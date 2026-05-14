@@ -1,0 +1,83 @@
+{
+  "started": "2026-05-03T17:03:42.885Z",
+  "completed": "2026-05-03T17:03:44.445Z",
+  "changes": [
+    {
+      "timestamp": "2026-05-03T17:03:44.341Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "id_nota": 45,
+      "codigo_disciplina": "ES1",
+      "nome_disciplina": "Engenharia de Software",
+      "field": "ac3",
+      "oldValue": 9.5,
+      "newValue": 10
+    },
+    {
+      "timestamp": "2026-05-03T17:03:44.341Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "id_nota": 45,
+      "codigo_disciplina": "ES1",
+      "nome_disciplina": "Engenharia de Software",
+      "field": "ttp",
+      "oldValue": 10.5,
+      "newValue": 11
+    },
+    {
+      "timestamp": "2026-05-03T17:03:44.342Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "id_nota": 45,
+      "codigo_disciplina": "ES1",
+      "nome_disciplina": "Engenharia de Software",
+      "field": "pp1",
+      "oldValue": 2.9,
+      "newValue": 3
+    },
+    {
+      "timestamp": "2026-05-03T17:03:44.388Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "id_nota": 46,
+      "codigo_disciplina": "BD2",
+      "nome_disciplina": "Base de Dados II",
+      "field": "ac2",
+      "oldValue": 12.5,
+      "newValue": 13
+    },
+    {
+      "timestamp": "2026-05-03T17:03:44.388Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "id_nota": 46,
+      "codigo_disciplina": "BD2",
+      "nome_disciplina": "Base de Dados II",
+      "field": "ac3",
+      "oldValue": 2.5,
+      "newValue": 3
+    },
+    {
+      "timestamp": "2026-05-03T17:03:44.388Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "id_nota": 46,
+      "codigo_disciplina": "BD2",
+      "nome_disciplina": "Base de Dados II",
+      "field": "ttp",
+      "oldValue": 4.5,
+      "newValue": 5
+    }
+  ],
+  "summary": {
+    "totalRecordsChecked": 188,
+    "totalRecordsUpdated": 2,
+    "totalFieldsCorrected": 6
+  }
+}

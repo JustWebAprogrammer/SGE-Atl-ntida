@@ -1,0 +1,686 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Usuario {
+  id_usuario             Int                   @id @default(autoincrement())
+  nome_usuario           String                @unique @db.VarChar(50)
+  email                  String                @unique @db.VarChar(100)
+  senha                  String                @db.VarChar(255)
+  tipo_usuario           TipoUsuario
+  data_cadastro          DateTime              @default(now())
+  admin                  Admin?
+  auditLogs              AuditLog[]
+  estudante              Estudante?
+  orientador             Orientador?
+  disciplinas            ProfessorDisciplina[]
+  recepcionista          Recepcionista?
+  configuracaoTaxasAtual ConfiguracaoTaxas[]
+  precosCursos           PrecoCurso[]
+  snapshots              SnapshotSemestre[] // NEW: Relation for snapshots created by this user
+  sistemaConfigs         SistemaConfig[]
+}
+
+model Admin {
+  id_admin         Int     @id @default(autoincrement())
+  nome_completo    String? @db.VarChar(80)
+  numero_telemovel String? @unique @db.VarChar(15)
+  id_usuario       Int     @unique
+  usuario          Usuario @relation(fields: [id_usuario], references: [id_usuario])
+}
+
+model Departamento {
+  id_departamento   Int                                   @id @default(autoincrement())
+  nome_departamento String                                @db.VarChar(100)
+  descricao         String?
+  cursos            Curso[]
+  disciplinas       Disciplina[]
+  estatisticas      EstatisticasMonografiasDepartamento[]
+  orientadores      Orientador[]
+  assinaturas       AssinaturaGestor[] // NEW: Relation for gestor signatures
+}
+
+model Curso {
+  id_curso        Int               @id @default(autoincrement())
+  nome_curso      String            @db.VarChar(100)
+  duracao_anos    Int?
+  turnos          String            @default("Matinal") @db.VarChar(100) // Matinal,Vespertino,Noturno
+  id_departamento Int               @default(1)
+  departamento    Departamento      @relation(fields: [id_departamento], references: [id_departamento])
+  estudantes      Estudante[]
+  precos          PrecoCurso[]
+  disciplinas     CursoDisciplina[]
+  horarios        HorarioAula[]
+  planos_provas   PlanoProva[]
+  periodos_provas PeriodoProva[]
+}
+
+// Tabela de relação many-to-many entre Curso e Disciplina
+model CursoDisciplina {
+  id_curso       Int
+  id_disciplina  Int
+  ano_curricular Int        @default(1) // Em que ano do curso a disciplina é oferecida
+  semestre       Semestre   @default(S1) // Em que semestre a disciplina é oferecida
+  curso          Curso      @relation(fields: [id_curso], references: [id_curso])
+  disciplina     Disciplina @relation(fields: [id_disciplina], references: [id_disciplina])
+
+  @@id([id_curso, id_disciplina])
+}
+
+model Disciplina {
+  id_disciplina           Int                      @id @default(autoincrement())
+  nome_disciplina         String                   @db.VarChar(100)
+  codigo_disciplina       String                   @unique @db.VarChar(10)
+  creditos                Int
+  id_departamento         Int
+  ano_curricular          Int                      @default(1)
+  semestre                Semestre                 @default(S1)
+  tem_dispensa            Boolean                  @default(true)
+  nota_dispensa           Int                      @default(14)
+  certificado_disciplinas CertificadoDisciplinas[]
+  departamento            Departamento             @relation(fields: [id_departamento], references: [id_departamento])
+  notas                   Nota[]
+  profesores              ProfessorDisciplina[]
+  cursos                  CursoDisciplina[]
+  horarios                HorarioAula[]
+  planos_provas           PlanoProva[]
+}
+
+model ProfessorDisciplina {
+  id            Int        @id @default(autoincrement())
+  id_usuario    Int
+  id_disciplina Int
+  ano_lectivo   String     @db.VarChar(9)
+  semestre      Semestre   @default(S1)
+  disciplina    Disciplina @relation(fields: [id_disciplina], references: [id_disciplina])
+  usuario       Usuario    @relation(fields: [id_usuario], references: [id_usuario])
+
+  @@unique([id_usuario, id_disciplina, ano_lectivo, semestre])
+}
+
+model Estudante {
+  id_estudante       Int                     @id @default(autoincrement())
+  nome_completo      String                  @db.VarChar(80)
+  numero_estudante   String?                 @unique @db.VarChar(20)
+  numero_telemovel   String?                 @unique @db.VarChar(15)
+  id_curso           Int
+  id_usuario         Int                     @unique
+  ano_current        Int?
+  ano_electivo       String?                 @db.VarChar(9)
+  turno              String                  @default("Matinal") @db.VarChar(20)
+  estado             EstadoEstudante         @default(EmCurso)
+  pagamento          String                  @default("Pendente")
+  tipo_bolsa         TipoBolsa               @default(Nenhuma)
+  ano_bolsa          String?                 @db.VarChar(9)
+  data_cadastro      DateTime?               @db.Date
+  certificados       Certificado[]
+  curriculos         CurriculoAcademico[]
+  curso              Curso                   @relation(fields: [id_curso], references: [id_curso])
+  usuario            Usuario                 @relation(fields: [id_usuario], references: [id_usuario])
+  facturas           Factura[]
+  monografias        Monografia[]
+  notas              Nota[]
+  notas_cobranca     NotaCobranca[]
+  pagamentos_propina PagamentoPropina[]
+  premonografias     Premonografia[]
+  solicitacoes       SolicitacaoOrientacao[]
+  snapshots          SnapshotSemestre[] // NEW: Relation for snapshots of this student
+  declaracoes        Declaracao[] // NEW: Relation for declarations
+}
+
+model Orientador {
+  id_orientador             Int                       @id @default(autoincrement())
+  nome_completo             String                    @db.VarChar(80)
+  especialidade             String                    @db.VarChar(100)
+  numero_telemovel          String?                   @db.VarChar(15)
+  e_gestor                  Boolean                   @default(false)
+  id_usuario                Int                       @unique
+  id_departamento           Int?
+  departamento              Departamento?             @relation(fields: [id_departamento], references: [id_departamento])
+  monografias_co_orientador Monografia[]              @relation("CoOrientadorMonografia")
+  monografias_orientador    Monografia[]              @relation("OrientadorMonografia")
+  monografias_correcao      MonografiasParaCorrecao[]
+  usuario                   Usuario                   @relation(fields: [id_usuario], references: [id_usuario])
+  solicitacoes              SolicitacaoOrientacao[]
+  assinaturas               AssinaturaGestor[] // NEW: Relation for gestor signatures
+}
+
+model Recepcionista {
+  id_recepcionista Int                @id @default(autoincrement())
+  nome_completo    String             @db.VarChar(80)
+  numero_telemovel String?            @unique @db.VarChar(15)
+  turno            TurnoRecepcionista @default(Manha)
+  id_usuario       Int                @unique
+  usuario          Usuario            @relation(fields: [id_usuario], references: [id_usuario])
+}
+
+model Nota {
+  id_nota        Int           @id @default(autoincrement())
+  id_estudante   Int
+  id_disciplina  Int
+  ano_lectivo    String        @db.VarChar(9)
+  semestre       Semestre      @default(S1)
+  ac1            Decimal?      @db.Decimal(4, 2)
+  ac2            Decimal?      @db.Decimal(4, 2)
+  ac3            Decimal?      @db.Decimal(4, 2)
+  ttp            Decimal?      @db.Decimal(4, 2)
+  pp1            Decimal?      @db.Decimal(4, 2)
+  pp2            Decimal?      @db.Decimal(4, 2)
+  exame          Decimal?      @db.Decimal(4, 2)
+  recurso        Decimal?      @db.Decimal(4, 2)
+  exame_especial Decimal?      @db.Decimal(4, 2)
+  nota_final     Decimal?      @db.Decimal(4, 2)
+  dispensada     Boolean       @default(false)
+  tipo_avaliacao TipoAvaliacao @default(Normal)
+  disciplina     Disciplina    @relation(fields: [id_disciplina], references: [id_disciplina])
+  estudante      Estudante     @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model Monografia {
+  id_monografia        Int                       @id @default(autoincrement())
+  id_estudante         Int
+  titulo               String                    @db.VarChar(200)
+  resumo               String?
+  descricao            String?
+  caminho_arquivo      String?
+  nome_arquivo         String?
+  data_submissao       DateTime                  @db.Date
+  data_envio_gestor    DateTime?
+  data_correcao_gestor DateTime?
+  data_defesa          DateTime?                 @db.Date
+  hora_defesa          String?                   @db.VarChar(5)
+  sala_defesa          String?                   @db.VarChar(50)
+  estado               EstadoMonografia          @default(Submetida)
+  nota_final           Decimal?                  @db.Decimal(4, 2)
+  nota_gestor          Decimal?                  @db.Decimal(4, 2)
+  feedback             String?
+  feedback_gestor      String?
+  id_co_orientador     Int?
+  id_orientador        Int?
+  nome_co_autor        String?                   @db.VarChar(100)
+  nome_co_orientador   String?                   @db.VarChar(100)
+  co_orientador        Orientador?               @relation("CoOrientadorMonografia", fields: [id_co_orientador], references: [id_orientador])
+  estudante            Estudante                 @relation(fields: [id_estudante], references: [id_estudante])
+  orientador           Orientador?               @relation("OrientadorMonografia", fields: [id_orientador], references: [id_orientador])
+  correcoes            MonografiasParaCorrecao[]
+}
+
+model MonografiasParaCorrecao {
+  id_monografia_correcao Int        @id @default(autoincrement())
+  id_monografia          Int
+  id_orientador          Int
+  data_correcao          DateTime?  @db.Date
+  observacoes            String?
+  monografia             Monografia @relation(fields: [id_monografia], references: [id_monografia])
+  orientador             Orientador @relation(fields: [id_orientador], references: [id_orientador])
+}
+
+model Premonografia {
+  id_premonografia Int                 @id @default(autoincrement())
+  id_estudante     Int
+  tema             String              @db.VarChar(200)
+  data_proposta    DateTime            @db.Date
+  estado           EstadoPremonografia @default(Proposto)
+  caminho_arquivo  String?
+  nome_arquivo     String?
+  feedback         String?
+  estudante        Estudante           @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model SolicitacaoOrientacao {
+  id_solicitacao   Int               @id @default(autoincrement())
+  id_estudante     Int
+  id_orientador    Int
+  data_solicitacao DateTime          @db.Date
+  estado           EstadoSolicitacao @default(Pendente)
+  observacoes      String?
+  estudante        Estudante         @relation(fields: [id_estudante], references: [id_estudante])
+  orientador       Orientador        @relation(fields: [id_orientador], references: [id_orientador])
+}
+
+model Factura {
+  id_factura            Int           @id @default(autoincrement())
+  id_estudante          Int
+  numero_factura        String?       @unique @db.VarChar(20)
+  descricao_servico     String?       @db.VarChar(100)
+  valor_total           Decimal       @default(0.00) @db.Decimal(10, 2)
+  valor_final           Decimal?      @db.Decimal(10, 2)
+  data_emissao          DateTime      @db.Date
+  data_vencimento       DateTime      @db.Date
+  estado                EstadoFactura @default(Pendente)
+  periodo               String?
+  ano_lectivo           String?       @db.VarChar(9)
+  metodo_pagamento      String?
+  data_pagamento        DateTime?
+  id_recepcionista      Int?
+  entregue              Boolean       @default(false)
+  codigo_confirmacao    String?       @db.VarChar(3)
+  estudante             Estudante     @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model PagamentoPropina {
+  id_pagamento       Int            @id @default(autoincrement())
+  id_estudante       Int
+  referencia         String         @unique @db.VarChar(40)
+  codigo_confirmacao String         @db.VarChar(3)
+  mes                Int
+  ano                Int
+  valor_base         Decimal        @db.Decimal(10, 2)
+  valor_multa        Decimal        @default(0) @db.Decimal(10, 2)
+  valor_total        Decimal        @db.Decimal(10, 2)
+  data_vencimento    DateTime       @db.Date
+  data_pagamento     DateTime?
+  forma_pagamento    FormaPagemento @default(Multicaixa)
+  estado             String         @default("Pendente")
+  emitido_por        EmitidoPor  @default(sistema) // Who issued this payment
+  estudante          Estudante      @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model NotaCobranca {
+  id_nota_cobranca Int                @id @default(autoincrement())
+  id_estudante     Int
+  descricao        String
+  valor            Decimal            @db.Decimal(10, 2)
+  data_vencimento  DateTime           @db.Date
+  estado           EstadoNotaCobranca @default(Pendente)
+  estudante        Estudante          @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model ConfiguracaoTaxas {
+  id_configuracao        Int       @id @default(1)
+  // Propinas por ano curricular (fallbacks)
+  Propina_ano1           Decimal   @default(15000) @db.Decimal(10, 2)
+  Propina_ano2           Decimal   @default(20000) @db.Decimal(10, 2)
+  Propina_ano3           Decimal   @default(25000) @db.Decimal(10, 2)
+  Propina_ano4           Decimal   @default(30000) @db.Decimal(10, 2)
+  Propina_ano5           Decimal   @default(35000) @db.Decimal(10, 2)
+  Propina_ano6           Decimal   @default(40000) @db.Decimal(10, 2)
+  // Multa por atraso (fallback)
+  valor_multa_atraso     Decimal   @default(500) @db.Decimal(10, 2)
+  // Re-enrollment fee (global default)
+  taxa_reenrollment      Decimal   @default(5000) @db.Decimal(10, 2)
+  // Configuração de horário
+  duracao_aula_minutos   Int       @default(90)
+  intervalo_aula_minutos Int       @default(10)
+  // Atualização
+  atualizado_por         Int?
+  atualizado_em          DateTime  @default(now())
+  usuario                Usuario?  @relation(fields: [atualizado_por], references: [id_usuario])
+  servicos               Servico[]
+}
+
+// Tabela de serviços dinâmicos
+model Servico {
+  id_servico      Int                @id @default(autoincrement())
+  nome_servico    String             @db.VarChar(100)
+  descricao       String?            @db.VarChar(255)
+  valor           Decimal            @db.Decimal(10, 2)
+  activo          Boolean            @default(true)
+  ordem           Int                @default(0)
+  created_at      DateTime           @default(now())
+  updated_at      DateTime           @updatedAt
+  configuracao    ConfiguracaoTaxas? @relation(fields: [id_configuracao], references: [id_configuracao])
+  id_configuracao Int?               @default(1)
+}
+
+model PrecoCurso {
+  id_preco_curso Int      @id @default(autoincrement())
+  id_curso       Int
+  ano_curricular Int
+  valor_propina  Decimal  @db.Decimal(10, 2)
+  valor_multa    Decimal  @db.Decimal(10, 2)
+  atualizado_por Int?
+  atualizado_em  DateTime @default(now())
+
+  curso   Curso    @relation(fields: [id_curso], references: [id_curso], onDelete: Cascade)
+  usuario Usuario? @relation(fields: [atualizado_por], references: [id_usuario])
+
+  @@unique([id_curso, ano_curricular])
+}
+
+model Certificado {
+  id_certificado   Int                      @id @default(autoincrement())
+  id_estudante     Int
+  data_emissao     DateTime                 @db.Date
+  tipo_certificado TipoCertificado
+  descricao        String?
+  status           StatusCertificado        @default(Solicitado)
+  estudante        Estudante                @relation(fields: [id_estudante], references: [id_estudante])
+  disciplinas      CertificadoDisciplinas[]
+}
+
+model CertificadoDisciplinas {
+  id_certificado_disciplina Int         @id @default(autoincrement())
+  id_certificado            Int
+  id_disciplina             Int
+  certificado               Certificado @relation(fields: [id_certificado], references: [id_certificado])
+  disciplina                Disciplina  @relation(fields: [id_disciplina], references: [id_disciplina])
+}
+
+// NEW: Declaracao (for digital declarations with QR verification)
+model Declaracao {
+  id_declaracao   Int      @id @default(autoincrement())
+  id_estudante    Int
+  numero_documento String   @unique // Format: DECL-{ano_lectivo}-{numero_estudante}-{sequence}
+  ano_lectivo     String   @db.VarChar(9)
+  data_emissao    DateTime @default(now())
+  caminho_pdf     String?  // Optional: if we store the PDF
+  estudante       Estudante @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model CurriculoAcademico {
+  id_curriculo Int       @id @default(autoincrement())
+  id_estudante Int
+  ano_lectivo  String    @db.VarChar(9)
+  descricao    String?
+  estudante    Estudante @relation(fields: [id_estudante], references: [id_estudante])
+}
+
+model EstatisticasMonografiasDepartamento {
+  id_estatistica         Int          @id @default(autoincrement())
+  id_departamento        Int
+  total_monografias      Int          @default(0)
+  monografias_aprovadas  Int          @default(0)
+  monografias_reprovadas Int          @default(0)
+  data_atualizacao       DateTime     @default(now())
+  departamento           Departamento @relation(fields: [id_departamento], references: [id_departamento])
+}
+
+model AuditLog {
+  id           Int      @id @default(autoincrement())
+  id_usuario   Int
+  acao         String   @db.VarChar(100)
+  tabela       String   @db.VarChar(50)
+  id_registro  Int
+  valor_antes  String?
+  valor_depois String?
+  ip_address   String   @db.VarChar(45)
+  data_hora    DateTime @default(now())
+  usuario      Usuario  @relation(fields: [id_usuario], references: [id_usuario])
+}
+
+// NEW: SistemaConfig (Singleton)
+model SistemaConfig {
+  id_config               Int       @id @default(1)
+
+  // Academic year boundaries (admin sets these)
+  ano_lectivo_inicio      DateTime  @db.Date
+  ano_lectivo_fim         DateTime  @db.Date
+
+  // Optional manual label override — if null, auto-derived from dates above
+  ano_lectivo_label       String?   @db.VarChar(9)
+
+  // Enrollment window
+  matricula_data_inicio   DateTime  @db.Date
+  matricula_data_fim      DateTime  @db.Date
+
+  // Propina generation — day of month within active academic year months only
+  propina_dia_geracao     Int       @default(5) // Day of month (1-28)
+
+  // Time simulator (testing only)
+  data_simulada           DateTime?
+  simulador_ativo         Boolean   @default(false)
+
+  // Semester control
+  semestre_atual          Semestre  @default(S1)
+
+  // Metadata
+  atualizado_por          Int?
+  atualizado_em           DateTime  @default(now()) @updatedAt
+
+  usuario                 Usuario?  @relation(fields: [atualizado_por], references: [id_usuario])
+}
+
+// NEW: FaseAvaliacao
+model FaseAvaliacao {
+  id_fase           Int               @id @default(autoincrement())
+  semestre          Semestre
+  ano_lectivo       String            @db.VarChar(9)
+  tipo_fase         TipoFaseAvaliacao
+  data_inicio       DateTime          @db.Date
+  data_fim          DateTime          @db.Date
+  is_active         Boolean           @default(false)
+  aberto_automatico Boolean           @default(false)
+  criado_em         DateTime          @default(now())
+  atualizado_em     DateTime          @updatedAt
+}
+
+// NEW: SnapshotSemestre
+model SnapshotSemestre {
+  id_snapshot         Int       @id @default(autoincrement())
+  id_estudante        Int
+  ano_lectivo         String    @db.VarChar(9)
+  semestre            Semestre
+  data_snapshot       DateTime  @default(now())
+  notas_snapshot      Json?
+  orientador_snapshot Json?    // Guarda ProfessorDisciplina do orientador no semestre
+  provas_snapshot     Json?    // Guarda PlanoProva + PeriodoProva do semestre
+  horarios_snapshot   Json?    // Guarda HorarioAula do semestre
+  dados_pessoais      Json?    // Dados pessoais do estudante (congelados na finalização)
+  monografia_snapshot Json?    // Dados da monografia (congelados na finalização)
+  tipo                String   @default("notas") // "notas" | "orientador" | "provas" | "completo" | "finalizacao"
+  criado_por          Int?
+  estudante           Estudante @relation(fields: [id_estudante], references: [id_estudante])
+  usuario             Usuario?  @relation(fields: [criado_por], references: [id_usuario])
+}
+
+// NEW: AssinaturaGestor
+model AssinaturaGestor {
+  id_assinatura   Int          @id @default(autoincrement())
+  id_gestor       Int?
+  id_departamento Int
+  ano_lectivo     String       @db.VarChar(9)
+  caminho_arquivo String
+  nome_arquivo    String?
+  data_inicio     DateTime     @db.Date
+  data_fim        DateTime?
+  criado_em       DateTime     @default(now())
+  gestor          Orientador?  @relation(fields: [id_gestor], references: [id_orientador])
+  departamento    Departamento @relation(fields: [id_departamento], references: [id_departamento])
+}
+
+// NEW: AssinaturaPresidente
+model AssinaturaPresidente {
+  id_assinatura   Int       @id @default(autoincrement())
+  nome_presidente String    @db.VarChar(100)
+  caminho_arquivo String
+  nome_arquivo    String?
+  ano_lectivo     String    @db.VarChar(9)
+  data_inicio     DateTime  @db.Date
+  data_fim        DateTime?
+  criado_em       DateTime  @default(now())
+}
+
+// NEW: AssinaturaDiretor
+model AssinaturaDiretor {
+  id_assinatura   Int       @id @default(autoincrement())
+  nome_diretor    String    @db.VarChar(100)
+  caminho_arquivo String
+  nome_arquivo    String?
+  ano_lectivo     String    @db.VarChar(9)
+  data_inicio     DateTime  @db.Date
+  data_fim        DateTime?
+  criado_em       DateTime  @default(now())
+}
+
+// NEW: LayoutDocumento
+model LayoutDocumento {
+  id_layout      Int                 @id @default(autoincrement())
+  tipo_documento TipoDocumentoLayout
+  nome_layout    String              @db.VarChar(100)
+  descricao      String?
+  conteudo       Json
+  activo         Boolean             @default(true)
+  criado_em      DateTime            @default(now())
+  atualizado_em  DateTime            @updatedAt
+}
+
+enum TipoUsuario {
+  admin
+  estudante
+  orientador
+  recepcionista
+}
+
+enum EstadoEstudante {
+  EmCurso
+  Finalizado
+  Desistente
+  Suspendido
+}
+
+enum EstadoMonografia {
+  Submetida
+  EmRevisao
+  Aprovada
+  ParaDefender
+  Defendida
+  Rejeitada
+}
+
+enum EstadoPremonografia {
+  Proposto
+  Aprovado
+  Reprovado
+  Cancelado
+}
+
+enum EstadoSolicitacao {
+  Pendente
+  Aceite
+  Recusado
+  Cancelado
+}
+
+enum EstadoFactura {
+  Pendente
+  Pago
+  Atrasado
+}
+
+enum EstadoNotaCobranca {
+  Pendente
+  Pago
+  Negociado
+}
+
+enum FormaPagemento {
+  Multicaixa
+  Transferencia
+  Dinheiro
+}
+
+enum TipoCertificado {
+  Conclusao
+  Disciplina
+  Participacao
+}
+
+enum TurnoRecepcionista {
+  Manha
+  Tarde
+  Noite
+}
+
+enum TipoAvaliacao {
+  Normal
+  Recurso
+  Especial
+}
+
+enum TipoBolsa {
+  Nenhuma
+  Cinquenta
+  Cem
+}
+
+enum Semestre {
+  S1
+  S2
+}
+
+enum EmitidoPor {
+  sistema
+  estudante
+}
+
+enum TipoFaseAvaliacao {
+  AC
+  PP1
+  TTP_PP2
+  Exame
+  Recurso_ExameEspecial
+}
+
+enum TipoDocumentoLayout {
+  CertificadoConclusao
+  DeclaracaoAcademica
+  CertificadoDisciplinas
+}
+
+enum StatusCertificado {
+  Solicitado
+  EmPreparacao
+  ProntoParaLevantamento
+  Entregue
+}
+
+model HorarioAula {
+  id_aula        Int      @id @default(autoincrement())
+  id_curso       Int
+  id_disciplina  Int
+  ano_curricular Int
+  semestre       String
+  turno          String   @default("Matinal") // Matinal, Vespertino, Noturno
+  dia_semana     String // Segunda, Terça, Quarta, Quinta, Sexta, Sábado
+  hora_inicio    String // HH:MM
+  hora_fim       String // HH:MM
+  sala           String?
+  ano_lectivo    String
+  criado_em      DateTime @default(now())
+
+  curso      Curso      @relation(fields: [id_curso], references: [id_curso])
+  disciplina Disciplina @relation(fields: [id_disciplina], references: [id_disciplina])
+
+  @@unique([id_curso, ano_curricular, semestre, turno, dia_semana, hora_inicio, ano_lectivo])
+}
+
+model PlanoProva {
+  id_prova       Int      @id @default(autoincrement())
+  id_curso       Int
+  id_disciplina  Int
+  ano_curricular Int
+  semestre       String
+  tipo_prova     String // PP1, PP2, Exame, Recurso, Exame_Especial
+  data_prova     DateTime // Dia específico dentro do período de provas
+  turno          String   @default("Matinal") // Matinal, Vespertino, Noturno
+  hora_inicio    String   @default("08:00") // HH:MM
+  hora_fim       String   @default("10:00") // HH:MM
+  ano_lectivo    String
+  criado_em      DateTime @default(now())
+
+  curso      Curso      @relation(fields: [id_curso], references: [id_curso])
+  disciplina Disciplina @relation(fields: [id_disciplina], references: [id_disciplina])
+
+  @@unique([id_curso, id_disciplina, ano_curricular, semestre, tipo_prova, turno, ano_lectivo])
+}
+
+model PeriodoProva {
+  id_periodo     Int      @id @default(autoincrement())
+  id_curso       Int
+  ano_curricular Int
+  semestre       String
+  ano_lectivo    String
+  data_inicio    DateTime
+  data_fim       DateTime
+  criado_em      DateTime @default(now())
+
+  curso Curso @relation(fields: [id_curso], references: [id_curso])
+
+  @@unique([id_curso, ano_curricular, semestre, ano_lectivo])
+}

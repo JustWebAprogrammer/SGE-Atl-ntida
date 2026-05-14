@@ -1,0 +1,1356 @@
+{
+  "started": "2026-04-30T13:28:05.521Z",
+  "completed": "2026-04-30T13:28:08.443Z",
+  "changes": [
+    {
+      "timestamp": "2026-04-30T13:28:06.346Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-03-BM-774, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.352Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-02-BM-839, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.359Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-01-BM-869, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.365Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-12-BM-440, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.369Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-11-BM-207, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.373Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-10-BM-429, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.376Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-09-BM-495, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.380Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-08-BM-901, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.384Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-07-BM-478, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.387Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-06-BM-420, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.391Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-05-BM-135, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.394Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-04-BM-805, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.458Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-03-CM-681, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.466Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-02-CM-784, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.471Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-01-CM-304, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.476Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-12-CM-413, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.481Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-11-CM-589, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.485Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-10-CM-530, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.490Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-09-CM-399, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.495Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-08-CM-813, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.499Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-07-CM-570, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.503Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-06-CM-894, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.507Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-05-CM-195, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.511Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-04-CM-209, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.517Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-03-CM-419, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.523Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-02-CM-330, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.529Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-01-CM-329, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.537Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-12-CM-729, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.561Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-11-CM-925, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.566Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-10-CM-169, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.572Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-09-CM-124, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.577Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-08-CM-854, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.582Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-07-CM-350, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.588Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-06-CM-857, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.593Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-05-CM-540, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.598Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-04-CM-503, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.602Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-03-CM-600, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.606Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-02-CM-369, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.610Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-01-CM-603, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.613Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-12-CM-830, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.617Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-11-CM-286, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.621Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-10-CM-260, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.625Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-09-CM-392, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.629Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-08-CM-612, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.650Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-07-CM-319, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.654Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-06-CM-459, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.657Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-05-CM-897, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.661Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-04-CM-266, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.667Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-03-F-651, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.671Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-02-F-522, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.675Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-01-F-183, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.680Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-12-F-971, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.685Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-11-F-740, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.690Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-10-F-737, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.694Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-09-F-901, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.697Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-08-F-169, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.701Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-07-F-603, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.704Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-06-F-292, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.707Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-05-F-935, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.711Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-04-F-443, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.718Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=25000 Kz, estado=Pago, ref=PROP-2026-03-H-463, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.723Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=25000 Kz, estado=Pago, ref=PROP-2026-02-H-862, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.728Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=25000 Kz, estado=Pago, ref=PROP-2026-01-H-418, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.732Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-12-H-341, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.921Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-11-H-379, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.925Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-10-H-835, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.929Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-09-H-378, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.944Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-08-H-202, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.948Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-07-H-460, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.952Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-06-H-141, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.956Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-05-H-303, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.961Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-04-H-977, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.964Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-03-H-888, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.968Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-02-H-583, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.971Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-01-H-217, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.974Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-12-H-559, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.977Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-11-H-826, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.980Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-10-H-922, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.983Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-09-H-579, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.986Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-08-H-984, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.989Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-07-H-237, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.992Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-06-H-999, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.995Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-05-H-254, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:06.998Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-04-H-972, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.004Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-03-MS-361, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.009Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-02-MS-874, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.014Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-01-MS-845, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.019Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-12-MS-236, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.023Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-11-MS-929, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.029Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-10-MS-516, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.047Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-09-MS-694, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.052Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-08-MS-419, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.056Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-07-MS-531, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.060Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-06-MS-357, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.064Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-05-MS-288, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.069Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-04-MS-230, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.074Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-03-MS-122, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.095Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-02-MS-581, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.099Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-01-MS-935, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.104Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-12-MS-292, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.109Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-11-MS-934, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.116Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-10-MS-885, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.121Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-09-MS-768, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.134Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-08-MS-720, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.156Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-07-MS-571, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.161Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-06-MS-204, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.165Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-05-MS-628, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.169Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-04-MS-109, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.173Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-03-MS-612, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.176Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-02-MS-764, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.179Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-01-MS-337, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.191Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-12-MS-300, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.203Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-11-MS-891, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.206Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-10-MS-960, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.211Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-09-MS-416, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.213Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-08-MS-968, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.218Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-07-MS-138, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.223Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-06-MS-746, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.227Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-05-MS-659, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.231Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-04-MS-241, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.253Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-03-PC-203, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.281Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-02-PC-985, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.297Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=30000 Kz, estado=Pago, ref=PROP-2026-01-PC-123, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.303Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-12-PC-461, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.736Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-11-PC-704, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.741Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-10-PC-624, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.748Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-09-PC-966, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.757Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-08-PC-343, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.764Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-07-PC-734, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.771Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-06-PC-104, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.784Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-05-PC-148, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.794Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=30000 Kz, estado=Pago, ref=PROP-2025-04-PC-111, ano_curricular_destino=4º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.801Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-03-PC-645, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.809Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-02-PC-788, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.813Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2025 — valor_base=25000 Kz, estado=Pago, ref=PROP-2025-01-PC-896, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.820Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-12-PC-831, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.826Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-11-PC-994, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.830Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-10-PC-637, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.835Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-09-PC-324, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.839Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-08-PC-645, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.844Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-07-PC-799, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.850Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-06-PC-379, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.855Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-05-PC-621, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.862Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2024 — valor_base=25000 Kz, estado=Pago, ref=PROP-2024-04-PC-683, ano_curricular_destino=3º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.867Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-03-PC-126, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.872Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-02-PC-202, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.875Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2024 — valor_base=50000 Kz, estado=Pago, ref=PROP-2024-01-PC-892, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.878Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-12-PC-326, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.883Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-11-PC-477, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.888Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-10-PC-125, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.891Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-09-PC-626, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.894Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-08-PC-949, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.897Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-07-PC-905, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.903Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-06-PC-236, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.922Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-05-PC-918, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.927Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2023 — valor_base=50000 Kz, estado=Pago, ref=PROP-2023-04-PC-959, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.933Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 3/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-03-P-421, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.938Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 2/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-02-P-825, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.942Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 1/2026 — valor_base=50000 Kz, estado=Pago, ref=PROP-2026-01-P-338, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.946Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 12/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-12-P-171, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.963Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 11/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-11-P-146, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.983Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 10/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-10-P-346, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.988Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 9/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-09-P-196, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.993Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 8/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-08-P-624, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:07.998Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 7/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-07-P-995, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:08.002Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 6/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-06-P-906, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:08.023Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 5/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-05-P-868, ano_curricular_destino=2º"
+    },
+    {
+      "timestamp": "2026-04-30T13:28:08.439Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "action": "PROPINA_CRIADA",
+      "details": "Mês 4/2025 — valor_base=50000 Kz, estado=Pago, ref=PROP-2025-04-P-211, ano_curricular_destino=2º"
+    }
+  ],
+  "summary": {
+    "estudantesAnalisados": 7,
+    "estudantesComPropinasCriadas": 7,
+    "propinasCriadas": 168,
+    "estudantesSemPreco": 0
+  }
+}

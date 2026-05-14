@@ -1,0 +1,141 @@
+{
+  "started": "2026-04-30T12:44:27.398Z",
+  "completed": "2026-04-30T12:44:28.177Z",
+  "academicYear": "2025/2026",
+  "changes": [
+    {
+      "timestamp": "2026-04-30T12:44:27.752Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.757Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.763Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.768Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.772Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.805Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.808Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:27.810Z",
+      "student": "Ana Silva",
+      "studentNumber": "20220001",
+      "id_estudante": 2,
+      "field": "Nota",
+      "action": "CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1 — criada com nota_final=null, aprovado=false"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:28.007Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "field": "numero_telemovel",
+      "action": "REMOVIDO (não normalizável)",
+      "details": "\"8\" não pôde ser normalizado — definido como NULL"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:28.054Z",
+      "student": "Len Lon",
+      "studentNumber": "20260003",
+      "id_estudante": 15,
+      "field": "numero_telemovel",
+      "action": "REMOVIDO (não normalizável)",
+      "details": "\"45453354\" não pôde ser normalizado — definido como NULL"
+    },
+    {
+      "timestamp": "2026-04-30T12:44:28.071Z",
+      "student": "Meme",
+      "studentNumber": "260009",
+      "id_estudante": 9,
+      "field": "numero_telemovel",
+      "action": "ACTUALIZADO",
+      "details": "\"+244 94356653\" → \"+244 94356653\""
+    },
+    {
+      "timestamp": "2026-04-30T12:44:28.119Z",
+      "student": "Miles Morales",
+      "studentNumber": null,
+      "id_estudante": 8,
+      "field": "numero_telemovel",
+      "action": "ACTUALIZADO",
+      "details": "\"+244 93382485\" → \"+244 93382485\""
+    }
+  ],
+  "manualReview": {
+    "turno": [],
+    "courseYear": [],
+    "phoneFlagged": [
+      {
+        "student": "Ben Minogashita",
+        "number": "20240001",
+        "id_estudante": 1,
+        "originalPhone": "8"
+      },
+      {
+        "student": "Len Lon",
+        "number": "20260003",
+        "id_estudante": 15,
+        "originalPhone": "45453354"
+      }
+    ]
+  },
+  "summary": {
+    "notasCriadas": 8,
+    "propinasCriadas": 0,
+    "phonesCorrected": 2,
+    "phonesFlagged": 2,
+    "turnoFlagged": 0,
+    "courseYearFlagged": 0
+  }
+}

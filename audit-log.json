@@ -1,0 +1,246 @@
+{
+  "generated": "2026-04-30T12:42:42.501Z",
+  "academicYear": "2025/2026",
+  "totalStudentsAudited": 14,
+  "issues": {
+    "missingSubjects": [
+      {
+        "student": "Ana Silva",
+        "number": "20220001",
+        "course": "Engenharia Informática",
+        "ano_current": 1,
+        "missing": [
+          {
+            "codigo": "MD1",
+            "nome": "Matemática Discreta",
+            "ano_curricular": 1,
+            "semestre": "S2"
+          },
+          {
+            "codigo": "MAT1",
+            "nome": "Matemática I",
+            "ano_curricular": 1,
+            "semestre": "S1"
+          },
+          {
+            "codigo": "MAT2",
+            "nome": "Matemática II",
+            "ano_curricular": 1,
+            "semestre": "S2"
+          },
+          {
+            "codigo": "PRG2",
+            "nome": "Programação II",
+            "ano_curricular": 1,
+            "semestre": "S2"
+          },
+          {
+            "codigo": "MD",
+            "nome": "Medicina ",
+            "ano_curricular": 1,
+            "semestre": "S1"
+          },
+          {
+            "codigo": "PRG1",
+            "nome": "Programação I",
+            "ano_curricular": 1,
+            "semestre": "S1"
+          },
+          {
+            "codigo": "TIC",
+            "nome": "Technology of Communication and information",
+            "ano_curricular": 1,
+            "semestre": "S1"
+          },
+          {
+            "codigo": "SD1",
+            "nome": "Sistemas Digitais",
+            "ano_curricular": 1,
+            "semestre": "S1"
+          }
+        ],
+        "extra": [
+          {
+            "codigo": "PF1",
+            "nome": "Projecto Final",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "MON1",
+            "nome": "Monografia",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "Carlos Manuel",
+        "number": "20220002",
+        "course": "Engenharia Informática",
+        "ano_current": 4,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "SD1",
+            "nome": "Sistemas Digitais",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "MAT1",
+            "nome": "Matemática I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "f",
+        "number": "20260002",
+        "course": "Engenharia Informática",
+        "ano_current": 2,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "PRG1",
+            "nome": "Programação I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "Len Lon",
+        "number": "20260003",
+        "course": "Engenharia Informática",
+        "ano_current": 1,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "ES1",
+            "nome": "Engenharia de Software",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "BD2",
+            "nome": "Base de Dados II",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "IA1",
+            "nome": "Inteligência Artificial",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "SO1",
+            "nome": "Sistemas Operativos",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "RC1",
+            "nome": "Redes de Computadores",
+            "ano_lectivo": "2025/2026"
+          },
+          {
+            "codigo": "BD1",
+            "nome": "Base de Dados I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "Maria Santos",
+        "number": "20220003",
+        "course": "Engenharia Informática",
+        "ano_current": 4,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "BD1",
+            "nome": "Base de Dados I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "Meme",
+        "number": "260009",
+        "course": "Engenharia Informática",
+        "ano_current": 1,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "BD1",
+            "nome": "Base de Dados I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "Myers ",
+        "number": "20260001",
+        "course": "Engenharia Informática",
+        "ano_current": 1,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "BD1",
+            "nome": "Base de Dados I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      },
+      {
+        "student": "Pedro Costa",
+        "number": "20220004",
+        "course": "Engenharia Informática",
+        "ano_current": 4,
+        "missing": [],
+        "extra": [
+          {
+            "codigo": "BD1",
+            "nome": "Base de Dados I",
+            "ano_lectivo": "2025/2026"
+          }
+        ]
+      }
+    ],
+    "missingTurno": [],
+    "courseYearMismatch": [],
+    "missingPropina": [],
+    "phoneFormat": [
+      {
+        "student": "Ben Minogashita",
+        "number": "20240001",
+        "currentPhone": "8",
+        "detail": "\"8\" is not a valid Angolan mobile number — cannot normalize"
+      },
+      {
+        "student": "Carlos Manuel",
+        "number": "20220002",
+        "currentPhone": null,
+        "detail": "phone number is null/empty"
+      },
+      {
+        "student": "Len Lon",
+        "number": "20260003",
+        "currentPhone": "45453354",
+        "detail": "\"45453354\" can be formatted to canonical \"+244 9XXXXXXXX\""
+      },
+      {
+        "student": "Meme",
+        "number": "260009",
+        "currentPhone": "+244 94356653",
+        "detail": "\"+244 94356653\" is not a valid Angolan mobile number — cannot normalize"
+      },
+      {
+        "student": "Miles Morales",
+        "number": null,
+        "currentPhone": "+244 93382485",
+        "detail": "\"+244 93382485\" is not a valid Angolan mobile number — cannot normalize"
+      },
+      {
+        "student": "Pedro Costa",
+        "number": "20220004",
+        "currentPhone": null,
+        "detail": "phone number is null/empty"
+      }
+    ]
+  }
+}

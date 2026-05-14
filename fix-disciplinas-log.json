@@ -1,0 +1,706 @@
+{
+  "started": "2026-04-30T13:27:17.820Z",
+  "completed": "2026-04-30T13:27:19.232Z",
+  "academicYear": "2025/2026",
+  "changes": [
+    {
+      "timestamp": "2026-04-30T13:27:18.615Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.671Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.685Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.695Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.738Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.748Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.752Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.757Z",
+      "student": "Ben Minogashita",
+      "studentNumber": "20240001",
+      "id_estudante": 1,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.776Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.779Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.782Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.784Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.787Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.793Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.804Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina BD1 (Base de Dados I) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.807Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina ES1 (Engenharia de Software) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.809Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina BD2 (Base de Dados II) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.812Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SO1 (Sistemas Operativos) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.814Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina RC1 (Redes de Computadores) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.825Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 3,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina IA1 (Inteligência Artificial) — 3º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.828Z",
+      "student": "Carlos Manuel",
+      "studentNumber": "20220002",
+      "id_estudante": 3,
+      "ano_curricular": 3,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PA1 (Programação Avançada) — 3º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.847Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.849Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.851Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.853Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.857Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.861Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.864Z",
+      "student": "f",
+      "studentNumber": "20260002",
+      "id_estudante": 13,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.898Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.900Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.902Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.904Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.908Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.910Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.912Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.914Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.924Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina BD1 (Base de Dados I) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.928Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina ES1 (Engenharia de Software) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.930Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina BD2 (Base de Dados II) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.933Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SO1 (Sistemas Operativos) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.935Z",
+      "student": "Hun",
+      "studentNumber": "20260005",
+      "id_estudante": 17,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina RC1 (Redes de Computadores) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.969Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:18.971Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.009Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.011Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.013Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.016Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.019Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.021Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.033Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina ES1 (Engenharia de Software) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.035Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina BD2 (Base de Dados II) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.037Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SO1 (Sistemas Operativos) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.040Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina RC1 (Redes de Computadores) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.050Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 3,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina IA1 (Inteligência Artificial) — 3º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.052Z",
+      "student": "Maria Santos",
+      "studentNumber": "20220003",
+      "id_estudante": 4,
+      "ano_curricular": 3,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PA1 (Programação Avançada) — 3º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.140Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.144Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.146Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.148Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.150Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.153Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.156Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.160Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.168Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina ES1 (Engenharia de Software) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.170Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina BD2 (Base de Dados II) — 2º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.174Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SO1 (Sistemas Operativos) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.178Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 2,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina RC1 (Redes de Computadores) — 2º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.186Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 3,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina IA1 (Inteligência Artificial) — 3º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.189Z",
+      "student": "Pedro Costa",
+      "studentNumber": "20220004",
+      "id_estudante": 5,
+      "ano_curricular": 3,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PA1 (Programação Avançada) — 3º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.203Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD1 (Matemática Discreta) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.206Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT1 (Matemática I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.208Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MAT2 (Matemática II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.211Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG2 (Programação II) — 1º Ano • S2"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.213Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina MD (Medicina ) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.216Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina PRG1 (Programação I) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.218Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina TIC (Technology of Communication and information) — 1º Ano • S1"
+    },
+    {
+      "timestamp": "2026-04-30T13:27:19.221Z",
+      "student": "Poppy ",
+      "studentNumber": "20260008",
+      "id_estudante": 20,
+      "ano_curricular": 1,
+      "action": "NOTA_CRIADA",
+      "details": "Disciplina SD1 (Sistemas Digitais) — 1º Ano • S1"
+    }
+  ],
+  "summary": {
+    "estudantesProcessados": 16,
+    "notasCriadas": 77,
+    "curriculosCriados": 21,
+    "estudantesSemAno": 0
+  }
+}
