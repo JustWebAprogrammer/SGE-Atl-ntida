@@ -104,8 +104,7 @@ export async function GET(
       logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
     } catch { }
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || request.nextUrl.origin
-    const qrCodeUrl = `${baseUrl}/verificar/${declaracao.id_declaracao}`
+    const qrCodeUrl = `${request.nextUrl.origin}/verificar/${declaracao.id_declaracao}`
     const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
     const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
 

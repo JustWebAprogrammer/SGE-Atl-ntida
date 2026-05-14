@@ -128,9 +128,8 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // Generate QR code
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || request.nextUrl.origin
-    const qrCodeUrl = `${baseUrl}/verificar/${declaracao.id_declaracao}`
+    // Generate QR code — usa request.nextUrl.origin para funcionar em qualquer ambiente (dev/produção)
+    const qrCodeUrl = `${request.nextUrl.origin}/verificar/${declaracao.id_declaracao}`
     const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, {
       width: 200,
       margin: 1

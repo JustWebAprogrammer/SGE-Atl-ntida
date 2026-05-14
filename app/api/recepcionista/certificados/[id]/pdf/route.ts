@@ -103,8 +103,7 @@ export async function GET(
         logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
       } catch { }
 
-      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || request.nextUrl.origin
-      const qrCodeUrl = `${baseUrl}/verificar/cert/${certificado.id_certificado}`
+      const qrCodeUrl = `${request.nextUrl.origin}/verificar/${certificado.id_certificado}`
       const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
       const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
 
@@ -147,8 +146,7 @@ export async function GET(
         logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
       } catch { }
 
-      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || request.nextUrl.origin
-      const qrCodeUrl = `${baseUrl}/verificar/cert-disc/${certificado.id_certificado}`
+      const qrCodeUrl = `${request.nextUrl.origin}/verificar/${certificado.id_certificado}`
       const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
       const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
 
