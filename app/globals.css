@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0d0f14;
+  --foreground: #e8eaf0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html, body {
+  background: #0d0f14 !important;
+  color: #e8eaf0;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  min-height: 100vh;
+  background: #0d0f14;
+}
+
+/* ── react-day-picker dark theme overrides ── */
+.rdp-dark {
+  --rdp-accent-color: #6366f1;
+  --rdp-background-color: rgba(99, 102, 241, 0.2);
+  background: transparent;
+}
+
+.rdp-dark .rdp-root {
+  color: #e8eaf0;
+}
+
+.rdp-dark .rdp-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+.rdp-dark .rdp-caption_label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #e8eaf0;
+}
+
+.rdp-dark .rdp-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.rdp-dark .rdp-nav_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #e8eaf0;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rdp-dark .rdp-nav_button:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.rdp-dark .rdp-head_cell {
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9098b0;
+  padding: 8px 0;
+}
+
+.rdp-dark .rdp-cell {
+  padding: 2px;
+}
+
+.rdp-dark .rdp-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #e8eaf0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rdp-dark .rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
+  background: rgba(255,255,255,0.1);
+}
+
+.rdp-dark .rdp-day_selected {
+  background: #6366f1 !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.rdp-dark .rdp-day_today:not(.rdp-day_selected) {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.rdp-dark .rdp-day_disabled {
+  color: #555e78;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.rdp-dark .rdp-day_outside {
+  color: #555e78;
+  opacity: 0.5;
+}
+
+.rdp-dark .rdp-months {
+  display: flex;
+  justify-content: center;
+}
+
+.rdp-dark .rdp-month {
+  margin: 0;
+}
+
+.rdp-dark .rdp-grid {
+  width: 100%;
+}
+
+/* ── Portuguese locale for react-day-picker ── */
+/* Replace navigation arrows */
+.rdp-portuguese .rdp-nav_button_previous::after {
+  content: "◀";
+}
+
+.rdp-portuguese .rdp-nav_button_next::after {
+  content: "▶";
+}
+
+/* Portuguese month - show static label that works with any month */
+.rdp-portuguese .rdp-caption_label {
+  position: relative;
+}
+
+/* Add Portuguese month name after the default label */
+.rdp-portuguese .rdp-caption_label::after {
+  content: "";
+  display: block;
+  margin-top: -20px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #e8eaf0;
+}
+
+/* Month names in Portuguese */
+.rdp-portuguese .rdp-caption[data-month="0"] .rdp-caption_label::after { content: "Janeiro"; }
+.rdp-portuguese .rdp-caption[data-month="1"] .rdp-caption_label::after { content: "Fevereiro"; }
+.rdp-portuguese .rdp-caption[data-month="2"] .rdp-caption_label::after { content: "Março"; }
+.rdp-portuguese .rdp-caption[data-month="3"] .rdp-caption_label::after { content: "Abril"; }
+.rdp-portuguese .rdp-caption[data-month="4"] .rdp-caption_label::after { content: "Maio"; }
+.rdp-portuguese .rdp-caption[data-month="5"] .rdp-caption_label::after { content: "Junho"; }
+.rdp-portuguese .rdp-caption[data-month="6"] .rdp-caption_label::after { content: "Julho"; }
+.rdp-portuguese .rdp-caption[data-month="7"] .rdp-caption_label::after { content: "Agosto"; }
+.rdp-portuguese .rdp-caption[data-month="8"] .rdp-caption_label::after { content: "Setembro"; }
+.rdp-portuguese .rdp-caption[data-month="9"] .rdp-caption_label::after { content: "Outubro"; }
+.rdp-portuguese .rdp-caption[data-month="10"] .rdp-caption_label::after { content: "Novembro"; }
+.rdp-portuguese .rdp-caption[data-month="11"] .rdp-caption_label::after { content: "Dezembro"; }
+
+/* Portuguese day names */
+.rdp-portuguese .rdp-head_cell:nth-child(1)::after { content: "Dom"; }
+.rdp-portuguese .rdp-head_cell:nth-child(2)::after { content: "Seg"; }
+.rdp-portuguese .rdp-head_cell:nth-child(3)::after { content: "Ter"; }
+.rdp-portuguese .rdp-head_cell:nth-child(4)::after { content: "Qua"; }
+.rdp-portuguese .rdp-head_cell:nth-child(5)::after { content: "Qui"; }
+.rdp-portuguese .rdp-head_cell:nth-child(6)::after { content: "Sex"; }
+.rdp-portuguese .rdp-head_cell:nth-child(7)::after { content: "Sáb"; }
+
+/* Hide default day headers, show custom */
+.rdp-portuguese .rdp-head_cell {
+  visibility: hidden;
+}
+
+.rdp-portuguese .rdp-head_cell::after {
+  visibility: visible;
+  display: block;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9098b0;
+}
+
+/* Legacy rdp class for backward compatibility */
+.rdp {
+  --rdp-accent-color: #6366f1;
+  --rdp-background-color: rgba(99, 102, 241, 0.2);
+  margin: 0;
+}
+
+.rdp-root {
+  color: #e8eaf0;
+}
+
+.rdp-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+.rdp-caption_label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #e8eaf0;
+}
+
+.rdp-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.rdp-nav_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: #e8eaf0;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rdp-nav_button:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.rdp-head_cell {
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9098b0;
+  padding: 8px 0;
+}
+
+.rdp-cell {
+  padding: 2px;
+}
+
+.rdp-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #e8eaf0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
+  background: rgba(255,255,255,0.1);
+}
+
+.rdp-day_selected {
+  background: #6366f1 !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.rdp-day_today:not(.rdp-day_selected) {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.rdp-day_disabled {
+  color: #555e78;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.rdp-day_outside {
+  color: #555e78;
+  opacity: 0.5;
+}
+
+.rdp-months {
+  display: flex;
+  justify-content: center;
+}
+
+.rdp-month {
+  margin: 0;
+}
+
+.rdp-grid {
+  width: 100%;
+}
