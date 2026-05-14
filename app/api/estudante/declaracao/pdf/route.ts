@@ -137,32 +137,37 @@ export async function GET(request: NextRequest) {
     })
     const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
 
-    // Load president signature
-    let signatureBase64 = ""
-    try {
-      const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
-      const signatureBuffer = readFileSync(signaturePath)
-      signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
-    } catch (signatureError) {
-      console.warn("Could not load signature file:", signatureError)
-      return NextResponse.json(
-        { error: "Erro ao carregar assinatura do presidente" },
-        { status: 500 }
-      )
+    // Load president signature - use base64 from DB if available, fallback to disk
+    let signatureBase64 = presidentSignature.imagem_base64 || ""
+    if (!signatureBase64) {
+      try {
+        const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
+        const signatureBuffer = readFileSync(signaturePath)
+        signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
+      } catch (signatureError) {
+        console.warn("Could not load signature file:", signatureError)
+        return NextResponse.json(
+          { error: "Erro ao carregar assinatura do presidente" },
+          { status: 500 }
+        )
+      }
     }
 
-    // Load director signature if available
+    // Load director signature if available - use base64 from DB if available, fallback to disk
     let directorSignatureBase64 = ""
     let directorName = ""
     if (directorSignature) {
-      try {
-        const directorSignaturePath = join(process.cwd(), "public", directorSignature.caminho_arquivo)
-        const directorSignatureBuffer = readFileSync(directorSignaturePath)
-        directorSignatureBase64 = `data:image/png;base64,${directorSignatureBuffer.toString("base64")}`
-        directorName = directorSignature.nome_diretor
-      } catch (signatureError) {
-        console.warn("Could not load director signature file:", signatureError)
+      directorSignatureBase64 = directorSignature.imagem_base64 || ""
+      if (!directorSignatureBase64) {
+        try {
+          const directorSignaturePath = join(process.cwd(), "public", directorSignature.caminho_arquivo)
+          const directorSignatureBuffer = readFileSync(directorSignaturePath)
+          directorSignatureBase64 = `data:image/png;base64,${directorSignatureBuffer.toString("base64")}`
+        } catch (signatureError) {
+          console.warn("Could not load director signature file:", signatureError)
+        }
       }
+      directorName = directorSignature.nome_diretor
     }
 
     // Load logo

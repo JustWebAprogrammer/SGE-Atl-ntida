@@ -103,25 +103,30 @@ export async function GET(
     const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
     const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
 
-    // Load signatures
-    let signatureBase64 = ""
-    try {
-      const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
-      const signatureBuffer = readFileSync(signaturePath)
-      signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
-    } catch (_) {
-      return NextResponse.json({ error: "Erro ao carregar assinatura" }, { status: 500 })
+    // Load signatures - use base64 from DB if available, fallback to disk
+    let signatureBase64 = presidentSignature.imagem_base64 || ""
+    if (!signatureBase64) {
+      try {
+        const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
+        const signatureBuffer = readFileSync(signaturePath)
+        signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
+      } catch (_) {
+        return NextResponse.json({ error: "Erro ao carregar assinatura" }, { status: 500 })
+      }
     }
 
     let directorSignatureBase64 = ""
     let directorName = ""
     if (directorSignature) {
-      try {
-        const dirPath = join(process.cwd(), "public", directorSignature.caminho_arquivo)
-        const dirBuffer = readFileSync(dirPath)
-        directorSignatureBase64 = `data:image/png;base64,${dirBuffer.toString("base64")}`
-        directorName = directorSignature.nome_diretor
-      } catch (_) { /* optional */ }
+      directorSignatureBase64 = directorSignature.imagem_base64 || ""
+      if (!directorSignatureBase64) {
+        try {
+          const dirPath = join(process.cwd(), "public", directorSignature.caminho_arquivo)
+          const dirBuffer = readFileSync(dirPath)
+          directorSignatureBase64 = `data:image/png;base64,${dirBuffer.toString("base64")}`
+        } catch (_) { /* optional */ }
+      }
+      directorName = directorSignature.nome_diretor
     }
 
     // Load logo

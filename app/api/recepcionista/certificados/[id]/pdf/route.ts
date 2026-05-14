@@ -87,8 +87,8 @@ export async function GET(
         where: { data_fim: null }
       })
 
-      let signatureBase64 = ""
-      if (presidentSignature) {
+      let signatureBase64 = presidentSignature?.imagem_base64 || ""
+      if (!signatureBase64 && presidentSignature) {
         try {
           const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
           const signatureBuffer = readFileSync(signaturePath)

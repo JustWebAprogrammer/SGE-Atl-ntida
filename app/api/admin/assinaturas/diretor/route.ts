@@ -4,9 +4,6 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { logAudit } from "@/lib/audit"
 import { headers } from "next/headers"
-import { writeFile, mkdir } from "fs/promises"
-import { join } from "path"
-import { existsSync } from "fs"
 
 // GET /api/admin/assinaturas/diretor - Returns all director signatures
 export async function GET() {
@@ -96,25 +93,22 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Create directory if it doesn't exist
-    const uploadDir = join(process.cwd(), "public", "documentos", "assinaturas")
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true })
-    }
-
-    // Save file
-    const fileName = `diretor-${ano_lectivo}.png`
-    const filePath = join(uploadDir, fileName)
+    // Convert image to base64 (data URL) instead of writing to disk
+    // This avoids EROFS errors on serverless platforms like Vercel
     const fileBuffer = Buffer.from(await assinatura.arrayBuffer())
-    await writeFile(filePath, fileBuffer)
+    const base64 = fileBuffer.toString("base64")
+    const imagemBase64 = `data:${assinatura.type};base64,${base64}`
 
-    // Create new signature record
+    const fileName = `diretor-${ano_lectivo}.png`
+
+    // Create new signature record with base64 image
     const newSignature = await prisma.assinaturaDiretor.create({
       data: {
         nome_diretor,
         ano_lectivo,
         caminho_arquivo: `/documentos/assinaturas/${fileName}`,
         nome_arquivo: fileName,
+        imagem_base64: imagemBase64,
         data_inicio: new Date()
       }
     })

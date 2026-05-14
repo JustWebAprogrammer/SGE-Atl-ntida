@@ -477,6 +477,7 @@ model AssinaturaGestor {
   ano_lectivo     String       @db.VarChar(9)
   caminho_arquivo String
   nome_arquivo    String?
+  imagem_base64   String?
   data_inicio     DateTime     @db.Date
   data_fim        DateTime?
   criado_em       DateTime     @default(now())
@@ -490,6 +491,7 @@ model AssinaturaPresidente {
   nome_presidente String    @db.VarChar(100)
   caminho_arquivo String
   nome_arquivo    String?
+  imagem_base64   String?
   ano_lectivo     String    @db.VarChar(9)
   data_inicio     DateTime  @db.Date
   data_fim        DateTime?
@@ -502,6 +504,7 @@ model AssinaturaDiretor {
   nome_diretor    String    @db.VarChar(100)
   caminho_arquivo String
   nome_arquivo    String?
+  imagem_base64   String?
   ano_lectivo     String    @db.VarChar(9)
   data_inicio     DateTime  @db.Date
   data_fim        DateTime?

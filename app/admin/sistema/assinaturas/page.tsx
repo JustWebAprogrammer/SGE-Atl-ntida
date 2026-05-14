@@ -9,6 +9,7 @@ interface AssinaturaPresidente {
   nome_presidente: string
   ano_lectivo: string
   caminho_arquivo: string
+  imagem_base64?: string | null
   data_inicio: string
   data_fim: string | null
   ativo: boolean
@@ -31,6 +32,7 @@ interface AssinaturaGestor {
   id_departamento: number
   ano_lectivo: string
   caminho_arquivo: string
+  imagem_base64?: string | null
   data_inicio: string
   data_fim: string | null
   ativo: boolean
@@ -42,6 +44,7 @@ interface AssinaturaDiretor {
   id_assinatura: number
   nome_diretor: string
   caminho_arquivo: string
+  imagem_base64?: string | null
   data_inicio: string
   data_fim: string | null
   ativo: boolean
@@ -75,6 +78,11 @@ const labelStyle = {
   fontWeight: "500" as const,
   textTransform: "uppercase" as const,
   letterSpacing: "0.5px",
+}
+
+// Helper to get the best image source (base64 preferred, fallback to file path)
+function getImageSrc(sig: { imagem_base64?: string | null; caminho_arquivo: string }): string {
+  return sig.imagem_base64 || sig.caminho_arquivo
 }
 
 // ─── Signature Preview ───────────────────────────────────────────────────────
@@ -267,12 +275,12 @@ function SignaturePreview({
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "16px" }}>
           <SignatureSlot
             label="O(A) Director(a) Académico(a)"
-            src={diretorSig?.caminho_arquivo}
+            src={diretorSig ? getImageSrc(diretorSig) : undefined}
             name={diretorSig?.nome_diretor}
           />
           <SignatureSlot
             label="O(A) Presidente"
-            src={presidenteSig?.caminho_arquivo}
+            src={presidenteSig ? getImageSrc(presidenteSig) : undefined}
             name={presidenteSig?.nome_presidente}
           />
         </div>
@@ -959,7 +967,7 @@ export default function AssinaturasDashboard() {
                         <td style={{ padding: "12px 24px", color: "#e8eaf0", fontSize: "13px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             <img
-                              src={sig.caminho_arquivo}
+                              src={getImageSrc(sig)}
                               alt={sig.nome_presidente}
                               style={{ height: "28px", maxWidth: "60px", objectFit: "contain", background: "#fff", borderRadius: "4px", padding: "2px" }}
                             />
@@ -985,7 +993,7 @@ export default function AssinaturasDashboard() {
                         <td style={{ padding: "12px 24px", color: "#e8eaf0", fontSize: "13px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             <img
-                              src={sig.caminho_arquivo}
+                              src={getImageSrc(sig)}
                               alt={sig.nome_diretor}
                               style={{ height: "28px", maxWidth: "60px", objectFit: "contain", background: "#fff", borderRadius: "4px", padding: "2px" }}
                             />
@@ -1010,7 +1018,7 @@ export default function AssinaturasDashboard() {
                         <td style={{ padding: "12px 24px", color: "#e8eaf0", fontSize: "13px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             <img
-                              src={sig.caminho_arquivo}
+                              src={getImageSrc(sig)}
                               alt={sig.gestor?.nome_completo}
                               style={{ height: "28px", maxWidth: "60px", objectFit: "contain", background: "#fff", borderRadius: "4px", padding: "2px" }}
                             />
@@ -1076,7 +1084,7 @@ export default function AssinaturasDashboard() {
                 {sig ? (
                   <>
                     <img
-                      src={sig.caminho_arquivo}
+                      src={getImageSrc(sig)}
                       alt={name}
                       style={{ height: "32px", maxWidth: "100%", objectFit: "contain", display: "block", background: "#fff", borderRadius: "4px", padding: "3px", marginBottom: "6px" }}
                     />
