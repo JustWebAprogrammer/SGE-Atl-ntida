@@ -1,0 +1,108 @@
+import { NextResponse } from "next/server"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
+import { prisma } from "@/lib/prisma"
+import { arredondarNota } from "@/lib/notas"
+
+export async function GET() {
+  const session = await getServerSession(authOptions)
+  if (!session || session.user.role !== "estudante") {
+    return NextResponse.json({ error: "Não autorizado" }, { status: 403 })
+  }
+
+  const estudante = await prisma.estudante.findUnique({
+    where: { id_usuario: parseInt(session.user.id) },
+    select: {
+      id_estudante: true,
+      nome_completo: true,
+      numero_estudante: true,
+      ano_current: true,
+      ano_electivo: true,
+      curso: {
+        select: {
+          nome_curso: true,
+          duracao_anos: true,
+        }
+      }
+    }
+  })
+
+  if (!estudante) {
+    return NextResponse.json({ error: "Estudante não encontrado" }, { status: 404 })
+  }
+
+  // Buscar notas de anos anteriores (excluindo o ano actual)
+  const anoActual = estudante.ano_current || 1
+
+  const notas = await prisma.nota.findMany({
+    where: {
+      id_estudante: estudante.id_estudante,
+      disciplina: {
+        ano_curricular: { lt: anoActual }
+      }
+    },
+    include: {
+      disciplina: {
+        select: {
+          nome_disciplina: true,
+          codigo_disciplina: true,
+          creditos: true,
+          ano_curricular: true,
+          semestre: true,
+        }
+      }
+    },
+    orderBy: [
+      { disciplina: { ano_curricular: "asc" } },
+      { disciplina: { semestre: "asc" } },
+      { disciplina: { nome_disciplina: "asc" } },
+    ]
+  })
+
+  // Agrupar por ano curricular
+  const agrupado: Record<number, Array<{
+    nome: string
+    codigo: string
+    creditos: number
+    semestre: string
+    nota_final: number | null
+    aprovado: boolean | null
+  }>> = {}
+
+  for (const n of notas) {
+    const ano = n.disciplina.ano_curricular
+    if (!agrupado[ano]) agrupado[ano] = []
+
+    const notaFinal = n.nota_final != null ? Number(n.nota_final) : null
+    agrupado[ano].push({
+      nome: n.disciplina.nome_disciplina,
+      codigo: n.disciplina.codigo_disciplina,
+      creditos: n.disciplina.creditos,
+      semestre: n.disciplina.semestre,
+      nota_final: notaFinal,
+      aprovado: notaFinal !== null ? notaFinal >= 10 : null,
+    })
+  }
+
+  // Calcular médias por ano
+  const medias: Record<number, number | null> = {}
+  for (const [ano, disciplinas] of Object.entries(agrupado)) {
+    const notasValidas = disciplinas
+      .filter(d => d.nota_final !== null)
+      .map(d => d.nota_final as number)
+    medias[Number(ano)] = notasValidas.length > 0
+      ? arredondarNota(notasValidas.reduce((a, b) => a + b, 0) / notasValidas.length)
+      : null
+  }
+
+  return NextResponse.json({
+    estudante: {
+      nome_completo: estudante.nome_completo,
+      numero_estudante: estudante.numero_estudante,
+      curso: estudante.curso.nome_curso,
+      ano_current: anoActual,
+    },
+    notas: agrupado,
+    medias,
+  })
+}
