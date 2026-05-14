@@ -12,6 +12,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
+main {
+  margin: 0;
+}
+
 html, body {
   background: #0d0f14 !important;
   color: #e8eaf0;

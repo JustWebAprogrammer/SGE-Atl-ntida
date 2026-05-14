@@ -454,7 +454,7 @@ export default function DashboardLayout({
       </aside>
 
       {/* MAIN */}
-      <main style={{ marginLeft: "240px", flex: 1, display: "flex", flexDirection: "column" }}>
+      <main style={{ marginLeft: "240px",marginTop: 0,paddingTop: 0, flex: 1, display: "flex", flexDirection: "column", background: "#0d0f14", minHeight: "100vh" }}>
 
         {/* Topbar */}
         <header style={{
@@ -503,7 +503,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Content */}
-        <div style={{ padding: "28px 32px", flex: 1 }}>
+        <div style={{ padding: "28px 32px", flex: 1, background: "#0d0f14" }}>
           {children}
         </div>
       </main>

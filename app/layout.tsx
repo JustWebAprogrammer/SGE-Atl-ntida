@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt">
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning style={{ background: '#0d0f14', margin: 0, padding: 0 }}>
         <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>
