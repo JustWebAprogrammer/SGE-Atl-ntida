@@ -163,6 +163,56 @@ export async function PUT(
   }
 }
 
+// PATCH - Reset password do rececionista
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const session = await getServerSession(authOptions)
+    
+    if (!session || session.user?.role !== 'admin') {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    }
+
+    const { id } = await params
+    const id_recepcionista = Number(id)
+
+    if (isNaN(id_recepcionista)) {
+      return NextResponse.json({ error: 'ID inválido' }, { status: 400 })
+    }
+
+    const body = await request.json()
+    const { tipo } = body
+
+    if (tipo === 'reset_password') {
+      const recepcionista = await prisma.recepcionista.findUnique({
+        where: { id_recepcionista },
+        select: { id_usuario: true, nome_completo: true }
+      })
+
+      if (!recepcionista) {
+        return NextResponse.json({ error: 'Recepcionista não encontrado' }, { status: 404 })
+      }
+
+      const SENHA_PADRAO = 'recepcionista123'
+      const novaSenhaHash = await bcrypt.hash(SENHA_PADRAO, 10)
+
+      await prisma.usuario.update({
+        where: { id_usuario: recepcionista.id_usuario },
+        data: { senha: novaSenhaHash }
+      })
+
+      return NextResponse.json({ success: true, message: `Password redefinido para: ${SENHA_PADRAO}` })
+    }
+
+    return NextResponse.json({ error: 'Tipo inválido' }, { status: 400 })
+  } catch (error) {
+    console.error('Erro reset password recepcionista:', error)
+    return new NextResponse('Erro interno', { status: 500 })
+  }
+}
+
 // DELETE - Remover rececionista
 export async function DELETE(
   request: Request,
