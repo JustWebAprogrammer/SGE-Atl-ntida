@@ -107,6 +107,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
   const [acaoLoading, setAcaoLoading] = useState<string | null>(null)
   const [mensagem, setMensagem] = useState<{ texto: string; tipo: "ok" | "erro" } | null>(null)
   const [recepcionistaNome, setRecepcionistaNome] = useState<string>("")
+  const [propinasExpandido, setPropinasExpandido] = useState(true)
 
 
   useEffect(() => {
@@ -433,8 +434,33 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
       {/* ─── HISTÓRICO DE PROPINAS ─── */}
       {dados.pagamentos_propina.length > 0 && (
         <Secao titulo={`Histórico de Propinas (${dados.pagamentos_propina.length})`}>
+          {/* Botão de expandir/recolher quando tem muitas propinas */}
+          {dados.pagamentos_propina.length > 3 && (
+            <div style={{ padding: "0 24px 12px", display: "flex", justifyContent: "flex-end" }}>
+              <button
+                onClick={() => setPropinasExpandido(!propinasExpandido)}
+                style={{
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: "6px",
+                  padding: "6px 12px",
+                  color: "#d0d7e8",
+                  fontSize: "12px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px"
+                }}
+              >
+                {propinasExpandido ? "▲ Recolher" : `▼ Mostrar tudo (${dados.pagamentos_propina.length})`}
+              </button>
+            </div>
+          )}
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {dados.pagamentos_propina.map(p => {
+            {(propinasExpandido
+              ? dados.pagamentos_propina
+              : dados.pagamentos_propina.slice(0, 3)
+            ).map(p => {
               const isPago = p.estado === "Pago"
               return (
                 <div key={p.id_pagamento} style={{
