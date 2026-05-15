@@ -350,6 +350,7 @@ model Certificado {
   tipo_certificado TipoCertificado
   descricao        String?
   status           StatusCertificado        @default(Solicitado)
+  isFisico         Boolean                  @default(false)
   estudante        Estudante                @relation(fields: [id_estudante], references: [id_estudante])
   disciplinas      CertificadoDisciplinas[]
 }

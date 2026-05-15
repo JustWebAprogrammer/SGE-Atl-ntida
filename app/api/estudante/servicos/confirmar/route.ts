@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { logAudit } from "@/lib/audit"
 import { getSystemDate, getAnoLectivo } from "@/lib/sistema"
-import { SERVICOS } from "@/lib/servicos-tipos"
+import { SERVICOS, isServicoFisico } from "@/lib/servicos-tipos"
 import { processarRematricula } from "@/lib/reenrollment"
 
 // POST - Confirmar pagamento de um serviço com código Multicaixa
@@ -127,6 +127,41 @@ export async function POST(request: Request) {
         metodo_pagamento: "Multicaixa",
       }
     })
+
+    // ── Se for um serviço físico, gerar registo para o recepcionista ──
+    if (factura.descricao_servico && isServicoFisico(factura.descricao_servico)) {
+      const desc = factura.descricao_servico.toLowerCase()
+      
+      // Certificado de Conclusão → criar certificado físico
+      if (desc.includes("certificado") && desc.includes("conclus")) {
+        await prisma.certificado.create({
+          data: {
+            id_estudante: estudante.id_estudante,
+            data_emissao: systemDate,
+            tipo_certificado: "Conclusao",
+            descricao: `Certificado de Conclusão (Físico) - ${factura.descricao_servico}`,
+            isFisico: true,
+            status: "Solicitado",
+          }
+        })
+      }
+      
+      // Declaração Académica → criar certificado físico (tipo Participacao)
+      if (desc.includes("declara") && desc.includes("acad")) {
+        await prisma.certificado.create({
+          data: {
+            id_estudante: estudante.id_estudante,
+            data_emissao: systemDate,
+            tipo_certificado: "Participacao",
+            descricao: `Declaração Académica (Física) - ${factura.descricao_servico}`,
+            isFisico: true,
+            status: "Solicitado",
+          }
+        })
+      }
+      
+      // Folha de Prova → não gera certificado, a própria factura já aparece no recepcionista
+    }
 
     // Registar no AuditLog
     await logAudit({

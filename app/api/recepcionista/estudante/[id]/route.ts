@@ -55,6 +55,7 @@ export async function GET(
         orderBy: [{ ano: "desc" }, { mes: "desc" }],
       },
       certificados: {
+        where: { isFisico: true },
         select: {
           id_certificado: true,
           tipo_certificado: true,
