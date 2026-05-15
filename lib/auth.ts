@@ -69,26 +69,45 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-        if (user) {
-          token.role = user.role
-          token.id = user.id
-          token.nome_usuario = (user.nome_usuario || user.name) as string | undefined
-        // Buscar e_gestor e nome_completo se for orientador
-        if (user.role === "orientador") {
+      // Se está a fazer login (user existe), preencher os campos base
+      if (user) {
+        token.role = user.role
+        token.id = user.id
+        token.nome_usuario = (user.nome_usuario || user.name) as string | undefined
+      }
+
+      // Buscar dados actualizados da DB em TODAS as chamadas (não só no login)
+      // Isto garante que alterações de nome feitas por admin aparecem sem precisar de logout
+      if (token.id) {
+        const userId = parseInt(token.id)
+        const role = token.role
+
+        if (role === "orientador") {
           const orientador = await prisma.orientador.findUnique({
-            where: { id_usuario: parseInt(user.id) }
+            where: { id_usuario: userId }
           })
           token.e_gestor = orientador?.e_gestor ?? false
           token.nome_completo = orientador?.nome_completo ?? undefined
+        } else if (role === "admin") {
+          const admin = await prisma.admin.findUnique({
+            where: { id_usuario: userId }
+          })
+          token.nome_completo = admin?.nome_completo ?? undefined
+          token.e_gestor = false
+        } else if (role === "estudante") {
+          const estudante = await prisma.estudante.findUnique({
+            where: { id_usuario: userId }
+          })
+          token.nome_completo = estudante?.nome_completo ?? undefined
+          token.e_gestor = false
+        } else if (role === "recepcionista") {
+          const recepcionista = await prisma.recepcionista.findUnique({
+            where: { id_usuario: userId }
+          })
+          token.nome_completo = recepcionista?.nome_completo ?? undefined
+          token.e_gestor = false
         } else {
           token.e_gestor = false
-          // Para admin, buscar nome_completo em Admin
-          if (user.role === "admin") {
-            const admin = await prisma.admin.findUnique({
-              where: { id_usuario: parseInt(user.id) }
-            })
-            token.nome_completo = admin?.nome_completo ?? undefined
-          }
         }
       }
       return token
