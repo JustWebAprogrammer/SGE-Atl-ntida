@@ -99,13 +99,6 @@ function Secao({ titulo, children }: { titulo: string; children: React.ReactNode
   )
 }
 
-type ContagemImpressao = {
-  id_factura: number
-  count: number
-  limite: number
-  bloqueado: boolean
-}
-
 export default function EstudanteDetalhe({ id }: { id: string }) {
   const router = useRouter()
   const [dados, setDados] = useState<EstudanteDetalhe | null>(null)
@@ -113,7 +106,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
   const [erro, setErro] = useState("")
   const [acaoLoading, setAcaoLoading] = useState<string | null>(null)
   const [mensagem, setMensagem] = useState<{ texto: string; tipo: "ok" | "erro" } | null>(null)
-  const [contagens, setContagens] = useState<Record<number, ContagemImpressao>>({})
   const [recepcionistaNome, setRecepcionistaNome] = useState<string>("")
 
 
@@ -135,44 +127,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
       })
       .catch(() => {})
   }, [id])
-
-  // Buscar contagem de impressões para facturas com documentos
-  useEffect(() => {
-    if (!dados) return
-
-    const facturasComDocumento = dados.facturas.filter(f =>
-      f.descricao_servico &&
-      ((f.descricao_servico.toLowerCase().includes("certificado") && f.descricao_servico.toLowerCase().includes("conclus")) ||
-       (f.descricao_servico.toLowerCase().includes("declara") && f.descricao_servico.toLowerCase().includes("acad")))
-    )
-
-    if (facturasComDocumento.length === 0) return
-
-    async function carregarContagens() {
-      const novasContagens: Record<number, ContagemImpressao> = {}
-      await Promise.all(
-        facturasComDocumento.map(async (f) => {
-          try {
-            const res = await fetch(`/api/recepcionista/auditar/contagem?id_factura=${f.id_factura}`)
-            const data = await res.json()
-            if (res.ok) {
-              novasContagens[f.id_factura] = {
-                id_factura: f.id_factura,
-                count: data.count,
-                limite: data.limite,
-                bloqueado: data.bloqueado,
-              }
-            }
-          } catch {
-            // silencioso
-          }
-        })
-      )
-      setContagens(novasContagens)
-    }
-
-    carregarContagens()
-  }, [dados])
 
   async function emitir(tipo: string, extra?: Record<string, unknown>) {
     if (!dados) return
@@ -205,62 +159,17 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
     }
   }
 
-  async function marcarEntregue(id_factura: number) {
-    setAcaoLoading(`entregar_${id_factura}`)
-    setMensagem(null)
-    try {
-      const res = await fetch("/api/recepcionista/factura/entregar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id_factura }),
-      })
-      const data = await res.json()
-
-      if (!res.ok) {
-        setMensagem({ texto: data.error ?? "Erro", tipo: "erro" })
-        return
-      }
-
-      setMensagem({ texto: data.mensagem, tipo: "ok" })
-
-      // Refazer fetch
-      const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
-      const d2 = await r2.json()
-      if (d2.estudante) setDados(d2.estudante)
-    } catch {
-      setMensagem({ texto: "Erro de ligação", tipo: "erro" })
-    } finally {
-      setAcaoLoading(null)
-    }
-  }
-
-  async function auditarImpressao(id_factura: number, tipo: "fatura" | "documento") {
+  async function auditarImpressao(id_factura: number) {
     try {
       const res = await fetch("/api/recepcionista/auditar/impressao", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id_factura, tipo }),
+        body: JSON.stringify({ id_factura, tipo: "fatura" }),
       })
       if (!res.ok) {
         const data = await res.json()
         setMensagem({ texto: data.error ?? "Erro ao registar impressão", tipo: "erro" })
         return false
-      }
-      // Actualizar contagem local após impressão bem-sucedida
-      if (tipo === "documento") {
-        setContagens(prev => {
-          const atual = prev[id_factura]
-          if (!atual) return prev
-          const novoCount = atual.count + 1
-          return {
-            ...prev,
-            [id_factura]: {
-              ...atual,
-              count: novoCount,
-              bloqueado: novoCount >= 2,
-            },
-          }
-        })
       }
       return true
     } catch {
@@ -410,71 +319,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
       setTimeout(() => URL.revokeObjectURL(url), 1000)
     } catch {
       // silently fail
-    }
-  }
-
-  function imprimirDocumento(factura: Factura) {
-    if (!dados || !factura.descricao_servico) return
-
-    const desc = factura.descricao_servico.toLowerCase()
-    const isCertificado = desc.includes("certificado") && desc.includes("conclus")
-    const isDeclaracao = desc.includes("declara") && desc.includes("acad")
-
-    if (!isCertificado && !isDeclaracao) return
-
-    const titulo = isCertificado ? "CERTIFICADO DE CONCLUSÃO" : "DECLARAÇÃO ACADÉMICA"
-    const texto = isCertificado
-      ? `Certificamos que <strong>${dados.nome_completo}</strong>, portador do Nº de Estudante <strong>${dados.numero_estudante ?? "—"}</strong>, concluiu com aproveitamento o curso de <strong>${dados.curso.nome_curso}</strong>, no ano lectivo de <strong>${dados.ano_electivo ?? dados.ano_current + "º ano"}</strong>.`
-      : `Declaramos para os devidos efeitos que <strong>${dados.nome_completo}</strong>, portador do Nº de Estudante <strong>${dados.numero_estudante ?? "—"}</strong>, é estudante regular do curso de <strong>${dados.curso.nome_curso}</strong>, frequentando actualmente o <strong>${dados.ano_current ?? "—"}º ano</strong>, no ano lectivo de <strong>${dados.ano_electivo ?? "2024/2025"}</strong>.`
-
-    const conteudo = `
-      <html>
-        <head>
-          <title>${titulo} - ${dados.nome_completo}</title>
-          <style>
-            body { font-family: "Times New Roman", serif; padding: 60px; color: #333; line-height: 1.6; }
-            .header { text-align: center; margin-bottom: 60px; }
-            .header h1 { margin: 0; font-size: 18px; color: #333; letter-spacing: 2px; }
-            .header .sub { font-size: 14px; color: #666; margin-top: 5px; }
-            .title { text-align: center; font-size: 22px; font-weight: bold; margin: 40px 0; text-decoration: underline; }
-            .content { text-align: justify; font-size: 16px; margin: 40px 0; }
-            .footer { margin-top: 80px; text-align: center; }
-            .footer .date { margin-bottom: 60px; }
-            .signature { margin-top: 40px; }
-            .signature-line { border-top: 1px solid #333; width: 300px; margin: 0 auto; padding-top: 5px; }
-            .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 80px; color: rgba(0,0,0,0.03); pointer-events: none; }
-          </style>
-        </head>
-        <body>
-          <div class="watermark">ISP ATLÂNTIDA</div>
-          <div class="header">
-            <h1>INSTITUTO SUPERIOR POLITÉCNICO ATLÂNTIDA</h1>
-            <div class="sub">Angola | Sede em Luanda</div>
-          </div>
-
-          <div class="title">${titulo}</div>
-
-          <div class="content">
-            <p>${texto}</p>
-            <p style="margin-top: 30px;">O presente documento destina-se a servir de comprovativo perante quem de direito.</p>
-          </div>
-
-          <div class="footer">
-            <div class="date">Luanda, ${new Date().toLocaleDateString("pt-AO", { day: "numeric", month: "long", year: "numeric" })}</div>
-            <div class="signature">
-              <div class="signature-line">O Director Geral</div>
-            </div>
-          </div>
-        </body>
-      </html>
-    `
-
-    const janela = window.open("", "_blank", "width=800,height=900")
-    if (janela) {
-      janela.document.write(conteudo)
-      janela.document.close()
-      janela.focus()
-      setTimeout(() => janela.print(), 300)
     }
   }
 
@@ -730,7 +574,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                     <div style={{ display: "flex", gap: "6px" }}>
                       <button
                         onClick={async () => {
-                          await auditarImpressao(f.id_factura, "fatura")
+                          await auditarImpressao(f.id_factura)
                           imprimirFaturaServico(f)
                         }}
                         style={{
@@ -746,7 +590,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                       </button>
                       <button
                         onClick={async () => {
-                          await auditarImpressao(f.id_factura, "fatura")
+                          await auditarImpressao(f.id_factura)
                           imprimirTalaoServico(f)
                         }}
                         style={{
@@ -761,66 +605,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                         🧾 Talão
                       </button>
                     </div>
-                  )}
-                  {f.estado === "Pago" && f.descricao_servico && (
-                    (f.descricao_servico.toLowerCase().includes("certificado") && f.descricao_servico.toLowerCase().includes("conclus")) ||
-                    (f.descricao_servico.toLowerCase().includes("declara") && f.descricao_servico.toLowerCase().includes("acad"))
-                  ) && (() => {
-                    const c = contagens[f.id_factura]
-                    const bloqueado = c?.bloqueado ?? false
-                    const count = c?.count ?? 0
-                    const label = bloqueado
-                      ? `📄 Documento (${count}/2)`
-                      : `📄 Documento ${count > 0 ? `(${count}/2)` : ""}`
-                    return (
-                      <button
-                        onClick={async () => {
-                          const ok = await auditarImpressao(f.id_factura, "documento")
-                          if (ok) imprimirDocumento(f)
-                        }}
-                        disabled={bloqueado}
-                        title={bloqueado ? "Limite de 2 impressões atingido" : undefined}
-                        style={{
-                          padding: "8px 14px",
-                          background: bloqueado
-                            ? "rgba(85,94,120,0.15)"
-                            : "rgba(155,89,182,0.15)",
-                          border: `1px solid ${bloqueado ? "rgba(85,94,120,0.3)" : "rgba(155,89,182,0.3)"}`,
-                          color: bloqueado ? "#b0b8cf" : "#9b59b6",
-                          borderRadius: "8px",
-                          fontSize: "12px", fontWeight: "600",
-                          cursor: bloqueado ? "not-allowed" : "pointer",
-                          whiteSpace: "nowrap" as const,
-                          opacity: bloqueado ? 0.7 : 1,
-                        }}
-                      >
-                        {label}
-                      </button>
-                    )
-                  })()}
-                  {f.entregue ? (
-                    <Badge
-                      label="Entregue"
-                      color="#22c55e"
-                      bg="rgba(34,197,94,0.12)"
-                    />
-                  ) : (
-                    <button
-                      onClick={() => marcarEntregue(f.id_factura)}
-                      disabled={acaoLoading === `entregar_${f.id_factura}`}
-                      style={{
-                        padding: "8px 14px",
-                        background: "rgba(240,165,0,0.15)",
-                        border: "1px solid rgba(240,165,0,0.3)",
-                        color: "#f0a500", borderRadius: "8px",
-                        fontSize: "12px", fontWeight: "600",
-                        cursor: acaoLoading === `entregar_${f.id_factura}` ? "not-allowed" : "pointer",
-                        whiteSpace: "nowrap" as const,
-                        opacity: acaoLoading === `entregar_${f.id_factura}` ? 0.6 : 1
-                      }}
-                    >
-                      {acaoLoading === `entregar_${f.id_factura}` ? "..." : "📦 Entregar"}
-                    </button>
                   )}
                 </div>
               </div>

@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { renderToBuffer } from "@react-pdf/renderer"
-import QRCode from "qrcode"
 import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
 import * as React from "react"
 import { readFileSync } from "fs"
@@ -104,10 +103,6 @@ export async function GET(
       logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
     } catch { }
 
-    const qrCodeUrl = `${request.nextUrl.origin}/verificar/${declaracao.id_declaracao}`
-    const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
-    const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
-
     const systemDate = await getSystemDate()
 
     const pdfBuffer = await renderToBuffer(
@@ -120,7 +115,7 @@ export async function GET(
         presidentSignature: signatureBase64,
         presidentName: presidentSignature?.nome_presidente || "",
         documentNumber: declaracao.numero_documento || `DECL-${anoLectivo}-${student.numero_estudante}-001`,
-        qrCodeUrl,
+        qrCodeUrl: "",
         logoUrl: logoBase64,
         systemDate
       }) as any

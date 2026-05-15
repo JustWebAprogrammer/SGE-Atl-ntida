@@ -4,8 +4,6 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { renderToBuffer } from "@react-pdf/renderer"
-import QRCode from "qrcode"
-import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
 import CertificadoConclusaoPDF from "@/app/components/CertificadoConclusaoPDF"
 import CertificadoPDF from "@/app/components/CertificadoPDF"
 import * as React from "react"
@@ -103,10 +101,6 @@ export async function GET(
         logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
       } catch { }
 
-      const qrCodeUrl = `${request.nextUrl.origin}/verificar/${certificado.id_certificado}`
-      const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
-      const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
-
       const systemDate = await getSystemDate()
 
       pdfBuffer = await renderToBuffer(
@@ -123,7 +117,7 @@ export async function GET(
           presidentSignature: signatureBase64,
           presidentName: presidentSignature?.nome_presidente || "",
           documentNumber: `CERT-${anoLectivo}-${student.numero_estudante}-001`,
-          qrCodeUrl,
+          qrCodeUrl: "",
           logoUrl: logoBase64,
           systemDate
         }) as any
@@ -146,10 +140,6 @@ export async function GET(
         logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
       } catch { }
 
-      const qrCodeUrl = `${request.nextUrl.origin}/verificar/${certificado.id_certificado}`
-      const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, { width: 200, margin: 1 })
-      const qrCodeBase64 = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`
-
       const systemDate = await getSystemDate()
 
       pdfBuffer = await renderToBuffer(
@@ -171,7 +161,7 @@ export async function GET(
           })),
           dataEmissao: systemDate,
           numeroCertificado: `DISC-${anoLectivo}-${student.numero_estudante}-001`,
-          qrCodeUrl,
+          qrCodeUrl: "",
           logoUrl: logoBase64
         }) as any
       )
