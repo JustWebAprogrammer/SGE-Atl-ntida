@@ -305,39 +305,6 @@ export default function RecepcionistasAdminDashboard() {
               </div>
             )}
 
-            {/* Info da password padrão — só aparece na criação */}
-            {!editingRecepcionista && (
-              <div style={{
-                background: 'rgba(240,165,0,0.10)',
-                border: '1px solid rgba(240,165,0,0.3)',
-                borderRadius: '8px',
-                padding: '14px',
-                marginBottom: '16px',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '10px'
-              }}>
-                <span style={{ fontSize: '20px' }}>🔑</span>
-                <div>
-                  <div style={{ color: '#f0a500', fontWeight: '600', fontSize: '13px', marginBottom: '4px' }}>
-                    Password automática
-                  </div>
-                  <div style={{ color: '#e8eaf0', fontSize: '14px', marginBottom: '4px' }}>
-                    <code style={{ 
-                      background: '#13161e', 
-                      padding: '2px 8px', 
-                      borderRadius: '4px',
-                      fontWeight: '600',
-                      color: '#e8eaf0'
-                    }}>{SENHA_PADRAO}</code>
-                  </div>
-                  <div style={{ color: '#9098b0', fontSize: '12px' }}>
-                    O recepcionista usará esta senha para aceder ao sistema.
-                  </div>
-                </div>
-              </div>
-            )}
-
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
                 <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome Completo *</label>
@@ -420,6 +387,12 @@ export default function RecepcionistasAdminDashboard() {
                   <option value="Tarde">Tarde</option>
                 </select>
               </div>
+
+              {!editingRecepcionista && (
+                <div style={{ marginBottom: '20px', padding: '12px', background: '#f0a50020', borderRadius: '8px' }}>
+                  <span style={{ color: '#f0a500', fontSize: '13px' }}>🔑 Senha padrão: <strong>{SENHA_PADRAO}</strong></span>
+                </div>
+              )}
 
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                 {/* Botão Apagar só na edição */}
