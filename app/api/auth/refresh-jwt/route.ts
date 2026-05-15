@@ -77,12 +77,10 @@ export async function POST() {
         return new Response("Tipo de utilizador não suportado", { status: 400 })
     }
 
-    // Retornar os dados atualizados
-    // Nota: O JWT em si não pode ser "atualizado" diretamente porque é stateless
-    // O cliente deve atualizar seu estado local e usar update() do NextAuth
-    // O que vai forçar uma nova chamada à API que vai buscar os dados atuais
+    // Retornar os dados atualizados — inclui nome_completo para o update() da sessão
     return NextResponse.json({
       name,
+      nome_completo: name,
       nome_usuario,
       role,
       id: session.user.id,

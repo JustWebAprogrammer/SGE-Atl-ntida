@@ -291,14 +291,7 @@ export default function DashboardLayout({
         throw new Error(errorData.error || `Erro HTTP: ${res.status}`)
       }
       
-      // Atualizar dados locais com valores confirmados do banco
-      setDadosPerfil(prev => ({
-        ...prev,
-        nome: dadosPerfil.nome.trim() || prev.nome,
-        nome_usuario: dadosPerfil.nome_usuario.trim() || prev.nome_usuario
-      }))
-      
-      // Fechar modal - o novo nome já está visível no sidebar via dadosPerfil
+      // Fechar modal - o novo nome fica visível após refresh abaixo
       setShowPerfilModal(false)
       
       // Atualizar sessão NextAuth com os novos dados
@@ -308,14 +301,22 @@ export default function DashboardLayout({
         })
         if (refreshRes.ok) {
           const refreshData = await refreshRes.json()
+          // Actualizar estado local imediatamente para o sidebar reflectir
+          setDadosPerfil(prev => ({
+            ...prev,
+            nome: refreshData.nome_completo || prev.nome,
+            nome_usuario: refreshData.nome_usuario || prev.nome_usuario
+          }))
           // Atualizar a sessão do NextAuth com o update()
           if (update) {
             await update({
-              name: refreshData.name,
-              nome_usuario: refreshData.nome_usuario,
-              email: refreshData.email,
-              role: refreshData.role,
-              id: refreshData.id
+              ...session,
+              user: {
+                ...session?.user,
+                name: refreshData.name,
+                nome_completo: refreshData.nome_completo,
+                nome_usuario: refreshData.nome_usuario,
+              }
             })
           }
         }
