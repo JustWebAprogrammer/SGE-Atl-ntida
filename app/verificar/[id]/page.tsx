@@ -43,110 +43,245 @@ export default function VerificarDocumento() {
     }
   }
 
+  const getDocumentTypeColor = (tipo: string) => {
+    switch (tipo) {
+      case "declaracao": return "#4ade80"
+      case "cert-disc": return "#6366f1"
+      case "cert": return "#f59e0b"
+      default: return "#9098b0"
+    }
+  }
+
+  // ─── Loading ───────────────────────────────────────
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-400">A verificar documento...</p>
+      <main style={{
+        minHeight: "100vh",
+        background: "#0d0f14",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "system-ui, sans-serif"
+      }}>
+        <div style={{ textAlign: "center" }}>
+          <div style={{
+            width: 40, height: 40,
+            border: "3px solid rgba(255,255,255,0.08)",
+            borderTop: "3px solid #e03d3d",
+            borderRadius: "50%",
+            margin: "0 auto 20px",
+            animation: "spin 0.8s linear infinite"
+          }} />
+          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+          <p style={{ color: "#9098b0", fontSize: "14px", margin: 0 }}>A verificar documento...</p>
         </div>
-      </div>
+      </main>
     )
   }
 
   const tipo = documento?.tipo || null
 
   return (
-    <div className="min-h-screen bg-gray-900 py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Instituto Superior Politécnico Atlântida
-          </h1>
-          <p className="text-gray-400">Verificação de Documentos</p>
+    <main style={{
+      minHeight: "100vh",
+      background: "#0d0f14",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontFamily: "system-ui, sans-serif",
+      padding: "24px 16px",
+      boxSizing: "border-box"
+    }}>
+      <div style={{ width: "100%", maxWidth: "480px" }}>
+        {/* ── Logo + Header ── */}
+        <div style={{ textAlign: "center", marginBottom: "32px" }}>
+          <div style={{
+            width: "48px", height: "48px",
+            background: "#e03d3d",
+            borderRadius: "12px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "22px",
+            fontWeight: "800",
+            color: "white",
+            marginBottom: "12px"
+          }}>A</div>
+          <h1 style={{
+            color: "#e8eaf0",
+            fontSize: "18px",
+            fontWeight: "700",
+            margin: "0 0 4px"
+          }}>Instituto Superior Politécnico Atlântida</h1>
+          <p style={{ color: "#555e78", fontSize: "13px", margin: 0 }}>Verificação de Documentos</p>
         </div>
 
-        {/* Result */}
+        {/* ── Error ── */}
         {error ? (
-          <div className="bg-red-500/20 border border-red-500 rounded-lg p-8 text-center">
-            <div className="text-5xl mb-4">❌</div>
-            <h2 className="text-xl font-semibold text-red-300 mb-2">Documento Inválido</h2>
-            <p className="text-red-200">{error}</p>
+          <div style={{
+            background: "rgba(224,61,61,0.12)",
+            border: "1px solid rgba(224,61,61,0.3)",
+            borderRadius: "16px",
+            padding: "40px 24px",
+            textAlign: "center"
+          }}>
+            <div style={{ fontSize: "48px", marginBottom: "12px" }}>✕</div>
+            <h2 style={{
+              color: "#e03d3d",
+              fontSize: "18px",
+              fontWeight: "600",
+              margin: "0 0 8px"
+            }}>Documento Inválido</h2>
+            <p style={{ color: "rgba(224,61,61,0.8)", fontSize: "14px", margin: 0 }}>{error}</p>
           </div>
         ) : documento ? (
-          <div className="bg-gray-800 rounded-lg p-8">
-            <div className="text-center mb-6">
-              <div className="text-5xl mb-4">✅</div>
-              <h2 className="text-2xl font-semibold text-green-400 mb-2">Documento Válido</h2>
-              <p className="text-gray-400">
+          /* ── Success Card ── */
+          <div style={{
+            background: "#1e2230",
+            border: "1px solid rgba(255,255,255,0.07)",
+            borderRadius: "16px",
+            overflow: "hidden"
+          }}>
+            {/* Header */}
+            <div style={{
+              padding: "32px 24px",
+              textAlign: "center",
+              borderBottom: "1px solid rgba(255,255,255,0.07)"
+            }}>
+              <div style={{ fontSize: "48px", marginBottom: "8px" }}>✓</div>
+              <h2 style={{
+                color: "#4ade80",
+                fontSize: "20px",
+                fontWeight: "600",
+                margin: "0 0 6px"
+              }}>Documento Válido</h2>
+              <p style={{ color: "#9098b0", fontSize: "13px", margin: "0 0 12px" }}>
                 Este documento foi emitido pelo Instituto Superior Politécnico Atlântida
               </p>
-              <div className="mt-2">
-                <span className="inline-block bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
-                  {getDocumentTypeLabel(tipo)}
+              <span style={{
+                display: "inline-block",
+                background: `${getDocumentTypeColor(tipo)}22`,
+                color: getDocumentTypeColor(tipo),
+                padding: "4px 14px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "600"
+              }}>{getDocumentTypeLabel(tipo)}</span>
+            </div>
+
+            {/* Info rows */}
+            <div style={{ padding: "20px 24px" }}>
+              {/* Número do Documento */}
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.05)"
+              }}>
+                <span style={{ color: "#9098b0", fontSize: "12px" }}>Nº Documento</span>
+                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                  {documento.numero_documento}
+                </span>
+              </div>
+
+              {/* Nome */}
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.05)"
+              }}>
+                <span style={{ color: "#9098b0", fontSize: "12px" }}>Nome</span>
+                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
+                  {documento.estudante.nome_completo}
+                </span>
+              </div>
+
+              {/* Nº Matrícula */}
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.05)"
+              }}>
+                <span style={{ color: "#9098b0", fontSize: "12px" }}>Matrícula</span>
+                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                  {documento.estudante.numero_estudante}
+                </span>
+              </div>
+
+              {/* Curso */}
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.05)"
+              }}>
+                <span style={{ color: "#9098b0", fontSize: "12px" }}>Curso</span>
+                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
+                  {documento.estudante.curso.nome_curso}
+                </span>
+              </div>
+
+              {/* Ano Lectivo */}
+              {documento.ano_lectivo && (
+                <div style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "12px 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.05)"
+                }}>
+                  <span style={{ color: "#9098b0", fontSize: "12px" }}>Ano Lectivo</span>
+                  <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                    {documento.ano_lectivo}
+                  </span>
+                </div>
+              )}
+
+              {/* Descrição */}
+              {documento.descricao && (
+                <div style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "12px 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.05)"
+                }}>
+                  <span style={{ color: "#9098b0", fontSize: "12px" }}>Descrição</span>
+                  <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
+                    {documento.descricao}
+                  </span>
+                </div>
+              )}
+
+              {/* Data de Emissão */}
+              <div style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "12px 0"
+              }}>
+                <span style={{ color: "#9098b0", fontSize: "12px" }}>Emissão</span>
+                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                  {new Date(documento.data_emissao).toLocaleDateString("pt-PT")}
                 </span>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="border-b border-gray-700 pb-4">
-                <p className="text-sm text-gray-400">Número do Documento</p>
-                <p className="text-white font-medium">{documento.numero_documento}</p>
-              </div>
-
-              <div className="border-b border-gray-700 pb-4">
-                <p className="text-sm text-gray-400">Nome do Estudante</p>
-                <p className="text-white font-medium">{documento.estudante.nome_completo}</p>
-              </div>
-
-              <div className="border-b border-gray-700 pb-4">
-                <p className="text-sm text-gray-400">Número de Matrícula</p>
-                <p className="text-white font-medium">{documento.estudante.numero_estudante}</p>
-              </div>
-
-              <div className="border-b border-gray-700 pb-4">
-                <p className="text-sm text-gray-400">Curso</p>
-                <p className="text-white font-medium">{documento.estudante.curso.nome_curso}</p>
-              </div>
-
-              {documento.ano_lectivo && (
-                <div className="border-b border-gray-700 pb-4">
-                  <p className="text-sm text-gray-400">Ano Lectivo</p>
-                  <p className="text-white font-medium">{documento.ano_lectivo}</p>
-                </div>
-              )}
-
-              {documento.descricao && (
-                <div className="border-b border-gray-700 pb-4">
-                  <p className="text-sm text-gray-400">Descrição</p>
-                  <p className="text-white font-medium">{documento.descricao}</p>
-                </div>
-              )}
-
-              <div>
-                <p className="text-sm text-gray-400">Data de Emissão</p>
-                <p className="text-white font-medium">
-                  {new Date(documento.data_emissao).toLocaleDateString("pt-PT")}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-gray-700 text-center">
-              <p className="text-sm text-gray-400">
-                Verificado em: {new Date().toLocaleString("pt-PT")}
+            {/* Footer do card */}
+            <div style={{
+              padding: "16px 24px",
+              borderTop: "1px solid rgba(255,255,255,0.07)",
+              textAlign: "center"
+            }}>
+              <p style={{ color: "#555e78", fontSize: "11px", margin: 0 }}>
+                Verificado em {new Date().toLocaleString("pt-PT")}
               </p>
             </div>
           </div>
         ) : null}
 
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-sm text-gray-500">
-            Este serviço é fornecido pelo Instituto Superior Politécnico Atlântida
-          </p>
-        </div>
+        {/* ── Footer ── */}
+        <p style={{
+          textAlign: "center",
+          color: "#555e78",
+          fontSize: "12px",
+          marginTop: "24px"
+        }}>
+          ISP Atlântida © {new Date().getFullYear()}
+        </p>
       </div>
-    </div>
+    </main>
   )
 }
