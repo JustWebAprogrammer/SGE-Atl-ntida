@@ -350,7 +350,7 @@ const s = {
   label: {
     display: 'block',
     marginBottom: '5px',
-    color: '#9098b0',
+    color: '#d0d7e8',
     fontSize: '12px',
     fontWeight: '500',
     textTransform: 'uppercase' as const,
@@ -467,12 +467,12 @@ const s = {
     borderRadius: '6px',
     fontSize: '11px',
     background: 'rgba(255,255,255,0.06)',
-    color: '#9098b0',
+    color: '#d0d7e8',
     border: '1px solid rgba(255,255,255,0.08)',
   } as React.CSSProperties,
 
   sumario: {
-    color: '#9098b0',
+    color: '#d0d7e8',
     fontSize: '13px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -488,18 +488,18 @@ const s = {
   } as React.CSSProperties,
 
   hora: {
-    color: '#9098b0',
+    color: '#d0d7e8',
     fontSize: '12px',
   } as React.CSSProperties,
 
   ip: {
-    color: '#555e78',
+    color: '#b0b8cf',
     fontSize: '11px',
     fontFamily: 'monospace',
   } as React.CSSProperties,
 
   chevron: (expandido: boolean): React.CSSProperties => ({
-    color: '#555e78',
+    color: '#b0b8cf',
     fontSize: '12px',
     transition: 'transform 0.2s',
     transform: expandido ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -530,7 +530,7 @@ const s = {
   } as React.CSSProperties,
 
   diffCampo: {
-    color: '#9098b0',
+    color: '#d0d7e8',
     fontSize: '12px',
     fontWeight: '500',
     textTransform: 'uppercase' as const,
@@ -548,7 +548,7 @@ const s = {
   } as React.CSSProperties,
 
   diffSeta: {
-    color: '#555e78',
+    color: '#b0b8cf',
     fontSize: '14px',
     textAlign: 'center' as const,
   } as React.CSSProperties,
@@ -667,7 +667,7 @@ const s = {
   }),
 
   semAlteracoes: {
-    color: '#555e78',
+    color: '#b0b8cf',
     fontSize: '13px',
     fontStyle: 'italic',
     textAlign: 'center' as const,
@@ -676,7 +676,7 @@ const s = {
 
   diffLabel: {
     fontSize: '11px',
-    color: '#555e78',
+    color: '#b0b8cf',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
     marginBottom: '8px',
@@ -703,7 +703,7 @@ const s = {
   }),
 
   paginaInfo: {
-    color: '#9098b0',
+    color: '#d0d7e8',
     fontSize: '13px',
     padding: '0 8px',
   } as React.CSSProperties,
@@ -711,7 +711,7 @@ const s = {
   vazio: {
     textAlign: 'center' as const,
     padding: '60px 20px',
-    color: '#555e78',
+    color: '#b0b8cf',
     fontSize: '14px',
     background: '#1e2230',
     borderRadius: '12px',
@@ -740,7 +740,7 @@ const s = {
   } as React.CSSProperties,
 
   statLabel: {
-    color: '#9098b0',
+    color: '#d0d7e8',
     fontSize: '11px',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
@@ -949,7 +949,7 @@ export default function AuditPage() {
           </div>
         </div>
         <div style={s.filtrosRodape}>
-          <span style={{ color: '#9098b0', fontSize: '13px' }}>
+          <span style={{ color: '#d0d7e8', fontSize: '13px' }}>
             A mostrar <strong style={{ color: 'white' }}>{logs.length}</strong> de <strong style={{ color: 'white' }}>{total}</strong> registos
           </span>
           <button onClick={resetFilters} style={s.btnLimpar}>Limpar filtros</button>
@@ -1018,7 +1018,7 @@ export default function AuditPage() {
                               {ctx.tipo === 'estudante' ? (
                                 <>
                                   {ctx.numero && (
-                                    <span style={s.contextoPill('#9098b0')}>#{ctx.numero}</span>
+                                    <span style={s.contextoPill('#d0d7e8')}>#{ctx.numero}</span>
                                   )}
                                   <span style={s.contextoPill('#6366f1')}>{ctx.ano}</span>
                                   <span style={s.contextoPill('#0ea5e9')}>{ctx.curso}</span>
@@ -1150,7 +1150,7 @@ export default function AuditPage() {
                                   <span style={s.contextoPill('#8b5cf6')}>{log.contexto_horario.turno}</span>
                                 )}
                                 {log.contexto_horario.sala && (
-                                  <span style={s.contextoPill('#9098b0')}>📍 {log.contexto_horario.sala}</span>
+                                  <span style={s.contextoPill('#d0d7e8')}>📍 {log.contexto_horario.sala}</span>
                                 )}
                               </div>
                             </div>
@@ -1180,7 +1180,7 @@ export default function AuditPage() {
                                   <span style={s.contextoPill('#8b5cf6')}>{log.contexto_prova.turno}</span>
                                 )}
                                 {log.contexto_prova.hora_inicio && log.contexto_prova.hora_fim && (
-                                  <span style={s.contextoPill('#9098b0')}>
+                                  <span style={s.contextoPill('#d0d7e8')}>
                                     {log.contexto_prova.hora_inicio} — {log.contexto_prova.hora_fim}
                                   </span>
                                 )}
@@ -1245,16 +1245,16 @@ export default function AuditPage() {
                               gap: '8px',
                               padding: '0 12px 8px',
                             }}>
-                              <span style={{ ...s.diffCampo, color: '#555e78' }}>Campo</span>
+                              <span style={{ ...s.diffCampo, color: '#b0b8cf' }}>Campo</span>
                               {isCriacao ? (
                                 <span style={{ fontSize: '11px', color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.4px', gridColumn: '2 / 5' }}>
                                   Valor registado
                                 </span>
                               ) : (
                                 <>
-                                  <span style={{ fontSize: '11px', color: '#555e78', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Antes</span>
+                                  <span style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Antes</span>
                                   <span />
-                                  <span style={{ fontSize: '11px', color: '#555e78', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Depois</span>
+                                  <span style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Depois</span>
                                 </>
                               )}
                             </div>

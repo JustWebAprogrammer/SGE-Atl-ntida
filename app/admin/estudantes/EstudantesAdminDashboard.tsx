@@ -94,7 +94,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   display: 'block',
   marginBottom: '6px',
-  color: '#9098b0',
+  color: '#d0d7e8',
   fontSize: '13px',
 }
 
@@ -659,7 +659,7 @@ export default function EstudantesAdminDashboard() {
 
       {/* ── Tabela ──────────────────────────────────────────── */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
           A carregar estudantes...
         </div>
       ) : (
@@ -673,7 +673,7 @@ export default function EstudantesAdminDashboard() {
                     style={{
                       textAlign: 'left',
                       padding: '14px',
-                      color: '#9098b0',
+                      color: '#d0d7e8',
                       fontWeight: '500',
                       fontSize: '12px',
                       textTransform: 'uppercase',
@@ -703,13 +703,13 @@ export default function EstudantesAdminDashboard() {
                       {estudante.nome_completo}
                     </span>
                   </td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{estudante.numero_estudante}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{estudante.usuario.email}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.numero_estudante}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.usuario.email}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>
                     {estudante.curso?.nome_curso ?? '—'}
                   </td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{estudante.ano_current}º Ano</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{estudante.turno || '—'}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.ano_current}º Ano</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.turno || '—'}</td>
                   <td style={{ padding: '14px' }}>
                     <span
                       style={{
@@ -803,7 +803,7 @@ export default function EstudantesAdminDashboard() {
               <div style={{ marginBottom: '16px' }}>
                 <label style={labelStyle}>Telefone (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#9098b0', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={formData.telefone}
@@ -832,7 +832,7 @@ export default function EstudantesAdminDashboard() {
                 <p style={{ margin: 0, color: '#22c55e', fontSize: '13px', fontWeight: 500 }}>
                   ℹ️ Senha padrão: <strong>estudante12345</strong>
                 </p>
-                <p style={{ margin: '4px 0 0 0', color: '#9098b0', fontSize: '12px' }}>
+                <p style={{ margin: '4px 0 0 0', color: '#d0d7e8', fontSize: '12px' }}>
                   O estudante poderá alterar depois no seu perfil
                 </p>
               </div>
@@ -923,7 +923,7 @@ export default function EstudantesAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer',
                   }}
                 >
@@ -972,7 +972,7 @@ export default function EstudantesAdminDashboard() {
               <div style={{ marginBottom: '16px' }}>
                 <label style={labelStyle}>Telefone (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#9098b0', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={editFormData.numero_telemovel}
@@ -1101,7 +1101,7 @@ export default function EstudantesAdminDashboard() {
                       background: 'transparent',
                       border: '1px solid rgba(255,255,255,0.1)',
                       borderRadius: '8px',
-                      color: '#9098b0',
+                      color: '#d0d7e8',
                       cursor: 'pointer',
                     }}
                   >
@@ -1148,7 +1148,7 @@ export default function EstudantesAdminDashboard() {
                 <h3 style={{ margin: '0 0 8px 0', color: '#e8eaf0', fontSize: '20px' }}>
                   {selectedStudent.nome_completo}
                 </h3>
-                <p style={{ margin: 0, color: '#9098b0', fontSize: '14px' }}>
+                <p style={{ margin: 0, color: '#d0d7e8', fontSize: '14px' }}>
                   Nº {selectedStudent.numero_estudante} • {selectedStudent.curso?.nome_curso} • {selectedStudent.ano_current}º Ano
                 </p>
               </div>
@@ -1157,7 +1157,7 @@ export default function EstudantesAdminDashboard() {
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: '#9098b0',
+                  color: '#d0d7e8',
                   fontSize: '24px',
                   cursor: 'pointer',
                   padding: '0 8px'
@@ -1176,7 +1176,7 @@ export default function EstudantesAdminDashboard() {
                   background: activeTab === 'notas' ? '#e03d3d' : 'transparent',
                   border: 'none',
                   borderRadius: '8px 8px 0 0',
-                  color: activeTab === 'notas' ? 'white' : '#9098b0',
+                  color: activeTab === 'notas' ? 'white' : '#d0d7e8',
                   fontWeight: '600',
                   cursor: 'pointer',
                 }}
@@ -1190,7 +1190,7 @@ export default function EstudantesAdminDashboard() {
                   background: activeTab === 'pagamentos' ? '#e03d3d' : 'transparent',
                   border: 'none',
                   borderRadius: '8px 8px 0 0',
-                  color: activeTab === 'pagamentos' ? 'white' : '#9098b0',
+                  color: activeTab === 'pagamentos' ? 'white' : '#d0d7e8',
                   fontWeight: '600',
                   cursor: 'pointer',
                 }}
@@ -1223,9 +1223,9 @@ export default function EstudantesAdminDashboard() {
                   </div>
 
                   {loadingDetails ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#9098b0' }}>A carregar...</div>
+                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>A carregar...</div>
                   ) : notas.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#9098b0' }}>
+                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>
                       Sem notas registradas para este ano
                     </div>
                   ) : (
@@ -1234,16 +1234,16 @@ export default function EstudantesAdminDashboard() {
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                       <thead>
                         <tr style={{ borderBottom: '2px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.03)' }}>
-                          <th style={{ textAlign: 'left', padding: '10px 12px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>Disciplina</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>AC1</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>AC2</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>AC3</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>TTP</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>PP1</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>PP2</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>Exame</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>Rec.</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#9098b0', fontSize: '13px', fontWeight: '600' }}>Esp.</th>
+                          <th style={{ textAlign: 'left', padding: '10px 12px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Disciplina</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>AC1</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>AC2</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>AC3</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>TTP</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>PP1</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>PP2</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Exame</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Rec.</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Esp.</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1251,7 +1251,7 @@ export default function EstudantesAdminDashboard() {
                       <tr key={nota.id_nota} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                         <td style={{ padding: '10px', color: '#e8eaf0' }}>
                           {nota.disciplina?.nome_disciplina}
-                          <div style={{ fontSize: '11px', color: '#9098b0' }}>{nota.disciplina?.codigo_disciplina}</div>
+                          <div style={{ fontSize: '11px', color: '#d0d7e8' }}>{nota.disciplina?.codigo_disciplina}</div>
                         </td>
         {(['ac1', 'ac2', 'ac3', 'ttp', 'pp1', 'pp2', 'exame', 'recurso', 'exame_especial'] as const).map((campo) => {
                           const valor = localGrades[nota.id_nota]?.[campo] ?? null
@@ -1321,7 +1321,7 @@ export default function EstudantesAdminDashboard() {
                         disabled={savingGrades || !hasChanges}
                         style={{
                           padding: '12px 24px',
-                          background: savingGrades ? '#555e78' : hasChanges ? '#22c55e' : '#3a3f4d',
+                          background: savingGrades ? '#b0b8cf' : hasChanges ? '#22c55e' : '#3a3f4d',
                           border: 'none',
                           borderRadius: '8px',
                           color: 'white',
@@ -1391,9 +1391,9 @@ export default function EstudantesAdminDashboard() {
                   </div>
 
                   {loadingDetails ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#9098b0' }}>A carregar...</div>
+                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>A carregar...</div>
                   ) : pagamentos.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#9098b0' }}>
+                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>
                       Sem pagamentos registrados
                     </div>
                   ) : (
@@ -1433,10 +1433,10 @@ export default function EstudantesAdminDashboard() {
                                 {pagamento.descricao}
                               </div>
                             </div>
-                            <div style={{ color: '#9098b0', fontSize: '13px' }}>
+                            <div style={{ color: '#d0d7e8', fontSize: '13px' }}>
                               Ref: {pagamento.referencia || '—'} • {pagamento.data ? new Date(pagamento.data).toLocaleDateString('pt-AO') : '—'}
                             </div>
-                            <div style={{ color: '#9098b0', fontSize: '13px' }}>
+                            <div style={{ color: '#d0d7e8', fontSize: '13px' }}>
                               Valor: {Number(pagamento.valor_total).toLocaleString('pt-AO', { style: 'currency', currency: 'AOA' })}
                               {Number(pagamento.valor_base) !== Number(pagamento.valor_total) && (
                                 <span style={{ marginLeft: '8px', color: '#22c55e', fontSize: '11px' }}>

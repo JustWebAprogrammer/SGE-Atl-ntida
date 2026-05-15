@@ -309,7 +309,7 @@ export default function LayoutDocumentosDashboard() {
   const labelStyle = {
     display: "block",
     marginBottom: "6px",
-    color: "#9098b0",
+    color: "#d0d7e8",
     fontSize: "12px",
     fontWeight: "500" as const,
     textTransform: "uppercase" as const,
@@ -319,7 +319,7 @@ export default function LayoutDocumentosDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={adminNavItems} title="Layout de Documentos" subtitle="A carregar...">
-        <div style={{ textAlign: "center", padding: "40px", color: "#9098b0" }}>A carregar...</div>
+        <div style={{ textAlign: "center", padding: "40px", color: "#d0d7e8" }}>A carregar...</div>
       </DashboardLayout>
     )
   }
@@ -361,7 +361,7 @@ export default function LayoutDocumentosDashboard() {
                 borderRadius: "8px",
                 border: isActive ? "none" : "1px solid rgba(255,255,255,0.07)",
                 background: isActive ? "#e03d3d" : "transparent",
-                color: isActive ? "#fff" : "#9098b0",
+                color: isActive ? "#fff" : "#d0d7e8",
                 fontSize: "13px",
                 fontWeight: isActive ? "600" : "400",
                 cursor: "pointer",
@@ -519,7 +519,7 @@ export default function LayoutDocumentosDashboard() {
                   {currentConfig.tem_qr_code ? (
                     <span style={{ color: "#2dd4bf", marginLeft: "8px", fontSize: "11px" }}>● Activo</span>
                   ) : (
-                    <span style={{ color: "#9098b0", marginLeft: "8px", fontSize: "11px" }}>○ Inactivo</span>
+                    <span style={{ color: "#d0d7e8", marginLeft: "8px", fontSize: "11px" }}>○ Inactivo</span>
                   )}
                 </span>
               </label>
@@ -558,7 +558,7 @@ export default function LayoutDocumentosDashboard() {
                   background: "transparent",
                   border: "1px solid rgba(255,255,255,0.1)",
                   borderRadius: "8px",
-                  color: "#9098b0",
+                  color: "#d0d7e8",
                   fontSize: "13px",
                   cursor: "pointer",
                 }}
@@ -585,7 +585,7 @@ export default function LayoutDocumentosDashboard() {
             <span
               style={{
                 fontSize: "11px",
-                color: "#9098b0",
+                color: "#d0d7e8",
                 background: "#1e2230",
                 padding: "4px 10px",
                 borderRadius: "12px",
@@ -604,7 +604,7 @@ export default function LayoutDocumentosDashboard() {
               background: "#1e2230",
               borderRadius: "8px",
               fontSize: "11px",
-              color: "#9098b0",
+              color: "#d0d7e8",
             }}
           >
             💡 A pré-visualização usa dados de exemplo. Os placeholders{" "}

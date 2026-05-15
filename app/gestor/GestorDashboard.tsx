@@ -131,7 +131,7 @@ function CardStat({
         fontSize: "11px",
         textTransform: "uppercase",
         letterSpacing: "0.5px",
-        color: "#555e78",
+        color: "#b0b8cf",
         marginBottom: "10px"
       }}>{label}</div>
       <div style={{
@@ -459,7 +459,7 @@ export default function GestorDashboard() {
       case "recurso": return "#e03d3d"
       case "exame": return "#f0a500"
       case "ac": return "#22c55e"
-      default: return "#555e78"
+      default: return "#b0b8cf"
     }
   }
 
@@ -480,7 +480,7 @@ export default function GestorDashboard() {
       case "Exame": return "#f0a500"
       case "Recurso": return "#e03d3d"
       case "Exame_Especial": return "#a855f7"
-      default: return "#555e78"
+      default: return "#b0b8cf"
     }
   }
 
@@ -525,10 +525,10 @@ export default function GestorDashboard() {
               border: "1px solid rgba(255,255,255,0.07)",
               borderRadius: "14px",
               padding: "20px",
-              borderTop: "2px solid #555e78"
+              borderTop: "2px solid #b0b8cf"
             }}>
-              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#555e78", marginBottom: "10px" }}>A carregar...</div>
-              <div style={{ fontSize: "22px", fontWeight: "700", color: "#555e78" }}>...</div>
+              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "10px" }}>A carregar...</div>
+              <div style={{ fontSize: "22px", fontWeight: "700", color: "#b0b8cf" }}>...</div>
             </div>
           ))
         ) : (
@@ -596,7 +596,7 @@ export default function GestorDashboard() {
                 border: "1px solid rgba(255,255,255,0.1)",
                 borderRadius: "8px",
                 padding: "8px 12px",
-                color: "#9098b0",
+                color: "#d0d7e8",
                 fontSize: "13px",
                 cursor: "pointer"
               }}
@@ -607,9 +607,9 @@ export default function GestorDashboard() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
         ) : disciplinasFiltradas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
             Nenhuma disciplina encontrada para os filtros selecionados
           </div>
         ) : (
@@ -632,7 +632,7 @@ export default function GestorDashboard() {
                 >
                   <div>
                     <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
-                    <div style={{ color: "#555e78", fontSize: "12px", marginTop: "2px" }}>
+                    <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
                       {d.codigo} · {d.creditos} créditos
                       {(() => {
                         // Extrair pares (ano_curricular, semestre) únicos e ordenados
@@ -655,7 +655,7 @@ export default function GestorDashboard() {
                       {d.total_estudantes} estudantes
                     </div>
                     <div style={{
-                      color: "#555e78",
+                      color: "#b0b8cf",
                       fontSize: "12px",
                       transition: "transform 0.2s",
                       transform: disciplinaSelecionada?.id === d.id ? "rotate(180deg)" : "rotate(0deg)"
@@ -675,9 +675,9 @@ export default function GestorDashboard() {
                     marginRight: "8px"
                   }}>
                     {loadingEstudantes ? (
-                      <div style={{ textAlign: "center", color: "#555e78", padding: "20px" }}>A carregar estudantes...</div>
+                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>A carregar estudantes...</div>
                     ) : estudantes.length === 0 ? (
-                      <div style={{ textAlign: "center", color: "#555e78", padding: "20px" }}>
+                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>
                         Nenhum estudante encontrado
                       </div>
                     ) : (
@@ -685,19 +685,19 @@ export default function GestorDashboard() {
                         <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
                             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#555e78", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>AC1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>AC2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>AC3</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>TTP</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>PP1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>PP2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Exame</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Rec</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Esp</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Final</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Estado</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}></th>
+                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC3</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>TTP</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>PP1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>PP2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Exame</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Rec</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Esp</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Final</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Estado</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -705,7 +705,7 @@ export default function GestorDashboard() {
                               <tr key={e.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                                 <td style={{ padding: "8px" }}>
                                   <div style={{ color: "#e8eaf0", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
-                                  <div style={{ color: "#555e78", fontSize: "11px" }}>{e.numero_estudante}</div>
+                                  <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{e.numero_estudante}</div>
                                 </td>
                                 {["ac1", "ac2", "ac3", "ttp", "pp1", "pp2", "exame", "recurso", "exame_especial"].map((campo) => (
                                   <td key={campo} style={{ textAlign: "center", padding: "8px" }}>
@@ -743,7 +743,7 @@ export default function GestorDashboard() {
                                     fontWeight: "700",
                                     color: e.nota_final != null
                                       ? (e.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                                      : "#555e78",
+                                      : "#b0b8cf",
                                     fontSize: "12px"
                                   }}>
                                     {e.nota_final != null ? arredondarNota(e.nota_final) : "—"}
@@ -783,7 +783,7 @@ export default function GestorDashboard() {
                                         onClick={cancelarEdicao}
                                         style={{
                                           padding: "3px 6px",
-                                          background: "#555e78",
+                                          background: "#b0b8cf",
                                           color: "white",
                                           border: "none",
                                           borderRadius: "4px",
@@ -844,7 +844,7 @@ export default function GestorDashboard() {
         {/* Only Turno filter visible */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end", marginBottom: "16px" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurnoHorario} onChange={e => setFiltroTurnoHorario(e.target.value)} style={estiloSelect}>
               {turnosHorario.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -852,9 +852,9 @@ export default function GestorDashboard() {
         </div>
 
         {loadingAulas ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar aulas...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar aulas...</div>
         ) : aulas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>Nenhuma aula encontrada para este turno</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>Nenhuma aula encontrada para este turno</div>
         ) : (
           <div style={{ overflowX: "auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`, gap: "1px", background: "#13161e", borderRadius: "10px" }}>
@@ -908,10 +908,10 @@ export default function GestorDashboard() {
                                 }}>{aula.disciplina.codigo_disciplina}</span>
                               </div>
                             )}
-                            {aula.sala && <div style={{ color: "#9098b0", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
+                            {aula.sala && <div style={{ color: "#d0d7e8", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                           </div>
                         ) : (
-                          <div style={{ color: "#555e78", fontSize: "10px" }}>—</div>
+                          <div style={{ color: "#b0b8cf", fontSize: "10px" }}>—</div>
                         )}
                       </div>
                     )
@@ -941,7 +941,7 @@ export default function GestorDashboard() {
         {/* Only Turno filter visible */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end", marginBottom: "16px" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurnoProvas} onChange={e => setFiltroTurnoProvas(e.target.value)} style={estiloSelect}>
               {turnosProvas.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -949,9 +949,9 @@ export default function GestorDashboard() {
         </div>
 
         {loadingProvas ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar provas...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar provas...</div>
         ) : provas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>Nenhuma prova encontrada para este turno</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>Nenhuma prova encontrada para este turno</div>
         ) : (
           <div style={{ overflowX: "auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: `160px 1fr`, gap: "1px", background: "#13161e", borderRadius: "10px" }}>

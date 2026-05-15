@@ -69,7 +69,7 @@ function BadgeEstado({ estado }: { estado: string }) {
     Proposto: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     Aprovado: { bg: "rgba(34,197,94,0.12)", color: "#22c55e" },
     Reprovado: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
-    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#555e78" },
+    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" },
     Submetida: { bg: "rgba(45,212,191,0.12)", color: "#2dd4bf" },
     EmRevisao: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     ParaDefender: { bg: "rgba(155,89,182,0.12)", color: "#9b59b6" },
@@ -77,7 +77,7 @@ function BadgeEstado({ estado }: { estado: string }) {
     Rejeitada: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
   }
 
-  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78" }
+  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
 
   return (
     <span style={{
@@ -245,7 +245,7 @@ export default function MonografiaDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={navItems} title="Monografia" subtitle="Submissão e acompanhamento">
-        <div style={{ textAlign: "center", color: "#555e78", padding: "60px" }}>
+        <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>
           A carregar...
         </div>
       </DashboardLayout>
@@ -275,7 +275,7 @@ export default function MonografiaDashboard() {
           <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
             Monografia disponível no {anoMonografia}º ano
           </div>
-          <div style={{ fontSize: "13px", color: "#555e78" }}>
+          <div style={{ fontSize: "13px", color: "#b0b8cf" }}>
             A submissão de monografia só está disponível para estudantes do {anoMonografia}º ano.
           </div>
         </div>
@@ -302,7 +302,7 @@ export default function MonografiaDashboard() {
             <div style={{ fontSize: "16px", fontWeight: "700", color: "#e8eaf0" }}>
               Não é possível submeter a monografia
             </div>
-            <div style={{ fontSize: "12px", color: "#555e78", marginTop: "2px" }}>
+            <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
               Resolva os problemas abaixo antes de submeter.
             </div>
           </div>
@@ -360,7 +360,7 @@ export default function MonografiaDashboard() {
               background: "rgba(13,15,20,0.5)",
               borderRadius: "8px",
               borderLeft: "3px solid #e03d3d",
-              fontSize: "12px", color: "#9098b0", lineHeight: "1.5"
+              fontSize: "12px", color: "#d0d7e8", lineHeight: "1.5"
             }}>
               {reason}
             </div>
@@ -397,7 +397,7 @@ export default function MonografiaDashboard() {
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#f0a500", marginBottom: "4px" }}>
               Propina pendente
             </div>
-            <div style={{ fontSize: "13px", color: "#9098b0" }}>
+            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
               Precisa de estar com a propina em dia para submeter a monografia.
             </div>
           </div>
@@ -436,9 +436,9 @@ export default function MonografiaDashboard() {
             }}>
               <div style={{ fontSize: "24px" }}>👨‍🏫</div>
               <div>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>Orientador</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
                 <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-                <div style={{ fontSize: "12px", color: "#555e78" }}>{dados.orientacao.orientador.especialidade}</div>
+                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
               </div>
             </div>
           )}
@@ -450,7 +450,7 @@ export default function MonografiaDashboard() {
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: m.nome_co_autor ? "12px" : 0 }}>
                   <div style={{ fontSize: "24px" }}>👥</div>
                   <div>
-                    <div style={{ fontSize: "13px", color: "#9098b0" }}>Co-orientador</div>
+                    <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Co-orientador</div>
                     <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{m.nome_co_orientador}</div>
                   </div>
                 </div>
@@ -459,7 +459,7 @@ export default function MonografiaDashboard() {
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <div style={{ fontSize: "24px" }}>✍️</div>
                   <div>
-                    <div style={{ fontSize: "13px", color: "#9098b0" }}>Co-autor</div>
+                    <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Co-autor</div>
                     <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{m.nome_co_autor}</div>
                   </div>
                 </div>
@@ -471,19 +471,19 @@ export default function MonografiaDashboard() {
           <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "24px", marginBottom: "16px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
                 <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0" }}>{m.titulo}</div>
               </div>
               <BadgeEstado estado={m.estado} />
             </div>
             <div style={{ marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo</div>
-              <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.6" }}>{m.resumo}</div>
+              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo</div>
+              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.resumo}</div>
             </div>
             {m.descricao && (
               <div style={{ marginBottom: "16px" }}>
-                <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição</div>
-                <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.6" }}>{m.descricao}</div>
+                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.descricao}</div>
               </div>
             )}
             {m.nome_arquivo && (
@@ -491,13 +491,13 @@ export default function MonografiaDashboard() {
                 <span style={{ fontSize: "20px" }}>📄</span>
                 <div>
                   <div style={{ fontSize: "13px", color: "#e8eaf0", fontWeight: "500" }}>{m.nome_arquivo}</div>
-                  <div style={{ fontSize: "11px", color: "#555e78" }}>PDF</div>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf" }}>PDF</div>
                 </div>
               </div>
             )}
             {m.nota_final !== null && (
               <div style={{ marginTop: "16px", padding: "16px", background: (m.nota_final ?? 0) >= 10 ? "rgba(34,197,94,0.08)" : "rgba(224,61,61,0.08)", borderRadius: "10px", textAlign: "center" }}>
-                <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "4px" }}>Nota Final</div>
+                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Nota Final</div>
                 <div style={{ fontSize: "32px", fontWeight: "700", color: (m.nota_final ?? 0) >= 10 ? "#22c55e" : "#e03d3d" }}>
                   {m.nota_final != null ? arredondarNota(m.nota_final) : "-"}
                 </div>
@@ -507,7 +507,7 @@ export default function MonografiaDashboard() {
               <div style={{ marginTop: "12px", padding: "12px 16px", background: "rgba(155,89,182,0.08)", borderRadius: "8px", display: "flex", alignItems: "center", gap: "10px" }}>
                 <span style={{ fontSize: "18px" }}>📅</span>
                 <div>
-                  <div style={{ fontSize: "12px", color: "#555e78" }}>Data de Defesa</div>
+                  <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Data de Defesa</div>
                   <div style={{ fontSize: "14px", fontWeight: "600", color: "#9b59b6" }}>{new Date(m.data_defesa).toLocaleDateString("pt-AO")}{m.hora_defesa ? ` às ${m.hora_defesa}h` : ""}{m.sala_defesa ? ` · Sala ${m.sala_defesa}` : ""}</div>
                 </div>
               </div>
@@ -516,24 +516,24 @@ export default function MonografiaDashboard() {
 
           {m.feedback && (
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Orientador</div>
-              <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.6" }}>{m.feedback}</div>
+              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Orientador</div>
+              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.feedback}</div>
             </div>
           )}
           {m.feedback_gestor && (
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Gestor</div>
-              <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.6" }}>{m.feedback_gestor}</div>
+              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Gestor</div>
+              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.feedback_gestor}</div>
             </div>
           )}
           {m.correcoes.length > 0 && (
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px" }}>
-              <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Histórico de Correções</div>
+              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Histórico de Correções</div>
               {m.correcoes.map((c, i) => (
                 <div key={i} style={{ padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", marginBottom: i < m.correcoes.length - 1 ? "8px" : 0 }}>
                   <div style={{ fontSize: "13px", fontWeight: "600", color: "#e8eaf0", marginBottom: "4px" }}>{c.orientador.nome_completo}</div>
-                  {c.data_correcao && <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>{new Date(c.data_correcao).toLocaleDateString("pt-AO")}</div>}
-                  {c.observacoes && <div style={{ fontSize: "12px", color: "#9098b0" }}>{c.observacoes}</div>}
+                  {c.data_correcao && <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>{new Date(c.data_correcao).toLocaleDateString("pt-AO")}</div>}
+                  {c.observacoes && <div style={{ fontSize: "12px", color: "#d0d7e8" }}>{c.observacoes}</div>}
                 </div>
               ))}
             </div>
@@ -544,8 +544,8 @@ export default function MonografiaDashboard() {
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginTop: "16px" }}>
               <div onClick={() => setMostrarHistorico(!mostrarHistorico)}
                 style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>Histórico de monografias ({dados.monografias.length})</div>
-                <div style={{ fontSize: "18px", color: "#555e78" }}>{mostrarHistorico ? "▲" : "▼"}</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Histórico de monografias ({dados.monografias.length})</div>
+                <div style={{ fontSize: "18px", color: "#b0b8cf" }}>{mostrarHistorico ? "▲" : "▼"}</div>
               </div>
               {mostrarHistorico && (
                 <div style={{ marginTop: "12px" }}>
@@ -553,14 +553,14 @@ export default function MonografiaDashboard() {
                     <div key={mon.id} style={{
                       padding: "12px", background: index === 0 ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.5)",
                       borderRadius: "8px", marginBottom: index < dados.monografias.length - 1 ? "8px" : 0,
-                      borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid #555e78"
+                      borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid #b0b8cf"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
                         <div style={{ fontSize: "12px", fontWeight: "600", color: "#e8eaf0" }}>{mon.titulo}</div>
                         <BadgeEstado estado={mon.estado} />
                       </div>
-                      <div style={{ fontSize: "11px", color: "#555e78" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
-                      {mon.feedback && <div style={{ fontSize: "11px", color: "#9098b0", marginTop: "4px" }}><strong style={{ color: "#555e78" }}>Feedback: </strong>{mon.feedback}</div>}
+                      <div style={{ fontSize: "11px", color: "#b0b8cf" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
+                      {mon.feedback && <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}><strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{mon.feedback}</div>}
                     </div>
                   ))}
                 </div>
@@ -581,9 +581,9 @@ export default function MonografiaDashboard() {
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
               <div style={{ fontSize: "24px" }}>👨‍🏫</div>
               <div>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>Orientador</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
                 <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-                <div style={{ fontSize: "12px", color: "#555e78" }}>{dados.orientacao.orientador.especialidade}</div>
+                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
               </div>
             </div>
           )}
@@ -594,18 +594,18 @@ export default function MonografiaDashboard() {
               <span style={{ fontSize: "20px" }}>❌</span>
               <div style={{ fontSize: "14px", fontWeight: "600", color: "#e03d3d" }}>Monografia Rejeitada</div>
             </div>
-            <div style={{ fontSize: "13px", color: "#9098b0", marginBottom: "6px" }}><strong>Título:</strong> {m.titulo}</div>
-            <div style={{ fontSize: "12px", color: "#555e78" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
+            <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "6px" }}><strong>Título:</strong> {m.titulo}</div>
+            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
             {m.feedback && (
               <div style={{ marginTop: "12px", padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", borderLeft: "3px solid #e03d3d" }}>
-                <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "4px" }}>Feedback do orientador:</div>
-                <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.5" }}>{m.feedback}</div>
+                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Feedback do orientador:</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{m.feedback}</div>
               </div>
             )}
             {m.feedback_gestor && (
               <div style={{ marginTop: "8px", padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", borderLeft: "3px solid #f0a500" }}>
-                <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "4px" }}>Feedback do gestor:</div>
-                <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.5" }}>{m.feedback_gestor}</div>
+                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Feedback do gestor:</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{m.feedback_gestor}</div>
               </div>
             )}
           </div>
@@ -616,49 +616,49 @@ export default function MonografiaDashboard() {
           {/* Formulário de resubmissão */}
           <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "24px" }}>
             <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "6px" }}>Submeter Nova Monografia</div>
-            <div style={{ fontSize: "13px", color: "#555e78", marginBottom: "20px" }}>Corrija os problemas apontados e submeta uma nova versão.</div>
+            <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>Corrija os problemas apontados e submeta uma nova versão.</div>
 
             {sucessoMon ? (
               <div style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: "10px", padding: "20px", textAlign: "center" }}>
                 <div style={{ fontSize: "40px", marginBottom: "12px" }}>🎉</div>
                 <div style={{ fontSize: "16px", fontWeight: "600", color: "#22c55e", marginBottom: "8px" }}>Monografia resubmetida com sucesso!</div>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>A sua monografia foi submetida e está a aguardar revisão.</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>A sua monografia foi submetida e está a aguardar revisão.</div>
               </div>
             ) : (
               <>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Título *</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Título *</label>
                   <input type="text" value={titulo} onChange={e => { setTitulo(e.target.value); setErroMon("") }}
                     placeholder="Título da monografia"
                     style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo * (mín. 50 caracteres)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo * (mín. 50 caracteres)</label>
                   <textarea value={resumo} onChange={e => { setResumo(e.target.value); setErroMon("") }}
                     placeholder="Resumo da sua monografia..." rows={4}
                     style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
-                  <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição (opcional)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição (opcional)</label>
                   <textarea value={descricao} onChange={e => setDescricao(e.target.value)}
                     placeholder="Descrição adicional..." rows={3}
                     style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-orientador externo (opcional)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-orientador externo (opcional)</label>
                   <input type="text" value={nomeCoOrientador} onChange={e => setNomeCoOrientador(e.target.value)}
                     placeholder="Nome do co-orientador externo"
                     style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-autor (opcional)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-autor (opcional)</label>
                   <input type="text" value={nomeCoAutor} onChange={e => setNomeCoAutor(e.target.value)}
                     placeholder="Nome do co-autor"
                     style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "20px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ficheiro * (PDF ou Word, máx. 10MB)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ficheiro * (PDF ou Word, máx. 10MB)</label>
                   <div onClick={() => fileInputRef.current?.click()}
                     style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "24px", textAlign: "center", cursor: "pointer", background: arquivo ? "rgba(34,197,94,0.05)" : "transparent" }}>
                     <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" onChange={e => setArquivo(e.target.files?.[0] || null)} style={{ display: "none" }} />
@@ -666,12 +666,12 @@ export default function MonografiaDashboard() {
                       <div>
                         <div style={{ fontSize: "24px", marginBottom: "8px" }}>📄</div>
                         <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivo.name}</div>
-                        <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
+                        <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
                       </div>
                     ) : (
                       <div>
                         <div style={{ fontSize: "24px", marginBottom: "8px" }}>📁</div>
-                        <div style={{ fontSize: "13px", color: "#9098b0" }}>Clique para selecionar o ficheiro PDF ou Word</div>
+                        <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar o ficheiro PDF ou Word</div>
                       </div>
                     )}
                   </div>
@@ -680,7 +680,7 @@ export default function MonografiaDashboard() {
                   <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "#e03d3d" }}>{erroMon}</div>
                 )}
                 <button onClick={submeterMonografia} disabled={submetendoMon}
-                  style={{ width: "100%", padding: "12px", background: submetendoMon ? "#555e78" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}>
+                  style={{ width: "100%", padding: "12px", background: submetendoMon ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}>
                   {submetendoMon ? "A submeter..." : "Submeter Nova Monografia"}
                 </button>
               </>
@@ -692,8 +692,8 @@ export default function MonografiaDashboard() {
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginTop: "16px" }}>
               <div onClick={() => setMostrarHistorico(!mostrarHistorico)}
                 style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>Histórico de monografias ({dados.monografias.length})</div>
-                <div style={{ fontSize: "18px", color: "#555e78" }}>{mostrarHistorico ? "▲" : "▼"}</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Histórico de monografias ({dados.monografias.length})</div>
+                <div style={{ fontSize: "18px", color: "#b0b8cf" }}>{mostrarHistorico ? "▲" : "▼"}</div>
               </div>
               {mostrarHistorico && (
                 <div style={{ marginTop: "12px" }}>
@@ -701,14 +701,14 @@ export default function MonografiaDashboard() {
                     <div key={mon.id} style={{
                       padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px",
                       marginBottom: index < dados.monografias.length - 1 ? "8px" : 0,
-                      borderLeft: "3px solid #555e78"
+                      borderLeft: "3px solid #b0b8cf"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
                         <div style={{ fontSize: "12px", fontWeight: "600", color: "#e8eaf0" }}>{mon.titulo}</div>
                         <BadgeEstado estado={mon.estado} />
                       </div>
-                      <div style={{ fontSize: "11px", color: "#555e78" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
-                      {mon.feedback && <div style={{ fontSize: "11px", color: "#9098b0", marginTop: "4px" }}><strong style={{ color: "#555e78" }}>Feedback: </strong>{mon.feedback}</div>}
+                      <div style={{ fontSize: "11px", color: "#b0b8cf" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
+                      {mon.feedback && <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}><strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{mon.feedback}</div>}
                     </div>
                   ))}
                 </div>
@@ -741,11 +741,11 @@ export default function MonografiaDashboard() {
             }}>
               <div style={{ fontSize: "24px" }}>👨‍🏫</div>
               <div>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>Orientador</div>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
                 <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
                   {dados.orientacao.orientador.nome_completo}
                 </div>
-                <div style={{ fontSize: "12px", color: "#555e78" }}>
+                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
                   {dados.orientacao.orientador.especialidade}
                 </div>
               </div>
@@ -790,10 +790,10 @@ export default function MonografiaDashboard() {
                   <span style={{ fontSize: "20px" }}>✅</span>
                   <div style={{ fontSize: "14px", fontWeight: "600", color: "#22c55e" }}>Pré-projecto Aprovado</div>
                 </div>
-                <div style={{ fontSize: "13px", color: "#9098b0", marginBottom: "6px" }}>
+                <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "6px" }}>
                   <strong>Tema:</strong> {preAprovado.tema}
                 </div>
-                <div style={{ fontSize: "12px", color: "#555e78" }}>
+                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
                   Submetido em {new Date(preAprovado.data_proposta).toLocaleDateString("pt-AO")}
                 </div>
                 {preAprovado.feedback && (
@@ -802,8 +802,8 @@ export default function MonografiaDashboard() {
                     background: "rgba(13,15,20,0.5)", borderRadius: "8px",
                     borderLeft: "3px solid #22c55e"
                   }}>
-                    <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "4px" }}>Feedback do orientador:</div>
-                    <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.5" }}>{preAprovado.feedback}</div>
+                    <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Feedback do orientador:</div>
+                    <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{preAprovado.feedback}</div>
                   </div>
                 )}
               </div>
@@ -822,7 +822,7 @@ export default function MonografiaDashboard() {
                     <div style={{ fontSize: "14px", fontWeight: "700", color: "#e8eaf0", marginBottom: "3px" }}>
                       Pronto para a Monografia!
                     </div>
-                    <div style={{ fontSize: "12px", color: "#9098b0" }}>
+                    <div style={{ fontSize: "12px", color: "#d0d7e8" }}>
                       O pré-projecto está aprovado. Submeta agora a monografia final.
                     </div>
                   </div>
@@ -851,13 +851,13 @@ export default function MonografiaDashboard() {
                   <span style={{ fontSize: "20px" }}>🔒</span>
                   <div>
                     <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>Submissão de Pré-projecto Bloqueada</div>
-                    <div style={{ fontSize: "12px", color: "#555e78", marginTop: "2px" }}>
+                    <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
                       O pré-projecto foi aprovado. Já não é possível submeter novos.
                     </div>
                   </div>
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Tema do Pré-projecto *
                   </label>
                   <textarea
@@ -865,14 +865,14 @@ export default function MonografiaDashboard() {
                     style={{
                       width: "100%", padding: "10px 14px",
                       background: "#0d0f14", border: "1px solid rgba(255,255,255,0.05)",
-                      borderRadius: "8px", color: "#555e78", fontSize: "13px",
+                      borderRadius: "8px", color: "#b0b8cf", fontSize: "13px",
                       outline: "none", resize: "none", boxSizing: "border-box", cursor: "not-allowed"
                     }}
                   />
                 </div>
                 <button disabled style={{
                   width: "100%", padding: "12px",
-                  background: "#1a1d26", color: "#555e78",
+                  background: "#1a1d26", color: "#b0b8cf",
                   border: "1px solid rgba(255,255,255,0.05)",
                   borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: "not-allowed"
                 }}>
@@ -897,7 +897,7 @@ export default function MonografiaDashboard() {
                   <div style={{ fontSize: "16px", fontWeight: "600", color: "#22c55e", marginBottom: "8px" }}>
                     Monografia submetida com sucesso!
                   </div>
-                  <div style={{ fontSize: "13px", color: "#9098b0" }}>
+                  <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
                     A sua monografia foi submetida e está a aguardar revisão do orientador.
                   </div>
                 </div>
@@ -911,7 +911,7 @@ export default function MonografiaDashboard() {
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Título *
                     </label>
                     <input
@@ -923,7 +923,7 @@ export default function MonografiaDashboard() {
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Resumo * (mín. 50 caracteres)
                     </label>
                     <textarea
@@ -932,11 +932,11 @@ export default function MonografiaDashboard() {
                       placeholder="Resumo da sua monografia..." rows={4}
                       style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }}
                     />
-                    <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Descrição (opcional)
                     </label>
                     <textarea
@@ -947,7 +947,7 @@ export default function MonografiaDashboard() {
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Co-orientador externo (opcional)
                     </label>
                     <input
@@ -959,7 +959,7 @@ export default function MonografiaDashboard() {
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Co-autor (opcional)
                     </label>
                     <input
@@ -971,7 +971,7 @@ export default function MonografiaDashboard() {
                   </div>
 
                   <div style={{ marginBottom: "20px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Ficheiro da Monografia * (PDF ou Word, máx. 10MB)
                     </label>
                     <div
@@ -983,12 +983,12 @@ export default function MonografiaDashboard() {
                         <div>
                           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📄</div>
                           <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivo.name}</div>
-                          <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
+                          <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
                         </div>
                       ) : (
                         <div>
                           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📁</div>
-                          <div style={{ fontSize: "13px", color: "#9098b0" }}>Clique para selecionar o ficheiro PDF ou Word</div>
+                          <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar o ficheiro PDF ou Word</div>
                         </div>
                       )}
                     </div>
@@ -1002,7 +1002,7 @@ export default function MonografiaDashboard() {
 
                   <button
                     onClick={submeterMonografia} disabled={submetendoMon}
-                    style={{ width: "100%", padding: "12px", background: submetendoMon ? "#555e78" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}
+                    style={{ width: "100%", padding: "12px", background: submetendoMon ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}
                   >
                     {submetendoMon ? "A submeter..." : "Submeter Monografia"}
                   </button>
@@ -1030,9 +1030,9 @@ export default function MonografiaDashboard() {
           }}>
             <div style={{ fontSize: "24px" }}>👨‍🏫</div>
             <div>
-              <div style={{ fontSize: "13px", color: "#9098b0" }}>Orientador</div>
+              <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
               <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-              <div style={{ fontSize: "12px", color: "#555e78" }}>{dados.orientacao.orientador.especialidade}</div>
+              <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
             </div>
           </div>
         )}
@@ -1047,10 +1047,10 @@ export default function MonografiaDashboard() {
               <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>Pré-projecto</div>
               <BadgeEstado estado={p.estado} />
             </div>
-            <div style={{ fontSize: "13px", color: "#9098b0", marginBottom: "8px" }}>
+            <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "8px" }}>
               <strong>Tema:</strong> {p.tema}
             </div>
-            <div style={{ fontSize: "12px", color: "#555e78" }}>
+            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
               Submetido em {new Date(p.data_proposta).toLocaleDateString("pt-AO")}
             </div>
             <div style={{ marginTop: "16px", padding: "12px", background: "rgba(240,165,0,0.08)", borderRadius: "8px" }}>
@@ -1070,7 +1070,7 @@ export default function MonografiaDashboard() {
             <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
               Submeter Pré-projecto
             </div>
-            <div style={{ fontSize: "13px", color: "#555e78", marginBottom: "20px" }}>
+            <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>
               Pode submeter um novo tema para apreciação do orientador.
             </div>
 
@@ -1081,22 +1081,22 @@ export default function MonografiaDashboard() {
               }}>
                 <div style={{ fontSize: "32px", marginBottom: "10px" }}>✅</div>
                 <div style={{ fontSize: "14px", fontWeight: "600", color: "#22c55e" }}>Novo pré-projecto submetido!</div>
-                <div style={{ fontSize: "12px", color: "#9098b0", marginTop: "6px" }}>Aguarda aprovação do orientador.</div>
+                <div style={{ fontSize: "12px", color: "#d0d7e8", marginTop: "6px" }}>Aguarda aprovação do orientador.</div>
               </div>
             ) : (
               <>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Tema do Pré-projecto *
                   </label>
                   <textarea value={tema} onChange={e => { setTema(e.target.value); setErroPre("") }}
                     placeholder="Descreva o tema do seu novo pré-projecto..." rows={3}
                     style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
-                  <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
                 </div>
 
                 <div style={{ marginBottom: "20px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Ficheiro * (PDF ou Word, máx. 10MB)
                   </label>
                   <div onClick={() => fileInputPreRef.current?.click()} style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "20px", textAlign: "center", cursor: "pointer", background: arquivoPre ? "rgba(34,197,94,0.05)" : "transparent" }}>
@@ -1105,12 +1105,12 @@ export default function MonografiaDashboard() {
                       <div>
                         <div style={{ fontSize: "20px", marginBottom: "6px" }}>📄</div>
                         <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivoPre.name}</div>
-                        <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
+                        <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
                       </div>
                     ) : (
                       <div>
                         <div style={{ fontSize: "20px", marginBottom: "6px" }}>📁</div>
-                        <div style={{ fontSize: "13px", color: "#9098b0" }}>Clique para selecionar ficheiro</div>
+                        <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar ficheiro</div>
                       </div>
                     )}
                   </div>
@@ -1121,7 +1121,7 @@ export default function MonografiaDashboard() {
                 )}
 
                 <button onClick={submeterPremonografia} disabled={submetendoPre}
-                  style={{ width: "100%", padding: "12px", background: submetendoPre ? "#555e78" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
+                  style={{ width: "100%", padding: "12px", background: submetendoPre ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
                   {submetendoPre ? "A submeter..." : "Submeter Novo Pré-projecto"}
                 </button>
               </>
@@ -1137,10 +1137,10 @@ export default function MonografiaDashboard() {
           }}>
             <div onClick={() => setMostrarHistorico(!mostrarHistorico)}
               style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
-              <div style={{ fontSize: "13px", color: "#9098b0" }}>
+              <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
                 Ver histórico de pré-projectos ({dados.premonografias.length})
               </div>
-              <div style={{ fontSize: "18px", color: "#555e78" }}>{mostrarHistorico ? "▲" : "▼"}</div>
+              <div style={{ fontSize: "18px", color: "#b0b8cf" }}>{mostrarHistorico ? "▲" : "▼"}</div>
             </div>
             {mostrarHistorico && (
               <div style={{ marginTop: "12px" }}>
@@ -1150,18 +1150,18 @@ export default function MonografiaDashboard() {
                     background: index === 0 ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.5)",
                     borderRadius: "8px",
                     marginBottom: index < dados.premonografias.length - 1 ? "8px" : 0,
-                    borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid #555e78"
+                    borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid #b0b8cf"
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
                       <div style={{ fontSize: "12px", fontWeight: "600", color: "#e8eaf0" }}>{pre.tema}</div>
                       <BadgeEstado estado={pre.estado} />
                     </div>
-                    <div style={{ fontSize: "11px", color: "#555e78" }}>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf" }}>
                       Submetido em {new Date(pre.data_proposta).toLocaleDateString("pt-AO")}
                     </div>
                     {pre.feedback && (
-                      <div style={{ fontSize: "11px", color: "#9098b0", marginTop: "4px" }}>
-                        <strong style={{ color: "#555e78" }}>Feedback: </strong>{pre.feedback}
+                      <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}>
+                        <strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{pre.feedback}
                       </div>
                     )}
                   </div>
@@ -1190,7 +1190,7 @@ export default function MonografiaDashboard() {
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#f0a500", marginBottom: "4px" }}>
               Orientação — Próximo Passo
             </div>
-            <div style={{ fontSize: "13px", color: "#9098b0" }}>
+            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
               Após submeter o pré-projecto, o gestor irá aprová-lo. Depois vá à página <strong>Orientador</strong> para solicitar um orientador.
             </div>
           </div>
@@ -1214,9 +1214,9 @@ export default function MonografiaDashboard() {
         }}>
           <div style={{ fontSize: "24px" }}>👨‍🏫</div>
           <div>
-            <div style={{ fontSize: "13px", color: "#9098b0" }}>Orientador</div>
+            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-            <div style={{ fontSize: "12px", color: "#555e78" }}>{dados.orientacao.orientador.especialidade}</div>
+            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
           </div>
         </div>
       )}
@@ -1226,7 +1226,7 @@ export default function MonografiaDashboard() {
         <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
           Submeter Pré-projecto
         </div>
-        <div style={{ fontSize: "13px", color: "#555e78", marginBottom: "20px" }}>
+        <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>
           Primeiro passo para a monografia. Submeta o seu pré-projecto para aprovação do gestor.
         </div>
 
@@ -1237,22 +1237,22 @@ export default function MonografiaDashboard() {
           }}>
             <div style={{ fontSize: "32px", marginBottom: "10px" }}>✅</div>
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#22c55e" }}>Pré-projecto submetido com sucesso!</div>
-            <div style={{ fontSize: "12px", color: "#9098b0", marginTop: "6px" }}>Aguarda aprovação do gestor.</div>
+            <div style={{ fontSize: "12px", color: "#d0d7e8", marginTop: "6px" }}>Aguarda aprovação do gestor.</div>
           </div>
         ) : (
           <>
             <div style={{ marginBottom: "16px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 Tema do Pré-projecto *
               </label>
               <textarea value={tema} onChange={e => { setTema(e.target.value); setErroPre("") }}
                 placeholder="Descreva o tema do seu pré-projecto..." rows={3}
                 style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
-              <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
+              <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
             </div>
 
             <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 Ficheiro * (PDF ou Word, máx. 10MB)
               </label>
               <div onClick={() => fileInputPreRef.current?.click()} style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "20px", textAlign: "center", cursor: "pointer", background: arquivoPre ? "rgba(34,197,94,0.05)" : "transparent" }}>
@@ -1261,12 +1261,12 @@ export default function MonografiaDashboard() {
                   <div>
                     <div style={{ fontSize: "20px", marginBottom: "6px" }}>📄</div>
                     <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivoPre.name}</div>
-                    <div style={{ fontSize: "11px", color: "#555e78", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
                   </div>
                 ) : (
                   <div>
                     <div style={{ fontSize: "20px", marginBottom: "6px" }}>📁</div>
-                    <div style={{ fontSize: "13px", color: "#9098b0" }}>Clique para selecionar ficheiro</div>
+                    <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar ficheiro</div>
                   </div>
                 )}
               </div>
@@ -1277,7 +1277,7 @@ export default function MonografiaDashboard() {
             )}
 
             <button onClick={submeterPremonografia} disabled={submetendoPre}
-              style={{ width: "100%", padding: "12px", background: submetendoPre ? "#555e78" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
+              style={{ width: "100%", padding: "12px", background: submetendoPre ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
               {submetendoPre ? "A submeter..." : "Submeter Pré-projecto"}
             </button>
           </>

@@ -335,7 +335,7 @@ export default function OrientadoresAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
           A carregar orientadores...
         </div>
       ) : (
@@ -343,29 +343,29 @@ export default function OrientadoresAdminDashboard() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Email</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Especialidade</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Função</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Email</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Especialidade</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Função</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {orientadores.map((orientador) => (
                 <tr key={orientador.id_orientador} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                   <td style={{ padding: '14px', color: '#e8eaf0' }}>{orientador.nome_completo}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{orientador.usuario.email}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{orientador.departamento?.nome_departamento || '—'}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{orientador.especialidade}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{orientador.usuario.email}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{orientador.departamento?.nome_departamento || '—'}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{orientador.especialidade}</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '4px 10px',
                       borderRadius: '12px',
                       fontSize: '11px',
                       fontWeight: '600',
-                      background: orientador.e_gestor ? '#9b59b620' : '#555e7820',
-                      color: orientador.e_gestor ? '#9b59b6' : '#555e78'
+                      background: orientador.e_gestor ? '#9b59b620' : '#b0b8cf20',
+                      color: orientador.e_gestor ? '#9b59b6' : '#b0b8cf'
                     }}>
                       {orientador.e_gestor ? '✅ Gestor' : 'Professor'}
                     </span>
@@ -410,7 +410,7 @@ export default function OrientadoresAdminDashboard() {
             
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome Completo</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo</label>
                 <input
                   type="text"
                   value={formData.nome}
@@ -428,7 +428,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Email</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Email</label>
                 <input
                   type="email"
                   value={formData.email}
@@ -446,7 +446,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
                 <select
                   value={formData.id_departamento}
                   onChange={(e) => setFormData({...formData, id_departamento: e.target.value})}
@@ -469,7 +469,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Especialidade</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Especialidade</label>
                 <input
                   type="text"
                   value={formData.especialidade}
@@ -487,9 +487,9 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Telemóvel (+244 9)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telemóvel (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#9098b0', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={formData.numero_telemovel}
@@ -517,7 +517,7 @@ export default function OrientadoresAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >
@@ -565,7 +565,7 @@ export default function OrientadoresAdminDashboard() {
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
             <h3 style={{ margin: '0 0 16px 0', color: '#e8eaf0' }}>⚠️ Substituir Gestor</h3>
-            <p style={{ color: '#9098b0', marginBottom: '20px', lineHeight: '1.5' }}>
+            <p style={{ color: '#d0d7e8', marginBottom: '20px', lineHeight: '1.5' }}>
               Já existe um gestor neste departamento (<strong>{gestorExistente}</strong>). 
               Deseja remover o gestor atual e tornar este orientador no novo gestor?
             </p>
@@ -581,7 +581,7 @@ export default function OrientadoresAdminDashboard() {
                   background: 'transparent',
                   border: '1px solid rgba(255,255,255,0.1)',
                   borderRadius: '8px',
-                  color: '#9098b0',
+                  color: '#d0d7e8',
                   cursor: 'pointer'
                 }}
               >
@@ -632,7 +632,7 @@ export default function OrientadoresAdminDashboard() {
             
             <form onSubmit={handleEditSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome Completo</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo</label>
                 <input
                   type="text"
                   value={editFormData.nome_completo}
@@ -650,7 +650,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
                 <select
                   value={editFormData.id_departamento}
                   onChange={(e) => setEditFormData({...editFormData, id_departamento: e.target.value})}
@@ -673,7 +673,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Especialidade</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Especialidade</label>
                 <input
                   type="text"
                   value={editFormData.especialidade}
@@ -691,9 +691,9 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Telemóvel (+244 9)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telemóvel (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#9098b0', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={editFormData.numero_telemovel}
@@ -743,7 +743,7 @@ export default function OrientadoresAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >

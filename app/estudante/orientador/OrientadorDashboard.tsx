@@ -35,10 +35,10 @@ function BadgeEstado({ estado }: { estado: string }) {
     Pendente: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     Aceite: { bg: "rgba(34,197,94,0.12)", color: "#22c55e" },
     Recusado: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
-    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#555e78" },
+    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" },
   }
 
-  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78" }
+  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
 
   return (
     <span style={{
@@ -103,7 +103,7 @@ export default function OrientadorDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={navItems} title="Orientador" subtitle="Solicitação de orientação">
-        <div style={{ textAlign: "center", color: "#555e78", padding: "60px" }}>
+        <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>
           A carregar...
         </div>
       </DashboardLayout>
@@ -133,7 +133,7 @@ export default function OrientadorDashboard() {
           <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
             Orientação disponível no {anoSolicitacao}º ano
           </div>
-          <div style={{ fontSize: "13px", color: "#555e78" }}>
+          <div style={{ fontSize: "13px", color: "#b0b8cf" }}>
             A solicitação de orientação só está disponível para estudantes do {anoSolicitacao}º ano.
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function OrientadorDashboard() {
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#f0a500", marginBottom: "4px" }}>
               Propina pendente
             </div>
-            <div style={{ fontSize: "13px", color: "#9098b0" }}>
+            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
               Precisa de estar com a propina em dia para solicitar orientação.
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function OrientadorDashboard() {
             alignItems: "flex-start", marginBottom: "16px"
           }}>
             <div>
-              <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>
+              <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>
                 Solicitado em {new Date(s.data_solicitacao).toLocaleDateString("pt-AO")}
               </div>
               <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0" }}>
@@ -203,13 +203,13 @@ export default function OrientadorDashboard() {
             background: "rgba(13,15,20,0.5)", borderRadius: "10px",
             padding: "16px", marginBottom: "16px"
           }}>
-            <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
               Orientador Selecionado
             </div>
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0", marginBottom: "4px" }}>
               {s.orientador.nome_completo}
             </div>
-            <div style={{ fontSize: "12px", color: "#555e78" }}>
+            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
               {s.orientador.especialidade}
             </div>
           </div>
@@ -217,10 +217,10 @@ export default function OrientadorDashboard() {
           {/* Observações */}
           {s.observacoes && (
             <div style={{ marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 Observações
               </div>
-              <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.6" }}>
+              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>
                 {s.observacoes}
               </div>
             </div>
@@ -276,7 +276,7 @@ export default function OrientadorDashboard() {
           <div style={{ fontSize: "16px", fontWeight: "600", color: "#22c55e", marginBottom: "8px" }}>
             Solicitação submetida com sucesso!
           </div>
-          <div style={{ fontSize: "13px", color: "#9098b0" }}>
+          <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
             O seu pedido de orientação foi enviado. Aguarde a resposta do orientador.
           </div>
         </div>
@@ -288,13 +288,13 @@ export default function OrientadorDashboard() {
           <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
             Solicitar Orientação
           </div>
-          <div style={{ fontSize: "13px", color: "#555e78", marginBottom: "20px" }}>
+          <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>
             Selecione um orientador para a sua monografia. O orientador irá rever o seu pré-projecto e monografia.
           </div>
 
           {/* Lista de orientadores */}
           <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "10px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "10px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
               Orientadores Disponíveis *
             </label>
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -317,7 +317,7 @@ export default function OrientadorDashboard() {
                     <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>
                       {o.nome_completo}
                     </div>
-                    <div style={{ color: "#555e78", fontSize: "12px", marginTop: "2px" }}>
+                    <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
                       {o.especialidade}
                     </div>
                   </div>
@@ -331,7 +331,7 @@ export default function OrientadorDashboard() {
 
           {/* Observações */}
           <div style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", fontSize: "12px", color: "#555e78", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
               Observações (opcional)
             </label>
             <textarea
@@ -363,7 +363,7 @@ export default function OrientadorDashboard() {
             disabled={submetendo || !orientadorSelecionado}
             style={{
               width: "100%", padding: "12px",
-              background: submetendo || !orientadorSelecionado ? "#555e78" : "#e03d3d",
+              background: submetendo || !orientadorSelecionado ? "#b0b8cf" : "#e03d3d",
               color: "white", border: "none",
               borderRadius: "8px", fontSize: "14px",
               fontWeight: "600", cursor: submetendo || !orientadorSelecionado ? "not-allowed" : "pointer"

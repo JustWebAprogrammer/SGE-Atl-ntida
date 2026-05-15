@@ -109,7 +109,7 @@ export default function FinalistasDashboard() {
   }
 
   function renderNotas(notas: Finalista["notas_snapshot"]) {
-    if (!notas || notas.length === 0) return <em style={{ color: "#555e78" }}>Nenhuma nota registada</em>
+    if (!notas || notas.length === 0) return <em style={{ color: "#b0b8cf" }}>Nenhuma nota registada</em>
 
     // Formato novo: agrupado por ano/semestre com disciplinas dentro
     if (isFormatoAgrupado(notas)) {
@@ -123,9 +123,9 @@ export default function FinalistasDashboard() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
               <thead>
                 <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                  <th style={{ textAlign: "left", padding: "6px 8px", color: "#555e78" }}>Disciplina</th>
-                  <th style={{ textAlign: "center", padding: "6px 8px", color: "#555e78" }}>Nota</th>
-                  <th style={{ textAlign: "center", padding: "6px 8px", color: "#555e78" }}>Estado</th>
+                  <th style={{ textAlign: "left", padding: "6px 8px", color: "#b0b8cf" }}>Disciplina</th>
+                  <th style={{ textAlign: "center", padding: "6px 8px", color: "#b0b8cf" }}>Nota</th>
+                  <th style={{ textAlign: "center", padding: "6px 8px", color: "#b0b8cf" }}>Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -176,10 +176,10 @@ export default function FinalistasDashboard() {
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                <th style={{ textAlign: "left", padding: "6px 8px", color: "#555e78" }}>Disciplina</th>
-                <th style={{ textAlign: "center", padding: "6px 8px", color: "#555e78" }}>Semestre</th>
-                <th style={{ textAlign: "center", padding: "6px 8px", color: "#555e78" }}>Nota</th>
-                <th style={{ textAlign: "center", padding: "6px 8px", color: "#555e78" }}>Estado</th>
+                <th style={{ textAlign: "left", padding: "6px 8px", color: "#b0b8cf" }}>Disciplina</th>
+                <th style={{ textAlign: "center", padding: "6px 8px", color: "#b0b8cf" }}>Semestre</th>
+                <th style={{ textAlign: "center", padding: "6px 8px", color: "#b0b8cf" }}>Nota</th>
+                <th style={{ textAlign: "center", padding: "6px 8px", color: "#b0b8cf" }}>Estado</th>
               </tr>
             </thead>
             <tbody>
@@ -188,7 +188,7 @@ export default function FinalistasDashboard() {
                 .map((n) => (
                   <tr key={n.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                     <td style={{ padding: "6px 8px", color: "#e8eaf0" }}>{n.nome_disciplina}</td>
-                    <td style={{ padding: "6px 8px", color: "#9098b0", textAlign: "center" }}>{n.semestre}</td>
+                    <td style={{ padding: "6px 8px", color: "#d0d7e8", textAlign: "center" }}>{n.semestre}</td>
                     <td style={{ padding: "6px 8px", textAlign: "center" }}>
                       <span style={{
                         fontWeight: "700",
@@ -284,16 +284,16 @@ export default function FinalistasDashboard() {
             <option key={a} value={a}>{a}</option>
           ))}
         </select>
-        <div style={{ fontSize: "12px", color: "#555e78", whiteSpace: "nowrap" }}>
+        <div style={{ fontSize: "12px", color: "#b0b8cf", whiteSpace: "nowrap" }}>
           {filtered.length} finalista(s)
         </div>
       </div>
 
       {/* Tabela */}
       {loading ? (
-        <div style={{ textAlign: "center", padding: "40px", color: "#555e78" }}>A carregar...</div>
+        <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>A carregar...</div>
       ) : filtered.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "40px", color: "#555e78" }}>
+        <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>
           Nenhum finalista encontrado.
         </div>
       ) : (
@@ -301,21 +301,21 @@ export default function FinalistasDashboard() {
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-                <th style={{ textAlign: "left", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Nome</th>
-                <th style={{ textAlign: "left", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Nº</th>
-                <th style={{ textAlign: "left", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Curso</th>
-                <th style={{ textAlign: "center", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Nota</th>
-                <th style={{ textAlign: "center", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Defesa</th>
-                <th style={{ textAlign: "center", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Ano Lectivo</th>
-                <th style={{ textAlign: "center", padding: "12px", color: "#9098b0", fontSize: "11px", textTransform: "uppercase" }}>Acções</th>
+                <th style={{ textAlign: "left", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Nome</th>
+                <th style={{ textAlign: "left", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Nº</th>
+                <th style={{ textAlign: "left", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Curso</th>
+                <th style={{ textAlign: "center", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Nota</th>
+                <th style={{ textAlign: "center", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Defesa</th>
+                <th style={{ textAlign: "center", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Ano Lectivo</th>
+                <th style={{ textAlign: "center", padding: "12px", color: "#d0d7e8", fontSize: "11px", textTransform: "uppercase" }}>Acções</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(f => (
                 <tr key={f.id_snapshot} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                   <td style={{ padding: "12px", color: "#e8eaf0", fontWeight: "500" }}>{f.estudante.nome_completo}</td>
-                  <td style={{ padding: "12px", color: "#9098b0" }}>{f.estudante.numero_estudante || "—"}</td>
-                  <td style={{ padding: "12px", color: "#9098b0" }}>{f.estudante.curso}</td>
+                  <td style={{ padding: "12px", color: "#d0d7e8" }}>{f.estudante.numero_estudante || "—"}</td>
+                  <td style={{ padding: "12px", color: "#d0d7e8" }}>{f.estudante.curso}</td>
                   <td style={{ padding: "12px", textAlign: "center" }}>
                     <span style={{
                       fontWeight: "700",
@@ -324,10 +324,10 @@ export default function FinalistasDashboard() {
                       {f.monografia_snapshot ? formatNota(f.monografia_snapshot.nota_final) : "—"}
                     </span>
                   </td>
-                  <td style={{ padding: "12px", textAlign: "center", color: "#9098b0", fontSize: "12px" }}>
+                  <td style={{ padding: "12px", textAlign: "center", color: "#d0d7e8", fontSize: "12px" }}>
                     {f.monografia_snapshot?.data_defesa ? formatData(f.monografia_snapshot.data_defesa) : "—"}
                   </td>
-                  <td style={{ padding: "12px", textAlign: "center", color: "#9098b0" }}>{f.ano_lectivo || "—"}</td>
+                  <td style={{ padding: "12px", textAlign: "center", color: "#d0d7e8" }}>{f.ano_lectivo || "—"}</td>
                   <td style={{ padding: "12px", textAlign: "center" }}>
                     <button
                       onClick={() => setSelectedFinalista(f)}
@@ -371,14 +371,14 @@ export default function FinalistasDashboard() {
                 <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0" }}>
                   🎓 {selectedFinalista.estudante.nome_completo}
                 </div>
-                <div style={{ fontSize: "13px", color: "#555e78", marginTop: "4px" }}>
+                <div style={{ fontSize: "13px", color: "#b0b8cf", marginTop: "4px" }}>
                   {selectedFinalista.estudante.numero_estudante} · {selectedFinalista.estudante.curso}
                 </div>
               </div>
               <button
                 onClick={() => setSelectedFinalista(null)}
                 style={{
-                  padding: "8px 12px", background: "#555e78", color: "white",
+                  padding: "8px 12px", background: "#b0b8cf", color: "white",
                   border: "none", borderRadius: "8px", fontSize: "12px", fontWeight: "600", cursor: "pointer",
                 }}
               >
@@ -397,27 +397,27 @@ export default function FinalistasDashboard() {
                   display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "12px",
                 }}>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Nome</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Nome</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.dados_pessoais.nome_completo}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Nº</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Nº</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.dados_pessoais.numero_estudante || "—"}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Curso</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Curso</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.dados_pessoais.nome_curso}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Ano Lectivo</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Ano Lectivo</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.dados_pessoais.ano_electivo || "—"}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Turno</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Turno</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.dados_pessoais.turno}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Bolsa</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Bolsa</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>
                       {selectedFinalista.dados_pessoais.tipo_bolsa === "Nenhuma" ? "Sem bolsa" :
                        selectedFinalista.dados_pessoais.tipo_bolsa === "Cinquenta" ? "50%" : "100%"}
@@ -438,11 +438,11 @@ export default function FinalistasDashboard() {
                   display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "12px",
                 }}>
                   <div style={{ gridColumn: "1 / -1" }}>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Título</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Título</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0", fontWeight: "500" }}>{selectedFinalista.monografia_snapshot.titulo}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Nota Final</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Nota Final</div>
                     <div style={{
                       fontSize: "24px", fontWeight: "700",
                       color: (selectedFinalista.monografia_snapshot.nota_final ?? 0) >= 10 ? "#22c55e" : "#e03d3d",
@@ -451,25 +451,25 @@ export default function FinalistasDashboard() {
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Resultado</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Resultado</div>
                     <div style={{ fontSize: "13px", color: (selectedFinalista.monografia_snapshot.nota_final ?? 0) >= 10 ? "#22c55e" : "#e03d3d" }}>
                       {(selectedFinalista.monografia_snapshot.nota_final ?? 0) >= 10 ? "✅ Aprovado" : "❌ Reprovado"}
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Data Defesa</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Data Defesa</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>
                       {formatData(selectedFinalista.monografia_snapshot.data_defesa)}
                       {selectedFinalista.monografia_snapshot.hora_defesa ? ` às ${selectedFinalista.monografia_snapshot.hora_defesa}h` : ""}
                     </div>
                   </div>
                   <div>
-                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Sala</div>
+                    <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Sala</div>
                     <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.monografia_snapshot.sala_defesa || "—"}</div>
                   </div>
                   {selectedFinalista.monografia_snapshot.orientador && (
                     <div>
-                      <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Orientador</div>
+                      <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Orientador</div>
                       <div style={{ fontSize: "13px", color: "#e8eaf0" }}>
                         {selectedFinalista.monografia_snapshot.orientador.nome_completo}
                       </div>
@@ -477,13 +477,13 @@ export default function FinalistasDashboard() {
                   )}
                   {selectedFinalista.monografia_snapshot.nome_co_orientador && (
                     <div>
-                      <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Co-orientador</div>
+                      <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Co-orientador</div>
                       <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.monografia_snapshot.nome_co_orientador}</div>
                     </div>
                   )}
                   {selectedFinalista.monografia_snapshot.nome_co_autor && (
                     <div>
-                      <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#555e78", marginBottom: "2px" }}>Co-autor</div>
+                      <div style={{ fontSize: "10px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "2px" }}>Co-autor</div>
                       <div style={{ fontSize: "13px", color: "#e8eaf0" }}>{selectedFinalista.monografia_snapshot.nome_co_autor}</div>
                     </div>
                   )}
@@ -500,7 +500,7 @@ export default function FinalistasDashboard() {
             </div>
 
             {/* Data snapshot */}
-            <div style={{ marginTop: "16px", fontSize: "11px", color: "#555e78", textAlign: "center" }}>
+            <div style={{ marginTop: "16px", fontSize: "11px", color: "#b0b8cf", textAlign: "center" }}>
               Snapshot criado em {new Date(selectedFinalista.data_snapshot).toLocaleString("pt-AO")}
             </div>
           </div>

@@ -94,7 +94,7 @@ function CardStat({
         fontSize: "11px",
         textTransform: "uppercase",
         letterSpacing: "0.5px",
-        color: "#555e78",
+        color: "#b0b8cf",
         marginBottom: "10px"
       }}>{label}</div>
       <div style={{
@@ -263,7 +263,7 @@ export default function OrientadorDashboard() {
       case "recurso": return "#e03d3d"
       case "exame": return "#f0a500"
       case "ac": return "#22c55e"
-      default: return "#555e78"
+      default: return "#b0b8cf"
     }
   }
 
@@ -305,10 +305,10 @@ export default function OrientadorDashboard() {
               border: "1px solid rgba(255,255,255,0.07)",
               borderRadius: "14px",
               padding: "20px",
-              borderTop: "2px solid #555e78"
+              borderTop: "2px solid #b0b8cf"
             }}>
-              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#555e78", marginBottom: "10px" }}>A carregar...</div>
-              <div style={{ fontSize: "22px", fontWeight: "700", color: "#555e78" }}>...</div>
+              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "10px" }}>A carregar...</div>
+              <div style={{ fontSize: "22px", fontWeight: "700", color: "#b0b8cf" }}>...</div>
             </div>
           ))
         ) : (
@@ -346,7 +346,7 @@ export default function OrientadorDashboard() {
         >
           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📚</div>
           <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>Disciplinas e Notas</div>
-          <div style={{ fontSize: "12px", color: "#555e78" }}>Lançar e editar notas das suas disciplinas</div>
+          <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Lançar e editar notas das suas disciplinas</div>
         </Link>
 
         <Link href="/orientador/solicitacoes" style={{
@@ -370,7 +370,7 @@ export default function OrientadorDashboard() {
         >
           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📋</div>
           <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>Solicitações</div>
-          <div style={{ fontSize: "12px", color: "#555e78" }}>Pedidos de orientação de estudantes</div>
+          <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Pedidos de orientação de estudantes</div>
         </Link>
 
         <Link href="/orientador/monografias" style={{
@@ -394,7 +394,7 @@ export default function OrientadorDashboard() {
         >
           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📝</div>
           <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>Monografias</div>
-          <div style={{ fontSize: "12px", color: "#555e78" }}>Rever e orientar monografias dos estudantes</div>
+          <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Rever e orientar monografias dos estudantes</div>
         </Link>
       </div>
 
@@ -461,7 +461,7 @@ export default function OrientadorDashboard() {
                 border: "1px solid rgba(255,255,255,0.1)",
                 borderRadius: "8px",
                 padding: "8px 12px",
-                color: "#9098b0",
+                color: "#d0d7e8",
                 fontSize: "13px",
                 cursor: "pointer"
               }}
@@ -472,9 +472,9 @@ export default function OrientadorDashboard() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
         ) : disciplinasFiltradas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
             Nenhuma disciplina encontrada para os filtros selecionados
           </div>
         ) : (
@@ -497,7 +497,7 @@ export default function OrientadorDashboard() {
                 >
                   <div>
                     <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
-                    <div style={{ color: "#555e78", fontSize: "12px", marginTop: "2px" }}>
+                    <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
                       {d.codigo} · {d.creditos} créditos · {d.ano_curricular}º Ano · {d.semestre}
                       {d.cursos.length > 0 && (
                         <span> · {d.cursos.map(c => c.nome_curso).join(", ")}</span>
@@ -509,7 +509,7 @@ export default function OrientadorDashboard() {
                       {d.total_estudantes} estudantes
                     </div>
                     <div style={{
-                      color: "#555e78",
+                      color: "#b0b8cf",
                       fontSize: "12px",
                       transition: "transform 0.2s",
                       transform: disciplinaSelecionada?.id === d.id ? "rotate(180deg)" : "rotate(0deg)"
@@ -529,9 +529,9 @@ export default function OrientadorDashboard() {
                     marginRight: "8px"
                   }}>
                     {loadingEstudantes ? (
-                      <div style={{ textAlign: "center", color: "#555e78", padding: "20px" }}>A carregar estudantes...</div>
+                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>A carregar estudantes...</div>
                     ) : estudantes.length === 0 ? (
-                      <div style={{ textAlign: "center", color: "#555e78", padding: "20px" }}>
+                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>
                         Nenhum estudante encontrado
                       </div>
                     ) : (
@@ -539,19 +539,19 @@ export default function OrientadorDashboard() {
                         <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
                             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#555e78", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>AC1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>AC2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>AC3</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>TTP</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>PP1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>PP2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Exame</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Rec</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Esp</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Final</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}>Estado</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "11px" }}></th>
+                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC3</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>TTP</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>PP1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>PP2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Exame</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Rec</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Esp</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Final</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Estado</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -559,7 +559,7 @@ export default function OrientadorDashboard() {
                               <tr key={e.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                                 <td style={{ padding: "8px" }}>
                                   <div style={{ color: "#e8eaf0", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
-                                  <div style={{ color: "#555e78", fontSize: "11px" }}>{e.numero_estudante}</div>
+                                  <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{e.numero_estudante}</div>
                                 </td>
                                 {["ac1", "ac2", "ac3", "ttp", "pp1", "pp2", "exame", "recurso", "exame_especial"].map((campo) => (
                                   <td key={campo} style={{ textAlign: "center", padding: "8px" }}>
@@ -597,7 +597,7 @@ export default function OrientadorDashboard() {
                                     fontWeight: "700",
                                     color: e.nota_final != null
                                       ? (e.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                                      : "#555e78",
+                                      : "#b0b8cf",
                                     fontSize: "12px"
                                   }}>
                                     {e.nota_final != null ? arredondarNota(e.nota_final) : "—"}
@@ -637,7 +637,7 @@ export default function OrientadorDashboard() {
                                         onClick={cancelarEdicao}
                                         style={{
                                           padding: "3px 6px",
-                                          background: "#555e78",
+                                          background: "#b0b8cf",
                                           color: "white",
                                           border: "none",
                                           borderRadius: "4px",

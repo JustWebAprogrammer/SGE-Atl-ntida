@@ -34,7 +34,7 @@ function BadgePagamento({ estado }: { estado: string }) {
     Pago:     { bg: "rgba(34,197,94,0.12)",  color: "#22c55e", label: "Propina OK" },
     Pendente: { bg: "rgba(240,165,0,0.12)",   color: "#f0a500", label: "Pendente" },
     Atrasado: { bg: "rgba(224,61,61,0.12)",   color: "#e03d3d", label: "Atrasado" },
-  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78", label: estado }
+  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf", label: estado }
 
   return (
     <span style={{
@@ -50,7 +50,7 @@ function BadgeEstado({ estado }: { estado: string }) {
     EmCurso:    { bg: "rgba(45,212,191,0.1)",  color: "#2dd4bf" },
     Finalizado: { bg: "rgba(34,197,94,0.12)",  color: "#22c55e" },
     Desistente: { bg: "rgba(224,61,61,0.12)",  color: "#e03d3d" },
-  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78" }
+  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
 
   return (
     <span style={{
@@ -158,7 +158,7 @@ export default function RecepcionistaDashboard() {
         padding: "28px 32px",
         marginBottom: "24px",
       }}>
-        <div style={{ fontSize: "13px", color: "#9098b0", marginBottom: "16px", fontWeight: "500" }}>
+        <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "16px", fontWeight: "500" }}>
           Filtros de pesquisa
         </div>
 
@@ -168,7 +168,7 @@ export default function RecepcionistaDashboard() {
             <span style={{
               position: "absolute", left: "14px", top: "50%",
               transform: "translateY(-50%)",
-              color: "#555e78", fontSize: "14px", pointerEvents: "none"
+              color: "#b0b8cf", fontSize: "14px", pointerEvents: "none"
             }}>🔍</span>
             <input
               type="text"
@@ -217,12 +217,12 @@ export default function RecepcionistaDashboard() {
           <div style={{ fontSize: "12px", color: "#e03d3d", marginTop: "10px" }}>{erro}</div>
         )}
         {!pesquisou && !loading && (
-          <div style={{ fontSize: "12px", color: "#555e78", marginTop: "10px" }}>
+          <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "10px" }}>
             Use os filtros acima para pesquisar estudantes
           </div>
         )}
         {loading && (
-          <div style={{ fontSize: "12px", color: "#555e78", marginTop: "10px" }}>
+          <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "10px" }}>
             A pesquisar...
           </div>
         )}
@@ -235,7 +235,7 @@ export default function RecepcionistaDashboard() {
             background: "#1e2230",
             border: "1px solid rgba(255,255,255,0.07)",
             borderRadius: "14px", padding: "60px",
-            textAlign: "center", color: "#555e78"
+            textAlign: "center", color: "#b0b8cf"
           }}>
             Nenhum estudante encontrado com os filtros seleccionados.
           </div>
@@ -252,7 +252,7 @@ export default function RecepcionistaDashboard() {
               display: "grid",
               gridTemplateColumns: "2fr 1fr 80px 100px 110px",
               gap: "12px",
-              fontSize: "11px", color: "#555e78",
+              fontSize: "11px", color: "#b0b8cf",
               textTransform: "uppercase", letterSpacing: "0.5px"
             }}>
               <span>Estudante</span>
@@ -286,15 +286,15 @@ export default function RecepcionistaDashboard() {
                     {e.nome_completo}
                   </div>
                   {e.numero_estudante && (
-                    <div style={{ fontSize: "11px", color: "#555e78", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                       Nº {e.numero_estudante}
                     </div>
                   )}
                 </div>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
                   {e.curso.nome_curso}
                 </div>
-                <div style={{ fontSize: "13px", color: "#9098b0" }}>
+                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
                   {e.ano_current ? `${e.ano_current}º ano` : "—"}
                 </div>
                 <BadgeEstado estado={e.estado} />
@@ -305,7 +305,7 @@ export default function RecepcionistaDashboard() {
             <div style={{
               padding: "10px 24px",
               borderTop: "1px solid rgba(255,255,255,0.05)",
-              fontSize: "11px", color: "#555e78"
+              fontSize: "11px", color: "#b0b8cf"
             }}>
               {resultados.length} resultado{resultados.length !== 1 ? "s" : ""}
             </div>

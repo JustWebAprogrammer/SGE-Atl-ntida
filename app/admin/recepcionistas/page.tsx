@@ -201,7 +201,7 @@ export default function RecepcionistasAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
           A carregar recepcionistas...
         </div>
       ) : (
@@ -211,7 +211,7 @@ export default function RecepcionistasAdminDashboard() {
             borderRadius: '12px', 
             padding: '60px', 
             textAlign: 'center',
-            color: '#9098b0'
+            color: '#d0d7e8'
           }}>
             Nenhum recepcionista encontrado
           </div>
@@ -220,19 +220,19 @@ export default function RecepcionistasAdminDashboard() {
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr style={{ background: '#13161e', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                  <th style={{ padding: '14px 16px', textAlign: 'left', color: '#9098b0', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Nome</th>
-                  <th style={{ padding: '14px 16px', textAlign: 'left', color: '#9098b0', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Email</th>
-                  <th style={{ padding: '14px 16px', textAlign: 'left', color: '#9098b0', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Telefone</th>
-                  <th style={{ padding: '14px 16px', textAlign: 'center', color: '#9098b0', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Turno</th>
-                  <th style={{ padding: '14px 16px', textAlign: 'right', color: '#9098b0', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Ações</th>
+                  <th style={{ padding: '14px 16px', textAlign: 'left', color: '#d0d7e8', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Nome</th>
+                  <th style={{ padding: '14px 16px', textAlign: 'left', color: '#d0d7e8', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Email</th>
+                  <th style={{ padding: '14px 16px', textAlign: 'left', color: '#d0d7e8', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Telefone</th>
+                  <th style={{ padding: '14px 16px', textAlign: 'center', color: '#d0d7e8', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Turno</th>
+                  <th style={{ padding: '14px 16px', textAlign: 'right', color: '#d0d7e8', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase' }}>Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {recepcionistas.map((recepcionista) => (
                   <tr key={recepcionista.id_recepcionista} style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
                     <td style={{ padding: '14px 16px', color: '#e8eaf0', fontSize: '14px', fontWeight: '500' }}>{recepcionista.nome_completo}</td>
-                    <td style={{ padding: '14px 16px', color: '#9098b0', fontSize: '13px' }}>{recepcionista.usuario.email}</td>
-                    <td style={{ padding: '14px 16px', color: '#9098b0', fontSize: '13px' }}>{recepcionista.numero_telemovel || '—'}</td>
+                    <td style={{ padding: '14px 16px', color: '#d0d7e8', fontSize: '13px' }}>{recepcionista.usuario.email}</td>
+                    <td style={{ padding: '14px 16px', color: '#d0d7e8', fontSize: '13px' }}>{recepcionista.numero_telemovel || '—'}</td>
                     <td style={{ padding: '14px 16px', textAlign: 'center', color: '#e8eaf0', fontSize: '13px' }}>
                       <span style={{ 
                         background: recepcionista.turno === 'Manha' ? 'rgba(240,165,0,0.15)' : 'rgba(45,212,191,0.15)',
@@ -307,7 +307,7 @@ export default function RecepcionistasAdminDashboard() {
 
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome Completo *</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo *</label>
                 <input
                   type="text"
                   required
@@ -326,7 +326,7 @@ export default function RecepcionistasAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Email *</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Email *</label>
                 <input
                   type="email"
                   required
@@ -345,9 +345,9 @@ export default function RecepcionistasAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Telefone (+244 9)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telefone (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#9098b0', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     maxLength={8}
@@ -369,7 +369,7 @@ export default function RecepcionistasAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Turno</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Turno</label>
                 <select
                   value={formData.turno}
                   onChange={(e) => setFormData({...formData, turno: e.target.value})}
@@ -439,7 +439,7 @@ export default function RecepcionistasAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >

@@ -75,7 +75,7 @@ export default function AdminDashboard() {
               fontSize: "11px",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
-              color: "#555e78",
+              color: "#b0b8cf",
               marginBottom: "10px"
             }}>{stat.label}</div>
             <div style={{

@@ -91,7 +91,7 @@ function Secao({ titulo, children }: { titulo: string; children: React.ReactNode
         padding: "14px 24px",
         borderBottom: "1px solid rgba(255,255,255,0.07)",
         fontSize: "12px", fontWeight: "600",
-        color: "#9098b0", textTransform: "uppercase" as const,
+        color: "#d0d7e8", textTransform: "uppercase" as const,
         letterSpacing: "0.5px"
       }}>{titulo}</div>
       <div style={{ padding: "20px 24px" }}>{children}</div>
@@ -480,7 +480,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
 
   if (loading) return (
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
-      <div style={{ textAlign: "center", color: "#555e78", padding: "80px" }}>
+      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "80px" }}>
         A carregar...
       </div>
     </DashboardLayout>
@@ -513,7 +513,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
         style={{
           background: "transparent",
           border: "1px solid rgba(255,255,255,0.1)",
-          color: "#9098b0", borderRadius: "8px",
+          color: "#d0d7e8", borderRadius: "8px",
           padding: "8px 16px", fontSize: "13px",
           cursor: "pointer", marginBottom: "20px",
           display: "flex", alignItems: "center", gap: "6px"
@@ -553,20 +553,20 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
           </div>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" as const }}>
             {dados.numero_estudante && (
-              <span style={{ fontSize: "13px", color: "#9098b0" }}>
+              <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
                 Nº <strong style={{ color: "#e8eaf0" }}>{dados.numero_estudante}</strong>
               </span>
             )}
-            <span style={{ fontSize: "13px", color: "#9098b0" }}>
+            <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
               {dados.curso.nome_curso}
             </span>
             {dados.ano_current && (
-              <span style={{ fontSize: "13px", color: "#9098b0" }}>
+              <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
                 {dados.ano_current}º ano
               </span>
             )}
             {dados.numero_telemovel && (
-              <span style={{ fontSize: "13px", color: "#9098b0" }}>
+              <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
                 📞 {dados.numero_telemovel}
               </span>
             )}
@@ -605,7 +605,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                     <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
                       {MESES[p.mes - 1]} {p.ano}
                     </div>
-                    <div style={{ fontSize: "11px", color: "#555e78", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                       Ref: {p.referencia} | Venc: {new Date(p.data_vencimento).toLocaleDateString("pt-AO")}
                     </div>
                     {p.data_pagamento && (
@@ -704,13 +704,13 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                   <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
                     {f.descricao_servico ?? "Serviço"}
                   </div>
-                  <div style={{ fontSize: "11px", color: "#555e78", marginTop: "2px" }}>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                     {f.numero_factura && `Nº ${f.numero_factura} | `}
                     {new Date(f.data_emissao).toLocaleDateString("pt-AO")}
                     {f.ano_lectivo && ` | ${f.ano_lectivo}`}
                   </div>
                   {f.metodo_pagamento && (
-                    <div style={{ fontSize: "11px", color: "#9098b0", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "2px" }}>
                       Pagamento: {f.metodo_pagamento}
                     </div>
                   )}
@@ -786,7 +786,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                             ? "rgba(85,94,120,0.15)"
                             : "rgba(155,89,182,0.15)",
                           border: `1px solid ${bloqueado ? "rgba(85,94,120,0.3)" : "rgba(155,89,182,0.3)"}`,
-                          color: bloqueado ? "#555e78" : "#9b59b6",
+                          color: bloqueado ? "#b0b8cf" : "#9b59b6",
                           borderRadius: "8px",
                           fontSize: "12px", fontWeight: "600",
                           cursor: bloqueado ? "not-allowed" : "pointer",
@@ -845,11 +845,11 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                   <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
                     Certificado de {c.tipo_certificado}
                   </div>
-                  <div style={{ fontSize: "11px", color: "#555e78", marginTop: "2px" }}>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                     Emitido em {new Date(c.data_emissao).toLocaleDateString("pt-AO")}
                   </div>
                   {c.descricao && (
-                    <div style={{ fontSize: "11px", color: "#9098b0", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "2px" }}>
                       {c.descricao}
                     </div>
                   )}

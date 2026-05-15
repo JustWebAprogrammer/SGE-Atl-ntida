@@ -32,10 +32,10 @@ function BadgeEstado({ estado }: { estado: string }) {
     Pendente: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     Aceite: { bg: "rgba(34,197,94,0.12)", color: "#22c55e" },
     Recusado: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
-    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#555e78" },
+    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" },
   }
 
-  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78" }
+  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
 
   return (
     <span style={{
@@ -138,7 +138,7 @@ export default function SolicitacoesDashboard() {
             fontSize: "11px",
             textTransform: "uppercase",
             letterSpacing: "0.5px",
-            color: "#555e78",
+            color: "#b0b8cf",
             marginBottom: "10px"
           }}>Pendentes</div>
           <div style={{
@@ -158,7 +158,7 @@ export default function SolicitacoesDashboard() {
             fontSize: "11px",
             textTransform: "uppercase",
             letterSpacing: "0.5px",
-            color: "#555e78",
+            color: "#b0b8cf",
             marginBottom: "10px"
           }}>Aceites</div>
           <div style={{
@@ -178,7 +178,7 @@ export default function SolicitacoesDashboard() {
             fontSize: "11px",
             textTransform: "uppercase",
             letterSpacing: "0.5px",
-            color: "#555e78",
+            color: "#b0b8cf",
             marginBottom: "10px"
           }}>Recusados</div>
           <div style={{
@@ -201,7 +201,7 @@ export default function SolicitacoesDashboard() {
           <div style={{ flex: 1, minWidth: "200px" }}>
             <label style={{
               fontSize: "11px",
-              color: "#9098b0",
+              color: "#d0d7e8",
               textTransform: "uppercase",
               marginBottom: "4px",
               display: "block"
@@ -226,7 +226,7 @@ export default function SolicitacoesDashboard() {
           <div>
             <label style={{
               fontSize: "11px",
-              color: "#9098b0",
+              color: "#d0d7e8",
               textTransform: "uppercase",
               marginBottom: "4px",
               display: "block"
@@ -254,7 +254,7 @@ export default function SolicitacoesDashboard() {
           <div>
             <label style={{
               fontSize: "11px",
-              color: "#9098b0",
+              color: "#d0d7e8",
               textTransform: "uppercase",
               marginBottom: "4px",
               display: "block"
@@ -287,7 +287,7 @@ export default function SolicitacoesDashboard() {
                 background: "transparent",
                 border: "1px solid rgba(255,255,255,0.1)",
                 borderRadius: "8px",
-                color: "#9098b0",
+                color: "#d0d7e8",
                 fontSize: "13px",
                 cursor: "pointer"
               }}
@@ -314,9 +314,9 @@ export default function SolicitacoesDashboard() {
         }}>Solicitações Pendentes</div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
         ) : pendentes.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
             {hasActiveFilters ? "Nenhuma solicitação pendente encontrada com os filtros selecionados" : "Nenhuma solicitação pendente"}
           </div>
         ) : (
@@ -341,14 +341,14 @@ export default function SolicitacoesDashboard() {
                         <span title="Atribuído pelo gestor" style={{ marginLeft: "6px", fontSize: "12px" }}>🔹</span>
                       )}
                     </div>
-                    <div style={{ color: "#555e78", fontSize: "12px" }}>
+                    <div style={{ color: "#b0b8cf", fontSize: "12px" }}>
                       {s.estudante.numero_estudante} · {s.estudante.curso} · {s.estudante.ano_current}º Ano · {s.estudante.turno}
                     </div>
                   </div>
                   <BadgeEstado estado={s.estado} />
                 </div>
 
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "8px" }}>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "8px" }}>
                   Solicitado em {new Date(s.data_solicitacao).toLocaleDateString("pt-AO")}
                 </div>
 
@@ -359,10 +359,10 @@ export default function SolicitacoesDashboard() {
                     padding: "10px",
                     marginBottom: "12px"
                   }}>
-                    <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px", textTransform: "uppercase" }}>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px", textTransform: "uppercase" }}>
                       Observações
                     </div>
-                    <div style={{ fontSize: "12px", color: "#9098b0", lineHeight: "1.5" }}>
+                    <div style={{ fontSize: "12px", color: "#d0d7e8", lineHeight: "1.5" }}>
                       {s.observacoes}
                     </div>
                   </div>
@@ -375,7 +375,7 @@ export default function SolicitacoesDashboard() {
                     style={{
                       flex: 1,
                       padding: "8px",
-                      background: processando === s.id_solicitacao ? "#555e78" : "#22c55e",
+                      background: processando === s.id_solicitacao ? "#b0b8cf" : "#22c55e",
                       color: "white",
                       border: "none",
                       borderRadius: "6px",
@@ -392,7 +392,7 @@ export default function SolicitacoesDashboard() {
                     style={{
                       flex: 1,
                       padding: "8px",
-                      background: processando === s.id_solicitacao ? "#555e78" : "#e03d3d",
+                      background: processando === s.id_solicitacao ? "#b0b8cf" : "#e03d3d",
                       color: "white",
                       border: "none",
                       borderRadius: "6px",
@@ -425,9 +425,9 @@ export default function SolicitacoesDashboard() {
         }}>Histórico de Solicitações</div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
         ) : historico.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
             {hasActiveFilters ? "Nenhuma solicitação no histórico com os filtros selecionados" : "Nenhuma solicitação processada ainda"}
           </div>
         ) : (
@@ -453,14 +453,14 @@ export default function SolicitacoesDashboard() {
                         <span title="Atribuído pelo gestor" style={{ marginLeft: "6px", fontSize: "12px" }}>🔹</span>
                       )}
                     </div>
-                    <div style={{ color: "#555e78", fontSize: "12px" }}>
+                    <div style={{ color: "#b0b8cf", fontSize: "12px" }}>
                       {s.estudante.numero_estudante} · {s.estudante.curso} · {s.estudante.ano_current}º Ano · {s.estudante.turno}
                     </div>
                   </div>
                   <BadgeEstado estado={s.estado} />
                 </div>
 
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "8px" }}>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "8px" }}>
                   Solicitado em {new Date(s.data_solicitacao).toLocaleDateString("pt-AO")}
                 </div>
 
@@ -471,10 +471,10 @@ export default function SolicitacoesDashboard() {
                     padding: "10px",
                     marginBottom: "12px"
                   }}>
-                    <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px", textTransform: "uppercase" }}>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px", textTransform: "uppercase" }}>
                       Observações
                     </div>
-                    <div style={{ fontSize: "12px", color: "#9098b0", lineHeight: "1.5" }}>
+                    <div style={{ fontSize: "12px", color: "#d0d7e8", lineHeight: "1.5" }}>
                       {s.observacoes}
                     </div>
                   </div>
@@ -489,8 +489,8 @@ export default function SolicitacoesDashboard() {
                         disabled={processando === s.id_solicitacao}
                         style={{
                           padding: "6px 12px",
-                          background: processando === s.id_solicitacao ? "#555e78" : "rgba(34,197,94,0.15)",
-                          color: processando === s.id_solicitacao ? "#9098b0" : "#22c55e",
+                          background: processando === s.id_solicitacao ? "#b0b8cf" : "rgba(34,197,94,0.15)",
+                          color: processando === s.id_solicitacao ? "#d0d7e8" : "#22c55e",
                           border: "1px solid rgba(34,197,94,0.3)",
                           borderRadius: "6px",
                           fontSize: "11px",
@@ -507,8 +507,8 @@ export default function SolicitacoesDashboard() {
                         disabled={processando === s.id_solicitacao}
                         style={{
                           padding: "6px 12px",
-                          background: processando === s.id_solicitacao ? "#555e78" : "rgba(224,61,61,0.15)",
-                          color: processando === s.id_solicitacao ? "#9098b0" : "#e03d3d",
+                          background: processando === s.id_solicitacao ? "#b0b8cf" : "rgba(224,61,61,0.15)",
+                          color: processando === s.id_solicitacao ? "#d0d7e8" : "#e03d3d",
                           border: "1px solid rgba(224,61,61,0.3)",
                           borderRadius: "6px",
                           fontSize: "11px",

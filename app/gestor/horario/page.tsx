@@ -263,7 +263,7 @@ export default function HorarioPage() {
     return (
       <DashboardLayout navItems={gestorNavItems} title="Horário de Aulas" subtitle="Gerir horário semanal por curso">
         <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "40px", textAlign: "center" }}>
-          <div style={{ color: "#555e78" }}>A carregar...</div>
+          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
         </div>
       </DashboardLayout>
     )
@@ -276,38 +276,38 @@ export default function HorarioPage() {
         <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Selecionar Turma</div>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Curso</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Curso</div>
             <select value={cursoId} onChange={e => { setCursoId(e.target.value); setAno("1") }} style={estiloSelect}>
               <option value="">Selecionar...</option>
               {cursos.map(c => <option key={c.id_curso} value={c.id_curso}>{c.nome_curso}</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Ano</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano</div>
             <select value={ano} onChange={e => setAno(e.target.value)} style={estiloSelect}>
               {anosDisponiveis.map(a => <option key={a} value={a}>{a}º</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Semestre</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Semestre</div>
             <select value={semestre} onChange={e => setSemestre(e.target.value)} style={estiloSelect}>
               <option value="S1">S1</option>
               <option value="S2">S2</option>
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Ano Lectivo</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano Lectivo</div>
             <input type="text" value={anoLectivo} onChange={e => setAnoLectivo(e.target.value)} style={{ ...estiloSelect, minWidth: "100px" }} />
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurno} onChange={e => { setFiltroTurno(e.target.value); setPosicao("1") }} style={estiloSelect}>
               {turnosDoCurso.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
         </div>
         {cursoId && (
-          <div style={{ marginTop: "10px", color: "#9098b0", fontSize: "12px" }}>
+          <div style={{ marginTop: "10px", color: "#d0d7e8", fontSize: "12px" }}>
             ⏱️ Aula: <strong style={{ color: "#2dd4bf" }}>{duracao} min</strong> · Intervalo: <strong style={{ color: "#2dd4bf" }}>{intervalo} min</strong>
             · Turno: <strong style={{ color: "#2dd4bf" }}>{filtroTurno}</strong>
           </div>
@@ -321,26 +321,26 @@ export default function HorarioPage() {
             <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Adicionar Aula</div>
             <form onSubmit={adicionarAula} style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "flex-end" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Disciplina</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Disciplina</div>
                 <select value={disciplinaId} onChange={e => setDisciplinaId(e.target.value)} required style={{ ...estiloSelect, minWidth: "220px" }}>
                   <option value="">Selecionar...</option>
                   {disciplinas.map(d => <option key={d.id_disciplina} value={d.id_disciplina}>{d.nome_disciplina} ({d.codigo_disciplina})</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Dia</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Dia</div>
                 <select value={diaSemana} onChange={e => setDiaSemana(e.target.value)} style={estiloSelect}>
                   {diasSemana.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Turno</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
                 <select value={filtroTurno} disabled style={{ ...estiloSelect, opacity: 0.7, cursor: "not-allowed" }}>
                   {turnosCurso.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
                 <select value={posicao} onChange={e => setPosicao(e.target.value)} style={estiloSelect}>
                   {Array.from({ length: Math.max(maxPosicoes, 1) }, (_, i) => (
                     <option key={i + 1} value={i + 1}>{i + 1}ª aula</option>
@@ -348,12 +348,12 @@ export default function HorarioPage() {
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Sala</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Sala</div>
                 <input type="text" placeholder="Ex: Sala 101" value={sala} onChange={e => setSala(e.target.value)} style={{ ...estiloSelect, minWidth: "100px" }} />
               </div>
               <button type="submit" disabled={salvando || !disciplinaId} style={{
-                padding: "8px 16px", background: disciplinaId ? "#2dd4bf" : "#555e78",
-                color: disciplinaId ? "#13161e" : "#9098b0", border: "none", borderRadius: "8px",
+                padding: "8px 16px", background: disciplinaId ? "#2dd4bf" : "#b0b8cf",
+                color: disciplinaId ? "#13161e" : "#d0d7e8", border: "none", borderRadius: "8px",
                 fontSize: "13px", fontWeight: "600", cursor: disciplinaId ? "pointer" : "not-allowed"
               }}>{salvando ? "A adicionar..." : "+ Adicionar"}</button>
             </form>
@@ -363,7 +363,7 @@ export default function HorarioPage() {
               </div>
             )}
             {disciplinas.length === 0 && (
-              <div style={{ color: "#555e78", fontSize: "12px", marginTop: "10px" }}>
+              <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "10px" }}>
                 Nenhuma disciplina no currículo. Adicione no <a href="/gestor/curriculo" style={{ color: "#2dd4bf" }}>Currículo</a> primeiro.
               </div>
             )}
@@ -438,7 +438,7 @@ export default function HorarioPage() {
                             {aula ? (
                               <div style={{ background: "#1e2230", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
                                 <div style={{ color: "#e8eaf0", fontWeight: "500", fontSize: "11px" }}>{aula.disciplina.nome_disciplina}</div>
-                                {aula.sala && <div style={{ color: "#9098b0", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
+                                {aula.sala && <div style={{ color: "#d0d7e8", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                                 <button onClick={() => removerAula(aula.id_aula)} style={{
                                   marginTop: "4px", padding: "2px 6px", background: "transparent",
                                   border: "1px solid rgba(224,61,61,0.3)", borderRadius: "4px",
@@ -446,7 +446,7 @@ export default function HorarioPage() {
                                 }}>Remover</button>
                               </div>
                             ) : (
-                              <div style={{ color: "#555e78", fontSize: "10px" }}>—</div>
+                              <div style={{ color: "#b0b8cf", fontSize: "10px" }}>—</div>
                             )}
                           </div>
                         )
@@ -469,9 +469,9 @@ export default function HorarioPage() {
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
                   <thead>
                     <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#9098b0", fontWeight: "600", fontSize: "12px" }}>Professor</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#9098b0", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#9098b0", fontWeight: "600", fontSize: "12px" }}>Código</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Professor</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Código</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -479,7 +479,7 @@ export default function HorarioPage() {
                       <tr key={idx} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                         <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>{p.nome_professor}</td>
                         <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>{p.nome_disciplina}</td>
-                        <td style={{ padding: "10px 12px", color: "#555e78" }}>{p.codigo_disciplina}</td>
+                        <td style={{ padding: "10px 12px", color: "#b0b8cf" }}>{p.codigo_disciplina}</td>
                       </tr>
                     ))}
                   </tbody>

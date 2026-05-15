@@ -196,9 +196,9 @@ export default function CurriculoPage() {
           Selecionar Curso
         </div>
         {loading ? (
-          <div style={{ color: "#555e78" }}>A carregar...</div>
+          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
         ) : cursos.length === 0 ? (
-          <div style={{ color: "#555e78" }}>Nenhum curso encontrado no departamento</div>
+          <div style={{ color: "#b0b8cf" }}>Nenhum curso encontrado no departamento</div>
         ) : (
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             {cursos.map(c => (
@@ -219,7 +219,7 @@ export default function CurriculoPage() {
                 }}
               >
                 {c.nome_curso}
-                {c.duracao_anos && <span style={{ color: "#555e78", marginLeft: "6px" }}>({c.duracao_anos} anos)</span>}
+                {c.duracao_anos && <span style={{ color: "#b0b8cf", marginLeft: "6px" }}>({c.duracao_anos} anos)</span>}
               </button>
             ))}
           </div>
@@ -243,7 +243,7 @@ export default function CurriculoPage() {
             {/* Filtros de disciplinas */}
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "flex-end", width: "100%", marginBottom: "8px" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Departamento</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Departamento</div>
                 <select
                   value={filtroDepartamento}
                   onChange={e => setFiltroDepartamento(e.target.value)}
@@ -267,7 +267,7 @@ export default function CurriculoPage() {
               </div>
 
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Pesquisar</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Pesquisar</div>
                 <input
                   type="text"
                   placeholder="Nome ou código..."
@@ -294,7 +294,7 @@ export default function CurriculoPage() {
                     background: "transparent",
                     border: "1px solid rgba(255,255,255,0.1)",
                     borderRadius: "8px",
-                    color: "#9098b0",
+                    color: "#d0d7e8",
                     fontSize: "12px",
                     cursor: "pointer"
                   }}
@@ -303,14 +303,14 @@ export default function CurriculoPage() {
                 </button>
               )}
 
-              <div style={{ color: "#555e78", fontSize: "12px", padding: "8px 0" }}>
+              <div style={{ color: "#b0b8cf", fontSize: "12px", padding: "8px 0" }}>
                 {disciplinasNaoAtribuidas.length} disciplina{disciplinasNaoAtribuidas.length !== 1 ? "s" : ""} disponível{disciplinasNaoAtribuidas.length !== 1 ? "is" : ""}
               </div>
             </div>
 
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "flex-end" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Disciplina</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Disciplina</div>
                 <select
                   value={disciplinaId}
                   onChange={e => setDisciplinaId(e.target.value)}
@@ -337,7 +337,7 @@ export default function CurriculoPage() {
               </div>
 
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Ano</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano</div>
                 <select
                   value={ano}
                   onChange={e => setAno(e.target.value)}
@@ -358,7 +358,7 @@ export default function CurriculoPage() {
               </div>
 
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Semestre</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Semestre</div>
                 <select
                   value={semestre}
                   onChange={e => setSemestre(e.target.value)}
@@ -382,8 +382,8 @@ export default function CurriculoPage() {
                 disabled={salvando || !disciplinaId}
                 style={{
                   padding: "8px 16px",
-                  background: disciplinaId ? "#2dd4bf" : "#555e78",
-                  color: disciplinaId ? "#13161e" : "#9098b0",
+                  background: disciplinaId ? "#2dd4bf" : "#b0b8cf",
+                  color: disciplinaId ? "#13161e" : "#d0d7e8",
                   border: "none",
                   borderRadius: "8px",
                   fontSize: "13px",
@@ -410,9 +410,9 @@ export default function CurriculoPage() {
             </div>
 
             {loadingCurriculo ? (
-              <div style={{ color: "#555e78", textAlign: "center", padding: "30px" }}>A carregar currículo...</div>
+              <div style={{ color: "#b0b8cf", textAlign: "center", padding: "30px" }}>A carregar currículo...</div>
             ) : curriculo.length === 0 ? (
-              <div style={{ color: "#555e78", textAlign: "center", padding: "30px" }}>
+              <div style={{ color: "#b0b8cf", textAlign: "center", padding: "30px" }}>
                 Nenhuma disciplina atribuída a este curso. Use o formulário acima para adicionar.
               </div>
             ) : (
@@ -443,7 +443,7 @@ export default function CurriculoPage() {
                               <div style={{
                                 fontSize: "11px",
                                 fontWeight: "600",
-                                color: "#9098b0",
+                                color: "#d0d7e8",
                                 textTransform: "uppercase",
                                 marginBottom: "6px",
                                 letterSpacing: "0.5px"
@@ -464,7 +464,7 @@ export default function CurriculoPage() {
                                       <div style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
                                         {d.nome_disciplina}
                                       </div>
-                                      <div style={{ color: "#555e78", fontSize: "11px", marginTop: "2px" }}>
+                                      <div style={{ color: "#b0b8cf", fontSize: "11px", marginTop: "2px" }}>
                                         {d.codigo_disciplina} · {d.creditos} créditos
                                       </div>
                                     </div>

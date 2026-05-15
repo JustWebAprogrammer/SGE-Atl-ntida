@@ -52,7 +52,7 @@ function BadgeEstado({ estado }: { estado: string }) {
     Pago:     { bg: "rgba(34,197,94,0.12)",   color: "#22c55e" },
     Pendente: { bg: "rgba(240,165,0,0.12)",    color: "#f0a500" },
     Atrasado: { bg: "rgba(224,61,61,0.12)",    color: "#e03d3d" },
-  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78" }
+  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
 
   return (
     <span style={{
@@ -328,7 +328,7 @@ export default function PagamentosDashboard() {
               <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0", marginBottom: "8px" }}>
                 Rematrícula para o Ano Lectivo {currentAnoLectivo}
               </div>
-              <div style={{ fontSize: "13px", color: "#9098b0", lineHeight: "1.6", marginBottom: "12px" }}>
+              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6", marginBottom: "12px" }}>
                 A Taxa de Rematrícula determina a sua continuidade no curso. 
                 {estudanteInfo.ano_current && (
                   <span> Seu ano curricular actual é <strong style={{ color: "#e8eaf0" }}>{estudanteInfo.ano_current}º</strong>.</span>
@@ -349,7 +349,7 @@ export default function PagamentosDashboard() {
                       <div style={{ fontSize: "12px", color: "#e8eaf0", marginBottom: "4px" }}>
                         Ao rematricular, estas disciplinas serão reiniciadas para o novo ano lectivo:
                       </div>
-                      <ul style={{ margin: "4px 0 0 0", paddingLeft: "20px", fontSize: "12px", color: "#9098b0" }}>
+                      <ul style={{ margin: "4px 0 0 0", paddingLeft: "20px", fontSize: "12px", color: "#d0d7e8" }}>
                         {failedSubjects.map((n, i) => (
                           <li key={i}>{n.nome_disciplina} (Nota: {n.nota_final})</li>
                         ))}
@@ -360,7 +360,7 @@ export default function PagamentosDashboard() {
                 return null
               })()}
 
-              <div style={{ fontSize: "13px", color: "#9098b0" }}>
+              <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
                 A Taxa de Rematrícula está disponível na tab <strong style={{ color: "#3b82f6", cursor: "pointer" }} onClick={() => setActiveTab("servicos")}>Serviços</strong> para pagamento.
               </div>
             </div>
@@ -370,8 +370,8 @@ export default function PagamentosDashboard() {
 
       {/* Tabs */}
       <div style={{ display: "flex", gap: "8px", marginBottom: "20px", borderBottom: "1px solid rgba(255,255,255,0.07)", paddingBottom: "8px" }}>
-        <button onClick={() => setActiveTab("propinas")} style={{ padding: "10px 20px", background: activeTab === "propinas" ? "#3b82f6" : "transparent", color: activeTab === "propinas" ? "white" : "#9098b0", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: "600", cursor: "pointer" }}>Propinas</button>
-        <button onClick={() => setActiveTab("servicos")} style={{ padding: "10px 20px", background: activeTab === "servicos" ? "#3b82f6" : "transparent", color: activeTab === "servicos" ? "white" : "#9098b0", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: "600", cursor: "pointer" }}>Serviços</button>
+        <button onClick={() => setActiveTab("propinas")} style={{ padding: "10px 20px", background: activeTab === "propinas" ? "#3b82f6" : "transparent", color: activeTab === "propinas" ? "white" : "#d0d7e8", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: "600", cursor: "pointer" }}>Propinas</button>
+        <button onClick={() => setActiveTab("servicos")} style={{ padding: "10px 20px", background: activeTab === "servicos" ? "#3b82f6" : "transparent", color: activeTab === "servicos" ? "white" : "#d0d7e8", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: "600", cursor: "pointer" }}>Serviços</button>
       </div>
 
       {/* ── Propinas Tab ── */}
@@ -385,7 +385,7 @@ export default function PagamentosDashboard() {
               { label: "Pagamentos Efectuados", value: loading ? "..." : `${pagos.length}`, color: "#22c55e" },
             ].map(s => (
               <div key={s.label} style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", borderTop: `2px solid ${s.color}` }}>
-                <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#555e78", marginBottom: "10px" }}>{s.label}</div>
+                <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#b0b8cf", marginBottom: "10px" }}>{s.label}</div>
                 <div style={{ fontSize: "20px", fontWeight: "700", color: s.color }}>{s.value}</div>
               </div>
             ))}
@@ -394,16 +394,16 @@ export default function PagamentosDashboard() {
           {precoInfo && (
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <div>
-                <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#555e78", marginBottom: "4px" }}>Valor Mensal (Propina)</div>
+                <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#b0b8cf", marginBottom: "4px" }}>Valor Mensal (Propina)</div>
                 <div style={{ fontSize: "18px", fontWeight: "700", color: "#2dd4bf" }}>{precoInfo.valor_com_desconto.toLocaleString("pt-AO")} Kz</div>
               </div>
-              <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "#9098b0" }}>
+              <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "#d0d7e8" }}>
                 <span>Curso: <strong style={{ color: "#e8eaf0" }}>{precoInfo.curso}</strong></span>
                 <span>Ano: <strong style={{ color: "#e8eaf0" }}>{precoInfo.ano_curricular}º</strong></span>
                 {precoInfo.tipo_bolsa !== "Nenhuma" && (
                   <span style={{ color: "#22c55e" }}>Bolsa: {precoInfo.desconto}</span>
                 )}
-                <span style={{ fontSize: "10px", color: "#555e78" }}>(Fonte: {precoInfo.origem === "curso" ? "Preço do curso" : "Fallback global"})</span>
+                <span style={{ fontSize: "10px", color: "#b0b8cf" }}>(Fonte: {precoInfo.origem === "curso" ? "Preço do curso" : "Fallback global"})</span>
               </div>
             </div>
           )}
@@ -418,7 +418,7 @@ export default function PagamentosDashboard() {
                   disabled={avancando}
                   style={{
                     padding: "10px 18px",
-                    background: avancando ? "#555e78" : "#3b82f6",
+                    background: avancando ? "#b0b8cf" : "#3b82f6",
                     border: "none",
                     borderRadius: "8px",
                     color: "white",
@@ -436,7 +436,7 @@ export default function PagamentosDashboard() {
           </div>
 
           {loading ? (
-            <div style={{ textAlign: "center", color: "#555e78", padding: "60px" }}>A carregar pagamentos...</div>
+            <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>A carregar pagamentos...</div>
           ) : (
             <>
               {pendentes.length > 0 && (
@@ -455,13 +455,13 @@ export default function PagamentosDashboard() {
                                 ? `${MESES[p.mes - 1]} ${p.ano}`
                                 : (p.descricao ?? "Serviço")}
                             </div>
-                            <div style={{ fontSize: "11px", color: "#555e78", marginTop: "2px" }}>
+                            <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                               {p.referencia ? `Ref: ${p.referencia}` : ""}
                             </div>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
                             <div style={{ textAlign: "right" }}>
-                              <div style={{ fontSize: "13px", color: "#9098b0" }}>
+                              <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
                                 Base: <span style={{ color: "#e8eaf0", fontWeight: "600" }}>{(p.valor_base ?? 0).toLocaleString("pt-AO")} Kz</span>
                               </div>
                               {(p.valor_multa ?? 0) > 0 && (
@@ -498,7 +498,7 @@ export default function PagamentosDashboard() {
               {pagos.length > 0 && pendentes.length > 0 && (
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", margin: "24px 0" }}>
                   <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.07)" }} />
-                  <span style={{ fontSize: "12px", color: "#555e78", textTransform: "uppercase", letterSpacing: "1px" }}>Histórico de Pagamentos</span>
+                  <span style={{ fontSize: "12px", color: "#b0b8cf", textTransform: "uppercase", letterSpacing: "1px" }}>Histórico de Pagamentos</span>
                   <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.07)" }} />
                 </div>
               )}
@@ -519,7 +519,7 @@ export default function PagamentosDashboard() {
                                 ? `${MESES[p.mes - 1]} ${p.ano}`
                                 : (p.descricao ?? "Serviço")}
                             </div>
-                            <div style={{ fontSize: "11px", color: "#555e78", marginTop: "2px" }}>
+                            <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                               {p.referencia ? `Ref: ${p.referencia}` : ""}
                               {p.data_pagamento && ` · Pago em ${new Date(p.data_pagamento).toLocaleDateString("pt-AO")}`}
                             </div>
@@ -553,7 +553,7 @@ export default function PagamentosDashboard() {
               )}
 
               {pagamentos.length === 0 && (
-                <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "60px", textAlign: "center", color: "#555e78" }}>
+                <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "60px", textAlign: "center", color: "#b0b8cf" }}>
                   Sem pagamentos registados. Use os botões acima para pagar adiantado.
                 </div>
               )}
@@ -566,16 +566,16 @@ export default function PagamentosDashboard() {
       {activeTab === "servicos" && (
         <>
           {loadingServicos ? (
-            <div style={{ textAlign: "center", color: "#555e78", padding: "60px" }}>A carregar serviços...</div>
+            <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>A carregar serviços...</div>
           ) : servicos.length === 0 ? (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "60px", textAlign: "center", color: "#555e78" }}>Nenhum serviço disponível.</div>
+            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "60px", textAlign: "center", color: "#b0b8cf" }}>Nenhum serviço disponível.</div>
           ) : (
             <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", overflow: "hidden" }}>
               {servicos.map((servico, i) => (
                 <div key={servico.id_servico} style={{ padding: "18px 24px", borderBottom: i < servicos.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
                     <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{servico.nome_servico}</div>
-                    {servico.descricao && <div style={{ fontSize: "12px", color: "#555e78", marginTop: "4px" }}>{servico.descricao}</div>}
+                    {servico.descricao && <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "4px" }}>{servico.descricao}</div>}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                     <div style={{ fontSize: "18px", fontWeight: "700", color: "#3b82f6" }}>{Number(servico.valor).toLocaleString("pt-AO")} Kz</div>
@@ -646,7 +646,7 @@ export default function PagamentosDashboard() {
             style={{ background: "#1e2230", borderRadius: "16px", padding: "24px", width: "360px", maxWidth: "90vw" }}
           >
             <h3 style={{ margin: "0 0 8px 0", color: "#e8eaf0" }}>Folha de Prova</h3>
-            <p style={{ color: "#9098b0", fontSize: "13px", marginBottom: "16px" }}>
+            <p style={{ color: "#d0d7e8", fontSize: "13px", marginBottom: "16px" }}>
               Quantas folhas deseja? (Unitário: {Number(folhaModal.valor).toLocaleString("pt-AO")} Kz)
             </p>
             <div style={{ marginBottom: "16px" }}>
@@ -670,7 +670,7 @@ export default function PagamentosDashboard() {
               />
             </div>
             <div style={{ textAlign: "center", marginBottom: "20px" }}>
-              <div style={{ fontSize: "12px", color: "#9098b0" }}>Total</div>
+              <div style={{ fontSize: "12px", color: "#d0d7e8" }}>Total</div>
               <div style={{ fontSize: "24px", fontWeight: "700", color: "#2dd4bf" }}>
                 {(Number(folhaModal.valor) * folhaQtd).toLocaleString("pt-AO")} Kz
               </div>
@@ -678,7 +678,7 @@ export default function PagamentosDashboard() {
             <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
               <button
                 onClick={() => setFolhaModal(null)}
-                style={{ padding: "10px 20px", background: "transparent", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#9098b0", cursor: "pointer" }}
+                style={{ padding: "10px 20px", background: "transparent", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#d0d7e8", cursor: "pointer" }}
               >
                 Cancelar
               </button>

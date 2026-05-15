@@ -31,7 +31,7 @@ export default function FinalistasPage() {
         justifyContent: 'center',
         height: '100vh',
         background: '#0d0f14',
-        color: '#9098b0'
+        color: '#d0d7e8'
       }}>
         A carregar...
       </div>

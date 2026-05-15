@@ -58,7 +58,7 @@ export default function PagamentosAdminDashboard() {
       subtitle="Ver todos os pagamentos de propinas do sistema"
     >
       <div style={{ marginBottom: '20px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-        <span style={{ color: '#9098b0' }}>Filtrar estado:</span>
+        <span style={{ color: '#d0d7e8' }}>Filtrar estado:</span>
         {['todos', 'Pago', 'Pendente', 'Atrasado'].map(estado => (
           <button
             key={estado}
@@ -78,7 +78,7 @@ export default function PagamentosAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
           A carregar pagamentos...
         </div>
       ) : (
@@ -86,22 +86,22 @@ export default function PagamentosAdminDashboard() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estudante</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Referência</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Mês/Ano</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Valor</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Vencimento</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estado</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estudante</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Referência</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Mês/Ano</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Valor</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Vencimento</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estado</th>
               </tr>
             </thead>
             <tbody>
               {pagamentosFiltrados.map((pagamento) => (
                 <tr key={pagamento.id_pagamento} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                   <td style={{ padding: '14px', color: '#e8eaf0' }}>{pagamento.estudante.nome_completo}</td>
-                  <td style={{ padding: '14px', color: '#9098b0', fontFamily: 'monospace' }}>{pagamento.referencia}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{pagamento.mes}/{pagamento.ano}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8', fontFamily: 'monospace' }}>{pagamento.referencia}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{pagamento.mes}/{pagamento.ano}</td>
                   <td style={{ padding: '14px', color: '#e8eaf0' }}>{Number(pagamento.valor_total).toLocaleString('pt-AO')} Kz</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{formatarData(pagamento.data_vencimento)}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{formatarData(pagamento.data_vencimento)}</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '4px 10px',

@@ -27,7 +27,7 @@ function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname:
                   borderRadius: "8px",
                   border: "none",
                   background: "transparent",
-                  color: "#9098b0",
+                  color: "#d0d7e8",
                   fontSize: "13.5px",
                   fontWeight: "400",
                   textAlign: "left",
@@ -61,7 +61,7 @@ function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname:
                           borderRadius: "6px",
                           border: "none",
                           background: active ? "rgba(224,61,61,0.12)" : "transparent",
-                          color: active ? "#e03d3d" : "#9098b0",
+                          color: active ? "#e03d3d" : "#d0d7e8",
                           fontSize: "13px",
                           fontWeight: active ? "500" : "400",
                           textAlign: "left",
@@ -93,7 +93,7 @@ function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname:
               borderRadius: "8px",
               border: "none",
               background: active ? "rgba(224,61,61,0.12)" : "transparent",
-              color: active ? "#e03d3d" : "#9098b0",
+              color: active ? "#e03d3d" : "#d0d7e8",
               fontSize: "13.5px",
               fontWeight: active ? "500" : "400",
               textAlign: "left",
@@ -209,7 +209,7 @@ export default function DashboardLayout({
           <h2 style={{ margin: '0 0 16px 0', color: '#f0a500' }}>
             Sessão Expirada
           </h2>
-          <p style={{ color: '#9098b0', lineHeight: '1.6' }}>
+          <p style={{ color: '#d0d7e8', lineHeight: '1.6' }}>
             A sua sessão expirou ou houve um erro de conexão.
             <br />
             Por favor, faça login novamente.
@@ -370,7 +370,7 @@ export default function DashboardLayout({
           </div>
           <div style={{
             fontSize: "11px",
-            color: "#555e78",
+            color: "#b0b8cf",
             marginTop: "4px",
             paddingLeft: "42px"
           }}>Portal Académico</div>
@@ -404,7 +404,7 @@ export default function DashboardLayout({
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
             }}>{displayName}</div>
-            <div style={{ fontSize: "11px", color: "#555e78" }}>
+            <div style={{ fontSize: "11px", color: "#b0b8cf" }}>
               {dadosPerfil.email || session?.user?.email}
             </div>
           </div>
@@ -436,7 +436,7 @@ export default function DashboardLayout({
               borderRadius: "8px",
               border: "none",
               background: "transparent",
-              color: "#555e78",
+              color: "#b0b8cf",
               fontSize: "13px",
               textAlign: "left",
               cursor: "pointer",
@@ -447,7 +447,7 @@ export default function DashboardLayout({
               ;(e.target as HTMLButtonElement).style.background = "rgba(224,61,61,0.12)"
             }}
             onMouseLeave={e => {
-              (e.target as HTMLButtonElement).style.color = "#555e78"
+              (e.target as HTMLButtonElement).style.color = "#b0b8cf"
               ;(e.target as HTMLButtonElement).style.background = "transparent"
             }}
           >Terminar Sessão</button>
@@ -472,7 +472,7 @@ export default function DashboardLayout({
           <div>
             <div style={{ fontSize: "18px", fontWeight: "700" }}>{title}</div>
             {subtitle && (
-              <div style={{ fontSize: "12px", color: "#555e78", marginTop: "2px" }}>
+              <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
                 {subtitle}
               </div>
             )}
@@ -539,13 +539,13 @@ export default function DashboardLayout({
             <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Meu Perfil</h3>
             
             {loadingPerfil ? (
-              <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+              <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
                 A carregar perfil...
               </div>
             ) : (
               <>
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome Completo</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo</label>
                   <input
                     type="text"
                     value={dadosPerfil.nome}
@@ -563,7 +563,7 @@ export default function DashboardLayout({
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome de Utilizador</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome de Utilizador</label>
                   <input
                     type="text"
                     value={dadosPerfil.nome_usuario}
@@ -581,7 +581,7 @@ export default function DashboardLayout({
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Email</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Email</label>
                   <input
                     type="email"
                     value={dadosPerfil.email}
@@ -599,7 +599,7 @@ export default function DashboardLayout({
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Telemóvel</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telemóvel</label>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
                     <div style={{
                       padding: '12px',
@@ -607,7 +607,7 @@ export default function DashboardLayout({
                       border: '1px solid rgba(255,255,255,0.07)',
                       borderRight: 'none',
                       borderRadius: '8px 0 0 8px',
-                      color: '#9098b0',
+                      color: '#d0d7e8',
                       fontSize: '14px'
                     }}>+244 9</div>
                     <input
@@ -639,7 +639,7 @@ export default function DashboardLayout({
                   <h4 style={{ color: '#e8eaf0', marginBottom: '12px', fontSize: '15px' }}>🔑 Alterar Password</h4>
 
                   <div style={{ marginBottom: '12px' }}>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Password Actual</label>
+                    <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Password Actual</label>
                     <input
                       type="password"
                       value={dadosPerfil.password_actual}
@@ -657,7 +657,7 @@ export default function DashboardLayout({
                 </div>
 
                 <div style={{ marginBottom: '12px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nova Password</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nova Password</label>
                   <input
                     type="password"
                     value={dadosPerfil.password_nova}
@@ -675,7 +675,7 @@ export default function DashboardLayout({
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Confirmar Nova Password</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Confirmar Nova Password</label>
                   <input
                     type="password"
                     value={dadosPerfil.password_confirmar}
@@ -702,7 +702,7 @@ export default function DashboardLayout({
                       background: 'transparent',
                       border: '1px solid rgba(255,255,255,0.1)',
                       borderRadius: '8px',
-                      color: '#9098b0',
+                      color: '#d0d7e8',
                       cursor: 'pointer'
                     }}
                   >

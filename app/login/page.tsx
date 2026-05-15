@@ -68,7 +68,7 @@ export default function LoginPage() {
             margin: "0 0 4px"
           }}>ISP Atlântida</h1>
           <p style={{
-            color: "#555e78",
+            color: "#b0b8cf",
             fontSize: "13px",
             margin: 0
           }}>Portal Académico</p>
@@ -93,7 +93,7 @@ export default function LoginPage() {
             <div style={{ marginBottom: "16px" }}>
               <label style={{
                 display: "block",
-                color: "#9098b0",
+                color: "#d0d7e8",
                 fontSize: "12px",
                 fontWeight: "500",
                 marginBottom: "8px",
@@ -124,7 +124,7 @@ export default function LoginPage() {
             <div style={{ marginBottom: "24px" }}>
               <label style={{
                 display: "block",
-                color: "#9098b0",
+                color: "#d0d7e8",
                 fontSize: "12px",
                 fontWeight: "500",
                 marginBottom: "8px",
@@ -171,7 +171,7 @@ export default function LoginPage() {
               style={{
                 width: "100%",
                 padding: "13px",
-                background: loading ? "#555e78" : "#e03d3d",
+                background: loading ? "#b0b8cf" : "#e03d3d",
                 color: "white",
                 border: "none",
                 borderRadius: "8px",
@@ -188,7 +188,7 @@ export default function LoginPage() {
 
         <p style={{
           textAlign: "center",
-          color: "#555e78",
+          color: "#b0b8cf",
           fontSize: "12px",
           marginTop: "24px"
         }}>

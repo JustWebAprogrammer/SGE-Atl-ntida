@@ -364,7 +364,7 @@ export default function DisciplinasDashboard() {
       case "recurso": return "#e03d3d"
       case "exame": return "#f0a500"
       case "ac": return "#22c55e"
-      default: return "#555e78"
+      default: return "#b0b8cf"
     }
   }
 
@@ -528,7 +528,7 @@ export default function DisciplinasDashboard() {
         </div>
         {/* Segunda linha: ano + semestre */}
         <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-          <span style={{ color: "#9098b0", fontSize: "12px" }}>Filtrar:</span>
+          <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Filtrar:</span>
           <div style={{ display: "flex", gap: "4px" }}>
             {anosDisponiveis.map(ano => (
               <button
@@ -540,7 +540,7 @@ export default function DisciplinasDashboard() {
                   border: "1px solid",
                   borderColor: filtroAno === ano ? "#2dd4bf" : "rgba(255,255,255,0.1)",
                   background: filtroAno === ano ? "rgba(45,212,191,0.1)" : "transparent",
-                  color: filtroAno === ano ? "#2dd4bf" : "#9098b0",
+                  color: filtroAno === ano ? "#2dd4bf" : "#d0d7e8",
                   fontSize: "11px",
                   cursor: "pointer"
                 }}
@@ -560,7 +560,7 @@ export default function DisciplinasDashboard() {
                   border: "1px solid",
                   borderColor: filtroSemestre === sem ? "#f0a500" : "rgba(255,255,255,0.1)",
                   background: filtroSemestre === sem ? "rgba(240,165,0,0.1)" : "transparent",
-                  color: filtroSemestre === sem ? "#f0a500" : "#9098b0",
+                  color: filtroSemestre === sem ? "#f0a500" : "#d0d7e8",
                   fontSize: "11px",
                   cursor: "pointer"
                 }}
@@ -618,7 +618,7 @@ export default function DisciplinasDashboard() {
               fontSize: "11px",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
-              color: "#555e78",
+              color: "#b0b8cf",
               marginBottom: "10px"
             }}>{s.label}</div>
             <div style={{
@@ -646,9 +646,9 @@ export default function DisciplinasDashboard() {
         }}>Todas as Disciplinas</div>
 
         {loadingDisciplinas ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
         ) : disciplinasFiltradas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#555e78", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
             Nenhuma disciplina encontrada
           </div>
         ) : (
@@ -671,7 +671,7 @@ export default function DisciplinasDashboard() {
                 >
                   <div>
                     <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
-                    <div style={{ color: "#555e78", fontSize: "12px", marginTop: "2px" }}>
+                    <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
                       {d.codigo} · {d.creditos} créditos · {d.departamento}
                     </div>
                     {/* Mostrar colocações no currículo (curso + ano + semestre) */}
@@ -729,7 +729,7 @@ export default function DisciplinasDashboard() {
                      </div>
                      <div style={{
                        fontSize: "18px",
-                       color: "#555e78",
+                       color: "#b0b8cf",
                        transform: disciplinaSelecionada?.id === d.id ? "rotate(180deg)" : "rotate(0deg)",
                        transition: "transform 0.2s"
                      }}>
@@ -749,15 +749,15 @@ export default function DisciplinasDashboard() {
                   }}>
                     {/* Contador de alunos (quando filtro de turno activo) */}
                     {filtroTurno && (
-                      <div style={{ color: "#9098b0", fontSize: "11px", marginBottom: "12px" }}>
+                      <div style={{ color: "#d0d7e8", fontSize: "11px", marginBottom: "12px" }}>
                         Mostrando {estudantesFiltrados.length} de {estudantes.length} alunos
                       </div>
                     )}
 
                     {loadingEstudantes ? (
-                      <div style={{ textAlign: "center", color: "#555e78", padding: "20px" }}>A carregar estudantes...</div>
+                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>A carregar estudantes...</div>
                     ) : estudantesFiltrados.length === 0 ? (
-                      <div style={{ textAlign: "center", color: "#555e78", padding: "20px" }}>
+                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>
                         {estudantes.length > 0 ? "Nenhum estudante encontrado neste turno" : "Nenhum estudante encontrado"}
                       </div>
                     ) : (
@@ -765,20 +765,20 @@ export default function DisciplinasDashboard() {
                         <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
                             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#555e78", fontSize: "10px", textTransform: "uppercase" }}>Estudante</th>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#555e78", fontSize: "10px", textTransform: "uppercase" }}>Turno</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>AC1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>AC2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>AC3</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>TTP</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>PP1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>PP2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>Exame</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>Recurso</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>Especial</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>Final</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>Estado</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#555e78", fontSize: "10px" }}>Ações</th>
+                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "10px", textTransform: "uppercase" }}>Estudante</th>
+                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "10px", textTransform: "uppercase" }}>Turno</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC3</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>TTP</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>PP1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>PP2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Exame</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Recurso</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Especial</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Final</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Estado</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Ações</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -786,7 +786,7 @@ export default function DisciplinasDashboard() {
                               <tr key={e.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                                 <td style={{ padding: "8px" }}>
                                   <div style={{ color: "#e8eaf0", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
-                                  <div style={{ color: "#555e78", fontSize: "10px" }}>{e.numero_estudante}</div>
+                                  <div style={{ color: "#b0b8cf", fontSize: "10px" }}>{e.numero_estudante}</div>
                                 </td>
                                 <td style={{ padding: "8px" }}>
                                   <span style={{
@@ -836,7 +836,7 @@ export default function DisciplinasDashboard() {
                                     fontSize: "11px",
                                     color: e.nota_final != null 
                                       ? (e.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                                      : "#555e78"
+                                      : "#b0b8cf"
                                   }}>
                                     {e.nota_final != null ? arredondarNota(e.nota_final) : "—"}
                                   </span>
@@ -875,7 +875,7 @@ export default function DisciplinasDashboard() {
                                         onClick={cancelarEdicao}
                                         style={{
                                           padding: "3px 6px",
-                                          background: "#555e78",
+                                          background: "#b0b8cf",
                                           color: "white",
                                           border: "none",
                                           borderRadius: "4px",
@@ -951,14 +951,14 @@ export default function DisciplinasDashboard() {
              </div>
 
              {carregandoProfessores ? (
-               <div style={{ textAlign: "center", padding: "30px", color: "#555e78" }}>A carregar...</div>
+               <div style={{ textAlign: "center", padding: "30px", color: "#b0b8cf" }}>A carregar...</div>
              ) : (
                <>
                  {/* Lista de professores atribuídos */}
                  <div style={{ marginBottom: "20px" }}>
-                 <div style={{ fontSize: "12px", color: "#9098b0", marginBottom: "8px" }}>✅ Professor Responsável:</div>
+                 <div style={{ fontSize: "12px", color: "#d0d7e8", marginBottom: "8px" }}>✅ Professor Responsável:</div>
                    {professoresDisciplina.length === 0 ? (
-                     <div style={{ color: "#555e78", fontSize: "12px", padding: "12px", background: "#13161e", borderRadius: "8px" }}>
+                     <div style={{ color: "#b0b8cf", fontSize: "12px", padding: "12px", background: "#13161e", borderRadius: "8px" }}>
                        Nenhum professor atribuído a esta disciplina
                      </div>
                    ) : (
@@ -974,7 +974,7 @@ export default function DisciplinasDashboard() {
                          }}>
                            <div>
                              <div style={{ color: "#e8eaf0", fontSize: "13px" }}>{prof.usuario.nome_usuario}</div>
-                             <div style={{ color: "#555e78", fontSize: "11px" }}>{prof.usuario.email}</div>
+                             <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{prof.usuario.email}</div>
                            </div>
                            <button onClick={() => removerProfessor(prof.id_usuario)} style={{
                              background: "#e03d3d",
@@ -1044,7 +1044,7 @@ export default function DisciplinasDashboard() {
                width: "100%",
                marginTop: "20px",
                padding: "10px",
-               background: "#555e78",
+               background: "#b0b8cf",
                color: "white",
                border: "none",
                borderRadius: "8px",

@@ -195,7 +195,7 @@ export default function PrecosAdminDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={adminNavItems} title="Preços e Taxas" subtitle="Configurar valores dos serviços">
-        <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>A carregar...</div>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>A carregar...</div>
       </DashboardLayout>
     )
   }
@@ -223,13 +223,13 @@ export default function PrecosAdminDashboard() {
         {/* Fallbacks - Propinas por Ano */}
         <form onSubmit={handleSaveFallbacks} style={{ background: '#1e2230', borderRadius: '16px', padding: '24px', marginBottom: '24px' }}>
           <h3 style={{ color: '#e8eaf0', marginBottom: '8px', marginTop: 0 }}>💰 Propinas (Fallback)</h3>
-          <p style={{ color: '#9098b0', fontSize: '13px', marginBottom: '20px' }}>
+          <p style={{ color: '#d0d7e8', fontSize: '13px', marginBottom: '20px' }}>
             ⚠️ Estes valores são usados automaticamente quando um curso não tem preços específicos definidos na gestão de cursos.
           </p>
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>1º Ano</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>1º Ano</label>
               <input
                 type="number"
                 value={formData.Propina_ano1}
@@ -249,7 +249,7 @@ export default function PrecosAdminDashboard() {
             </div>
 
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>2º Ano</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>2º Ano</label>
               <input
                 type="number"
                 value={formData.Propina_ano2}
@@ -269,7 +269,7 @@ export default function PrecosAdminDashboard() {
             </div>
 
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>3º Ano</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>3º Ano</label>
               <input
                 type="number"
                 value={formData.Propina_ano3}
@@ -289,7 +289,7 @@ export default function PrecosAdminDashboard() {
             </div>
 
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>4º Ano</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>4º Ano</label>
               <input
                 type="number"
                 value={formData.Propina_ano4}
@@ -309,7 +309,7 @@ export default function PrecosAdminDashboard() {
             </div>
 
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>5º Ano</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>5º Ano</label>
               <input
                 type="number"
                 value={formData.Propina_ano5}
@@ -329,7 +329,7 @@ export default function PrecosAdminDashboard() {
             </div>
 
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>6º Ano</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>6º Ano</label>
               <input
                 type="number"
                 value={formData.Propina_ano6}
@@ -371,7 +371,7 @@ export default function PrecosAdminDashboard() {
         {/* Fallback - Multa */}
         <form onSubmit={handleSaveFallbacks} style={{ background: '#1e2230', borderRadius: '16px', padding: '24px', marginBottom: '24px' }}>
           <h3 style={{ color: '#e8eaf0', marginBottom: '8px', marginTop: 0 }}>⚠️ Multa por Atraso (Fallback)</h3>
-          <p style={{ color: '#9098b0', fontSize: '13px', marginBottom: '20px' }}>
+          <p style={{ color: '#d0d7e8', fontSize: '13px', marginBottom: '20px' }}>
             ⚠️ Valor usado automaticamente quando um curso não tem multa específica definida.
           </p>
           
@@ -417,13 +417,13 @@ export default function PrecosAdminDashboard() {
         {/* Configuração de Horário */}
         <form onSubmit={handleSaveFallbacks} style={{ background: '#1e2230', borderRadius: '16px', padding: '24px', marginBottom: '24px' }}>
           <h3 style={{ color: '#e8eaf0', marginBottom: '8px', marginTop: 0 }}>⏱️ Configuração de Horário</h3>
-          <p style={{ color: '#9098b0', fontSize: '13px', marginBottom: '20px' }}>
+          <p style={{ color: '#d0d7e8', fontSize: '13px', marginBottom: '20px' }}>
             Define a duração padrão de cada aula e o intervalo entre aulas. Usado pelo gestor ao elaborar horários.
           </p>
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>Duração da Aula (minutos)</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>Duração da Aula (minutos)</label>
               <input
                 type="number"
                 min={30}
@@ -445,7 +445,7 @@ export default function PrecosAdminDashboard() {
             </div>
 
             <div style={{ background: '#13161e', padding: '16px', borderRadius: '12px' }}>
-              <label style={{ display: 'block', color: '#9098b0', fontSize: '13px', marginBottom: '8px' }}>Intervalo entre Aulas (minutos)</label>
+              <label style={{ display: 'block', color: '#d0d7e8', fontSize: '13px', marginBottom: '8px' }}>Intervalo entre Aulas (minutos)</label>
               <input
                 type="number"
                 min={0}
@@ -491,7 +491,7 @@ export default function PrecosAdminDashboard() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div>
               <h3 style={{ color: '#e8eaf0', marginBottom: '8px', marginTop: 0 }}>📄 Serviços Acadêmicos</h3>
-              <p style={{ color: '#9098b0', fontSize: '13px', margin: 0 }}>
+              <p style={{ color: '#d0d7e8', fontSize: '13px', margin: 0 }}>
                 Lista dinâmica de serviços disponíveis para emissão na recepção
               </p>
             </div>
@@ -513,7 +513,7 @@ export default function PrecosAdminDashboard() {
           </div>
 
           {servicos.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+            <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
               Nenhum serviço cadastrado. Clique em Adicionar Serviço para começar.
             </div>
           ) : (
@@ -533,7 +533,7 @@ export default function PrecosAdminDashboard() {
                   <div>
             <div style={{ color: '#e8eaf0', fontWeight: '600', fontSize: '15px' }}>{servico.nome_servico?.replace(/"/g, '"')}</div>
                     {servico.descricao && (
-                      <div style={{ color: '#9098b0', fontSize: '13px', marginTop: '4px' }}>{servico.descricao}</div>
+                      <div style={{ color: '#d0d7e8', fontSize: '13px', marginTop: '4px' }}>{servico.descricao}</div>
                     )}
                     <div style={{ color: '#f0a500', fontWeight: '600', marginTop: '8px' }}>{formatarKwanzas(Number(servico.valor))}</div>
                   </div>
@@ -581,7 +581,7 @@ export default function PrecosAdminDashboard() {
         </div>
 
         {config?.atualizado_em && (
-          <p style={{ color: '#9098b0', marginTop: '16px', fontSize: '13px', textAlign: 'center' }}>
+          <p style={{ color: '#d0d7e8', marginTop: '16px', fontSize: '13px', textAlign: 'center' }}>
             Última atualização fallback: {new Date(config.atualizado_em).toLocaleString('pt-AO')}
           </p>
         )}
@@ -612,7 +612,7 @@ export default function PrecosAdminDashboard() {
             
             <form onSubmit={handleAddServico}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome do Serviço</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome do Serviço</label>
                 <input
                   type="text"
                   value={newServico.nome_servico}
@@ -632,7 +632,7 @@ export default function PrecosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Descrição (opcional)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Descrição (opcional)</label>
                 <input
                   type="text"
                   value={newServico.descricao}
@@ -651,7 +651,7 @@ export default function PrecosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Valor (Kz)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Valor (Kz)</label>
                 <input
                   type="number"
                   value={newServico.valor}
@@ -679,7 +679,7 @@ export default function PrecosAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >
@@ -730,7 +730,7 @@ export default function PrecosAdminDashboard() {
             
             <form onSubmit={handleUpdateServico}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome do Serviço</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome do Serviço</label>
                 <input
                   type="text"
                   value={editForm.nome_servico}
@@ -749,7 +749,7 @@ export default function PrecosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Descrição (opcional)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Descrição (opcional)</label>
                 <input
                   type="text"
                   value={editForm.descricao}
@@ -767,7 +767,7 @@ export default function PrecosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Valor (Kz)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Valor (Kz)</label>
                 <input
                   type="number"
                   value={editForm.valor}
@@ -794,7 +794,7 @@ export default function PrecosAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >

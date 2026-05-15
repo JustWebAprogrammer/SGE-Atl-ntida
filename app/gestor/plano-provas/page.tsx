@@ -428,7 +428,7 @@ export default function PlanoProvasPage() {
       case "Exame": return "#f0a500"
       case "Recurso": return "#e03d3d"
       case "Exame_Especial": return "#a855f7"
-      default: return "#555e78"
+      default: return "#b0b8cf"
     }
   }
 
@@ -460,7 +460,7 @@ export default function PlanoProvasPage() {
     return (
       <DashboardLayout navItems={gestorNavItems} title="Horário de Prova" subtitle="Gerir calendário de avaliações por curso">
         <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "40px", textAlign: "center" }}>
-          <div style={{ color: "#555e78" }}>A carregar...</div>
+          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
         </div>
       </DashboardLayout>
     )
@@ -473,7 +473,7 @@ export default function PlanoProvasPage() {
         <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Selecionar Turma</div>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Curso</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Curso</div>
             <select value={cursoId} onChange={e => setCursoId(e.target.value)} style={estiloSelect}>
               <option value="">Selecionar...</option>
               {cursos.map(c => (
@@ -484,30 +484,30 @@ export default function PlanoProvasPage() {
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Ano</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano</div>
             <select value={ano} onChange={e => setAno(e.target.value)} style={estiloSelect}>
               {anosDisponiveis.map(a => <option key={a} value={a}>{a}º</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Semestre</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Semestre</div>
             <select value={semestre} onChange={e => setSemestre(e.target.value)} style={estiloSelect}>
               <option value="S1">S1</option>
               <option value="S2">S2</option>
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Ano Lectivo</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano Lectivo</div>
             <input type="text" value={anoLectivo} onChange={e => setAnoLectivo(e.target.value)} style={{ ...estiloSelect, minWidth: "100px" }} />
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurno} onChange={e => { setFiltroTurno(e.target.value); setPosicao("1") }} style={estiloSelect}>
               {turnosDoCurso.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Tipo de Prova</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Tipo de Prova</div>
             <select value={filtroTipoProva} onChange={e => setFiltroTipoProva(e.target.value)} style={estiloSelect}>
               {tiposProva.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -520,11 +520,11 @@ export default function PlanoProvasPage() {
         <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Período de Provas</div>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Data Início</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Data Início</div>
             <DatePickerPT value={periodoInicio} onChange={setPeriodoInicio} style={{ ...estiloSelect, borderColor: erroPeriodo ? "#e03d3d" : "rgba(255,255,255,0.1)" }} />
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Data Fim</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Data Fim</div>
             <DatePickerPT value={periodoFim} onChange={setPeriodoFim} style={{ ...estiloSelect, borderColor: erroPeriodo ? "#e03d3d" : "rgba(255,255,255,0.1)" }} />
           </div>
           <button 
@@ -532,8 +532,8 @@ export default function PlanoProvasPage() {
             disabled={guardandoPeriodo || !periodoInicio || !periodoFim || !!erroPeriodo}
             style={{
               padding: "8px 14px",
-              background: periodoInicio && periodoFim && !erroPeriodo ? "#2dd4bf" : "#555e78",
-              color: periodoInicio && periodoFim && !erroPeriodo ? "#13161e" : "#9098b0",
+              background: periodoInicio && periodoFim && !erroPeriodo ? "#2dd4bf" : "#b0b8cf",
+              color: periodoInicio && periodoFim && !erroPeriodo ? "#13161e" : "#d0d7e8",
               border: "none",
               borderRadius: "8px",
               fontSize: "12px",
@@ -561,7 +561,7 @@ export default function PlanoProvasPage() {
             <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Adicionar Prova</div>
             <form onSubmit={adicionarProva} style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "flex-end" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Disciplina</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Disciplina</div>
                 <select value={disciplinaId} onChange={e => setDisciplinaId(e.target.value)} required style={{ ...estiloSelect, minWidth: "220px" }}>
                   <option value="">Selecionar...</option>
                   {disciplinas.map(d => (
@@ -572,13 +572,13 @@ export default function PlanoProvasPage() {
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Tipo</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Tipo</div>
                 <select value={filtroTipoProva} disabled style={{ ...estiloSelect, opacity: 0.7, cursor: "not-allowed" }}>
                   {tiposProva.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Data</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Data</div>
                 <DatePickerPT 
                   value={dataProva} 
                   onChange={setDataProva} 
@@ -589,13 +589,13 @@ export default function PlanoProvasPage() {
                 {erroDataProva && <div style={{ color: "#e03d3d", fontSize: "11px", marginTop: "4px" }}>{erroDataProva}</div>}
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Turno</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
                 <select value={filtroTurno} disabled style={{ ...estiloSelect, opacity: 0.7, cursor: "not-allowed" }}>
                   {turnosDoCurso.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#555e78", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
+                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
                 <select value={posicao} onChange={e => setPosicao(e.target.value)} style={estiloSelect}>
                   {Array.from({ length: Math.max(maxPosicoes, 1) }, (_, i) => (
                     <option key={i + 1} value={i + 1}>{i + 1}ª Prova</option>
@@ -604,8 +604,8 @@ export default function PlanoProvasPage() {
               </div>
                 <button type="submit" disabled={salvando || !disciplinaId || !dataProva || !filtroTurno || !!erroPeriodo || !!erroDataProva} style={{
                 padding: "8px 16px",
-                background: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#2dd4bf" : "#555e78",
-                color: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#13161e" : "#9098b0",
+                background: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#2dd4bf" : "#b0b8cf",
+                color: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#13161e" : "#d0d7e8",
                 border: "none",
                 borderRadius: "8px",
                 fontSize: "13px",
@@ -622,7 +622,7 @@ export default function PlanoProvasPage() {
             )}
             
             {disciplinas.length === 0 && (
-              <div style={{ color: "#555e78", fontSize: "12px", marginTop: "10px" }}>
+              <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "10px" }}>
                 Nenhuma disciplina encontrada no currículo para {ano}º ano, {semestre}. Adicione disciplinas no <a href="/gestor/curriculo" style={{ color: "#2dd4bf" }}>Currículo</a> primeiro.
               </div>
             )}
@@ -702,12 +702,12 @@ export default function PlanoProvasPage() {
                                       <div style={{ color: "#e8eaf0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "180px" }}>
                                         {prova.disciplina.nome_disciplina}
                                       </div>
-                                      <div style={{ color: "#9098b0", fontSize: "10px" }}>
+                                      <div style={{ color: "#d0d7e8", fontSize: "10px" }}>
                                         {prova.disciplina.codigo_disciplina} • <strong>{prova.hora_inicio}-{prova.hora_fim}</strong>
                                       </div>
                                     </div>
                                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "4px" }}>
-                                      <span style={{ color: "#555e78", fontSize: "10px" }}>{prova.turno}</span>
+                                      <span style={{ color: "#b0b8cf", fontSize: "10px" }}>{prova.turno}</span>
                                       <button 
                                         onClick={() => removerProva(prova.id_prova)} 
                                         style={{
@@ -730,14 +730,14 @@ export default function PlanoProvasPage() {
                           ))}
                         </div>
                       ) : (
-                        !filtroTurno && <div style={{ color: "#555e78", fontSize: "11px", fontStyle: "italic" }}>— Sem provas</div>
+                        !filtroTurno && <div style={{ color: "#b0b8cf", fontSize: "11px", fontStyle: "italic" }}>— Sem provas</div>
                       )}
                     </div>
                   )
                 })}
               </div>
             ) : (
-              <div style={{ color: "#555e78", textAlign: "center", padding: "30px" }}>
+              <div style={{ color: "#b0b8cf", textAlign: "center", padding: "30px" }}>
                 {!periodoInicio ? "Defina o período de provas acima para ver o calendário." : erroPeriodo ? "Corrija o período de provas." : "Nenhuma data no período seleccionado."}
               </div>
             )}
@@ -779,16 +779,16 @@ export default function PlanoProvasPage() {
                         </div>
                         <div>
                           <div style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", lineHeight: "1.3", marginBottom: "2px" }}>{prova.disciplina.nome_disciplina}</div>
-                          <div style={{ color: "#555e78", fontSize: "11px" }}>{prova.disciplina.codigo_disciplina}</div>
+                          <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{prova.disciplina.codigo_disciplina}</div>
                         </div>
                         <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "3px" }}>
-                          <div style={{ color: "#9098b0", fontSize: "11px" }}>
+                          <div style={{ color: "#d0d7e8", fontSize: "11px" }}>
                             📅 {diasSemana[data.getDay()]}, <strong>{dia}/{mes}</strong>
                           </div>
-                          <div style={{ color: "#9098b0", fontSize: "11px" }}>
+                          <div style={{ color: "#d0d7e8", fontSize: "11px" }}>
                             🕐 <strong>{prova.hora_inicio} — {prova.hora_fim}</strong>
                           </div>
-                          <div style={{ color: "#9098b0", fontSize: "11px" }}>
+                          <div style={{ color: "#d0d7e8", fontSize: "11px" }}>
                             🔄 {prova.turno}
                           </div>
                         </div>

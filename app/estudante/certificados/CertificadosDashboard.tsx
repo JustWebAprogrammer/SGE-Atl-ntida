@@ -56,7 +56,7 @@ function BadgeTipo({ tipo }: { tipo: string }) {
     CertificadoConclusao: { bg: "rgba(34,197,94,0.12)", color: "#22c55e", label: "Conclusão" },
     DeclaracaoAcademica: { bg: "rgba(59,130,246,0.12)", color: "#3b82f6", label: "Declaração" },
   }
-  const style = config[tipo] ?? { bg: "rgba(85,94,120,0.2)", color: "#555e78", label: tipo }
+  const style = config[tipo] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf", label: tipo }
   return (
     <span style={{ background: style.bg, color: style.color, padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: "600" }}>
       {style.label}
@@ -94,7 +94,7 @@ function CardDocumento(props: {
         <div style={{ fontSize: "32px" }}>{icon}</div>
         <div>
           <div style={{ fontSize: "15px", fontWeight: "600", color: "#e8eaf0", marginBottom: "4px" }}>{titulo}</div>
-          <div style={{ fontSize: "12px", color: "#9098b0" }}>{bloqueado ? msgBloqueado : descricao}</div>
+          <div style={{ fontSize: "12px", color: "#d0d7e8" }}>{bloqueado ? msgBloqueado : descricao}</div>
         </div>
       </div>
       {podeEmitir && !bloqueado && (
@@ -103,7 +103,7 @@ function CardDocumento(props: {
           disabled={estaBaixando}
           style={{
             flexShrink: 0, padding: "10px 20px",
-            background: estaBaixando ? "#555e78" : cor,
+            background: estaBaixando ? "#b0b8cf" : cor,
             color: estaBaixando ? "#fff" : "#0d0f14",
             border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: "600",
             cursor: estaBaixando ? "not-allowed" : "pointer",
@@ -276,7 +276,7 @@ export default function CertificadosDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={navItems} title="Certificados" subtitle="Certificados e diplomas">
-        <div style={{ textAlign: "center", color: "#555e78", padding: "60px" }}>A carregar...</div>
+        <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>A carregar...</div>
       </DashboardLayout>
     )
   }
@@ -306,7 +306,7 @@ export default function CertificadosDashboard() {
           { label: "Estado Propina", value: propinaPaga ? "Pago" : estudante.pagamento, color: propinaPaga ? "#22c55e" : "#f0a500" },
         ].map((s) => (
           <div key={s.label} style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", borderTop: `2px solid ${s.color}` }}>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#555e78", marginBottom: "10px" }}>{s.label}</div>
+            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#b0b8cf", marginBottom: "10px" }}>{s.label}</div>
             <div style={{ fontSize: "20px", fontWeight: "700", color: s.color }}>{s.value}</div>
           </div>
         ))}
@@ -362,7 +362,7 @@ export default function CertificadosDashboard() {
           <div style={{ fontSize: "28px" }}>⚠️</div>
           <div>
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#f0a500", marginBottom: "4px" }}>Propina pendente</div>
-            <div style={{ fontSize: "13px", color: "#9098b0" }}>Precisa de estar com a propina em dia para emitir novos documentos.</div>
+            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Precisa de estar com a propina em dia para emitir novos documentos.</div>
           </div>
           <a href="/estudante/pagamentos" style={{ marginLeft: "auto", padding: "8px 16px", background: "#f0a500", color: "#0d0f14", borderRadius: "8px", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>Ver Pagamentos</a>
         </div>
@@ -372,7 +372,7 @@ export default function CertificadosDashboard() {
       <h3 style={{ color: "#e8eaf0", fontSize: "15px", fontWeight: "600", margin: "0 0 16px 0" }}>Histórico de Documentos Emitidos</h3>
 
       {documentos.length === 0 ? (
-        <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "60px", textAlign: "center", color: "#555e78" }}>
+        <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "60px", textAlign: "center", color: "#b0b8cf" }}>
           <div style={{ fontSize: "40px", marginBottom: "16px" }}>📜</div>
           <div style={{ fontSize: "14px" }}>Nenhum documento emitido ainda.</div>
         </div>
@@ -404,7 +404,7 @@ export default function CertificadosDashboard() {
                     <span style={{ fontSize: "24px" }}>{icone}</span>
                     <div>
                       <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{nomeDoc}</div>
-                      <div style={{ fontSize: "12px", color: "#555e78" }}>Emitido em {new Date(doc.data_emissao).toLocaleDateString("pt-AO")}</div>
+                      <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Emitido em {new Date(doc.data_emissao).toLocaleDateString("pt-AO")}</div>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -412,15 +412,15 @@ export default function CertificadosDashboard() {
                     <button
                       onClick={handleDownload}
                       disabled={isDownloading}
-                      style={{ padding: "6px 14px", background: isDownloading ? "#555e78" : "#2dd4bf", color: "#0d0f14", borderRadius: "6px", fontSize: "12px", fontWeight: "600", border: "none", cursor: isDownloading ? "not-allowed" : "pointer" }}
+                      style={{ padding: "6px 14px", background: isDownloading ? "#b0b8cf" : "#2dd4bf", color: "#0d0f14", borderRadius: "6px", fontSize: "12px", fontWeight: "600", border: "none", cursor: isDownloading ? "not-allowed" : "pointer" }}
                     >
                       {isDownloading ? "..." : "📥 Download PDF"}
                     </button>
                   </div>
                 </div>
-                {doc.descricao && <div style={{ fontSize: "12px", color: "#9098b0", marginTop: "4px" }}>{doc.descricao}</div>}
+                {doc.descricao && <div style={{ fontSize: "12px", color: "#d0d7e8", marginTop: "4px" }}>{doc.descricao}</div>}
                 {doc.disciplinas && doc.disciplinas.length > 0 && (
-                  <div style={{ marginTop: "8px", fontSize: "11px", color: "#555e78" }}>{doc.disciplinas.length} disciplina(s) incluída(s)</div>
+                  <div style={{ marginTop: "8px", fontSize: "11px", color: "#b0b8cf" }}>{doc.disciplinas.length} disciplina(s) incluída(s)</div>
                 )}
               </div>
             )

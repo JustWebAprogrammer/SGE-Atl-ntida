@@ -163,7 +163,7 @@ export default function DisciplinasAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#9098b0' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
           A carregar disciplinas...
         </div>
       ) : (
@@ -171,20 +171,20 @@ export default function DisciplinasAdminDashboard() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Código</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ano</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Semestre</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Créditos</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Dispensa</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#9098b0', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Código</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ano</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Semestre</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Créditos</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Dispensa</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {disciplinas.map((disciplina) => (
                 <tr key={disciplina.id_disciplina} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <td style={{ padding: '14px', color: '#9098b0', fontFamily: 'monospace' }}>{disciplina.codigo_disciplina}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8', fontFamily: 'monospace' }}>{disciplina.codigo_disciplina}</td>
                   <td style={{ padding: '14px', color: '#e8eaf0' }}>{disciplina.nome_disciplina}</td>
                   <td style={{ padding: '14px', color: '#e8eaf0' }}>{disciplina.ano_curricular}º</td>
                   <td style={{ padding: '14px' }}>
@@ -199,8 +199,8 @@ export default function DisciplinasAdminDashboard() {
                       {disciplina.semestre === 'S1' ? 'S1' : 'S2'}
                     </span>
                   </td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{disciplina.departamento?.nome_departamento || '-'}</td>
-                  <td style={{ padding: '14px', color: '#9098b0' }}>{disciplina.creditos} ECTS</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{disciplina.departamento?.nome_departamento || '-'}</td>
+                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{disciplina.creditos} ECTS</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '4px 10px',
@@ -254,7 +254,7 @@ export default function DisciplinasAdminDashboard() {
             <form onSubmit={handleSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome da Disciplina</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome da Disciplina</label>
                   <input
                     type="text"
                     value={formData.nome_disciplina}
@@ -272,7 +272,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Código</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Código</label>
                   <input
                     type="text"
                     value={formData.codigo_disciplina}
@@ -292,7 +292,7 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Ano Curricular</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Ano Curricular</label>
                   <select
                     value={formData.ano_curricular}
                     onChange={(e) => setFormData({...formData, ano_curricular: Number(e.target.value)})}
@@ -312,7 +312,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Semestre</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Semestre</label>
                   <select
                     value={formData.semestre}
                     onChange={(e) => setFormData({...formData, semestre: e.target.value})}
@@ -331,7 +331,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Créditos</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Créditos</label>
                   <input
                     type="number"
                     min="1"
@@ -353,7 +353,7 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Departamento</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
                   <select
                     value={formData.id_departamento}
                     onChange={(e) => setFormData({...formData, id_departamento: Number(e.target.value)})}
@@ -374,7 +374,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>&nbsp;</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>&nbsp;</label>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center', paddingTop: '4px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
                       <input
@@ -418,7 +418,7 @@ export default function DisciplinasAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >
@@ -470,7 +470,7 @@ export default function DisciplinasAdminDashboard() {
             <form onSubmit={handleEditSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Nome da Disciplina</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome da Disciplina</label>
                   <input
                     type="text"
                     value={editFormData.nome_disciplina}
@@ -488,7 +488,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Código</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Código</label>
                   <input
                     type="text"
                     value={editFormData.codigo_disciplina}
@@ -508,7 +508,7 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Ano Curricular</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Ano Curricular</label>
                   <select
                     value={editFormData.ano_curricular}
                     onChange={(e) => setEditFormData({...editFormData, ano_curricular: Number(e.target.value)})}
@@ -528,7 +528,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Semestre</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Semestre</label>
                   <select
                     value={editFormData.semestre}
                     onChange={(e) => setEditFormData({...editFormData, semestre: e.target.value})}
@@ -547,7 +547,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Créditos</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Créditos</label>
                   <input
                     type="number"
                     min="1"
@@ -569,7 +569,7 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>Departamento</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
                   <select
                     value={editFormData.id_departamento}
                     onChange={(e) => setEditFormData({...editFormData, id_departamento: Number(e.target.value)})}
@@ -590,7 +590,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#9098b0', fontSize: '13px' }}>&nbsp;</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>&nbsp;</label>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center', paddingTop: '4px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
                       <input
@@ -634,7 +634,7 @@ export default function DisciplinasAdminDashboard() {
                     background: 'transparent',
                     border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '8px',
-                    color: '#9098b0',
+                    color: '#d0d7e8',
                     cursor: 'pointer'
                   }}
                 >

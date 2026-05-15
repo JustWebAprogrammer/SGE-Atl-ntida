@@ -48,7 +48,7 @@ export default function VerificarDocumento() {
       case "declaracao": return "#4ade80"
       case "cert-disc": return "#6366f1"
       case "cert": return "#f59e0b"
-      default: return "#9098b0"
+      default: return "#d0d7e8"
     }
   }
 
@@ -73,7 +73,7 @@ export default function VerificarDocumento() {
             animation: "spin 0.8s linear infinite"
           }} />
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-          <p style={{ color: "#9098b0", fontSize: "14px", margin: 0 }}>A verificar documento...</p>
+          <p style={{ color: "#d0d7e8", fontSize: "14px", margin: 0 }}>A verificar documento...</p>
         </div>
       </main>
     )
@@ -113,7 +113,7 @@ export default function VerificarDocumento() {
             fontWeight: "700",
             margin: "0 0 4px"
           }}>Instituto Superior Politécnico Atlântida</h1>
-          <p style={{ color: "#555e78", fontSize: "13px", margin: 0 }}>Verificação de Documentos</p>
+          <p style={{ color: "#b0b8cf", fontSize: "13px", margin: 0 }}>Verificação de Documentos</p>
         </div>
 
         {/* ── Error ── */}
@@ -155,7 +155,7 @@ export default function VerificarDocumento() {
                 fontWeight: "600",
                 margin: "0 0 6px"
               }}>Documento Válido</h2>
-              <p style={{ color: "#9098b0", fontSize: "13px", margin: "0 0 12px" }}>
+              <p style={{ color: "#d0d7e8", fontSize: "13px", margin: "0 0 12px" }}>
                 Este documento foi emitido pelo Instituto Superior Politécnico Atlântida
               </p>
               <span style={{
@@ -177,7 +177,7 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#9098b0", fontSize: "12px" }}>Nº Documento</span>
+                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Nº Documento</span>
                 <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
                   {documento.numero_documento}
                 </span>
@@ -189,7 +189,7 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#9098b0", fontSize: "12px" }}>Nome</span>
+                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Nome</span>
                 <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
                   {documento.estudante.nome_completo}
                 </span>
@@ -201,7 +201,7 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#9098b0", fontSize: "12px" }}>Matrícula</span>
+                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Matrícula</span>
                 <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
                   {documento.estudante.numero_estudante}
                 </span>
@@ -213,7 +213,7 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#9098b0", fontSize: "12px" }}>Curso</span>
+                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Curso</span>
                 <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
                   {documento.estudante.curso.nome_curso}
                 </span>
@@ -226,7 +226,7 @@ export default function VerificarDocumento() {
                   padding: "12px 0",
                   borderBottom: "1px solid rgba(255,255,255,0.05)"
                 }}>
-                  <span style={{ color: "#9098b0", fontSize: "12px" }}>Ano Lectivo</span>
+                  <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Ano Lectivo</span>
                   <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
                     {documento.ano_lectivo}
                   </span>
@@ -240,7 +240,7 @@ export default function VerificarDocumento() {
                   padding: "12px 0",
                   borderBottom: "1px solid rgba(255,255,255,0.05)"
                 }}>
-                  <span style={{ color: "#9098b0", fontSize: "12px" }}>Descrição</span>
+                  <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Descrição</span>
                   <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
                     {documento.descricao}
                   </span>
@@ -252,7 +252,7 @@ export default function VerificarDocumento() {
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 padding: "12px 0"
               }}>
-                <span style={{ color: "#9098b0", fontSize: "12px" }}>Emissão</span>
+                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Emissão</span>
                 <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
                   {new Date(documento.data_emissao).toLocaleDateString("pt-PT")}
                 </span>
@@ -265,7 +265,7 @@ export default function VerificarDocumento() {
               borderTop: "1px solid rgba(255,255,255,0.07)",
               textAlign: "center"
             }}>
-              <p style={{ color: "#555e78", fontSize: "11px", margin: 0 }}>
+              <p style={{ color: "#b0b8cf", fontSize: "11px", margin: 0 }}>
                 Verificado em {new Date().toLocaleString("pt-PT")}
               </p>
             </div>
@@ -275,7 +275,7 @@ export default function VerificarDocumento() {
         {/* ── Footer ── */}
         <p style={{
           textAlign: "center",
-          color: "#555e78",
+          color: "#b0b8cf",
           fontSize: "12px",
           marginTop: "24px"
         }}>
