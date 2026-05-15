@@ -83,9 +83,45 @@ No modal de edição, aparece um botão "🔑 Reset" / "🔑 Reset Password" que
 </label>
 ```
 
-## 4. Histórico de Alterações
+## 4. Reset de Password (API)
+
+Sempre que um admin faz reset à password de um funcionário, o sistema faz um `PATCH` para a API correspondente.
+
+### Rotas de Reset
+
+| Funcionário | Ficheiro da Rota | Método | Rota |
+|-------------|-----------------|--------|------|
+| Administrador | `app/api/admin/admins/route.ts` | `PATCH` | `/api/admin/admins` |
+| Orientador | `app/api/admin/orientadores/route.ts` | `PATCH` | `/api/admin/orientadores` |
+| Recepcionista | `app/api/admin/recepcionistas/[id]/route.ts` | `PATCH` | `/api/admin/recepcionistas/{id}` |
+
+### Estrutura do Request PATCH
+
+```json
+{
+  "id_recepcionista": 2,
+  "tipo": "reset_password"
+}
+```
+
+### Funcionamento
+
+1. O frontend envia `PATCH /api/admin/recepcionistas/2` com body `{ tipo: "reset_password" }`
+2. A API busca o recepcionista pelo `id_recepcionista` para obter o `id_usuario`
+3. Faz hash da senha padrão (`recepcionista123`) com `bcrypt.hash(senha, 10)`
+4. Actualiza `usuario.senha` na base de dados
+5. Retorna mensagem de sucesso
+
+### Importante
+
+- O ficheiro `app/api/admin/recepcionistas/[id]/route.ts` precisa de ter `import bcrypt from 'bcryptjs'` para funcionar
+- As senhas são armazenadas com hash bcrypt (cost factor 10)
+- O botão "🔑 Reset" no modal de edição dispara este PATCH
+
+## 5. Histórico de Alterações
 
 | Data | Descrição | Autor |
 |------|-----------|-------|
+| 15/05/2026 | Corrigido handler PATCH em falta no reset de password do recepcionista (estava 405) + import bcrypt | Cline |
 | 15/05/2026 | Substituição global `#9098b0`→`#d0d7e8` e `#555e78`→`#b0b8cf` (41 ficheiros) para melhorar contraste | Cline |
 | 15/05/2026 | Adicionado badge de senha padrão no modal de criação de recepcionistas | Cline |
