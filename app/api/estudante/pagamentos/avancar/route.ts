@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { getPrecoEstudante } from "@/lib/precos"
 import { getSystemDate, getActivePropinaMonths } from "@/lib/sistema"
+import { logAudit } from "@/lib/audit"
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
@@ -159,6 +160,21 @@ export async function POST(req: Request) {
       codigo_confirmacao,
     })
   }
+
+  // Registar no audit log
+  await logAudit({
+    id_usuario: parseInt(session.user.id),
+    acao: "CRIAR_PROPINA_AVANCO",
+    tabela: "PagamentoPropina",
+    id_registro: criados[0].id,
+    valor_depois: {
+      meses: meses,
+      total_pagamentos: criados.length,
+      valor_total_grupo: criados.reduce((s, c) => s + c.valor_total, 0),
+      ids: criados.map(c => c.id),
+    },
+    ip_address: req.headers.get("x-forwarded-for") || "127.0.0.1"
+  })
 
   return NextResponse.json({
     success: true,

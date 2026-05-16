@@ -4,6 +4,7 @@ import { TipoUsuario } from "@prisma/client"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 import { DefaultSession } from "next-auth"
+import { logAudit } from "@/lib/audit"
 
 declare module "next-auth" {
   interface Session {
@@ -41,7 +42,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null
 
         const usuario = await prisma.usuario.findUnique({
@@ -56,6 +57,17 @@ export const authOptions: NextAuthOptions = {
         )
 
         if (!senhaCorreta) return null
+
+        // Registar login no audit log
+        const ip = req?.headers?.get("x-forwarded-for") || "127.0.0.1"
+        await logAudit({
+          id_usuario: usuario.id_usuario,
+          acao: "LOGIN",
+          tabela: "Usuario",
+          id_registro: usuario.id_usuario,
+          valor_depois: { email: usuario.email, tipo: usuario.tipo_usuario },
+          ip_address: ip
+        })
 
         return {
           id: usuario.id_usuario.toString(),

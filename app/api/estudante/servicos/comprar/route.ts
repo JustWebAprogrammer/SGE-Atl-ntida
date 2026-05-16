@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { logAudit } from "@/lib/audit"
 import { SERVICOS } from "@/lib/servicos-tipos"
 import { getAnoLectivo, getSystemDate } from "@/lib/sistema"
 
@@ -133,6 +134,21 @@ export async function POST(request: Request) {
         numero_factura,
         codigo_confirmacao: codigoConfirmacao,
       }
+    })
+
+    // Registar no audit log
+    await logAudit({
+      id_usuario: parseInt(session.user.id),
+      acao: "COMPRAR_SERVICO",
+      tabela: "Factura",
+      id_registro: factura.id_factura,
+      valor_depois: {
+        servico: descricaoServico,
+        valor: valorTotal,
+        estado: "Pendente",
+        numero_factura,
+      },
+      ip_address: request.headers.get("x-forwarded-for") || "127.0.0.1"
     })
 
     return NextResponse.json({

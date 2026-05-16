@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { getSystemDate } from "@/lib/sistema"
+import { logAudit } from "@/lib/audit"
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
@@ -74,6 +75,17 @@ export async function POST(req: Request) {
       estado: "Pago",
       data_pagamento: new Date(),
     }
+  })
+
+  // Registar no audit log
+  await logAudit({
+    id_usuario: parseInt(session.user.id),
+    acao: "CONFIRMAR_PAGAMENTO_PROPINA",
+    tabela: "PagamentoPropina",
+    id_registro: idPagamentoNumerico,
+    valor_antes: { estado: pagamento.estado },
+    valor_depois: { estado: "Pago", mes: pagamento.mes, ano: pagamento.ano, valor: Number(pagamento.valor_total), referencia: pagamento.referencia },
+    ip_address: req.headers.get("x-forwarded-for") || "127.0.0.1"
   })
 
   // Verificar se ainda existem propinas vencidas e não pagas
