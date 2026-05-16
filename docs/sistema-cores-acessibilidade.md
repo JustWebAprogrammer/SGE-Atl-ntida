@@ -1,5 +1,5 @@
 # SGE Atlântida — Sistema de Cores e Acessibilidade
-> Criado em 15/05/2026
+> Criado em 15/05/2026 · Última actualização 16/05/2026
 
 ## 1. Paleta de Cores do Sistema
 
@@ -118,10 +118,101 @@ Sempre que um admin faz reset à password de um funcionário, o sistema faz um `
 - As senhas são armazenadas com hash bcrypt (cost factor 10)
 - O botão "🔑 Reset" no modal de edição dispara este PATCH
 
-## 5. Histórico de Alterações
+## 5. Fluxo de Serviços Físicos (Recepcionista)
+
+O recepcionista gere documentos **físicos** que o estudante paga como serviço extra e vai buscar pessoalmente.
+
+### Serviços considerados físicos
+
+| Serviço | Gera certificado físico? | Aparece no recepcionista como |
+|---------|------------------------|-------------------------------|
+| Certificado de Conclusão | ✅ Sim, `isFisico: true` | "Certificados para Levantar" |
+| Declaração Académica | ✅ Sim, `isFisico: true` | "Certificados para Levantar" |
+| Folha de Prova | ❌ Não (não é documento) | "Pagamentos e Documentos" (factura) |
+
+### Como detectar (`lib/servicos-tipos.ts`)
+
+```typescript
+export function isServicoFisico(descricao: string): boolean {
+  const d = descricao.toLowerCase()
+  return d.includes("certificado") || d.includes("declara") || d.includes("folha de prova")
+}
+```
+
+### Fluxo completo
+
+1. **Estudante** paga por um serviço físico em `/estudante/servicos` (confirma com código Multicaixa)
+2. **API** (`app/api/estudante/servicos/confirmar/route.ts`):
+   - Marca a factura como "Pago"
+   - Se for Certificado de Conclusão → cria `Certificado` com `isFisico: true` e `tipo: "Conclusao"`
+   - Se for Declaração Académica → cria `Certificado` com `isFisico: true` e `tipo: "Participacao"`
+   - Se for Folha de Prova → só marca factura como paga (não gera certificado)
+3. **Recepcionista** abre a ficha do estudante em `/recepcionista/estudante/[id]`
+4. **API do recepcionista** (`app/api/recepcionista/estudante/[id]/route.ts`) filtra:
+   ```typescript
+   certificados: { where: { isFisico: true } }
+   ```
+5. **Frontend** mostra secção "Certificados para Levantar" com botão "✓ Confirmar Levantamento"
+6. Recepcionista clica no botão, o status do certificado muda para "Entregue"
+
+### Campo no Schema
+
+```prisma
+model Certificado {
+  ...
+  isFisico Boolean @default(false)
+  ...
+}
+```
+
+Adicionado via `prisma db push` na Neon.
+
+## 6. PDFs do Recepcionista (sem QR Code)
+
+Os PDFs gerados pelo recepcionista são documentos **físicos** (carimbados manualmente), por isso **não têm QR code** de verificação digital. As assinaturas do presidente/director são mantidas.
+
+| Rota | Componente PDF | QR Code | Assinaturas |
+|------|---------------|---------|-------------|
+| `/api/recepcionista/estudantes/[id]/declaracao/pdf` | `DeclaracaoPDF` | ❌ Removido | ✅ Mantidas |
+| `/api/recepcionista/certificados/[id]/pdf` (Conclusão) | `CertificadoConclusaoPDF` | ❌ Removido | ✅ Mantidas |
+| `/api/recepcionista/certificados/[id]/pdf` (Disciplinas) | `CertificadoPDF` | ❌ Removido | ✅ Mantidas |
+
+Os PDFs **digitais** gerados pelo estudante em `/estudante/certificados` continuam a ter QR code com link de verificação.
+
+## 7. Botões Removidos no Recepcionista
+
+No ficheiro `app/recepcionista/estudante/[id]/EstudanteDetalhe.tsx` foram removidos:
+
+| Botão | Motivo |
+|-------|--------|
+| 📄 **Documento** | Gerava HTML manual de declaração/certificado — documentos digitais são gerados pelo estudante |
+| 📦 **Entregar / Entregue** | Marcava como entregue fisicamente — só faz sentido para docs físicos pagos como serviço |
+
+**Funções removidas:**
+- `marcarEntregue()` — já não é usada
+- `imprimirDocumento()` — gerava HTML manual
+- `ContagemImpressao` type e state `contagens` — já não são necessários
+
+**Função simplificada:**
+- `auditarImpressao()` — agora só aceita `id_factura` (sempre regista como "fatura", já que documentos foram removidos)
+
+## 8. Dropdown no Histórico de Propinas
+
+Quando o histórico de propinas tem mais de 3 itens, o card recolhe mostrando apenas os 3 mais recentes, com um botão para expandir:
+
+- Estado inicial: mostra as 3 propinas mais recentes + botão "▼ Mostrar tudo (12)"
+- Ao clicar: expande para mostrar todas + botão "▲ Recolher"
+
+Implementado no ficheiro `app/recepcionista/estudante/[id]/EstudanteDetalhe.tsx` com state `propinasExpandido`.
+
+## 9. Histórico de Alterações
 
 | Data | Descrição | Autor |
 |------|-----------|-------|
+| 16/05/2026 | Adicionado dropdown no histórico de propinas quando extenso (+3 itens) | Cline |
+| 15/05/2026 | Criado fluxo de serviços físicos com campo `isFisico`, filter na API e criação automática de certificados no pagamento | Cline |
+| 15/05/2026 | Removidos botões 📄 Documento e 📦 Entregar de documentos digitais no recepcionista | Cline |
+| 15/05/2026 | Removido QR code dos PDFs emitidos pelo recepcionista (declaração e certificados) | Cline |
 | 15/05/2026 | Corrigido handler PATCH em falta no reset de password do recepcionista (estava 405) + import bcrypt | Cline |
 | 15/05/2026 | Substituição global `#9098b0`→`#d0d7e8` e `#555e78`→`#b0b8cf` (41 ficheiros) para melhorar contraste | Cline |
 | 15/05/2026 | Adicionado badge de senha padrão no modal de criação de recepcionistas | Cline |
