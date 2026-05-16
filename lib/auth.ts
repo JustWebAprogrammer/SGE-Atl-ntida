@@ -59,7 +59,10 @@ export const authOptions: NextAuthOptions = {
         if (!senhaCorreta) return null
 
         // Registar login no audit log
-        const ip = req?.headers?.get("x-forwarded-for") || "127.0.0.1"
+        // Nota: req.headers no authorize do NextAuth é um objecto normal, não um Headers padrão
+        // por isso usamos bracket notation em vez de .get()
+        const headers = req?.headers as Record<string, string> | undefined
+        const ip = headers?.["x-forwarded-for"] || "127.0.0.1"
         await logAudit({
           id_usuario: usuario.id_usuario,
           acao: "LOGIN",
