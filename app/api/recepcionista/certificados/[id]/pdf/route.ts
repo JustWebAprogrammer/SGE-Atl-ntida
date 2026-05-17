@@ -47,7 +47,7 @@ export async function GET(
     // Generate PDF based on certificate type
     let pdfBuffer: Buffer
 
-    if (certificado.tipo_certificado === "Conclusao") {
+    if (certificado.tipo_certificado === "CertificadoConclusao") {
       // Generate Certificado de Conclusão
       const currentYear = student.ano_current || student.curso.duracao_anos || 3
       const allYears = Array.from({ length: currentYear }, (_, i) => i + 1)
@@ -123,7 +123,7 @@ export async function GET(
         }) as any
       )
 
-    } else if (certificado.tipo_certificado === "Disciplina") {
+    } else if (certificado.tipo_certificado === "CertificadoDisciplinas") {
       // Generate Certificado de Disciplinas
       const notas = await prisma.nota.findMany({
         where: {
