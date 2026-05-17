@@ -6,6 +6,7 @@ import { authOptions } from "@/lib/auth"
 import { renderToBuffer } from "@react-pdf/renderer"
 import CertificadoConclusaoPDF from "@/app/components/CertificadoConclusaoPDF"
 import CertificadoPDF from "@/app/components/CertificadoPDF"
+import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
 import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
@@ -47,7 +48,7 @@ export async function GET(
     // Generate PDF based on certificate type
     let pdfBuffer: Buffer
 
-    if (certificado.tipo_certificado === "CertificadoConclusao") {
+    if (certificado.tipo_certificado === "Conclusao") {
       // Generate Certificado de Conclusão
       const currentYear = student.ano_current || student.curso.duracao_anos || 3
       const allYears = Array.from({ length: currentYear }, (_, i) => i + 1)
@@ -123,7 +124,7 @@ export async function GET(
         }) as any
       )
 
-    } else if (certificado.tipo_certificado === "CertificadoDisciplinas") {
+    } else if (certificado.tipo_certificado === "Disciplina") {
       // Generate Certificado de Disciplinas
       const notas = await prisma.nota.findMany({
         where: {
@@ -163,6 +164,33 @@ export async function GET(
           numeroCertificado: `DISC-${anoLectivo}-${student.numero_estudante}-001`,
           qrCodeUrl: "",
           logoUrl: logoBase64
+        }) as any
+      )
+
+    } else if (certificado.tipo_certificado === "Participacao") {
+      // Generate Declaração Académica
+      let logoBase64 = ""
+      try {
+        const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
+        const logoBuffer = readFileSync(logoPath)
+        logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
+      } catch { }
+
+      const systemDate = await getSystemDate()
+
+      pdfBuffer = await renderToBuffer(
+        React.createElement(DeclaracaoPDF, {
+          studentName: student.nome_completo,
+          studentNumber: student.numero_estudante || "",
+          courseName: student.curso.nome_curso,
+          currentYear: student.ano_current || student.curso.duracao_anos || 3,
+          anoLectivo,
+          presidentSignature: "",
+          presidentName: "",
+          documentNumber: `DECL-${anoLectivo}-${student.numero_estudante}-001`,
+          qrCodeUrl: "",
+          logoUrl: logoBase64,
+          systemDate
         }) as any
       )
 

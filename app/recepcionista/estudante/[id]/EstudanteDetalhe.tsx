@@ -647,7 +647,9 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                 }}>
                   <div>
                     <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
-                      Certificado de {c.tipo_certificado === "Conclusao" ? "Conclusão" : c.tipo_certificado}
+                      {c.tipo_certificado === "Conclusao" ? "Certificado de Conclusão" :
+                       c.tipo_certificado === "Participacao" ? "Declaração Académica" :
+                       `Certificado de ${c.tipo_certificado}`}
                     </div>
                     <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
                       Emitido em {new Date(c.data_emissao).toLocaleDateString("pt-AO")}
