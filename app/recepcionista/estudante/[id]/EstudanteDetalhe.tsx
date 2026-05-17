@@ -32,6 +32,25 @@ type Certificado = {
   tipo_certificado: string
   data_emissao: string
   descricao: string | null
+  status: string
+}
+
+// Workflow de status dos certificados
+const CERT_STATUS_FLOW = [
+  { value: "Solicitado", label: "Solicitado", color: "rgba(240,165,0,0.12)", textColor: "#f0a500" },
+  { value: "EmPreparacao", label: "Em Preparação", color: "rgba(59,130,246,0.12)", textColor: "#3b82f6" },
+  { value: "ProntoParaLevantamento", label: "Pronto para Levantamento", color: "rgba(168,85,247,0.12)", textColor: "#a855f7" },
+  { value: "Entregue", label: "Entregue", color: "rgba(34,197,94,0.12)", textColor: "#22c55e" },
+]
+
+function getNextCertStatus(current: string): string | null {
+  const idx = CERT_STATUS_FLOW.findIndex(s => s.value === current)
+  if (idx === -1 || idx === CERT_STATUS_FLOW.length - 1) return null
+  return CERT_STATUS_FLOW[idx + 1].value
+}
+
+function getCertStatusConfig(value: string) {
+  return CERT_STATUS_FLOW.find(s => s.value === value) || CERT_STATUS_FLOW[0]
 }
 
 type Factura = {
@@ -128,37 +147,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
       })
       .catch(() => {})
   }, [id])
-
-  async function emitir(tipo: string, extra?: Record<string, unknown>) {
-    if (!dados) return
-    setAcaoLoading(tipo)
-    setMensagem(null)
-
-    try {
-      const res = await fetch("/api/recepcionista/emitir", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tipo, id_estudante: dados.id_estudante, ...extra }),
-      })
-      const data = await res.json()
-
-      if (!res.ok) {
-        setMensagem({ texto: data.error ?? "Erro desconhecido", tipo: "erro" })
-        return
-      }
-
-      setMensagem({ texto: data.mensagem, tipo: "ok" })
-
-      // Refazer fetch para actualizar dados
-      const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
-      const d2 = await r2.json()
-      if (d2.estudante) setDados(d2.estudante)
-    } catch {
-      setMensagem({ texto: "Erro de ligação", tipo: "erro" })
-    } finally {
-      setAcaoLoading(null)
-    }
-  }
 
   async function auditarImpressao(id_factura: number) {
     try {
@@ -639,48 +627,110 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
         </Secao>
       )}
 
-      {/* ─── CERTIFICADOS PARA LEVANTAR ─── */}
+      {/* ─── CERTIFICADOS ─── */}
       {dados.certificados.length > 0 && (
         <Secao titulo={`Certificados (${dados.certificados.length})`}>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {dados.certificados.map(c => (
-              <div key={c.id_certificado} style={{
-                display: "flex", justifyContent: "space-between",
-                alignItems: "center",
-                background: "rgba(13,15,20,0.4)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                borderRadius: "10px", padding: "12px 16px"
-              }}>
-                <div>
-                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
-                    Certificado de {c.tipo_certificado}
-                  </div>
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
-                    Emitido em {new Date(c.data_emissao).toLocaleDateString("pt-AO")}
-                  </div>
-                  {c.descricao && (
-                    <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "2px" }}>
-                      {c.descricao}
+            {dados.certificados.map(c => {
+              const statusCfg = getCertStatusConfig(c.status)
+              const nextStatus = getNextCertStatus(c.status)
+              const isEntregue = c.status === "Entregue"
+
+              return (
+                <div key={c.id_certificado} style={{
+                  display: "flex", justifyContent: "space-between",
+                  alignItems: "center",
+                  background: isEntregue ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.4)",
+                  border: `1px solid ${isEntregue ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.07)"}`,
+                  borderRadius: "10px", padding: "12px 16px",
+                  flexWrap: "wrap", gap: "10px"
+                }}>
+                  <div>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                      Certificado de {c.tipo_certificado === "Conclusao" ? "Conclusão" : c.tipo_certificado}
                     </div>
-                  )}
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                      Emitido em {new Date(c.data_emissao).toLocaleDateString("pt-AO")}
+                    </div>
+                    <div style={{ marginTop: "6px" }}>
+                      <span style={{
+                        background: statusCfg.color, color: statusCfg.textColor,
+                        padding: "3px 10px", borderRadius: "20px",
+                        fontSize: "11px", fontWeight: "600"
+                      }}>
+                        {statusCfg.label}
+                      </span>
+                    </div>
+                    {c.descricao && (
+                      <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}>
+                        {c.descricao}
+                      </div>
+                    )}
+                  </div>
+                  <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                    {/* Botão de imprimir (abre PDF) */}
+                    <a
+                      href={`/api/recepcionista/certificados/${c.id_certificado}/pdf`}
+                      target="_blank"
+                      style={{
+                        padding: "8px 12px",
+                        background: "rgba(45,212,191,0.15)",
+                        border: "1px solid rgba(45,212,191,0.3)",
+                        color: "#2dd4bf", borderRadius: "8px",
+                        fontSize: "11px", fontWeight: "600",
+                        textDecoration: "none",
+                        whiteSpace: "nowrap" as const
+                      }}
+                    >
+                      🖨️ Imprimir
+                    </a>
+                    {/* Botão de avançar status */}
+                    {nextStatus ? (
+                      <button
+                        onClick={async () => {
+                          const key = `status-${c.id_certificado}`
+                          setAcaoLoading(key)
+                          setMensagem(null)
+                          try {
+                            const res = await fetch(`/api/recepcionista/certificados/${c.id_certificado}/status`, {
+                              method: "PUT",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ status: nextStatus }),
+                            })
+                            if (!res.ok) {
+                              const data = await res.json()
+                              setMensagem({ texto: data.error ?? "Erro ao atualizar status", tipo: "erro" })
+                              return
+                            }
+                            setMensagem({ texto: `Certificado atualizado para "${getCertStatusConfig(nextStatus).label}"`, tipo: "ok" })
+                            // Recarregar dados
+                            const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
+                            const d2 = await r2.json()
+                            if (d2.estudante) setDados(d2.estudante)
+                          } catch {
+                            setMensagem({ texto: "Erro de ligação", tipo: "erro" })
+                          } finally {
+                            setAcaoLoading(null)
+                          }
+                        }}
+                        disabled={acaoLoading === `status-${c.id_certificado}`}
+                        style={{
+                          padding: "8px 12px",
+                          background: "rgba(59,130,246,0.15)",
+                          border: "1px solid rgba(59,130,246,0.3)",
+                          color: "#3b82f6", borderRadius: "8px",
+                          fontSize: "11px", fontWeight: "600",
+                          cursor: acaoLoading === `status-${c.id_certificado}` ? "not-allowed" : "pointer",
+                          whiteSpace: "nowrap" as const
+                        }}
+                      >
+                        {acaoLoading === `status-${c.id_certificado}` ? "..." : `→ ${getCertStatusConfig(nextStatus).label}`}
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
-                <button
-                  onClick={() => emitir("levantamento_certificado", { id_certificado: c.id_certificado })}
-                  disabled={acaoLoading === "levantamento_certificado"}
-                  style={{
-                    padding: "8px 16px",
-                    background: "rgba(34,197,94,0.15)",
-                    border: "1px solid rgba(34,197,94,0.3)",
-                    color: "#22c55e", borderRadius: "8px",
-                    fontSize: "12px", fontWeight: "600",
-                    cursor: acaoLoading === "levantamento_certificado" ? "not-allowed" : "pointer",
-                    whiteSpace: "nowrap" as const
-                  }}
-                >
-                  {acaoLoading === "levantamento_certificado" ? "..." : "✓ Confirmar Levantamento"}
-                </button>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </Secao>
       )}

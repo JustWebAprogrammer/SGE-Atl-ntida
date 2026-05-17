@@ -61,6 +61,7 @@ export async function GET(
           tipo_certificado: true,
           data_emissao: true,
           descricao: true,
+          status: true,
         },
         orderBy: { data_emissao: "desc" },
       },

@@ -3,5 +3,4 @@
 
 export const recepcionistaNavItems = [
   { label: "Pesquisa", path: "/recepcionista" },
-  { label: "Certificados", path: "/recepcionista/certificados" },
 ]
