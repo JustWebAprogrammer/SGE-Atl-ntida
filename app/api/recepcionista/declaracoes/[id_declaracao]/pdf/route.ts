@@ -3,12 +3,11 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { renderToBuffer } from "@react-pdf/renderer"
-import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
+import RecepcionistaDeclaracaoPDF from "@/app/components/RecepcionistaDeclaracaoPDF"
 import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
 import { getSystemDate } from "@/lib/sistema"
-import { getLayoutDefaults } from "@/lib/layout-defaults"
 
 // GET /api/recepcionista/declaracoes/[id_declaracao]/pdf - View existing declaration PDF by declaration ID
 export async function GET(
@@ -79,15 +78,8 @@ export async function GET(
 
     const systemDate = await getSystemDate()
 
-    // Declaração física — não tem QR code
-    const layoutConfig = {
-      ...getLayoutDefaults("DeclaracaoAcademica"),
-      tem_qr_code: false,
-    }
-
     const pdfBuffer = await renderToBuffer(
-      React.createElement(DeclaracaoPDF, {
-        layoutConfig,
+      React.createElement(RecepcionistaDeclaracaoPDF, {
         studentName: student.nome_completo,
         studentNumber: student.numero_estudante || "",
         courseName: student.curso.nome_curso,
@@ -96,7 +88,6 @@ export async function GET(
         presidentSignature: signatureBase64,
         presidentName: presidentSignature?.nome_presidente || "",
         documentNumber: declaracao.numero_documento,
-        qrCodeUrl: "",
         logoUrl: logoBase64,
         systemDate
       }) as any

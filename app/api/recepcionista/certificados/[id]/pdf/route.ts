@@ -4,9 +4,9 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { renderToBuffer } from "@react-pdf/renderer"
-import CertificadoConclusaoPDF from "@/app/components/CertificadoConclusaoPDF"
-import CertificadoPDF from "@/app/components/CertificadoPDF"
-import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
+import RecepcionistaCertificadoConclusaoPDF from "@/app/components/RecepcionistaCertificadoConclusaoPDF"
+import RecepcionistaCertificadoDisciplinasPDF from "@/app/components/RecepcionistaCertificadoDisciplinasPDF"
+import RecepcionistaDeclaracaoPDF from "@/app/components/RecepcionistaDeclaracaoPDF"
 import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
@@ -45,11 +45,34 @@ export async function GET(
     const student = certificado.estudante
     const anoLectivo = student.ano_electivo || await getAnoLectivo()
 
+    // Load logo
+    let logoBase64 = ""
+    try {
+      const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
+      const logoBuffer = readFileSync(logoPath)
+      logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
+    } catch { }
+
+    // Get president signature
+    const presidentSignature = await prisma.assinaturaPresidente.findFirst({
+      where: { data_fim: null }
+    })
+
+    let signatureBase64 = presidentSignature?.imagem_base64 || ""
+    if (!signatureBase64 && presidentSignature) {
+      try {
+        const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
+        const signatureBuffer = readFileSync(signaturePath)
+        signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
+      } catch { }
+    }
+
+    const systemDate = await getSystemDate()
+
     // Generate PDF based on certificate type
     let pdfBuffer: Buffer
 
     if (certificado.tipo_certificado === "Conclusao") {
-      // Generate Certificado de Conclusão
       const currentYear = student.ano_current || student.curso.duracao_anos || 3
       const allYears = Array.from({ length: currentYear }, (_, i) => i + 1)
 
@@ -82,30 +105,8 @@ export async function GET(
       const allGrades = [...yearAverages, monografiaGrade]
       const finalGrade = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
 
-      const presidentSignature = await prisma.assinaturaPresidente.findFirst({
-        where: { data_fim: null }
-      })
-
-      let signatureBase64 = presidentSignature?.imagem_base64 || ""
-      if (!signatureBase64 && presidentSignature) {
-        try {
-          const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
-          const signatureBuffer = readFileSync(signaturePath)
-          signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
-        } catch { }
-      }
-
-      let logoBase64 = ""
-      try {
-        const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
-        const logoBuffer = readFileSync(logoPath)
-        logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
-      } catch { }
-
-      const systemDate = await getSystemDate()
-
       pdfBuffer = await renderToBuffer(
-        React.createElement(CertificadoConclusaoPDF, {
+        React.createElement(RecepcionistaCertificadoConclusaoPDF, {
           studentName: student.nome_completo,
           studentNumber: student.numero_estudante || "",
           courseName: student.curso.nome_curso,
@@ -118,14 +119,12 @@ export async function GET(
           presidentSignature: signatureBase64,
           presidentName: presidentSignature?.nome_presidente || "",
           documentNumber: `CERT-${anoLectivo}-${student.numero_estudante}-001`,
-          qrCodeUrl: "",
           logoUrl: logoBase64,
           systemDate
         }) as any
       )
 
     } else if (certificado.tipo_certificado === "Disciplina") {
-      // Generate Certificado de Disciplinas
       const notas = await prisma.nota.findMany({
         where: {
           id_estudante: student.id_estudante,
@@ -134,67 +133,31 @@ export async function GET(
         include: { disciplina: true }
       })
 
-      let logoBase64 = ""
-      try {
-        const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
-        const logoBuffer = readFileSync(logoPath)
-        logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
-      } catch { }
-
-      const systemDate = await getSystemDate()
-
       pdfBuffer = await renderToBuffer(
-        React.createElement(CertificadoPDF, {
-          tipo: "Disciplina",
-          estudante: {
-            nome_completo: student.nome_completo,
-            numero_estudante: student.numero_estudante || "",
-            curso: {
-              nome_curso: student.curso.nome_curso,
-              duracao_anos: student.curso.duracao_anos || 3
-            }
-          },
+        React.createElement(RecepcionistaCertificadoDisciplinasPDF, {
+          studentName: student.nome_completo,
+          studentNumber: student.numero_estudante || "",
+          courseName: student.curso.nome_curso,
+          anoLectivo,
           notas: notas.map(n => ({
             id_nota: n.id_nota,
             nota_final: n.nota_final ? Number(n.nota_final) : null,
             dispensada: n.dispensada,
             disciplina: n.disciplina
           })),
-          dataEmissao: systemDate,
-          numeroCertificado: `DISC-${anoLectivo}-${student.numero_estudante}-001`,
-          qrCodeUrl: "",
-          logoUrl: logoBase64
+          presidentSignature: signatureBase64,
+          presidentName: presidentSignature?.nome_presidente || "",
+          documentNumber: `DISC-${anoLectivo}-${student.numero_estudante}-001`,
+          logoUrl: logoBase64,
+          systemDate
         }) as any
       )
 
     } else if (certificado.tipo_certificado === "Participacao") {
-      // Generate Declaração Académica PDF inline (like other certificate types)
       const currentYear = student.ano_current || 3
-      let logoBase64 = ""
-      try {
-        const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
-        const logoBuffer = readFileSync(logoPath)
-        logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
-      } catch { }
-
-      const systemDate = await getSystemDate()
-
-      // Get president signature
-      const presidentSignature = await prisma.assinaturaPresidente.findFirst({
-        where: { data_fim: null }
-      })
-
-      let signatureBase64 = presidentSignature?.imagem_base64 || ""
-      if (!signatureBase64 && presidentSignature) {
-        try {
-          const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
-          const signatureBuffer = readFileSync(signaturePath)
-          signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
-        } catch { }
-      }
 
       pdfBuffer = await renderToBuffer(
-        React.createElement(DeclaracaoPDF, {
+        React.createElement(RecepcionistaDeclaracaoPDF, {
           studentName: student.nome_completo,
           studentNumber: student.numero_estudante || "",
           courseName: student.curso.nome_curso,
@@ -203,7 +166,6 @@ export async function GET(
           presidentSignature: signatureBase64,
           presidentName: presidentSignature?.nome_presidente || "",
           documentNumber: `DECL-${anoLectivo}-${student.numero_estudante}-001`,
-          qrCodeUrl: "",
           logoUrl: logoBase64,
           systemDate
         }) as any
