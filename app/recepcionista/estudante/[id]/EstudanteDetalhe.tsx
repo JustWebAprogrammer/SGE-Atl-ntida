@@ -341,6 +341,15 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
   const propinasPagas = dados.pagamentos_propina.filter(p => p.estado === "Pago")
   const propinasPendentes = dados.pagamentos_propina.filter(p => p.estado !== "Pago")
   // Facturas que não são propinas (outros serviços)
+  function isServicoFisico(descricao: string): boolean {
+    const d = descricao.toLowerCase()
+    return (
+      d.includes("certificado") ||
+      d.includes("declara") ||
+      d.includes("folha de prova")
+    )
+  }
+
   const outrasFacturas = dados.facturas.filter(f =>
     f.descricao_servico && !f.descricao_servico.toLowerCase().includes("propina")
   )
@@ -626,6 +635,52 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                       >
                         🧾 Talão
                       </button>
+                      {/* Botão de entrega para serviços físicos (Folha de Prova) */}
+                      {f.descricao_servico && isServicoFisico(f.descricao_servico) && !f.entregue && (
+                        <button
+                          onClick={async () => {
+                            const key = `entregar-${f.id_factura}`
+                            setAcaoLoading(key)
+                            setMensagem(null)
+                            try {
+                              const res = await fetch("/api/recepcionista/factura/entregar", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ id_factura: f.id_factura }),
+                              })
+                              if (!res.ok) {
+                                const data = await res.json()
+                                setMensagem({ texto: data.error ?? "Erro ao marcar entrega", tipo: "erro" })
+                                return
+                              }
+                              setMensagem({ texto: "Documento marcado como entregue", tipo: "ok" })
+                              // Recarregar dados
+                              const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
+                              const d2 = await r2.json()
+                              if (d2.estudante) setDados(d2.estudante)
+                            } catch {
+                              setMensagem({ texto: "Erro de ligação", tipo: "erro" })
+                            } finally {
+                              setAcaoLoading(null)
+                            }
+                          }}
+                          disabled={acaoLoading === `entregar-${f.id_factura}`}
+                          style={{
+                            padding: "8px 12px",
+                            background: "rgba(59,130,246,0.15)",
+                            border: "1px solid rgba(59,130,246,0.3)",
+                            color: "#3b82f6", borderRadius: "8px",
+                            fontSize: "11px", fontWeight: "600",
+                            cursor: acaoLoading === `entregar-${f.id_factura}` ? "not-allowed" : "pointer",
+                            whiteSpace: "nowrap" as const
+                          }}
+                        >
+                          {acaoLoading === `entregar-${f.id_factura}` ? "..." : "📦 Entregue"}
+                        </button>
+                      )}
+                      {f.entregue && (
+                        <Badge label="Entregue" color="#22c55e" bg="rgba(34,197,94,0.12)" />
+                      )}
                     </div>
                   )}
                 </div>

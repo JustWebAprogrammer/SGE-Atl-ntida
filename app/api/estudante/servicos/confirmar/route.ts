@@ -173,8 +173,8 @@ export async function POST(request: Request) {
         })
       }
 
-      // Certificado de Disciplinas → criar certificado físico (tipo Disciplina)
-      if (desc.includes("certificado") && desc.includes("disciplinas")) {
+      // Certificado de Disciplina(s) → criar certificado físico (tipo Disciplina)
+      if (desc.includes("certificado") && (desc.includes("disciplinas") || desc.includes("disciplina"))) {
         await prisma.certificado.create({
           data: {
             id_estudante: estudante.id_estudante,
