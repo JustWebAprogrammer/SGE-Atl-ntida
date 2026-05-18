@@ -8,6 +8,7 @@ import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
 import { getSystemDate } from "@/lib/sistema"
+import { getLayoutDefaults } from "@/lib/layout-defaults"
 
 // GET /api/recepcionista/declaracoes/[id_declaracao]/pdf - View existing declaration PDF by declaration ID
 export async function GET(
@@ -78,8 +79,15 @@ export async function GET(
 
     const systemDate = await getSystemDate()
 
+    // Declaração física — não tem QR code
+    const layoutConfig = {
+      ...getLayoutDefaults("DeclaracaoAcademica"),
+      tem_qr_code: false,
+    }
+
     const pdfBuffer = await renderToBuffer(
       React.createElement(DeclaracaoPDF, {
+        layoutConfig,
         studentName: student.nome_completo,
         studentNumber: student.numero_estudante || "",
         courseName: student.curso.nome_curso,
