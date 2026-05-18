@@ -112,6 +112,7 @@ export async function GET(
           numero_documento: true,
           ano_lectivo: true,
           data_emissao: true,
+          status_entrega: true,
         },
         orderBy: { data_emissao: "desc" },
       },

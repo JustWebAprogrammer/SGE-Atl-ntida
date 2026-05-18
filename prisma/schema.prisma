@@ -363,7 +363,7 @@ model CertificadoDisciplinas {
   disciplina                Disciplina  @relation(fields: [id_disciplina], references: [id_disciplina])
 }
 
-// NEW: Declaracao (for digital declarations with QR verification)
+// Declaracao (declarações académicas físicas)
 model Declaracao {
   id_declaracao   Int      @id @default(autoincrement())
   id_estudante    Int
@@ -371,6 +371,7 @@ model Declaracao {
   ano_lectivo     String   @db.VarChar(9)
   data_emissao    DateTime @default(now())
   caminho_pdf     String?  // Optional: if we store the PDF
+  status_entrega  String   @default("Solicitado") // Solicitado | Pronto | Entregue
   estudante       Estudante @relation(fields: [id_estudante], references: [id_estudante])
 }
 

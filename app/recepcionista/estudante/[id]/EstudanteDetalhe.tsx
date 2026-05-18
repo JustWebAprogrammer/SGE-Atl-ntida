@@ -13,6 +13,7 @@ const MESES = [
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ]
 
+// ===== TYPES =====
 type Propina = {
   id_pagamento: number
   referencia: string
@@ -40,24 +41,7 @@ type DeclaracaoItem = {
   numero_documento: string
   ano_lectivo: string
   data_emissao: string
-}
-
-// Workflow de status dos certificados
-const CERT_STATUS_FLOW = [
-  { value: "Solicitado", label: "Solicitado", color: "rgba(240,165,0,0.12)", textColor: "#f0a500" },
-  { value: "EmPreparacao", label: "Em Preparação", color: "rgba(59,130,246,0.12)", textColor: "#3b82f6" },
-  { value: "ProntoParaLevantamento", label: "Pronto para Levantamento", color: "rgba(168,85,247,0.12)", textColor: "#a855f7" },
-  { value: "Entregue", label: "Entregue", color: "rgba(34,197,94,0.12)", textColor: "#22c55e" },
-]
-
-function getNextCertStatus(current: string): string | null {
-  const idx = CERT_STATUS_FLOW.findIndex(s => s.value === current)
-  if (idx === -1 || idx === CERT_STATUS_FLOW.length - 1) return null
-  return CERT_STATUS_FLOW[idx + 1].value
-}
-
-function getCertStatusConfig(value: string) {
-  return CERT_STATUS_FLOW.find(s => s.value === value) || CERT_STATUS_FLOW[0]
+  status_entrega?: string
 }
 
 type Factura = {
@@ -96,6 +80,23 @@ type EstudanteDetalhe = {
   declaracoes: DeclaracaoItem[]
 }
 
+// ===== TIPOS INTERNOS =====
+type DocumentoFisico = {
+  id: string // chave única tipo "cert-1", "decl-2", "fact-3"
+  tipo: "certificado" | "declaracao" | "folha_prova"
+  subtipo: string // "Conclusao" | "Disciplina" | "DeclaracaoAcademica" | "FolhaProva"
+  nome: string
+  data: string
+  descricao: string
+  // Estado de entrega
+  status_entrega: "Solicitado" | "Pronto" | "Entregue"
+  // Referências para acções
+  ref_certificado?: number
+  ref_declaracao?: number
+  ref_factura?: number
+}
+
+// ===== HELPERS UI =====
 function Badge({ label, color, bg }: { label: string; color: string; bg: string }) {
   return (
     <span style={{
@@ -106,7 +107,22 @@ function Badge({ label, color, bg }: { label: string; color: string; bg: string 
   )
 }
 
-function Secao({ titulo, children }: { titulo: string; children: React.ReactNode }) {
+const STATUS_ENTREGA_CFG: Record<string, { label: string; color: string; textColor: string }> = {
+  Solicitado: { label: "Solicitado", color: "rgba(240,165,0,0.12)", textColor: "#f0a500" },
+  Pronto: { label: "Pronto para Levantamento", color: "rgba(168,85,247,0.12)", textColor: "#a855f7" },
+  Entregue: { label: "Entregue", color: "rgba(34,197,94,0.12)", textColor: "#22c55e" },
+}
+
+const STATUS_FLOW = ["Solicitado", "Pronto", "Entregue"]
+
+function getNextStatus(current: string): string | null {
+  const idx = STATUS_FLOW.indexOf(current)
+  if (idx === -1 || idx >= STATUS_FLOW.length - 1) return null
+  return STATUS_FLOW[idx + 1]
+}
+
+function Secao({ titulo, children, defaultExpanded = true }: { titulo: string; children: React.ReactNode; defaultExpanded?: boolean }) {
+  const [expanded, setExpanded] = useState(defaultExpanded)
   return (
     <div style={{
       background: "#1e2230",
@@ -114,14 +130,22 @@ function Secao({ titulo, children }: { titulo: string; children: React.ReactNode
       borderRadius: "14px", overflow: "hidden",
       marginBottom: "16px"
     }}>
-      <div style={{
-        padding: "14px 24px",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
-        fontSize: "12px", fontWeight: "600",
-        color: "#d0d7e8", textTransform: "uppercase" as const,
-        letterSpacing: "0.5px"
-      }}>{titulo}</div>
-      <div style={{ padding: "20px 24px" }}>{children}</div>
+      <div
+        onClick={() => setExpanded(!expanded)}
+        style={{
+          padding: "14px 24px",
+          borderBottom: expanded ? "1px solid rgba(255,255,255,0.07)" : "none",
+          fontSize: "12px", fontWeight: "600",
+          color: "#d0d7e8", textTransform: "uppercase" as const,
+          letterSpacing: "0.5px",
+          cursor: "pointer",
+          display: "flex", justifyContent: "space-between", alignItems: "center"
+        }}
+      >
+        <span>{titulo}</span>
+        <span style={{ fontSize: "14px", color: "#b0b8cf" }}>{expanded ? "▲" : "▼"}</span>
+      </div>
+      {expanded && <div style={{ padding: "20px 24px" }}>{children}</div>}
     </div>
   )
 }
@@ -134,8 +158,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
   const [acaoLoading, setAcaoLoading] = useState<string | null>(null)
   const [mensagem, setMensagem] = useState<{ texto: string; tipo: "ok" | "erro" } | null>(null)
   const [recepcionistaNome, setRecepcionistaNome] = useState<string>("")
-  const [propinasExpandido, setPropinasExpandido] = useState(true)
-
 
   useEffect(() => {
     fetch(`/api/recepcionista/estudante/${id}`)
@@ -147,7 +169,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
       .catch(() => setErro("Erro de ligação"))
       .finally(() => setLoading(false))
 
-    // Buscar nome do recepcionista actual
     fetch("/api/recepcionista/me")
       .then(r => r.json())
       .then(data => {
@@ -156,6 +177,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
       .catch(() => {})
   }, [id])
 
+  // ===== FUNÇÕES DE IMPRESSÃO =====
   async function auditarImpressao(id_factura: number) {
     try {
       const res = await fetch("/api/recepcionista/auditar/impressao", {
@@ -175,118 +197,11 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
     }
   }
 
-  async function imprimirTalaoPropina(propina: Propina) {
-    if (!dados) return
-    try {
-      const { pdf } = await import("@react-pdf/renderer")
-      const { default: FacturaTalao } = await import("../../../components/FacturaTalao")
-
-      const data = {
-        numero_factura: propina.referencia,
-        descricao_servico: `Propina - ${MESES[propina.mes - 1]} ${propina.ano}`,
-        valor_total: Number(propina.valor_total),
-        valor_base: Number(propina.valor_base),
-        valor_multa: Number(propina.valor_multa),
-        data_emissao: new Date().toISOString(),
-        data_pagamento: propina.data_pagamento,
-        metodo_pagamento: propina.forma_pagamento,
-        mes: propina.mes,
-        ano: propina.ano,
-        origem: "propina" as const,
-        emitido_por: recepcionistaNome || null,
-        estudante: {
-          nome_completo: dados.nome_completo,
-          numero_estudante: dados.numero_estudante,
-          curso: dados.curso.nome_curso,
-        },
-      }
-
-      const blob = await pdf(<FacturaTalao data={data} />).toBlob()
-      const url = URL.createObjectURL(blob)
-      window.open(url, "_blank")
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
-    } catch {
-      // silently fail
-    }
-  }
-
-  async function imprimirFaturaPropina(propina: Propina) {
-    if (!dados) return
-    try {
-      const { pdf } = await import("@react-pdf/renderer")
-      const { default: FacturaPDF } = await import("../../../components/FacturaPDF")
-
-      const data = {
-        numero_factura: propina.referencia,
-        descricao_servico: `Propina - ${MESES[propina.mes - 1]} ${propina.ano}`,
-        valor_total: Number(propina.valor_total),
-        valor_base: Number(propina.valor_base),
-        valor_multa: Number(propina.valor_multa),
-        data_emissao: new Date().toISOString(),
-        data_pagamento: propina.data_pagamento,
-        estado: propina.estado,
-        metodo_pagamento: propina.forma_pagamento,
-        mes: propina.mes,
-        ano: propina.ano,
-        origem: "propina" as const,
-        referencia: propina.referencia,
-        emitido_por: recepcionistaNome || null,
-        estudante: {
-          nome_completo: dados.nome_completo,
-          numero_estudante: dados.numero_estudante,
-          curso: dados.curso.nome_curso,
-          email: dados.usuario?.email || "",
-        },
-      }
-
-      const blob = await pdf(<FacturaPDF data={data} />).toBlob()
-      const url = URL.createObjectURL(blob)
-      window.open(url, "_blank")
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
-    } catch {
-      // silently fail
-    }
-  }
-
-  async function imprimirTalaoServico(factura: Factura) {
-    if (!dados) return
-    try {
-      const { pdf } = await import("@react-pdf/renderer")
-      const { default: FacturaTalao } = await import("../../../components/FacturaTalao")
-
-      const data = {
-        numero_factura: factura.numero_factura || "",
-        descricao_servico: factura.descricao_servico || "Serviço",
-        valor_total: Number(factura.valor_final ?? factura.valor_total),
-        data_emissao: factura.data_emissao,
-        data_pagamento: factura.data_pagamento,
-        metodo_pagamento: factura.metodo_pagamento,
-        mes: null,
-        ano: null,
-        origem: "factura" as const,
-        emitido_por: recepcionistaNome || null,
-        estudante: {
-          nome_completo: dados.nome_completo,
-          numero_estudante: dados.numero_estudante,
-          curso: dados.curso.nome_curso,
-        },
-      }
-
-      const blob = await pdf(<FacturaTalao data={data} />).toBlob()
-      const url = URL.createObjectURL(blob)
-      window.open(url, "_blank")
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
-    } catch {
-      // silently fail
-    }
-  }
-
   async function imprimirFaturaServico(factura: Factura) {
     if (!dados) return
     try {
       const { pdf } = await import("@react-pdf/renderer")
       const { default: FacturaPDF } = await import("../../../components/FacturaPDF")
-
       const data = {
         numero_factura: factura.numero_factura || "",
         descricao_servico: factura.descricao_servico || "Serviço",
@@ -297,8 +212,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
         data_pagamento: factura.data_pagamento,
         estado: factura.estado,
         metodo_pagamento: factura.metodo_pagamento || "—",
-        mes: null,
-        ano: null,
+        mes: null, ano: null,
         origem: "factura" as const,
         referencia: factura.numero_factura,
         emitido_por: recepcionistaNome || null,
@@ -309,75 +223,198 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
           email: dados.usuario?.email || "",
         },
       }
-
       const blob = await pdf(<FacturaPDF data={data} />).toBlob()
       const url = URL.createObjectURL(blob)
       window.open(url, "_blank")
       setTimeout(() => URL.revokeObjectURL(url), 1000)
+    } catch { /* silently fail */ }
+  }
+
+  async function imprimirTalao(factura: Factura) {
+    if (!dados) return
+    try {
+      const { pdf } = await import("@react-pdf/renderer")
+      const { default: FacturaTalao } = await import("../../../components/FacturaTalao")
+      const data = {
+        numero_factura: factura.numero_factura || "",
+        descricao_servico: factura.descricao_servico || "Serviço",
+        valor_total: Number(factura.valor_final ?? factura.valor_total),
+        data_emissao: factura.data_emissao,
+        data_pagamento: factura.data_pagamento,
+        metodo_pagamento: factura.metodo_pagamento,
+        mes: null, ano: null,
+        origem: "factura" as const,
+        emitido_por: recepcionistaNome || null,
+        estudante: {
+          nome_completo: dados.nome_completo,
+          numero_estudante: dados.numero_estudante,
+          curso: dados.curso.nome_curso,
+        },
+      }
+      const blob = await pdf(<FacturaTalao data={data} />).toBlob()
+      const url = URL.createObjectURL(blob)
+      window.open(url, "_blank")
+      setTimeout(() => URL.revokeObjectURL(url), 1000)
+    } catch { /* silently fail */ }
+  }
+
+  // ===== AVANÇAR STATUS DE ENTREGA =====
+  async function avancarEntrega(doc: DocumentoFisico) {
+    const nextStatus = getNextStatus(doc.status_entrega)
+    if (!nextStatus) return
+    const key = `entrega-${doc.id}`
+    setAcaoLoading(key)
+    setMensagem(null)
+    try {
+      let res: Response
+      if (doc.tipo === "certificado") {
+        res = await fetch(`/api/recepcionista/certificados/${doc.ref_certificado}/status`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: nextStatus }),
+        })
+      } else if (doc.tipo === "declaracao") {
+        res = await fetch(`/api/recepcionista/declaracoes/${doc.ref_declaracao}/status`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: nextStatus }),
+        })
+      } else {
+        // Folha de Prova - usar endpoint factura/entregar
+        res = await fetch("/api/recepcionista/factura/entregar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_factura: doc.ref_factura }),
+        })
+      }
+      if (!res.ok) {
+        const data = await res.json()
+        setMensagem({ texto: data.error ?? "Erro ao atualizar", tipo: "erro" })
+        return
+      }
+      setMensagem({ texto: `Documento atualizado para "${nextStatus}"`, tipo: "ok" })
+      // Recarregar dados
+      const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
+      const d2 = await r2.json()
+      if (d2.estudante) setDados(d2.estudante)
     } catch {
-      // silently fail
+      setMensagem({ texto: "Erro de ligação", tipo: "erro" })
+    } finally {
+      setAcaoLoading(null)
     }
   }
 
+  // ===== CONSTRUIR LISTA DE DOCUMENTOS FÍSICOS =====
+  function construirDocumentos(): DocumentoFisico[] {
+    if (!dados) return []
+    const docs: DocumentoFisico[] = []
+
+    // 1. Certificados físicos
+    for (const c of dados.certificados) {
+      const nome = c.tipo_certificado === "Conclusao"
+        ? "Certificado de Conclusão"
+        : c.tipo_certificado === "Disciplina"
+          ? "Certificado de Disciplinas"
+          : `Certificado (${c.tipo_certificado})`
+      docs.push({
+        id: `cert-${c.id_certificado}`,
+        tipo: "certificado",
+        subtipo: c.tipo_certificado,
+        nome,
+        data: c.data_emissao,
+        descricao: c.descricao || nome,
+        status_entrega: (c.status === "EmPreparacao" ? "Solicitado" :
+                         c.status === "ProntoParaLevantamento" ? "Pronto" :
+                         c.status === "Entregue" ? "Entregue" : "Solicitado") as "Solicitado" | "Pronto" | "Entregue",
+        ref_certificado: c.id_certificado,
+      })
+    }
+
+    // 2. Declarações académicas
+    for (const d of dados.declaracoes) {
+      docs.push({
+        id: `decl-${d.id_declaracao}`,
+        tipo: "declaracao",
+        subtipo: "DeclaracaoAcademica",
+        nome: "Declaração Académica",
+        data: d.data_emissao,
+        descricao: d.numero_documento,
+        status_entrega: (d.status_entrega || "Solicitado") as "Solicitado" | "Pronto" | "Entregue",
+        ref_declaracao: d.id_declaracao,
+      })
+    }
+
+    // 3. Folhas de Prova (facturas pagas)
+    for (const f of dados.facturas) {
+      if (!f.descricao_servico) continue
+      const desc = f.descricao_servico.toLowerCase()
+      if (!desc.includes("folha de prova")) continue
+      if (f.estado !== "Pago") continue
+      docs.push({
+        id: `fact-${f.id_factura}`,
+        tipo: "folha_prova",
+        subtipo: "FolhaProva",
+        nome: "Folha de Prova",
+        data: f.data_emissao,
+        descricao: f.descricao_servico,
+        status_entrega: f.entregue ? "Entregue" : "Solicitado",
+        ref_factura: f.id_factura,
+      })
+    }
+
+    // Ordenar: pendentes primeiro, depois por data
+    docs.sort((a, b) => {
+      const ordem = { Entregue: 3, Pronto: 2, Solicitado: 1 }
+      const diff = (ordem[a.status_entrega] || 0) - (ordem[b.status_entrega] || 0)
+      if (diff !== 0) return diff
+      return new Date(b.data).getTime() - new Date(a.data).getTime()
+    })
+
+    return docs
+  }
+
+  // ===== RENDER =====
   if (loading) return (
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
-      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "80px" }}>
-        A carregar...
-      </div>
+      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "80px" }}>A carregar...</div>
     </DashboardLayout>
   )
 
   if (erro || !dados) return (
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
-      <div style={{
-        background: "#1e2230", border: "1px solid rgba(224,61,61,0.3)",
-        borderRadius: "14px", padding: "40px", textAlign: "center", color: "#e03d3d"
-      }}>
+      <div style={{ background: "#1e2230", border: "1px solid rgba(224,61,61,0.3)", borderRadius: "14px", padding: "40px", textAlign: "center", color: "#e03d3d" }}>
         {erro || "Estudante não encontrado"}
       </div>
     </DashboardLayout>
   )
 
+  const documentosFisicos = construirDocumentos()
   const propinasPagas = dados.pagamentos_propina.filter(p => p.estado === "Pago")
   const propinasPendentes = dados.pagamentos_propina.filter(p => p.estado !== "Pago")
-  // Facturas que não são propinas (outros serviços)
-  function isServicoFisico(descricao: string): boolean {
-    const d = descricao.toLowerCase()
-    return (
-      d.includes("certificado") ||
-      d.includes("declara") ||
-      d.includes("folha de prova")
-    )
-  }
 
-  const outrasFacturas = dados.facturas.filter(f =>
-    f.descricao_servico && !f.descricao_servico.toLowerCase().includes("propina")
-  )
+  // Outras facturas (não físicas, não propinas) para o Histórico
+  const outrasFacturas = dados.facturas.filter(f => {
+    if (!f.descricao_servico) return false
+    const desc = f.descricao_servico.toLowerCase()
+    if (desc.includes("propina")) return false
+    if (desc.includes("folha de prova")) return false
+    return true
+  })
 
   return (
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
-
       {/* Botão voltar */}
-      <button
-        onClick={() => router.push("/recepcionista")}
-        style={{
-          background: "transparent",
-          border: "1px solid rgba(255,255,255,0.1)",
-          color: "#d0d7e8", borderRadius: "8px",
-          padding: "8px 16px", fontSize: "13px",
-          cursor: "pointer", marginBottom: "20px",
-          display: "flex", alignItems: "center", gap: "6px"
-        }}
-      >
-        ← Voltar à pesquisa
-      </button>
+      <button onClick={() => router.push("/recepcionista")} style={{
+        background: "transparent", border: "1px solid rgba(255,255,255,0.1)",
+        color: "#d0d7e8", borderRadius: "8px", padding: "8px 16px",
+        fontSize: "13px", cursor: "pointer", marginBottom: "20px",
+        display: "flex", alignItems: "center", gap: "6px"
+      }}>← Voltar à pesquisa</button>
 
-      {/* Mensagem de feedback global */}
+      {/* Mensagem global */}
       {mensagem && (
         <div style={{
-          background: mensagem.tipo === "ok"
-            ? "rgba(34,197,94,0.1)"
-            : "rgba(224,61,61,0.1)",
+          background: mensagem.tipo === "ok" ? "rgba(34,197,94,0.1)" : "rgba(224,61,61,0.1)",
           border: `1px solid ${mensagem.tipo === "ok" ? "rgba(34,197,94,0.3)" : "rgba(224,61,61,0.3)"}`,
           borderRadius: "10px", padding: "12px 20px",
           color: mensagem.tipo === "ok" ? "#22c55e" : "#e03d3d",
@@ -390,10 +427,8 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
 
       {/* Header do estudante */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: "16px", padding: "24px 28px",
-        marginBottom: "16px",
+        background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+        borderRadius: "16px", padding: "24px 28px", marginBottom: "16px",
         display: "flex", justifyContent: "space-between", alignItems: "flex-start",
         flexWrap: "wrap" as const, gap: "16px"
       }}>
@@ -407,19 +442,9 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                 Nº <strong style={{ color: "#e8eaf0" }}>{dados.numero_estudante}</strong>
               </span>
             )}
-            <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
-              {dados.curso.nome_curso}
-            </span>
-            {dados.ano_current && (
-              <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
-                {dados.ano_current}º ano
-              </span>
-            )}
-            {dados.numero_telemovel && (
-              <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
-                📞 {dados.numero_telemovel}
-              </span>
-            )}
+            <span style={{ fontSize: "13px", color: "#d0d7e8" }}>{dados.curso.nome_curso}</span>
+            {dados.ano_current && <span style={{ fontSize: "13px", color: "#d0d7e8" }}>{dados.ano_current}º ano</span>}
+            {dados.numero_telemovel && <span style={{ fontSize: "13px", color: "#d0d7e8" }}>📞 {dados.numero_telemovel}</span>}
           </div>
         </div>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" as const, alignItems: "center" }}>
@@ -436,41 +461,164 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
         </div>
       </div>
 
-      {/* ─── HISTÓRICO DE PROPINAS ─── */}
-      {dados.pagamentos_propina.length > 0 && (
-        <Secao titulo={`Histórico de Propinas (${dados.pagamentos_propina.length})`}>
-          {/* Botão de expandir/recolher quando tem muitas propinas */}
-          {dados.pagamentos_propina.length > 3 && (
-            <div style={{ padding: "0 24px 12px", display: "flex", justifyContent: "flex-end" }}>
-              <button
-                onClick={() => setPropinasExpandido(!propinasExpandido)}
-                style={{
-                  background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: "6px",
-                  padding: "6px 12px",
-                  color: "#d0d7e8",
-                  fontSize: "12px",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px"
-                }}
-              >
-                {propinasExpandido ? "▲ Recolher" : `▼ Mostrar tudo (${dados.pagamentos_propina.length})`}
-              </button>
-            </div>
-          )}
+      {/* ─── SECÇÃO PRINCIPAL: DOCUMENTOS PARA ENTREGA ─── */}
+      {documentosFisicos.length > 0 && (
+        <Secao titulo={`📋 Documentos para Entrega (${documentosFisicos.length})`} defaultExpanded={true}>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {(propinasExpandido
-              ? dados.pagamentos_propina
-              : dados.pagamentos_propina.slice(0, 3)
-            ).map(p => {
+            {documentosFisicos.map(doc => {
+              const statusCfg = STATUS_ENTREGA_CFG[doc.status_entrega] || STATUS_ENTREGA_CFG.Solicitado
+              const nextStatus = getNextStatus(doc.status_entrega)
+              const isEntregue = doc.status_entrega === "Entregue"
+              const key = `entrega-${doc.id}`
+
+              // Para Folha de Prova: mostrar A4 e Talão
+              // Para Certificados/Declarações: mostrar "Imprimir" que abre o PDF
+              const mostrarFactura = doc.tipo === "folha_prova"
+
+              return (
+                <div key={doc.id} style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  background: isEntregue ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.4)",
+                  border: `1px solid ${isEntregue ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.07)"}`,
+                  borderRadius: "10px", padding: "12px 16px",
+                  flexWrap: "wrap", gap: "10px"
+                }}>
+                  {/* Informação do documento */}
+                  <div style={{ minWidth: "200px", flex: 1 }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                      {doc.nome}
+                    </div>
+                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                      {new Date(doc.data).toLocaleDateString("pt-AO")}
+                      {doc.descricao ? ` — ${doc.descricao}` : ""}
+                    </div>
+                    {/* Badge de status */}
+                    <div style={{ marginTop: "6px" }}>
+                      <span style={{
+                        background: statusCfg.color, color: statusCfg.textColor,
+                        padding: "3px 10px", borderRadius: "20px",
+                        fontSize: "11px", fontWeight: "600"
+                      }}>{statusCfg.label}</span>
+                    </div>
+                  </div>
+
+                  {/* Acções */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                    {/* Botões de impressão */}
+                    {mostrarFactura ? (
+                      <>
+                        <button onClick={async () => {
+                          const fact = dados.facturas.find(f => f.id_factura === doc.ref_factura)
+                          if (fact) { await auditarImpressao(fact.id_factura); imprimirFaturaServico(fact) }
+                        }} style={{
+                          padding: "8px 10px", background: "rgba(45,212,191,0.15)",
+                          border: "1px solid rgba(45,212,191,0.3)", color: "#2dd4bf",
+                          borderRadius: "8px", fontSize: "11px", fontWeight: "600",
+                          cursor: "pointer", whiteSpace: "nowrap" as const
+                        }}>🖨️ A4</button>
+                        <button onClick={async () => {
+                          const fact = dados.facturas.find(f => f.id_factura === doc.ref_factura)
+                          if (fact) { await auditarImpressao(fact.id_factura); imprimirTalao(fact) }
+                        }} style={{
+                          padding: "8px 10px", background: "rgba(155,89,182,0.15)",
+                          border: "1px solid rgba(155,89,182,0.3)", color: "#9b59b6",
+                          borderRadius: "8px", fontSize: "11px", fontWeight: "600",
+                          cursor: "pointer", whiteSpace: "nowrap" as const
+                        }}>🧾 Talão</button>
+                      </>
+                    ) : (
+                      // Certificado ou Declaração → link para PDF
+                      <a
+                        href={doc.tipo === "certificado"
+                          ? `/api/recepcionista/certificados/${doc.ref_certificado}/pdf`
+                          : `/api/recepcionista/declaracoes/${doc.ref_declaracao}/pdf`
+                        }
+                        target="_blank"
+                        style={{
+                          padding: "8px 12px", background: "rgba(45,212,191,0.15)",
+                          border: "1px solid rgba(45,212,191,0.3)", color: "#2dd4bf",
+                          borderRadius: "8px", fontSize: "11px", fontWeight: "600",
+                          textDecoration: "none", whiteSpace: "nowrap" as const
+                        }}
+                      >🖨️ Imprimir</a>
+                    )}
+
+                    {/* Botão de avançar entrega */}
+                    {nextStatus && !isEntregue && (
+                      <button
+                        onClick={() => avancarEntrega(doc)}
+                        disabled={acaoLoading === key}
+                        style={{
+                          padding: "8px 12px",
+                          background: nextStatus === "Entregue" ? "rgba(34,197,94,0.15)" : "rgba(59,130,246,0.15)",
+                          border: `1px solid ${nextStatus === "Entregue" ? "rgba(34,197,94,0.3)" : "rgba(59,130,246,0.3)"}`,
+                          color: nextStatus === "Entregue" ? "#22c55e" : "#3b82f6",
+                          borderRadius: "8px", fontSize: "11px", fontWeight: "600",
+                          cursor: acaoLoading === key ? "not-allowed" : "pointer",
+                          whiteSpace: "nowrap" as const
+                        }}
+                      >
+                        {acaoLoading === key ? "..." : nextStatus === "Pronto" ? "📦 Pronto" : "✅ Entregue"}
+                      </button>
+                    )}
+                    {isEntregue && (
+                      <Badge label="Entregue ✅" color="#22c55e" bg="rgba(34,197,94,0.12)" />
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </Secao>
+      )}
+
+      {/* ─── HISTÓRICO (outras facturas não-físicas) ─── */}
+      {outrasFacturas.length > 0 && (
+        <Secao titulo={`📜 Histórico (${outrasFacturas.length})`} defaultExpanded={false}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {outrasFacturas.map(f => (
+              <div key={f.id_factura} style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                background: "rgba(13,15,20,0.4)",
+                border: "1px solid rgba(255,255,255,0.07)",
+                borderRadius: "10px", padding: "12px 16px",
+                flexWrap: "wrap", gap: "10px"
+              }}>
+                <div>
+                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                    {f.descricao_servico ?? "Serviço"}
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                    {f.numero_factura && `Nº ${f.numero_factura} | `}
+                    {new Date(f.data_emissao).toLocaleDateString("pt-AO")}
+                    {f.ano_lectivo && ` | ${f.ano_lectivo}`}
+                  </div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+                  <div style={{ fontSize: "14px", fontWeight: "700", color: "#e8eaf0" }}>
+                    {Number(f.valor_final ?? f.valor_total).toLocaleString("pt-AO")} Kz
+                  </div>
+                  <Badge
+                    label={f.estado}
+                    color={f.estado === "Pago" ? "#22c55e" : f.estado === "Atrasado" ? "#e03d3d" : "#f0a500"}
+                    bg={f.estado === "Pago" ? "rgba(34,197,94,0.12)" : f.estado === "Atrasado" ? "rgba(224,61,61,0.12)" : "rgba(240,165,0,0.12)"}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Secao>
+      )}
+
+      {/* ─── PROPINAS ─── */}
+      {dados.pagamentos_propina.length > 0 && (
+        <Secao titulo={`💰 Propinas (${dados.pagamentos_propina.length})`} defaultExpanded={false}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {dados.pagamentos_propina.map(p => {
               const isPago = p.estado === "Pago"
               return (
                 <div key={p.id_pagamento} style={{
-                  display: "flex", justifyContent: "space-between",
-                  alignItems: "center",
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
                   background: isPago ? "rgba(34,197,94,0.05)" : "rgba(224,61,61,0.05)",
                   border: `1px solid ${isPago ? "rgba(34,197,94,0.15)" : "rgba(224,61,61,0.15)"}`,
                   borderRadius: "10px", padding: "12px 16px",
@@ -485,7 +633,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                     </div>
                     {p.data_pagamento && (
                       <div style={{ fontSize: "11px", color: "#22c55e", marginTop: "2px" }}>
-                        Pago em {new Date(p.data_pagamento).toLocaleDateString("pt-AO")} via {p.forma_pagamento}
+                        Pago em {new Date(p.data_pagamento).toLocaleDateString("pt-AO")}
                       </div>
                     )}
                   </div>
@@ -505,52 +653,16 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                       color={isPago ? "#22c55e" : p.estado === "Atrasado" ? "#e03d3d" : "#f0a500"}
                       bg={isPago ? "rgba(34,197,94,0.12)" : p.estado === "Atrasado" ? "rgba(224,61,61,0.12)" : "rgba(240,165,0,0.12)"}
                     />
-                    {isPago && (
-                      <div style={{ display: "flex", gap: "6px" }}>
-                        <button
-                          onClick={() => imprimirFaturaPropina(p)}
-                          style={{
-                            padding: "8px 10px",
-                            background: "rgba(45,212,191,0.15)",
-                            border: "1px solid rgba(45,212,191,0.3)",
-                            color: "#2dd4bf", borderRadius: "8px",
-                            fontSize: "11px", fontWeight: "600",
-                            cursor: "pointer", whiteSpace: "nowrap" as const
-                          }}
-                        >
-                          🖨️ A4
-                        </button>
-                        <button
-                          onClick={() => imprimirTalaoPropina(p)}
-                          style={{
-                            padding: "8px 10px",
-                            background: "rgba(155,89,182,0.15)",
-                            border: "1px solid rgba(155,89,182,0.3)",
-                            color: "#9b59b6", borderRadius: "8px",
-                            fontSize: "11px", fontWeight: "600",
-                            cursor: "pointer", whiteSpace: "nowrap" as const
-                          }}
-                        >
-                          🧾 Talão
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
               )
             })}
           </div>
-
           {/* Resumo */}
           <div style={{
-            marginTop: "16px",
-            padding: "12px 16px",
-            background: "rgba(13,15,20,0.4)",
-            borderRadius: "10px",
-            display: "flex",
-            gap: "24px",
-            flexWrap: "wrap",
-            fontSize: "13px"
+            marginTop: "16px", padding: "12px 16px",
+            background: "rgba(13,15,20,0.4)", borderRadius: "10px",
+            display: "flex", gap: "24px", flexWrap: "wrap", fontSize: "13px"
           }}>
             <span style={{ color: "#22c55e" }}>
               ✓ {propinasPagas.length} paga{propinasPagas.length !== 1 ? "s" : ""}
@@ -562,291 +674,9 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
         </Secao>
       )}
 
-      {/* ─── HISTÓRICO DE PAGAMENTOS E DOCUMENTOS ─── */}
-      {outrasFacturas.length > 0 && (
-        <Secao titulo={`Histórico de Pagamentos e Documentos (${outrasFacturas.length})`}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {outrasFacturas.map(f => (
-              <div key={f.id_factura} style={{
-                display: "flex", justifyContent: "space-between",
-                alignItems: "center",
-                background: f.entregue ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.4)",
-                border: `1px solid ${f.entregue ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.07)"}`,
-                borderRadius: "10px", padding: "12px 16px",
-                flexWrap: "wrap", gap: "10px"
-              }}>
-                <div>
-                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
-                    {f.descricao_servico ?? "Serviço"}
-                  </div>
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
-                    {f.numero_factura && `Nº ${f.numero_factura} | `}
-                    {new Date(f.data_emissao).toLocaleDateString("pt-AO")}
-                    {f.ano_lectivo && ` | ${f.ano_lectivo}`}
-                  </div>
-                  {f.metodo_pagamento && (
-                    <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "2px" }}>
-                      Pagamento: {f.metodo_pagamento}
-                    </div>
-                  )}
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: "15px", fontWeight: "700", color: "#e8eaf0" }}>
-                      {Number(f.valor_final ?? f.valor_total).toLocaleString("pt-AO")} Kz
-                    </div>
-                  </div>
-                  <Badge
-                    label={f.estado}
-                    color={f.estado === "Pago" ? "#22c55e" : f.estado === "Atrasado" ? "#e03d3d" : "#f0a500"}
-                    bg={f.estado === "Pago" ? "rgba(34,197,94,0.12)" : f.estado === "Atrasado" ? "rgba(224,61,61,0.12)" : "rgba(240,165,0,0.12)"}
-                  />
-                  {f.estado === "Pago" && (
-                    <div style={{ display: "flex", gap: "6px" }}>
-                      <button
-                        onClick={async () => {
-                          await auditarImpressao(f.id_factura)
-                          imprimirFaturaServico(f)
-                        }}
-                        style={{
-                          padding: "8px 10px",
-                          background: "rgba(45,212,191,0.15)",
-                          border: "1px solid rgba(45,212,191,0.3)",
-                          color: "#2dd4bf", borderRadius: "8px",
-                          fontSize: "11px", fontWeight: "600",
-                          cursor: "pointer", whiteSpace: "nowrap" as const
-                        }}
-                      >
-                        🖨️ A4
-                      </button>
-                      <button
-                        onClick={async () => {
-                          await auditarImpressao(f.id_factura)
-                          imprimirTalaoServico(f)
-                        }}
-                        style={{
-                          padding: "8px 10px",
-                          background: "rgba(155,89,182,0.15)",
-                          border: "1px solid rgba(155,89,182,0.3)",
-                          color: "#9b59b6", borderRadius: "8px",
-                          fontSize: "11px", fontWeight: "600",
-                          cursor: "pointer", whiteSpace: "nowrap" as const
-                        }}
-                      >
-                        🧾 Talão
-                      </button>
-                      {/* Botão de entrega para serviços físicos (Folha de Prova) */}
-                      {f.descricao_servico && isServicoFisico(f.descricao_servico) && !f.entregue && (
-                        <button
-                          onClick={async () => {
-                            const key = `entregar-${f.id_factura}`
-                            setAcaoLoading(key)
-                            setMensagem(null)
-                            try {
-                              const res = await fetch("/api/recepcionista/factura/entregar", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ id_factura: f.id_factura }),
-                              })
-                              if (!res.ok) {
-                                const data = await res.json()
-                                setMensagem({ texto: data.error ?? "Erro ao marcar entrega", tipo: "erro" })
-                                return
-                              }
-                              setMensagem({ texto: "Documento marcado como entregue", tipo: "ok" })
-                              // Recarregar dados
-                              const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
-                              const d2 = await r2.json()
-                              if (d2.estudante) setDados(d2.estudante)
-                            } catch {
-                              setMensagem({ texto: "Erro de ligação", tipo: "erro" })
-                            } finally {
-                              setAcaoLoading(null)
-                            }
-                          }}
-                          disabled={acaoLoading === `entregar-${f.id_factura}`}
-                          style={{
-                            padding: "8px 12px",
-                            background: "rgba(59,130,246,0.15)",
-                            border: "1px solid rgba(59,130,246,0.3)",
-                            color: "#3b82f6", borderRadius: "8px",
-                            fontSize: "11px", fontWeight: "600",
-                            cursor: acaoLoading === `entregar-${f.id_factura}` ? "not-allowed" : "pointer",
-                            whiteSpace: "nowrap" as const
-                          }}
-                        >
-                          {acaoLoading === `entregar-${f.id_factura}` ? "..." : "📦 Entregue"}
-                        </button>
-                      )}
-                      {f.entregue && (
-                        <Badge label="Entregue" color="#22c55e" bg="rgba(34,197,94,0.12)" />
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Secao>
-      )}
-
-      {/* ─── CERTIFICADOS ─── */}
-      {dados.certificados.length > 0 && (
-        <Secao titulo={`Certificados (${dados.certificados.length})`}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {dados.certificados.map(c => {
-              const statusCfg = getCertStatusConfig(c.status)
-              const nextStatus = getNextCertStatus(c.status)
-              const isEntregue = c.status === "Entregue"
-
-              return (
-                <div key={c.id_certificado} style={{
-                  display: "flex", justifyContent: "space-between",
-                  alignItems: "center",
-                  background: isEntregue ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.4)",
-                  border: `1px solid ${isEntregue ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.07)"}`,
-                  borderRadius: "10px", padding: "12px 16px",
-                  flexWrap: "wrap", gap: "10px"
-                }}>
-                  <div>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
-                      {c.tipo_certificado === "Conclusao" ? "Certificado de Conclusão" :
-                       c.tipo_certificado === "Participacao" ? "Declaração Académica" :
-                       `Certificado de ${c.tipo_certificado}`}
-                    </div>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
-                      Emitido em {new Date(c.data_emissao).toLocaleDateString("pt-AO")}
-                    </div>
-                    <div style={{ marginTop: "6px" }}>
-                      <span style={{
-                        background: statusCfg.color, color: statusCfg.textColor,
-                        padding: "3px 10px", borderRadius: "20px",
-                        fontSize: "11px", fontWeight: "600"
-                      }}>
-                        {statusCfg.label}
-                      </span>
-                    </div>
-                    {c.descricao && (
-                      <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}>
-                        {c.descricao}
-                      </div>
-                    )}
-                  </div>
-                  <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-                    {/* Botão de imprimir (abre PDF) */}
-                    <a
-                      href={`/api/recepcionista/certificados/${c.id_certificado}/pdf`}
-                      target="_blank"
-                      style={{
-                        padding: "8px 12px",
-                        background: "rgba(45,212,191,0.15)",
-                        border: "1px solid rgba(45,212,191,0.3)",
-                        color: "#2dd4bf", borderRadius: "8px",
-                        fontSize: "11px", fontWeight: "600",
-                        textDecoration: "none",
-                        whiteSpace: "nowrap" as const
-                      }}
-                    >
-                      🖨️ Imprimir
-                    </a>
-                    {/* Botão de avançar status */}
-                    {nextStatus ? (
-                      <button
-                        onClick={async () => {
-                          const key = `status-${c.id_certificado}`
-                          setAcaoLoading(key)
-                          setMensagem(null)
-                          try {
-                            const res = await fetch(`/api/recepcionista/certificados/${c.id_certificado}/status`, {
-                              method: "PUT",
-                              headers: { "Content-Type": "application/json" },
-                              body: JSON.stringify({ status: nextStatus }),
-                            })
-                            if (!res.ok) {
-                              const data = await res.json()
-                              setMensagem({ texto: data.error ?? "Erro ao atualizar status", tipo: "erro" })
-                              return
-                            }
-                            setMensagem({ texto: `Certificado atualizado para "${getCertStatusConfig(nextStatus).label}"`, tipo: "ok" })
-                            // Recarregar dados
-                            const r2 = await fetch(`/api/recepcionista/estudante/${id}`)
-                            const d2 = await r2.json()
-                            if (d2.estudante) setDados(d2.estudante)
-                          } catch {
-                            setMensagem({ texto: "Erro de ligação", tipo: "erro" })
-                          } finally {
-                            setAcaoLoading(null)
-                          }
-                        }}
-                        disabled={acaoLoading === `status-${c.id_certificado}`}
-                        style={{
-                          padding: "8px 12px",
-                          background: "rgba(59,130,246,0.15)",
-                          border: "1px solid rgba(59,130,246,0.3)",
-                          color: "#3b82f6", borderRadius: "8px",
-                          fontSize: "11px", fontWeight: "600",
-                          cursor: acaoLoading === `status-${c.id_certificado}` ? "not-allowed" : "pointer",
-                          whiteSpace: "nowrap" as const
-                        }}
-                      >
-                        {acaoLoading === `status-${c.id_certificado}` ? "..." : `→ ${getCertStatusConfig(nextStatus).label}`}
-                      </button>
-                    ) : null}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </Secao>
-      )}
-
-      {/* ─── DECLARAÇÕES ─── */}
-      {dados.declaracoes && dados.declaracoes.length > 0 && (
-        <Secao titulo={`Declarações Académicas (${dados.declaracoes.length})`}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {dados.declaracoes.map(d => (
-              <div key={d.id_declaracao} style={{
-                display: "flex", justifyContent: "space-between",
-                alignItems: "center",
-                background: "rgba(13,15,20,0.4)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                borderRadius: "10px", padding: "12px 16px",
-                flexWrap: "wrap", gap: "10px"
-              }}>
-                <div>
-                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
-                    {d.numero_documento}
-                  </div>
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
-                    {d.ano_lectivo} — Emitido em {new Date(d.data_emissao).toLocaleDateString("pt-AO")}
-                  </div>
-                </div>
-                <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-                  <a
-                    href={`/api/recepcionista/declaracoes/${d.id_declaracao}/pdf`}
-                    target="_blank"
-                    style={{
-                      padding: "8px 12px",
-                      background: "rgba(45,212,191,0.15)",
-                      border: "1px solid rgba(45,212,191,0.3)",
-                      color: "#2dd4bf", borderRadius: "8px",
-                      fontSize: "11px", fontWeight: "600",
-                      textDecoration: "none",
-                      whiteSpace: "nowrap" as const
-                    }}
-                  >
-                    🖨️ Imprimir
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Secao>
-      )}
-
       {/* ─── NOTAS DE COBRANÇA PENDENTES ─── */}
       {dados.notas_cobranca.length > 0 && (
-        <Secao titulo={`Outras cobranças pendentes (${dados.notas_cobranca.length})`}>
+        <Secao titulo={`Outras cobranças pendentes (${dados.notas_cobranca.length})`} defaultExpanded={false}>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {dados.notas_cobranca.map(n => (
               <div key={n.id_nota_cobranca} style={{
