@@ -106,6 +106,15 @@ export async function GET(
         orderBy: { data_submissao: "desc" },
         take: 1,
       },
+      declaracoes: {
+        select: {
+          id_declaracao: true,
+          numero_documento: true,
+          ano_lectivo: true,
+          data_emissao: true,
+        },
+        orderBy: { data_emissao: "desc" },
+      },
     },
   })
 

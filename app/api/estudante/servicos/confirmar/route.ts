@@ -17,7 +17,14 @@ export async function POST(request: Request) {
 
     const estudante = await prisma.estudante.findUnique({
       where: { id_usuario: parseInt(session.user.id) },
-      select: { id_estudante: true }
+      select: {
+        id_estudante: true,
+        numero_estudante: true,
+        ano_electivo: true,
+        curso: {
+          select: { nome_curso: true }
+        }
+      }
     })
 
     if (!estudante) {
@@ -146,14 +153,34 @@ export async function POST(request: Request) {
         })
       }
       
-      // Declaração Académica → criar certificado físico (tipo Participacao)
+      // Declaração Académica → criar registo na tabela Declaracao
+      // para a recepcionista imprimir (físico, sem QR code)
       if (desc.includes("declara") && desc.includes("acad")) {
+        const anoLectivo = await getAnoLectivo()
+        const declarationCount = await prisma.declaracao.count({
+          where: { id_estudante: estudante.id_estudante }
+        })
+        const sequence = (declarationCount + 1).toString().padStart(3, '0')
+        const numero = estudante.numero_estudante || String(estudante.id_estudante)
+        const numero_documento = `DECL-${anoLectivo}-${numero}-${sequence}`
+
+        await prisma.declaracao.create({
+          data: {
+            id_estudante: estudante.id_estudante,
+            numero_documento,
+            ano_lectivo: anoLectivo,
+          }
+        })
+      }
+
+      // Certificado de Disciplinas → criar certificado físico (tipo Disciplina)
+      if (desc.includes("certificado") && desc.includes("disciplinas")) {
         await prisma.certificado.create({
           data: {
             id_estudante: estudante.id_estudante,
             data_emissao: systemDate,
-            tipo_certificado: "Participacao",
-            descricao: `Declaração Académica (Física) - ${factura.descricao_servico}`,
+            tipo_certificado: "Disciplina",
+            descricao: `Certificado de Disciplinas (Físico) - ${factura.descricao_servico}`,
             isFisico: true,
             status: "Solicitado",
           }

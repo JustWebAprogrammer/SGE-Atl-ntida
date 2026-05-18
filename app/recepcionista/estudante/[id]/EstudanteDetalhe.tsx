@@ -35,6 +35,13 @@ type Certificado = {
   status: string
 }
 
+type DeclaracaoItem = {
+  id_declaracao: number
+  numero_documento: string
+  ano_lectivo: string
+  data_emissao: string
+}
+
 // Workflow de status dos certificados
 const CERT_STATUS_FLOW = [
   { value: "Solicitado", label: "Solicitado", color: "rgba(240,165,0,0.12)", textColor: "#f0a500" },
@@ -86,6 +93,7 @@ type EstudanteDetalhe = {
   facturas: Factura[]
   notas_cobranca: { id_nota_cobranca: number; descricao: string; valor: number; data_vencimento: string }[]
   monografias: { id_monografia: number; titulo: string; estado: string; data_submissao: string }[]
+  declaracoes: DeclaracaoItem[]
 }
 
 function Badge({ label, color, bg }: { label: string; color: string; bg: string }) {
@@ -733,6 +741,50 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                 </div>
               )
             })}
+          </div>
+        </Secao>
+      )}
+
+      {/* ─── DECLARAÇÕES ─── */}
+      {dados.declaracoes && dados.declaracoes.length > 0 && (
+        <Secao titulo={`Declarações Académicas (${dados.declaracoes.length})`}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {dados.declaracoes.map(d => (
+              <div key={d.id_declaracao} style={{
+                display: "flex", justifyContent: "space-between",
+                alignItems: "center",
+                background: "rgba(13,15,20,0.4)",
+                border: "1px solid rgba(255,255,255,0.07)",
+                borderRadius: "10px", padding: "12px 16px",
+                flexWrap: "wrap", gap: "10px"
+              }}>
+                <div>
+                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                    {d.numero_documento}
+                  </div>
+                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                    {d.ano_lectivo} — Emitido em {new Date(d.data_emissao).toLocaleDateString("pt-AO")}
+                  </div>
+                </div>
+                <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                  <a
+                    href={`/api/recepcionista/declaracoes/${d.id_declaracao}/pdf`}
+                    target="_blank"
+                    style={{
+                      padding: "8px 12px",
+                      background: "rgba(45,212,191,0.15)",
+                      border: "1px solid rgba(45,212,191,0.3)",
+                      color: "#2dd4bf", borderRadius: "8px",
+                      fontSize: "11px", fontWeight: "600",
+                      textDecoration: "none",
+                      whiteSpace: "nowrap" as const
+                    }}
+                  >
+                    🖨️ Imprimir
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </Secao>
       )}

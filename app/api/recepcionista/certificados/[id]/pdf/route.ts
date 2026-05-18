@@ -6,6 +6,7 @@ import { authOptions } from "@/lib/auth"
 import { renderToBuffer } from "@react-pdf/renderer"
 import CertificadoConclusaoPDF from "@/app/components/CertificadoConclusaoPDF"
 import CertificadoPDF from "@/app/components/CertificadoPDF"
+import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
 import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
@@ -167,11 +168,45 @@ export async function GET(
       )
 
     } else if (certificado.tipo_certificado === "Participacao") {
-      // Redirect to the existing declaration PDF route
-      const url = new URL(request.url)
-      const baseUrl = `${url.protocol}//${url.host}`
-      return NextResponse.redirect(
-        new URL(`/api/recepcionista/estudantes/${student.id_estudante}/declaracao/pdf`, baseUrl)
+      // Generate Declaração Académica PDF inline (like other certificate types)
+      const currentYear = student.ano_current || 3
+      let logoBase64 = ""
+      try {
+        const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
+        const logoBuffer = readFileSync(logoPath)
+        logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`
+      } catch { }
+
+      const systemDate = await getSystemDate()
+
+      // Get president signature
+      const presidentSignature = await prisma.assinaturaPresidente.findFirst({
+        where: { data_fim: null }
+      })
+
+      let signatureBase64 = presidentSignature?.imagem_base64 || ""
+      if (!signatureBase64 && presidentSignature) {
+        try {
+          const signaturePath = join(process.cwd(), "public", presidentSignature.caminho_arquivo)
+          const signatureBuffer = readFileSync(signaturePath)
+          signatureBase64 = `data:image/png;base64,${signatureBuffer.toString("base64")}`
+        } catch { }
+      }
+
+      pdfBuffer = await renderToBuffer(
+        React.createElement(DeclaracaoPDF, {
+          studentName: student.nome_completo,
+          studentNumber: student.numero_estudante || "",
+          courseName: student.curso.nome_curso,
+          currentYear,
+          anoLectivo,
+          presidentSignature: signatureBase64,
+          presidentName: presidentSignature?.nome_presidente || "",
+          documentNumber: `DECL-${anoLectivo}-${student.numero_estudante}-001`,
+          qrCodeUrl: "",
+          logoUrl: logoBase64,
+          systemDate
+        }) as any
       )
 
     } else {

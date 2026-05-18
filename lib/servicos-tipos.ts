@@ -5,6 +5,7 @@
 export const SERVICOS = {
   FOLHA_PROVA: "Folha de Prova",
   CERTIFICADO_CONCLUSAO: "Certificado de Conclusão",
+  CERTIFICADO_DISCIPLINAS: "Certificado de Disciplinas",
   DECLARACAO_ACADEMICA: "Declaração Académica",
   TAXA_MONOGRAFIA: "Taxa de Monografia",
   REMATRICULA: "Taxa de Rematrícula",

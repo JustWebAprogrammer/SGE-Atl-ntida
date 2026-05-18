@@ -34,19 +34,19 @@
 
 ### Current Stack
 
-| Layer | Technology | Why |
-|---|---|---|
-| Frontend | Next.js 15 + TypeScript | File-based routing, React components, one codebase |
-| Styling | Tailwind CSS | Utility-first, no separate CSS files |
-| Auth | NextAuth JWT (custom refresh-jwt endpoint) | JWT strategy with role-based protection, refresh endpoint to update session after profile edit |
-| Backend | Next.js API Routes | Same codebase as frontend, no separate server needed |
-| ORM | Prisma 6 | Type-safe database queries, schema-first, auto migrations |
-| Database | PostgreSQL (Neon) | Cloud-hosted PostgreSQL with pooled + direct connection |
-| DB Driver | @prisma/adapter-pg | Required by Prisma 6 for direct PostgreSQL connection |
-| Password | bcryptjs | Secure password hashing |
-| PDF Generation | @react-pdf/renderer | React components for generating professional certificates & declarations |
-| Calendar | react-day-picker + date-fns (locale ptBR) | Date picker with Portuguese locale |
-| Runtime | Node.js v22 | Required for Next.js |
+| Layer          | Technology                                 | Why                                                                                            |
+| -------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| Frontend       | Next.js 15 + TypeScript                    | File-based routing, React components, one codebase                                             |
+| Styling        | Tailwind CSS                               | Utility-first, no separate CSS files                                                           |
+| Auth           | NextAuth JWT (custom refresh-jwt endpoint) | JWT strategy with role-based protection, refresh endpoint to update session after profile edit |
+| Backend        | Next.js API Routes                         | Same codebase as frontend, no separate server needed                                           |
+| ORM            | Prisma 6                                   | Type-safe database queries, schema-first, auto migrations                                      |
+| Database       | PostgreSQL (Neon)                          | Cloud-hosted PostgreSQL with pooled + direct connection                                        |
+| DB Driver      | @prisma/adapter-pg                         | Required by Prisma 6 for direct PostgreSQL connection                                          |
+| Password       | bcryptjs                                   | Secure password hashing                                                                        |
+| PDF Generation | @react-pdf/renderer                        | React components for generating professional certificates & declarations                       |
+| Calendar       | react-day-picker + date-fns (locale ptBR)  | Date picker with Portuguese locale                                                             |
+| Runtime        | Node.js v22                                | Required for Next.js                                                                           |
 
 ### What is NOT in this stack (and why)
 
@@ -458,67 +458,67 @@ Configura NextAuth com estratégia JWT, incluindo `nome_usuario`, `role`, `e_ges
 
 ### Enums
 
-| Enum | Values |
-|---|---|
-| TipoUsuario | admin \| estudante \| orientador \| recepcionista |
-| EstadoEstudante | EmCurso \| Finalizado \| Desistente \| Suspendido |
-| EstadoMonografia | Submetida \| EmRevisao \| Aprovada \| ParaDefender \| Defendida \| Rejeitada |
-| EstadoPremonografia | Proposto \| Aprovado \| Reprovado \| Cancelado |
-| EstadoSolicitacao | Pendente \| Aceite \| Recusado \| Cancelado |
-| EstadoFactura | Pendente \| Pago \| Atrasado |
-| EstadoNotaCobranca | Pendente \| Pago \| Negociado |
-| FormaPagemento | Multicaixa \| Transferencia \| Dinheiro |
-| TipoCertificado | Conclusao \| Disciplina \| Participacao |
-| StatusCertificado | Solicitado \| EmPreparacao \| ProntoParaLevantamento \| Entregue |
-| TurnoRecepcionista | Manha \| Tarde \| Noite |
-| Semestre | S1 \| S2 |
-| TipoAvaliacao | Normal \| Recurso \| Especial |
-| TipoBolsa | Nenhuma \| Cinquenta \| Cem |
-| EmitidoPor | sistema \| estudante |
-| TipoFaseAvaliacao | AC \| PP1 \| TTP_PP2 \| Exame \| Recurso_ExameEspecial |
-| TipoDocumentoLayout | CertificadoConclusao \| DeclaracaoAcademica \| CertificadoDisciplinas |
+| Enum                | Values                                                                      |
+| ------------------- | --------------------------------------------------------------------------- |
+| TipoUsuario         | admin\| estudante \| orientador \| recepcionista                            |
+| EstadoEstudante     | EmCurso\| Finalizado \| Desistente \| Suspendido                            |
+| EstadoMonografia    | Submetida\| EmRevisao \| Aprovada \| ParaDefender \| Defendida \| Rejeitada |
+| EstadoPremonografia | Proposto\| Aprovado \| Reprovado \| Cancelado                               |
+| EstadoSolicitacao   | Pendente\| Aceite \| Recusado \| Cancelado                                  |
+| EstadoFactura       | Pendente\| Pago \| Atrasado                                                 |
+| EstadoNotaCobranca  | Pendente\| Pago \| Negociado                                                |
+| FormaPagemento      | Multicaixa\| Transferencia \| Dinheiro                                      |
+| TipoCertificado     | Conclusao\| Disciplina \| Participacao                                      |
+| StatusCertificado   | Solicitado\| EmPreparacao \| ProntoParaLevantamento \| Entregue             |
+| TurnoRecepcionista  | Manha\| Tarde \| Noite                                                      |
+| Semestre            | S1\| S2                                                                     |
+| TipoAvaliacao       | Normal\| Recurso \| Especial                                                |
+| TipoBolsa           | Nenhuma\| Cinquenta \| Cem                                                  |
+| EmitidoPor          | sistema\| estudante                                                         |
+| TipoFaseAvaliacao   | AC\| PP1 \| TTP_PP2 \| Exame \| Recurso_ExameEspecial                       |
+| TipoDocumentoLayout | CertificadoConclusao\| DeclaracaoAcademica \| CertificadoDisciplinas        |
 
 ### Core Tables
 
-| Model | Description |
-|---|---|
-| **Usuario** | Base user — all roles (admin, estudante, orientador, recepcionista) share this |
-| **Admin** | Admin profile (nome_completo, telefone) |
-| **Orientador** | Professor profile (nome_completo, especialidade, e_gestor, id_departamento) |
-| **Estudante** | Student profile (nome_completo, numero_estudante, id_curso, ano_current, turno, estado, tipo_bolsa) |
-| **Recepcionista** | Receptionist profile (nome_completo, turno) |
-| **Departamento** | Academic department |
-| **Curso** | Course (nome, duracao_anos, turnos) |
-| **Disciplina** | Subject (nome, codigo, creditos, id_departamento, tem_dispensa, nota_dispensa) |
-| **CursoDisciplina** | N:N Curso→Disciplina with ano_curricular + semestre |
-| **ProfessorDisciplina** | Teacher assignment to discipline (id_usuario, id_disciplina, ano_lectivo, semestre) |
-| **Nota** | Full grade record (AC1-3, TTP, PP1-2, Exame, Recurso, Especial, nota_final) |
-| **Monografia** | Monograph/thesis |
-| **MonografiasParaCorrecao** | N:N Monografia→Orientador (correction assignments) |
-| **Premonografia** | Pre-project |
-| **SolicitacaoOrientacao** | Advisor request (estudante→orientador) |
-| **Factura** | Invoice for services |
-| **PagamentoPropina** | Monthly tuition payment (with Multicaixa confirmation code) |
-| **NotaCobranca** | Debt collection notice |
-| **ConfiguracaoTaxas** | Singleton: global fee config (propina fallbacks per year, multa, taxa reenrollment, duracao_aula) |
-| **PrecoCurso** | Per-course pricing (propina + multa by curricular year) |
-| **Servico** | Dynamic services (nome, valor, activo) |
-| **Certificado** | Certificate request/status |
-| **CertificadoDisciplinas** | N:N Certificado→Disciplina |
-| **Declaracao** | Academic declaration with QR verification code |
-| **HorarioAula** | Weekly class schedule (curso, turno, dia, hora, sala) |
-| **PlanoProva** | Exam calendar (PP1, PP2, Exame, Recurso, Especial) |
-| **PeriodoProva** | Exam period date range |
-| **SistemaConfig** | Singleton: system config (ano lectivo, matricula window, simulador, semestre_atual) |
-| **FaseAvaliacao** | Evaluation phase control (AC, PP1, TTP/PP2, Exame, Recurso/Especial) |
-| **SnapshotSemestre** | Semester snapshots for re-enrollment & finalization |
-| **AuditLog** | Audit trail (quem, quando, IP, valor antes/depois) |
-| **AssinaturaGestor** | Gestor signature image per departamento |
-| **AssinaturaPresidente** | President signature image |
-| **AssinaturaDiretor** | Director signature image |
-| **LayoutDocumento** | Document layout templates (JSON content) |
-| **CurriculoAcademico** | Student's academic curriculum per year |
-| **EstatisticasMonografiasDepartamento** | Department monograph statistics |
+| Model                                         | Description                                                                                         |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Usuario**                             | Base user — all roles (admin, estudante, orientador, recepcionista) share this                     |
+| **Admin**                               | Admin profile (nome_completo, telefone)                                                             |
+| **Orientador**                          | Professor profile (nome_completo, especialidade, e_gestor, id_departamento)                         |
+| **Estudante**                           | Student profile (nome_completo, numero_estudante, id_curso, ano_current, turno, estado, tipo_bolsa) |
+| **Recepcionista**                       | Receptionist profile (nome_completo, turno)                                                         |
+| **Departamento**                        | Academic department                                                                                 |
+| **Curso**                               | Course (nome, duracao_anos, turnos)                                                                 |
+| **Disciplina**                          | Subject (nome, codigo, creditos, id_departamento, tem_dispensa, nota_dispensa)                      |
+| **CursoDisciplina**                     | N:N Curso→Disciplina with ano_curricular + semestre                                                |
+| **ProfessorDisciplina**                 | Teacher assignment to discipline (id_usuario, id_disciplina, ano_lectivo, semestre)                 |
+| **Nota**                                | Full grade record (AC1-3, TTP, PP1-2, Exame, Recurso, Especial, nota_final)                         |
+| **Monografia**                          | Monograph/thesis                                                                                    |
+| **MonografiasParaCorrecao**             | N:N Monografia→Orientador (correction assignments)                                                 |
+| **Premonografia**                       | Pre-project                                                                                         |
+| **SolicitacaoOrientacao**               | Advisor request (estudante→orientador)                                                             |
+| **Factura**                             | Invoice for services                                                                                |
+| **PagamentoPropina**                    | Monthly tuition payment (with Multicaixa confirmation code)                                         |
+| **NotaCobranca**                        | Debt collection notice                                                                              |
+| **ConfiguracaoTaxas**                   | Singleton: global fee config (propina fallbacks per year, multa, taxa reenrollment, duracao_aula)   |
+| **PrecoCurso**                          | Per-course pricing (propina + multa by curricular year)                                             |
+| **Servico**                             | Dynamic services (nome, valor, activo)                                                              |
+| **Certificado**                         | Certificate request/status                                                                          |
+| **CertificadoDisciplinas**              | N:N Certificado→Disciplina                                                                         |
+| **Declaracao**                          | Academic declaration with QR verification code                                                      |
+| **HorarioAula**                         | Weekly class schedule (curso, turno, dia, hora, sala)                                               |
+| **PlanoProva**                          | Exam calendar (PP1, PP2, Exame, Recurso, Especial)                                                  |
+| **PeriodoProva**                        | Exam period date range                                                                              |
+| **SistemaConfig**                       | Singleton: system config (ano lectivo, matricula window, simulador, semestre_atual)                 |
+| **FaseAvaliacao**                       | Evaluation phase control (AC, PP1, TTP/PP2, Exame, Recurso/Especial)                                |
+| **SnapshotSemestre**                    | Semester snapshots for re-enrollment & finalization                                                 |
+| **AuditLog**                            | Audit trail (quem, quando, IP, valor antes/depois)                                                  |
+| **AssinaturaGestor**                    | Gestor signature image per departamento                                                             |
+| **AssinaturaPresidente**                | President signature image                                                                           |
+| **AssinaturaDiretor**                   | Director signature image                                                                            |
+| **LayoutDocumento**                     | Document layout templates (JSON content)                                                            |
+| **CurriculoAcademico**                  | Student's academic curriculum per year                                                              |
+| **EstatisticasMonografiasDepartamento** | Department monograph statistics                                                                     |
 
 ### Nota Model (full structure)
 
@@ -584,15 +584,16 @@ Se exame_especial lançado
 
 ### Sistema de Preços Hierárquico
 
-| Item | Escopo |
-|---|---|
-| Propina Mensal | 🟠 **ESPECIFICO POR CURSO e ANO** (via `PrecoCurso`) |
-| Multa de Atraso | 🟠 **ESPECIFICO POR CURSO e ANO** |
-| Taxa Monografia | 🔵 GLOBAL IGUAL PARA TODOS |
-| Folhas de Prova | 🔵 GLOBAL IGUAL PARA TODOS |
-| Taxa Rematrícula | 🔵 GLOBAL (via `ConfiguracaoTaxas.taxa_reenrollment`) |
+| Item              | Escopo                                                      |
+| ----------------- | ----------------------------------------------------------- |
+| Propina Mensal    | 🟠**ESPECIFICO POR CURSO e ANO** (via `PrecoCurso`) |
+| Multa de Atraso   | 🟠**ESPECIFICO POR CURSO e ANO**                      |
+| Taxa Monografia   | 🔵 GLOBAL IGUAL PARA TODOS                                  |
+| Folhas de Prova   | 🔵 GLOBAL IGUAL PARA TODOS                                  |
+| Taxa Rematrícula | 🔵 GLOBAL (via `ConfiguracaoTaxas.taxa_reenrollment`)     |
 
 **Lógica de busca** (`lib/precos.ts`):
+
 1. Sistema procura PRIMEIRO por preço definido especificamente para aquele curso e ano (`PrecoCurso`)
 2. Se não encontrar valor definido, usa automaticamente o valor padrão global (`ConfiguracaoTaxas`)
 3. Aplica desconto de bolsa se aplicável (50% ou 100%)
@@ -604,22 +605,22 @@ const { valor_propina, valor_com_desconto, valor_multa, tipo_bolsa, origem } = a
 
 ### Sistema de Bolsas
 
-| Tipo | Efeito |
-|---|---|
-| Nenhuma | Paga 100% do valor |
+| Tipo      | Efeito                                   |
+| --------- | ---------------------------------------- |
+| Nenhuma   | Paga 100% do valor                       |
 | Cinquenta | Paga 50% (metade) — sem multa de atraso |
-| Cem | Isento — não paga nada, sem multa |
+| Cem       | Isento — não paga nada, sem multa      |
 
 ### Valores Padrão Globais (Fallback via ConfiguracaoTaxas)
 
-| Year | Monthly fee | Late fee |
-|---|---|---|
-| 1st year | 15,000 Kz | 500 Kz |
-| 2nd year | 20,000 Kz | 500 Kz |
-| 3rd year | 25,000 Kz | 500 Kz |
-| 4th year | 30,000 Kz | 500 Kz |
-| 5th year | 35,000 Kz | 500 Kz |
-| 6th year | 40,000 Kz | 500 Kz |
+| Year     | Monthly fee | Late fee |
+| -------- | ----------- | -------- |
+| 1st year | 15,000 Kz   | 500 Kz   |
+| 2nd year | 20,000 Kz   | 500 Kz   |
+| 3rd year | 25,000 Kz   | 500 Kz   |
+| 4th year | 30,000 Kz   | 500 Kz   |
+| 5th year | 35,000 Kz   | 500 Kz   |
+| 6th year | 40,000 Kz   | 500 Kz   |
 
 ### Monthly Propina Flow
 
@@ -708,12 +709,12 @@ O ano curricular e semestre das disciplinas vêm do `CursoDisciplina` (tabela qu
 
 ### Conflitos de Professor
 
-| Regra | Estado |
-|---|---|
-| Professor não pode leccionar duas disciplinas ao mesmo tempo (mesmo em cursos diferentes) | ✅ Implementado |
+| Regra                                                                                           | Estado          |
+| ----------------------------------------------------------------------------------------------- | --------------- |
+| Professor não pode leccionar duas disciplinas ao mesmo tempo (mesmo em cursos diferentes)      | ✅ Implementado |
 | Apenas PP1 e PP2 verificados para conflitos (Exame/Recurso/Especial são vigiados por proctors) | ✅ Implementado |
-| Verificação cross-curso | ✅ Implementado |
-| Exclui apenas a mesma disciplina + curso + ano + semestre | ✅ Implementado |
+| Verificação cross-curso                                                                       | ✅ Implementado |
+| Exclui apenas a mesma disciplina + curso + ano + semestre                                       | ✅ Implementado |
 
 ### Monografia Workflow
 
@@ -772,15 +773,15 @@ Submetida → EmRevisao → Aprovada → ParaDefender → Defendida
 
 ## 10. Test Credentials (after running seed)
 
-| Role | Email | Password | Contexto |
-|---|---|---|---|
-| Admin | admin@ispatlantida.ao | admin123 | — |
-| Student (2º ano) | estudante@ispatlantida.ao | student123 | Ben — notas e pagamentos |
-| Student (4º ano) | ana@ispatlantida.ao | student4ano123 | Ana Silva — monografia e certificados |
-| Student (4º ano) | carlos@ispatlantida.ao | student4ano123 | Carlos Manuel — monografia (orientador: Prof. João) |
-| Orientador | orientador@ispatlantida.ao | orientador123 | Prof. Walter Neto — com funções de gestor (e_gestor=true) |
-| Orientador 2 (NOT gestor) | orientador2@ispatlantida.ao | orientador123 | Prof. João Mendes — sem funções de gestor |
-| Receptionist | recepcao@ispatlantida.ao | recepcao123 | — |
+| Role                      | Email                       | Password       | Contexto                                                     |
+| ------------------------- | --------------------------- | -------------- | ------------------------------------------------------------ |
+| Admin                     | admin@ispatlantida.ao       | admin123       | —                                                           |
+| Student (2º ano)         | estudante@ispatlantida.ao   | student123     | Ben — notas e pagamentos                                    |
+| Student (4º ano)         | ana@ispatlantida.ao         | student4ano123 | Ana Silva — monografia e certificados                       |
+| Student (4º ano)         | carlos@ispatlantida.ao      | student4ano123 | Carlos Manuel — monografia (orientador: Prof. João)        |
+| Orientador                | orientador@ispatlantida.ao  | orientador123  | Prof. Walter Neto — com funções de gestor (e_gestor=true) |
+| Orientador 2 (NOT gestor) | orientador2@ispatlantida.ao | orientador123  | Prof. João Mendes — sem funções de gestor                |
+| Receptionist              | recepcao@ispatlantida.ao    | recepcao123    | —                                                           |
 
 > Payment confirmation code: visible in terminal after seed or via `npx prisma studio` → table `PagamentoPropina`.
 
@@ -790,16 +791,16 @@ Submetida → EmRevisao → Aprovada → ParaDefender → Defendida
 
 O sistema usa múltiplos ficheiros de seed para organização:
 
-| File | Purpose |
-|---|---|
-| `prisma/seed-base.ts` | Dados base: departamento, curso, admin, orientadores, recepcionista, preços |
-| `prisma/seed-estudantes.ts` | Estudantes com notas, disciplinas, currículo académico |
-| `prisma/seed-propinas.ts` | Propinas/mensalidades |
-| `prisma/seed-registos.ts` | Registos académicos |
-| `prisma/seed-semestre.ts` | Configuração de semestre |
-| `prisma/seed-rematricula.ts` | Rematrícula |
-| `prisma/seed-snapshot-finalizados.ts` | Snapshot de estudantes finalizados |
-| `prisma/seed.ts` | Seed principal que chama os seeds acima |
+| File                                    | Purpose                                                                      |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| `prisma/seed-base.ts`                 | Dados base: departamento, curso, admin, orientadores, recepcionista, preços |
+| `prisma/seed-estudantes.ts`           | Estudantes com notas, disciplinas, currículo académico                     |
+| `prisma/seed-propinas.ts`             | Propinas/mensalidades                                                        |
+| `prisma/seed-registos.ts`             | Registos académicos                                                         |
+| `prisma/seed-semestre.ts`             | Configuração de semestre                                                   |
+| `prisma/seed-rematricula.ts`          | Rematrícula                                                                 |
+| `prisma/seed-snapshot-finalizados.ts` | Snapshot de estudantes finalizados                                           |
+| `prisma/seed.ts`                      | Seed principal que chama os seeds acima                                      |
 
 Run with: `npx tsx prisma/seed.ts`
 
@@ -844,170 +845,187 @@ npx tsx prisma/seed.ts
 ### Module 1 — Student Portal ✅ COMPLETO
 
 #### Visão Geral (/estudante)
-- [x] Perfil: nome, curso, ano actual, estado da propina
-- [x] Seletor de ano/semestre com disciplinas da BD
-- [x] Banner de propina pendente com referência e valor
-- [x] API `GET /api/estudante/perfil`
-- [x] API `GET /api/estudante/disciplinas?ano=&semestre=`
+
+- [X] Perfil: nome, curso, ano actual, estado da propina
+- [X] Seletor de ano/semestre com disciplinas da BD
+- [X] Banner de propina pendente com referência e valor
+- [X] API `GET /api/estudante/perfil`
+- [X] API `GET /api/estudante/disciplinas?ano=&semestre=`
 
 #### Notas (/estudante/notas)
-- [x] Tabela agrupada por Ano → Semestre
-- [x] Badge: Aprovado / Reprovado / Dispensado / Em Curso
-- [x] Nota parcial a amarelo para disciplinas em curso
-- [x] Painel expandido: componentes AC + cadeia de exames com setas
-- [x] Nota seca identificada para recurso e especial
-- [x] Média por ano + Média geral
-- [x] Notas do ano corrente bloqueadas se propina pendente
-- [x] API `GET /api/estudante/notas`
+
+- [X] Tabela agrupada por Ano → Semestre
+- [X] Badge: Aprovado / Reprovado / Dispensado / Em Curso
+- [X] Nota parcial a amarelo para disciplinas em curso
+- [X] Painel expandido: componentes AC + cadeia de exames com setas
+- [X] Nota seca identificada para recurso e especial
+- [X] Média por ano + Média geral
+- [X] Notas do ano corrente bloqueadas se propina pendente
+- [X] API `GET /api/estudante/notas`
 
 #### Pagamentos (/estudante/pagamentos)
-- [x] Resumo: total em dívida, pagamentos pendentes, pagamentos efectuados
-- [x] Histórico completo ordenado
-- [x] Estado: Pendente / Atrasado / Pago com cores
-- [x] Valor base + multa separados
-- [x] Referência Multicaixa + código de 3 dígitos
-- [x] Protecção contra pagamento duplicado
-- [x] API `GET /api/estudante/pagamentos`
-- [x] API `POST /api/estudante/pagamentos/confirmar`
+
+- [X] Resumo: total em dívida, pagamentos pendentes, pagamentos efectuados
+- [X] Histórico completo ordenado
+- [X] Estado: Pendente / Atrasado / Pago com cores
+- [X] Valor base + multa separados
+- [X] Referência Multicaixa + código de 3 dígitos
+- [X] Protecção contra pagamento duplicado
+- [X] API `GET /api/estudante/pagamentos`
+- [X] API `POST /api/estudante/pagamentos/confirmar`
 
 #### Monografia (/estudante/monografia)
-- [x] Submeter pré-projecto e monografia
-- [x] Upload de PDF (máx 10MB)
-- [x] Co-autor e Co-orientador
-- [x] API `GET /api/estudante/monografia`
-- [x] API `POST /api/estudante/monografia/upload`
-- [x] API `POST /api/estudante/premonografia`
+
+- [X] Submeter pré-projecto e monografia
+- [X] Upload de PDF (máx 10MB)
+- [X] Co-autor e Co-orientador
+- [X] API `GET /api/estudante/monografia`
+- [X] API `POST /api/estudante/monografia/upload`
+- [X] API `POST /api/estudante/premonografia`
 
 #### Certificados (/estudante/certificados)
-- [x] Lista de certificados + pedir novo
-- [x] Download PDF
-- [x] Certificado de Disciplinas + Conclusão
-- [x] API `GET /api/estudante/certificados`
-- [x] API `POST /api/estudante/certificados/pedir`
+
+- [X] Lista de certificados + pedir novo
+- [X] Download PDF
+- [X] Certificado de Disciplinas + Conclusão
+- [X] API `GET /api/estudante/certificados`
+- [X] API `POST /api/estudante/certificados/pedir`
 
 #### Horário (/estudante/horario)
-- [x] Grade semanal do estudante (por turno)
-- [x] Disciplinas pendentes de anos anteriores
-- [x] Nome do professor por disciplina
-- [x] API `GET /api/estudante/horario`
+
+- [X] Grade semanal do estudante (por turno)
+- [X] Disciplinas pendentes de anos anteriores
+- [X] Nome do professor por disciplina
+- [X] API `GET /api/estudante/horario`
 
 #### Serviços (/estudante/servicos)
-- [x] Comprar serviços (declarações, etc.)
-- [x] Confirmar pagamento
-- [x] API `GET /api/estudante/servicos`
-- [x] API `POST /api/estudante/servicos/confirmar`
+
+- [X] Comprar serviços (declarações, etc.)
+- [X] Confirmar pagamento
+- [X] API `GET /api/estudante/servicos`
+- [X] API `POST /api/estudante/servicos/confirmar`
 
 ---
 
 ### Module 2 — Grade Management ✅ COMPLETO
 
-- [x] Modelo `ProfessorDisciplina` no schema
-- [x] Seed com disciplinas atribuídas (BD1, RC1, SO1)
-- [x] `lib/audit.ts` — helper logAudit()
-- [x] `lib/notas.ts` — calcularNotaFinal()
-- [x] Dashboard do orientador com edição inline
-- [x] Dashboard do gestor com visão geral
-- [x] `/gestor/estudantes` + `/gestor/disciplinas`
-- [x] Edição inline de notas com pré-visualização
-- [x] Filtros por curso, ano, semestre, turno
-- [x] Gestão de professores responsáveis (1 por disciplina)
-- [x] Conflitos de professor (horário + provas)
-- [x] Correção: ano/semestre vindo do CursoDisciplina (não da Disciplina)
-- [x] Bloqueio de notas para anos futuros
+- [X] Modelo `ProfessorDisciplina` no schema
+- [X] Seed com disciplinas atribuídas (BD1, RC1, SO1)
+- [X] `lib/audit.ts` — helper logAudit()
+- [X] `lib/notas.ts` — calcularNotaFinal()
+- [X] Dashboard do orientador com edição inline
+- [X] Dashboard do gestor com visão geral
+- [X] `/gestor/estudantes` + `/gestor/disciplinas`
+- [X] Edição inline de notas com pré-visualização
+- [X] Filtros por curso, ano, semestre, turno
+- [X] Gestão de professores responsáveis (1 por disciplina)
+- [X] Conflitos de professor (horário + provas)
+- [X] Correção: ano/semestre vindo do CursoDisciplina (não da Disciplina)
+- [X] Bloqueio de notas para anos futuros
 
 #### Plano Escolar (Horário + Provas)
-- [x] `/gestor/horario` — grade semanal com turno, impressão
-- [x] `/gestor/plano-provas` — calendário de provas, impressão
-- [x] `/gestor/curriculo` — gestão do currículo
-- [x] API CRUD completo para horário, provas, período
-- [x] Turnos configuráveis no curso
-- [x] Duração/intervalo configurável no admin
+
+- [X] `/gestor/horario` — grade semanal com turno, impressão
+- [X] `/gestor/plano-provas` — calendário de provas, impressão
+- [X] `/gestor/curriculo` — gestão do currículo
+- [X] API CRUD completo para horário, provas, período
+- [X] Turnos configuráveis no curso
+- [X] Duração/intervalo configurável no admin
 
 ---
 
 ### Module 3 — Monografia Workflow ✅ COMPLETO
 
 #### Estudante
-- [x] `/estudante/orientador` — pedir orientação
-- [x] Ver estado do pedido
-- [x] API `POST/GET /api/estudante/solicitacao-orientacao`
+
+- [X] `/estudante/orientador` — pedir orientação
+- [X] Ver estado do pedido
+- [X] API `POST/GET /api/estudante/solicitacao-orientacao`
 
 #### Orientador
-- [x] `/orientador/solicitacoes` — aceitar/rejeitar
-- [x] `/orientador/monografias` — rever, feedback
-- [x] APIs completas
+
+- [X] `/orientador/solicitacoes` — aceitar/rejeitar
+- [X] `/orientador/monografias` — rever, feedback
+- [X] APIs completas
 
 #### Gestor
-- [x] `/gestor/monografias` — agendar defesa, nota final
-- [x] Pipeline visual de monografias
-- [x] APIs completas
+
+- [X] `/gestor/monografias` — agendar defesa, nota final
+- [X] Pipeline visual de monografias
+- [X] APIs completas
 
 ---
 
 ### Module 4 — Recepcionista ✅ COMPLETO
 
-- [x] `/recepcionista` — pesquisa de estudante (debounce)
-- [x] `/recepcionista/estudante/[id]` — detalhe completo
-- [x] Confirmar levantamento de certificado
-- [x] Registar pagamento de folhas de prova (quantidade múltipla)
-- [x] Registar pagamento de taxa de monografia
-- [x] Limite de 2 impressões por documento
-- [x] APIs completas
+- [X] `/recepcionista` — pesquisa de estudante (debounce)
+- [X] `/recepcionista/estudante/[id]` — detalhe completo
+- [X] Confirmar levantamento de certificado
+- [X] Registar pagamento de folhas de prova (quantidade múltipla)
+- [X] Registar pagamento de taxa de monografia
+- [X] Limite de 2 impressões por documento
+- [X] APIs completas
 
 ---
 
 ### Module 5 — Admin ✅ 100% COMPLETO
 
-- [x] Dashboard com stats
-- [x] Gestão de Estudantes (CRUD + notas + pagamentos)
-- [x] Gestão de Orientadores (pesquisa, filtros, gestor)
-- [x] Gestão de Recepcionistas
-- [x] Gestão de Administradores
-- [x] Gestão de Cursos (com preços por ano)
-- [x] Gestão de Disciplinas
-- [x] Gestão de Departamentos (com gestor)
-- [x] Gestão de Pagamentos
-- [x] Preços Globais + Serviços + Horário
-- [x] Audit Log (filtros avançados, cartões de contexto)
-- [x] Sistema: Ano Lectivo, Semestre, Finalistas, Layout Documentos, Assinaturas, Registos
-- [x] Simulador de data do sistema
+- [X] Dashboard com stats
+- [X] Gestão de Estudantes (CRUD + notas + pagamentos)
+- [X] Gestão de Orientadores (pesquisa, filtros, gestor)
+- [X] Gestão de Recepcionistas
+- [X] Gestão de Administradores
+- [X] Gestão de Cursos (com preços por ano)
+- [X] Gestão de Disciplinas
+- [X] Gestão de Departamentos (com gestor)
+- [X] Gestão de Pagamentos
+- [X] Preços Globais + Serviços + Horário
+- [X] Audit Log (filtros avançados, cartões de contexto)
+- [X] Sistema: Ano Lectivo, Semestre, Finalistas, Layout Documentos, Assinaturas, Registos
+- [X] Simulador de data do sistema
 
 ---
 
 ## 14. Extra Features (Post-Completion)
 
 ### Rematrícula
-- [x] `lib/reenrollment.ts` — `processarRematricula()` com snapshot
-- [x] Avanço de ano (com atribuição automática de disciplinas)
-- [x] Repetição de ano (reset só das disciplinas falhadas)
-- [x] Suspensão de estudantes sem rematrícula
-- [x] SnapshotSemestre para preservar dados antes da mudança
+
+- [X] `lib/reenrollment.ts` — `processarRematricula()` com snapshot
+- [X] Avanço de ano (com atribuição automática de disciplinas)
+- [X] Repetição de ano (reset só das disciplinas falhadas)
+- [X] Suspensão de estudantes sem rematrícula
+- [X] SnapshotSemestre para preservar dados antes da mudança
 
 ### Documentos e Assinaturas
-- [x] Declarações académicas com código de verificação
-- [x] Página pública `/verificar/[id]`
-- [x] Assinaturas: Presidente, Gestor (por departamento), Director
-- [x] Layouts de documentos configuráveis (JSON)
-- [x] PDFs com @react-pdf/renderer
+
+- [X] Declarações académicas com código de verificação
+- [X] Página pública `/verificar/[id]`
+- [X] Assinaturas: Presidente, Gestor (por departamento), Director
+- [X] Layouts de documentos configuráveis (JSON)
+- [X] PDFs com @react-pdf/renderer
 
 ### Configuração de Preços por Curso
-- [x] `PrecoCurso` — preço de propina e multa por curso + ano
-- [x] Admin pode configurar no modal de edição de cursos
-- [x] Fallback para valores globais se não houver específico
+
+- [X] `PrecoCurso` — preço de propina e multa por curso + ano
+- [X] Admin pode configurar no modal de edição de cursos
+- [X] Fallback para valores globais se não houver específico
 
 ### Serviços Dinâmicos
-- [x] `Servico` — nome, descrição, valor, activo
-- [x] Admin pode criar/editar/desactivar serviços
-- [x] Estudante compra e confirma pagamento
+
+- [X] `Servico` — nome, descrição, valor, activo
+- [X] Admin pode criar/editar/desactivar serviços
+- [X] Estudante compra e confirma pagamento
 
 ### Sistema de Bolsas
-- [x] `TipoBolsa`: Nenhuma, Cinquenta (50%), Cem (100%)
-- [x] Isenção de multa para bolseiros
-- [x] Desconto automático no cálculo da propina
+
+- [X] `TipoBolsa`: Nenhuma, Cinquenta (50%), Cem (100%)
+- [X] Isenção de multa para bolseiros
+- [X] Desconto automático no cálculo da propina
 
 ### Gestão Centralizada (Admin + Gestor)
-- [x] `app/admin/adminNav.ts` — fonte única de navegação admin
-- [x] `app/gestor/gestorNav.ts` — navegação gestor com dropdown
+
+- [X] `app/admin/adminNav.ts` — fonte única de navegação admin
+- [X] `app/gestor/gestorNav.ts` — navegação gestor com dropdown
 
 ---
 
@@ -1075,63 +1093,75 @@ export function calcularNotaFinal(nota: NotaInput, disciplina: DisciplinaInput) 
 
 ## 16. UI Design System
 
-| Token | Value |
-|---|---|
-| Background | `#0d0f14` |
-| Card | `#1e2230` |
-| Sidebar | `#13161e` |
-| Primary | `#e03d3d` (red) |
-| Secondary | `#f0a500` (gold) |
-| Teal | `#2dd4bf` |
-| Text | `#e8eaf0` |
-| Muted | `#9098b0` |
-| Dim | `#555e78` |
-| Border | `rgba(255,255,255,0.07)` |
-| Font | `system-ui` |
+| Token      | Value                      |
+| ---------- | -------------------------- |
+| Background | `#0d0f14`                |
+| Card       | `#1e2230`                |
+| Sidebar    | `#13161e`                |
+| Primary    | `#e03d3d` (red)          |
+| Secondary  | `#f0a500` (gold)         |
+| Teal       | `#2dd4bf`                |
+| Text       | `#e8eaf0`                |
+| Muted      | `#9098b0`                |
+| Dim        | `#555e78`                |
+| Border     | `rgba(255,255,255,0.07)` |
+| Font       | `system-ui`              |
 
 ### Status Colours
 
-| State | Colour |
-|---|---|
-| Pass / Paid / Active | `#22c55e` |
+| State                            | Colour      |
+| -------------------------------- | ----------- |
+| Pass / Paid / Active             | `#22c55e` |
 | Pending / Warning / Nota parcial | `#f0a500` |
-| Fail / Late / Error | `#e03d3d` |
-| Dispensado / Info | `#2dd4bf` |
-| Em curso / Sem nota | `#555e78` |
-| Exame Especial | `#9b59b6` |
+| Fail / Late / Error              | `#e03d3d` |
+| Dispensado / Info                | `#2dd4bf` |
+| Em curso / Sem nota              | `#555e78` |
+| Exame Especial                   | `#9b59b6` |
 
 ---
 
 ## 17. Dificuldades e Lições Aprendidas
 
 ### 🚫 **Next.js 15 App Router — `params` é uma Promise**
+
 Todos os endpoints API que recebiam `params.id` deixaram de funcionar pois agora `params` é uma `Promise`.
+
 > ✅ **Solução:** Adicionar `const resolvedParams = await params` ANTES de aceder a qualquer propriedade.
 
 ### 🚫 **Prisma Decimal — Bug `Number(null) = 0`**
+
 `Number(null)` retorna 0 em JavaScript, que é uma nota válida.
+
 > ✅ **Solução:** Sempre verificar com `!= null` ANTES de converter para Number.
 
 ### 🚫 **TurboPack Hydration Errors**
+
 O novo bundler do Next.js 15 causa vários erros de hidratação com datas e formatação.
+
 > ✅ **Solução:** Remover fontes padrão Geist, formatar datas apenas dentro de `useEffect()`.
 
 ### 🚫 **Timezone UTC shift (Africa/Luanda UTC+1)**
+
 `new Date("2025-03-17T00:00:00")` em UTC+1 vira 23:00 UTC do dia anterior.
+
 > ✅ **Solução:** Usar `T12:00:00` (meio-dia) em vez de `T00:00:00` para evitar shift.
 
 ### 🚫 **Sidebar nav overflow**
+
 Quando a sidebar tinha muitos itens, o logout ficava inacessível.
+
 > ✅ **Solução:** `height: 100vh` + `overflow: hidden` no aside, `overflow-y: auto` no nav.
 
 ### 🚫 **JWT não atualiza após edição de perfil**
-> ✅ **Solução:** Endpoint `/api/auth/refresh-jwt` que recarrega dados do DB + `update()` do NextAuth.
 
 ### 🚫 **Disciplinas aparecem no ano/semestre errado**
+
 O código usava `Disciplina.ano_curricular` em vez de `CursoDisciplina.ano_curricular`.
+
 > ✅ **Solução:** Corrigido em 6 ficheiros para usar valores do CursoDisciplina.
 
 ### 🚫 **Edição de notas — valores sobrescritos com null**
+
 > ✅ **Solução:** API PUT ignora null, frontend faz fetch directo após save.
 
 ---
@@ -1140,21 +1170,21 @@ O código usava `Disciplina.ano_curricular` em vez de `CursoDisciplina.ano_curri
 
 ### Completed
 
-- [x] Full project scaffolded (Next.js 15 + TypeScript + Tailwind)
-- [x] PostgreSQL database with 37 models + 17 enums
-- [x] Production deploy on Vercel + Neon: [sge-atl-ntida.vercel.app](https://sge-atl-ntida.vercel.app/)
-- [x] NextAuth JWT authentication + refresh-jwt + middleware
-- [x] All 5 role dashboards (Admin, Gestor, Orientador, Recepcionista, Estudante)
-- [x] Student: perfil, notas, pagamentos, monografia, certificados, horário, serviços
-- [x] Orientador: disciplinas, solicitações, monografias, download
-- [x] Gestor: estudantes, disciplinas, notas, horário, plano provas, currículo, monografias, pipeline
-- [x] Recepcionista: pesquisa, emitir, auditar impressão
-- [x] Admin: CRUD completo + sistema + audit + preços + assinaturas + documentos
-- [x] Rematrícula com snapshot e suspensão
-- [x] Sistema de bolsas (50% e 100%)
-- [x] Conflitos de professor
-- [x] Verificação de documentos com código único
-- [x] Assinaturas digitais (presidente, gestor, diretor)
-- [x] Audit logging completo em todas as operações
-- [x] QR code verification on certificates and declarations
-- [x] Production-ready with Vercel + Neon (QR codes, HTTPS, login fix)
+- [X] Full project scaffolded (Next.js 15 + TypeScript + Tailwind)
+- [X] PostgreSQL database with 37 models + 17 enums
+- [X] Production deploy on Vercel + Neon: [sge-atl-ntida.vercel.app](https://sge-atl-ntida.vercel.app/)
+- [X] NextAuth JWT authentication + refresh-jwt + middleware
+- [X] All 5 role dashboards (Admin, Gestor, Orientador, Recepcionista, Estudante)
+- [X] Student: perfil, notas, pagamentos, monografia, certificados, horário, serviços
+- [X] Orientador: disciplinas, solicitações, monografias, download
+- [X] Gestor: estudantes, disciplinas, notas, horário, plano provas, currículo, monografias, pipeline
+- [X] Recepcionista: pesquisa, emitir, auditar impressão
+- [X] Admin: CRUD completo + sistema + audit + preços + assinaturas + documentos
+- [X] Rematrícula com snapshot e suspensão
+- [X] Sistema de bolsas (50% e 100%)
+- [X] Conflitos de professor
+- [X] Verificação de documentos com código único
+- [X] Assinaturas digitais (presidente, gestor, diretor)
+- [X] Audit logging completo em todas as operações
+- [X] QR code verification on certificates and declarations
+- [X] Production-ready with Vercel + Neon (QR codes, HTTPS, login fix)
