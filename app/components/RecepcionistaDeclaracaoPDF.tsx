@@ -1,5 +1,3 @@
-"use client"
-
 import { Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer"
 import * as React from "react"
 import type { LayoutConfig } from "@/lib/layout-defaults"
