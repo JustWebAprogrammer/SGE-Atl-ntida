@@ -1,10 +1,33 @@
-// Helper para gerar PDFs sem usar React.createElement (que causa erro React #31)
-// Este ficheiro é .tsx para poder usar JSX com @react-pdf/renderer
-
+// Helper para gerar PDFs com debug detalhado
 import { renderToBuffer } from "@react-pdf/renderer"
+import { Document, Page, Text, View } from "@react-pdf/renderer"
 import RecepcionistaCertificadoConclusaoPDF from "@/app/components/RecepcionistaCertificadoConclusaoPDF"
 import RecepcionistaCertificadoDisciplinasPDF from "@/app/components/RecepcionistaCertificadoDisciplinasPDF"
 import RecepcionistaDeclaracaoPDF from "@/app/components/RecepcionistaDeclaracaoPDF"
+
+// Componente PDF minímo para teste
+function PDFTeste({ mensagem }: { mensagem: string }) {
+  return (
+    <Document>
+      <Page size="A4" style={{ padding: 40 }}>
+        <Text>{mensagem}</Text>
+      </Page>
+    </Document>
+  )
+}
+
+// Teste básico: gera um PDF simples para ver se renderToBuffer funciona
+export async function renderPDFTeste(): Promise<Buffer> {
+  console.log("[DEBUG] renderPDFTeste: starting...")
+  try {
+    const buf = await renderToBuffer(<PDFTeste mensagem="Teste OK" />)
+    console.log("[DEBUG] renderPDFTeste: success, size=" + buf.length)
+    return buf
+  } catch (e) {
+    console.error("[DEBUG] renderPDFTeste: FAILED", e)
+    throw e
+  }
+}
 
 // ===== RECEPCIONISTA: Certificado de Conclusão =====
 export async function renderCertificadoConclusao(data: {
@@ -23,24 +46,34 @@ export async function renderCertificadoConclusao(data: {
   logoUrl?: string
   systemDate?: Date
 }): Promise<Buffer> {
-  return await renderToBuffer(
-    <RecepcionistaCertificadoConclusaoPDF
-      studentName={data.studentName}
-      studentNumber={data.studentNumber}
-      courseName={data.courseName}
-      courseDuration={data.courseDuration}
-      anoLectivo={data.anoLectivo}
-      gradesByYear={data.gradesByYear}
-      monografiaGrade={data.monografiaGrade}
-      finalGrade={data.finalGrade}
-      finalGradeExtenso={data.finalGradeExtenso}
-      presidentSignature={data.presidentSignature}
-      presidentName={data.presidentName}
-      documentNumber={data.documentNumber}
-      logoUrl={data.logoUrl}
-      systemDate={data.systemDate}
-    />
-  )
+  console.log("[DEBUG] renderCertificadoConclusao: starting...")
+  try {
+    const element = (
+      <RecepcionistaCertificadoConclusaoPDF
+        studentName={data.studentName}
+        studentNumber={data.studentNumber}
+        courseName={data.courseName}
+        courseDuration={data.courseDuration}
+        anoLectivo={data.anoLectivo}
+        gradesByYear={data.gradesByYear}
+        monografiaGrade={data.monografiaGrade}
+        finalGrade={data.finalGrade}
+        finalGradeExtenso={data.finalGradeExtenso}
+        presidentSignature={data.presidentSignature}
+        presidentName={data.presidentName}
+        documentNumber={data.documentNumber}
+        logoUrl={data.logoUrl}
+        systemDate={data.systemDate}
+      />
+    )
+    console.log("[DEBUG] renderCertificadoConclusao: element created, calling renderToBuffer...")
+    const buf = await renderToBuffer(element)
+    console.log("[DEBUG] renderCertificadoConclusao: success, size=" + buf.length)
+    return buf
+  } catch (e) {
+    console.error("[DEBUG] renderCertificadoConclusao: FAILED", e)
+    throw e
+  }
 }
 
 // ===== RECEPCIONISTA: Certificado de Disciplinas =====
@@ -56,23 +89,33 @@ export async function renderCertificadoDisciplinas(data: {
   logoUrl?: string
   systemDate?: Date
 }): Promise<Buffer> {
-  return await renderToBuffer(
-    <RecepcionistaCertificadoDisciplinasPDF
-      studentName={data.studentName}
-      studentNumber={data.studentNumber}
-      courseName={data.courseName}
-      anoLectivo={data.anoLectivo}
-      notas={data.notas}
-      presidentSignature={data.presidentSignature}
-      presidentName={data.presidentName}
-      documentNumber={data.documentNumber}
-      logoUrl={data.logoUrl}
-      systemDate={data.systemDate}
-    />
-  )
+  console.log("[DEBUG] renderCertificadoDisciplinas: starting...")
+  try {
+    const element = (
+      <RecepcionistaCertificadoDisciplinasPDF
+        studentName={data.studentName}
+        studentNumber={data.studentNumber}
+        courseName={data.courseName}
+        anoLectivo={data.anoLectivo}
+        notas={data.notas}
+        presidentSignature={data.presidentSignature}
+        presidentName={data.presidentName}
+        documentNumber={data.documentNumber}
+        logoUrl={data.logoUrl}
+        systemDate={data.systemDate}
+      />
+    )
+    console.log("[DEBUG] renderCertificadoDisciplinas: element created, calling renderToBuffer...")
+    const buf = await renderToBuffer(element)
+    console.log("[DEBUG] renderCertificadoDisciplinas: success, size=" + buf.length)
+    return buf
+  } catch (e) {
+    console.error("[DEBUG] renderCertificadoDisciplinas: FAILED", e)
+    throw e
+  }
 }
 
-// ===== RECEPCIONISTA: Declaração Académica (física, sem QR) =====
+// ===== RECEPCIONISTA: Declaração Académica =====
 export async function renderRecepcionistaDeclaracao(data: {
   studentName: string
   studentNumber: string
@@ -85,18 +128,28 @@ export async function renderRecepcionistaDeclaracao(data: {
   logoUrl?: string
   systemDate?: Date
 }): Promise<Buffer> {
-  return await renderToBuffer(
-    <RecepcionistaDeclaracaoPDF
-      studentName={data.studentName}
-      studentNumber={data.studentNumber}
-      courseName={data.courseName}
-      currentYear={data.currentYear}
-      anoLectivo={data.anoLectivo}
-      presidentSignature={data.presidentSignature}
-      presidentName={data.presidentName}
-      documentNumber={data.documentNumber}
-      logoUrl={data.logoUrl}
-      systemDate={data.systemDate}
-    />
-  )
+  console.log("[DEBUG] renderRecepcionistaDeclaracao: starting...")
+  try {
+    const element = (
+      <RecepcionistaDeclaracaoPDF
+        studentName={data.studentName}
+        studentNumber={data.studentNumber}
+        courseName={data.courseName}
+        currentYear={data.currentYear}
+        anoLectivo={data.anoLectivo}
+        presidentSignature={data.presidentSignature}
+        presidentName={data.presidentName}
+        documentNumber={data.documentNumber}
+        logoUrl={data.logoUrl}
+        systemDate={data.systemDate}
+      />
+    )
+    console.log("[DEBUG] renderRecepcionistaDeclaracao: element created, calling renderToBuffer...")
+    const buf = await renderToBuffer(element)
+    console.log("[DEBUG] renderRecepcionistaDeclaracao: success, size=" + buf.length)
+    return buf
+  } catch (e) {
+    console.error("[DEBUG] renderRecepcionistaDeclaracao: FAILED", e)
+    throw e
+  }
 }
