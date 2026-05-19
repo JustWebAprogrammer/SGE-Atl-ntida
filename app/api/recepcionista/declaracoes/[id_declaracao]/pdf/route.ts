@@ -2,12 +2,10 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import { renderToBuffer } from "@react-pdf/renderer"
-import RecepcionistaDeclaracaoPDF from "@/app/components/RecepcionistaDeclaracaoPDF"
-import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
 import { getSystemDate } from "@/lib/sistema"
+import { renderRecepcionistaDeclaracao } from "@/app/lib/render-pdf-helper"
 
 // GET /api/recepcionista/declaracoes/[id_declaracao]/pdf - View existing declaration PDF by declaration ID
 export async function GET(
@@ -78,20 +76,18 @@ export async function GET(
 
     const systemDate = await getSystemDate()
 
-    const pdfBuffer = await renderToBuffer(
-      React.createElement(RecepcionistaDeclaracaoPDF, {
-        studentName: student.nome_completo,
-        studentNumber: student.numero_estudante || "",
-        courseName: student.curso.nome_curso,
-        currentYear,
-        anoLectivo,
-        presidentSignature: signatureBase64,
-        presidentName: presidentSignature?.nome_presidente || "",
-        documentNumber: declaracao.numero_documento,
-        logoUrl: logoBase64,
-        systemDate
-      }) as any
-    )
+    const pdfBuffer = await renderRecepcionistaDeclaracao({
+      studentName: student.nome_completo,
+      studentNumber: student.numero_estudante || "",
+      courseName: student.curso.nome_curso,
+      currentYear,
+      anoLectivo,
+      presidentSignature: signatureBase64,
+      presidentName: presidentSignature?.nome_presidente || "",
+      documentNumber: declaracao.numero_documento,
+      logoUrl: logoBase64,
+      systemDate
+    })
 
     return new NextResponse(new Uint8Array(pdfBuffer), {
       headers: {

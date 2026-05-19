@@ -3,14 +3,10 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import { renderToBuffer } from "@react-pdf/renderer"
-import RecepcionistaCertificadoConclusaoPDF from "@/app/components/RecepcionistaCertificadoConclusaoPDF"
-import RecepcionistaCertificadoDisciplinasPDF from "@/app/components/RecepcionistaCertificadoDisciplinasPDF"
-import RecepcionistaDeclaracaoPDF from "@/app/components/RecepcionistaDeclaracaoPDF"
-import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
 import { getAnoLectivo, getSystemDate } from "@/lib/sistema"
+import { renderCertificadoConclusao, renderCertificadoDisciplinas, renderRecepcionistaDeclaracao } from "@/app/lib/render-pdf-helper"
 
 // GET /api/recepcionista/certificados/[id]/pdf - View existing certificate PDF
 export async function GET(
@@ -105,24 +101,22 @@ export async function GET(
       const allGrades = [...yearAverages, monografiaGrade]
       const finalGrade = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
 
-      pdfBuffer = await renderToBuffer(
-        React.createElement(RecepcionistaCertificadoConclusaoPDF, {
-          studentName: student.nome_completo,
-          studentNumber: student.numero_estudante || "",
-          courseName: student.curso.nome_curso,
-          courseDuration: student.curso.duracao_anos || 3,
-          anoLectivo,
-          gradesByYear,
-          monografiaGrade: monografiaGrade.toFixed(2),
-          finalGrade: finalGrade.toFixed(2),
-          finalGradeExtenso: finalGrade.toFixed(2).replace(".", ","),
-          presidentSignature: signatureBase64,
-          presidentName: presidentSignature?.nome_presidente || "",
-          documentNumber: `CERT-${anoLectivo}-${student.numero_estudante}-001`,
-          logoUrl: logoBase64,
-          systemDate
-        }) as any
-      )
+      pdfBuffer = await renderCertificadoConclusao({
+        studentName: student.nome_completo,
+        studentNumber: student.numero_estudante || "",
+        courseName: student.curso.nome_curso,
+        courseDuration: student.curso.duracao_anos || 3,
+        anoLectivo,
+        gradesByYear,
+        monografiaGrade: monografiaGrade.toFixed(2),
+        finalGrade: finalGrade.toFixed(2),
+        finalGradeExtenso: finalGrade.toFixed(2).replace(".", ","),
+        presidentSignature: signatureBase64,
+        presidentName: presidentSignature?.nome_presidente || "",
+        documentNumber: `CERT-${anoLectivo}-${student.numero_estudante}-001`,
+        logoUrl: logoBase64,
+        systemDate
+      })
 
     } else if (certificado.tipo_certificado === "Disciplina") {
       const notas = await prisma.nota.findMany({
@@ -133,43 +127,39 @@ export async function GET(
         include: { disciplina: true }
       })
 
-      pdfBuffer = await renderToBuffer(
-        React.createElement(RecepcionistaCertificadoDisciplinasPDF, {
-          studentName: student.nome_completo,
-          studentNumber: student.numero_estudante || "",
-          courseName: student.curso.nome_curso,
-          anoLectivo,
-          notas: notas.map(n => ({
-            id_nota: n.id_nota,
-            nota_final: n.nota_final ? Number(n.nota_final) : null,
-            dispensada: n.dispensada,
-            disciplina: n.disciplina
-          })),
-          presidentSignature: signatureBase64,
-          presidentName: presidentSignature?.nome_presidente || "",
-          documentNumber: `DISC-${anoLectivo}-${student.numero_estudante}-001`,
-          logoUrl: logoBase64,
-          systemDate
-        }) as any
-      )
+      pdfBuffer = await renderCertificadoDisciplinas({
+        studentName: student.nome_completo,
+        studentNumber: student.numero_estudante || "",
+        courseName: student.curso.nome_curso,
+        anoLectivo,
+        notas: notas.map(n => ({
+          id_nota: n.id_nota,
+          nota_final: n.nota_final ? Number(n.nota_final) : null,
+          dispensada: n.dispensada,
+          disciplina: n.disciplina
+        })),
+        presidentSignature: signatureBase64,
+        presidentName: presidentSignature?.nome_presidente || "",
+        documentNumber: `DISC-${anoLectivo}-${student.numero_estudante}-001`,
+        logoUrl: logoBase64,
+        systemDate
+      })
 
     } else if (certificado.tipo_certificado === "Participacao") {
       const currentYear = student.ano_current || 3
 
-      pdfBuffer = await renderToBuffer(
-        React.createElement(RecepcionistaDeclaracaoPDF, {
-          studentName: student.nome_completo,
-          studentNumber: student.numero_estudante || "",
-          courseName: student.curso.nome_curso,
-          currentYear,
-          anoLectivo,
-          presidentSignature: signatureBase64,
-          presidentName: presidentSignature?.nome_presidente || "",
-          documentNumber: `DECL-${anoLectivo}-${student.numero_estudante}-001`,
-          logoUrl: logoBase64,
-          systemDate
-        }) as any
-      )
+      pdfBuffer = await renderRecepcionistaDeclaracao({
+        studentName: student.nome_completo,
+        studentNumber: student.numero_estudante || "",
+        courseName: student.curso.nome_curso,
+        currentYear,
+        anoLectivo,
+        presidentSignature: signatureBase64,
+        presidentName: presidentSignature?.nome_presidente || "",
+        documentNumber: `DECL-${anoLectivo}-${student.numero_estudante}-001`,
+        logoUrl: logoBase64,
+        systemDate
+      })
 
     } else {
       return NextResponse.json(

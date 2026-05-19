@@ -2,14 +2,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
-import { renderToBuffer } from "@react-pdf/renderer"
-import DeclaracaoPDF from "@/app/components/DeclaracaoPDF"
-import * as React from "react"
 import { readFileSync } from "fs"
 import { join } from "path"
-import { getAnoLectivo, getSystemDate } from "@/lib/sistema"
+import { getSystemDate } from "@/lib/sistema"
+import { renderRecepcionistaDeclaracao } from "@/app/lib/render-pdf-helper"
 
-// GET /api/recepcionista/estudantes/[id]/declaracao/pdf - View existing declaration PDF
+// GET /api/recepcionista/estudantes/[id]/declaracao/pdf - View latest declaration PDF for a student
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -29,60 +27,26 @@ export async function GET(
     // Fetch the latest declaration for this student
     const declaracao = await prisma.declaracao.findFirst({
       where: { id_estudante: studentId },
-      orderBy: { data_emissao: "desc" }
+      orderBy: { data_emissao: "desc" },
+      include: {
+        estudante: {
+          include: { curso: true }
+        }
+      }
     })
 
     if (!declaracao) {
       return NextResponse.json(
-        { error: "Declaração não encontrada" },
+        { error: "Nenhuma declaração encontrada para este estudante" },
         { status: 404 }
       )
     }
 
-    // Fetch student data
-    const student = await prisma.estudante.findUnique({
-      where: { id_estudante: studentId },
-      include: { curso: true }
-    })
-
-    if (!student) {
-      return NextResponse.json(
-        { error: "Estudante não encontrado" },
-        { status: 404 }
-      )
-    }
-
-    const anoLectivo = declaracao.ano_lectivo || student.ano_electivo || await getAnoLectivo()
+    const student = declaracao.estudante
+    const anoLectivo = declaracao.ano_lectivo
     const currentYear = student.ano_current || 3
-    const completedYears = Array.from({ length: currentYear - 1 }, (_, i) => i + 1)
 
-    const gradesByYear = await Promise.all(
-      completedYears.map(async (year) => {
-        const notas = await prisma.nota.findMany({
-          where: {
-            id_estudante: studentId,
-            disciplina: { ano_curricular: year },
-            ano_lectivo: anoLectivo
-          },
-          include: { disciplina: true }
-        })
-
-        const subjects = notas.map(nota => ({
-          discipline: nota.disciplina.nome_disciplina,
-          semester: nota.semestre === "S1" ? "1º Semestre" : "2º Semestre",
-          finalGrade: nota.nota_final?.toString() || "-",
-          situation: nota.dispensada ? "Dispensada" : (nota.nota_final && Number(nota.nota_final) >= 10 ? "Aprovado" : "Reprovado")
-        }))
-
-        const validGrades = notas.filter(n => n.nota_final !== null && !n.dispensada)
-        const average = validGrades.length > 0
-          ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length).toFixed(2)
-          : "-"
-
-        return { year, subjects, average }
-      })
-    )
-
+    // Get president signature
     const presidentSignature = await prisma.assinaturaPresidente.findFirst({
       where: { data_fim: null }
     })
@@ -96,6 +60,7 @@ export async function GET(
       } catch { }
     }
 
+    // Load logo
     let logoBase64 = ""
     try {
       const logoPath = join(process.cwd(), "public", "documentos", "logo.png")
@@ -105,21 +70,18 @@ export async function GET(
 
     const systemDate = await getSystemDate()
 
-    const pdfBuffer = await renderToBuffer(
-      React.createElement(DeclaracaoPDF, {
-        studentName: student.nome_completo,
-        studentNumber: student.numero_estudante || "",
-        courseName: student.curso.nome_curso,
-        currentYear,
-        anoLectivo,
-        presidentSignature: signatureBase64,
-        presidentName: presidentSignature?.nome_presidente || "",
-        documentNumber: declaracao.numero_documento || `DECL-${anoLectivo}-${student.numero_estudante}-001`,
-        qrCodeUrl: "",
-        logoUrl: logoBase64,
-        systemDate
-      }) as any
-    )
+    const pdfBuffer = await renderRecepcionistaDeclaracao({
+      studentName: student.nome_completo,
+      studentNumber: student.numero_estudante || "",
+      courseName: student.curso.nome_curso,
+      currentYear,
+      anoLectivo,
+      presidentSignature: signatureBase64,
+      presidentName: presidentSignature?.nome_presidente || "",
+      documentNumber: declaracao.numero_documento,
+      logoUrl: logoBase64,
+      systemDate
+    })
 
     return new NextResponse(new Uint8Array(pdfBuffer), {
       headers: {
