@@ -351,6 +351,7 @@ model Certificado {
   descricao        String?
   status           StatusCertificado        @default(Solicitado)
   isFisico         Boolean                  @default(false)
+  pdf_base64       String?                  // PDF pré-gerado (base64)
   estudante        Estudante                @relation(fields: [id_estudante], references: [id_estudante])
   disciplinas      CertificadoDisciplinas[]
 }

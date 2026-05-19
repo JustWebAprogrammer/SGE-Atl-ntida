@@ -527,20 +527,94 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                         }}>🧾 Talão</button>
                       </>
                     ) : (
-                      // Certificado ou Declaração → link para PDF
-                      <a
-                        href={doc.tipo === "certificado"
-                          ? `/api/recepcionista/certificados/${doc.ref_certificado}/pdf`
-                          : `/api/recepcionista/declaracoes/${doc.ref_declaracao}/pdf`
-                        }
-                        target="_blank"
+                      // Certificado ou Declaração → gerar PDF no browser
+                      <button
+                        onClick={async () => {
+                          const key = `imprimir-${doc.id}`
+                          setAcaoLoading(key)
+                          try {
+                            let blob: Blob
+                            if (doc.tipo === "certificado") {
+                              // Buscar dados do certificado
+                              const res = await fetch(`/api/recepcionista/certificados/${doc.ref_certificado}/dados`)
+                              if (!res.ok) throw new Error("Erro ao buscar dados")
+                              const data = await res.json()
+                              
+                              // Gerar PDF no browser
+                              if (data.tipo === "Conclusao") {
+                                const { gerarPDFCertificadoConclusao } = await import("@/app/lib/pdf-generator-browser")
+                                blob = await gerarPDFCertificadoConclusao({
+                                  studentName: data.studentName,
+                                  studentNumber: data.studentNumber,
+                                  courseName: data.courseName,
+                                  courseDuration: data.courseDuration,
+                                  anoLectivo: data.anoLectivo,
+                                  gradesByYear: data.gradesByYear,
+                                  monografiaGrade: data.monografiaGrade,
+                                  finalGrade: data.finalGrade,
+                                  finalGradeExtenso: data.finalGradeExtenso,
+                                  presidentSignature: data.presidentSignature,
+                                  presidentName: data.presidentName,
+                                  documentNumber: data.documentNumber,
+                                  logoUrl: data.logoUrl,
+                                  systemDate: data.systemDate ? new Date(data.systemDate) : undefined,
+                                })
+                              } else {
+                                const { gerarPDFCertificadoDisciplinas } = await import("@/app/lib/pdf-generator-browser")
+                                blob = await gerarPDFCertificadoDisciplinas({
+                                  studentName: data.studentName,
+                                  studentNumber: data.studentNumber,
+                                  courseName: data.courseName,
+                                  anoLectivo: data.anoLectivo,
+                                  notas: data.notas,
+                                  presidentSignature: data.presidentSignature,
+                                  presidentName: data.presidentName,
+                                  documentNumber: data.documentNumber,
+                                  logoUrl: data.logoUrl,
+                                  systemDate: data.systemDate ? new Date(data.systemDate) : undefined,
+                                })
+                              }
+                            } else {
+                              // Declaração
+                              const res = await fetch(`/api/recepcionista/declaracoes/${doc.ref_declaracao}/dados`)
+                              if (!res.ok) throw new Error("Erro ao buscar dados")
+                              const data = await res.json()
+                              
+                              const { gerarPDFDeclaracao } = await import("@/app/lib/pdf-generator-browser")
+                              blob = await gerarPDFDeclaracao({
+                                studentName: data.studentName,
+                                studentNumber: data.studentNumber,
+                                courseName: data.courseName,
+                                currentYear: data.currentYear,
+                                anoLectivo: data.anoLectivo,
+                                presidentSignature: data.presidentSignature,
+                                presidentName: data.presidentName,
+                                documentNumber: data.documentNumber,
+                                logoUrl: data.logoUrl,
+                                systemDate: data.systemDate ? new Date(data.systemDate) : undefined,
+                              })
+                            }
+                            // Abrir o PDF
+                            const url = URL.createObjectURL(blob)
+                            window.open(url, "_blank")
+                            setTimeout(() => URL.revokeObjectURL(url), 1000)
+                          } catch {
+                            setMensagem({ texto: "Erro ao gerar PDF", tipo: "erro" })
+                          } finally {
+                            setAcaoLoading(null)
+                          }
+                        }}
+                        disabled={acaoLoading === `imprimir-${doc.id}`}
                         style={{
                           padding: "8px 12px", background: "rgba(45,212,191,0.15)",
                           border: "1px solid rgba(45,212,191,0.3)", color: "#2dd4bf",
                           borderRadius: "8px", fontSize: "11px", fontWeight: "600",
-                          textDecoration: "none", whiteSpace: "nowrap" as const
+                          cursor: acaoLoading === `imprimir-${doc.id}` ? "not-allowed" : "pointer",
+                          whiteSpace: "nowrap" as const
                         }}
-                      >🖨️ Imprimir</a>
+                      >
+                        {acaoLoading === `imprimir-${doc.id}` ? "..." : "🖨️ Imprimir"}
+                      </button>
                     )}
 
                     {/* Botão de avançar entrega */}
