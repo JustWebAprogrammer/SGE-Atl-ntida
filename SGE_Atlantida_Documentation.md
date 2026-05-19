@@ -1,6 +1,6 @@
 # SGE Atlântida — Project Documentation
 
-**Last updated:** May 16, 2026
+**Last updated:** May 19, 2026
 **Status:** 🎉 100% COMPLETO! Todos os 5 Módulos + Funcionalidades Extra implementados e funcionais
 **Production URL:** [https://sge-atl-ntida.vercel.app/](https://sge-atl-ntida.vercel.app/) (Neon PostgreSQL)
 
@@ -1163,6 +1163,31 @@ O código usava `Disciplina.ano_curricular` em vez de `CursoDisciplina.ano_curri
 ### 🚫 **Edição de notas — valores sobrescritos com null**
 
 > ✅ **Solução:** API PUT ignora null, frontend faz fetch directo após save.
+
+### 🚫 **@react-pdf/renderer v4 — Erro React #31 na Vercel**
+
+O `renderToBuffer()` do `@react-pdf/renderer` v4.3.2 causa erro React #31 no servidor da Vercel (Next.js 15 + React 19). O motor interno `react-reconciler` conflita com a versão do React usada pelo servidor.
+
+> ✅ **Solução:** Gerar PDFs no **browser do cliente** (recepcionista) em vez do servidor. O `@react-pdf/renderer` funciona perfeitamente no browser.
+
+**Ficheiros criados:**
+
+| Ficheiro | Função |
+|----------|--------|
+| `app/lib/pdf-generator-browser.tsx` | Geração de PDF no browser com `pdf().toBlob()` |
+| `app/api/recepcionista/certificados/[id]/dados/route.ts` | API que retorna dados do certificado |
+| `app/api/recepcionista/declaracoes/[id]/dados/route.ts` | API que retorna dados da declaração |
+
+**Fluxo actual:**
+1. Recepcionista clica em "🖨️ Imprimir"
+2. Browser busca dados do documento via API (`/dados`)
+3. Browser gera o PDF usando `pdf().toBlob()` (import dinâmico)
+4. Abre o PDF automaticamente para impressão
+
+**Ficheiros obsoletos (mantidos mas não usados):**
+- `app/api/recepcionista/certificados/[id]/pdf/route.ts`
+- `app/api/recepcionista/declaracoes/[id]/pdf/route.ts`
+- `app/lib/render-pdf-helper.tsx`
 
 ---
 
