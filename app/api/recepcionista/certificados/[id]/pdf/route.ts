@@ -66,7 +66,7 @@ export async function GET(
     const systemDate = await getSystemDate()
 
     // Generate PDF based on certificate type
-    let pdfBuffer: Buffer
+    let pdfBuffer: Uint8Array
 
     if (certificado.tipo_certificado === "Conclusao") {
       const currentYear = student.ano_current || student.curso.duracao_anos || 3
