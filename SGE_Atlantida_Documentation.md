@@ -1,6 +1,6 @@
 # SGE Atlântida — Project Documentation
 
-**Last updated:** May 19, 2026
+**Last updated:** May 20, 2026
 **Status:** 🎉 100% COMPLETO! Todos os 5 Módulos + Funcionalidades Extra implementados e funcionais
 **Production URL:** [https://sge-atl-ntida.vercel.app/](https://sge-atl-ntida.vercel.app/) (Neon PostgreSQL)
 
@@ -765,7 +765,14 @@ Submetida → EmRevisao → Aprovada → ParaDefender → Defendida
 ### Documentos / Assinaturas / Verificação
 
 - Declarações académicas com código único de verificação (`DECL-{ano}-{numero}-{seq}`)
-- Página pública `/verificar/[id]` para validar documentos
+- Página pública `/verificar/[id]` para validar documentos por QR code
+- Conteúdo dinâmico por tipo de documento na página de verificação:
+  - **Declaração Académica:** mostra Nome, Matrícula, Curso, Ano Lectivo, Ano Curricular, Estado do estudante (EmCurso/Finalizado/Desistente/Suspendido) com badge colorido
+  - **Certificado de Disciplinas:** mostra tabela completa das disciplinas (Disciplina, Semestre, Ano Curricular, Nota Final, Situação) — permite ao verificador confirmar se o PDF foi adulterado
+  - **Certificado de Conclusão:** mostra Nota Final (numérica em destaque) + Nota por extenso — sem notas de anos anteriores
+- Animações: loading com scanner QR animado, fade-in do card, scale-in no selo de verificação, shake no erro
+- Design escuro com glassmorphism (backdrop-filter: blur), gradiente no fundo
+- Selo "Documento verificado digitalmente" no footer
 - Assinaturas: Presidente, Gestor (por departamento), Director — upload de imagem
 - Layouts de documentos configuráveis via JSON
 
@@ -1000,6 +1007,9 @@ npx tsx prisma/seed.ts
 
 - [X] Declarações académicas com código de verificação
 - [X] Página pública `/verificar/[id]`
+- [X] Conteúdo dinâmico na verificação: estado/ano na declaração, tabela disciplinas no cert. disciplinas, nota final no cert. conclusão
+- [X] Animações: scanner QR loading, fade-in, scale-in, shake no erro
+- [X] Design escuro com glassmorphism e gradiente
 - [X] Assinaturas: Presidente, Gestor (por departamento), Director
 - [X] Layouts de documentos configuráveis (JSON)
 - [X] PDFs com @react-pdf/renderer
