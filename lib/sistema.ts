@@ -73,6 +73,31 @@ export async function getSemestreAtual(): Promise<"S1" | "S2"> {
   }
 }
 
+/**
+ * Check if the current system date is within the enrollment period.
+ * Enrollment period is configured by the Admin via SistemaConfig (matricula_data_inicio / matricula_data_fim).
+ * @returns Promise<boolean> - true if within enrollment period, false otherwise
+ */
+export async function isEnrollmentOpen(): Promise<boolean> {
+  try {
+    const config = await prisma.sistemaConfig.findUnique({ 
+      where: { id_config: 1 } 
+    })
+
+    if (!config?.matricula_data_inicio || !config?.matricula_data_fim) {
+      return false // No enrollment period configured = not open
+    }
+
+    const systemDate = await getSystemDate()
+    const start = new Date(config.matricula_data_inicio)
+    const end = new Date(config.matricula_data_fim)
+
+    return systemDate >= start && systemDate <= end
+  } catch {
+    return false // On error, assume enrollment is NOT open (safe default)
+  }
+}
+
 export async function getActivePropinaMonths(): Promise<{ mes: number, ano: number }[]> {
   try {
     const config = await prisma.sistemaConfig.findUnique({ 

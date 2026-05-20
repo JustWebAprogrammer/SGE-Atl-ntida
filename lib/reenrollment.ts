@@ -6,7 +6,7 @@
  * haven't re-enrolled for the new academic year.
  */
 import { prisma } from "./prisma"
-import { getAnoLectivo, getSystemDate } from "./sistema"
+import { getAnoLectivo, getSystemDate, isEnrollmentOpen } from "./sistema"
 import { atribuirDisciplinasAoEstudante } from "./atribuirDisciplinas"
 import { logAudit } from "./audit"
 
@@ -64,7 +64,25 @@ export async function processarRematricula(
     }
   }
 
-  // ── 3. Validate student has an academic year assigned ──
+  // ── 3. Enrollment period check ──
+  const dentroDoPeriodo = await isEnrollmentOpen()
+  if (!dentroDoPeriodo) {
+    // Buscar as datas do período de matrículas para incluir na mensagem
+    const config = await prisma.sistemaConfig.findUnique({ where: { id_config: 1 } })
+    const dataInicio = config?.matricula_data_inicio
+      ? new Date(config.matricula_data_inicio).toLocaleDateString("pt-PT")
+      : "—"
+    const dataFim = config?.matricula_data_fim
+      ? new Date(config.matricula_data_fim).toLocaleDateString("pt-PT")
+      : "—"
+
+    return {
+      success: false,
+      message: `Fora do período de matrículas. As matrículas estão abertas de ${dataInicio} até ${dataFim}.`,
+    }
+  }
+
+  // ── 4. Validate student has an academic year assigned ──
   if (!estudante.ano_electivo) {
     return {
       success: false,
@@ -72,7 +90,7 @@ export async function processarRematricula(
     }
   }
 
-  // ── 4. Block final year students from re-enrolling ──
+  // ── 5. Block final year students from re-enrolling ──
   const oldAnoCurrent = estudante.ano_current ?? 1
   const duracaoAnos = estudante.curso?.duracao_anos ?? 4
 
