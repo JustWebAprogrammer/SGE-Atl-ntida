@@ -67,8 +67,11 @@ export async function atribuirDisciplinasAoEstudante(
 /**
  * Atribui disciplinas para UM ano curricular específico.
  * Cria registos de Nota para disciplinas que ainda não existem.
+ * 
+ * Exportada para ser usada na rematrícula — atribui apenas disciplinas
+ * de UM ano específico (evita duplicar disciplinas de anos anteriores).
  */
-async function atribuirDisciplinasParaAno(
+export async function atribuirDisciplinasParaAno(
   db: PrismaClient,
   id_estudante: number,
   id_curso: number,

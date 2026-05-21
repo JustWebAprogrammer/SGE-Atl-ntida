@@ -7,11 +7,15 @@
  */
 import { prisma } from "./prisma"
 import { getAnoLectivo, getSystemDate, isEnrollmentOpen } from "./sistema"
-import { atribuirDisciplinasAoEstudante } from "./atribuirDisciplinas"
+import { atribuirDisciplinasParaAno } from "./atribuirDisciplinas"
 import { logAudit } from "./audit"
 
 /**
  * Process a student's re-enrollment after payment.
+ *
+ * Nova regra de progressão:
+ * - Se tiver NO MÁXIMO 2 reprovações no mesmo ano curricular → AVANÇA (reseta só as reprovadas)
+ * - Se tiver MAIS de 2 reprovações no mesmo ano curricular → REPETE o ano
  *
  * @param id_estudante - Student ID
  * @param id_usuario_trigger - User ID who triggered the action (for audit)
@@ -179,13 +183,11 @@ export async function processarRematricula(
   const anoComMaisDe2 = Array.from(falhadasPorAno.entries()).find(([_, count]) => count > 2)
   const maxDuasPorAno = !anoComMaisDe2
 
-  const passouTudo = disciplinasFalhadas.length === 0
+  // NOVA REGRA: pode avançar se tiver no máximo 2 reprovações no mesmo ano
+  // (mesmo que tenha 1 ou 2 reprovações, avança — reseta só as reprovadas)
+  const podeAvancar = maxDuasPorAno
 
-  // Determine if the student can advance: must pass ALL subjects,
-  // and have at most 2 failed subjects from any single curricular year
-  const podeAvancar = passouTudo && maxDuasPorAno
-
-  // ── 7a. Path A — All passed AND at most 2 failed from same year: advance ──
+  // ── 7a. Path A — At most 2 failed from same year: advance ──
   if (podeAvancar) {
     const newAnoCurrent = Math.min(oldAnoCurrent + 1, duracaoAnos)
 
@@ -197,9 +199,39 @@ export async function processarRematricula(
       },
     })
 
-    // Assign disciplines for the new year (only if NOT the final year — finalists do monography)
+    // Reset ONLY failed subjects (mesmo tendo avançado, as reprovadas são resetadas)
+    const resetDisciplinas: { nome: string; codigo: string }[] = []
+
+    for (const nota of disciplinasFalhadas) {
+      await prisma.nota.update({
+        where: { id_nota: nota.id_nota },
+        data: {
+          ac1: null,
+          ac2: null,
+          ac3: null,
+          ttp: null,
+          pp1: null,
+          pp2: null,
+          exame: null,
+          recurso: null,
+          exame_especial: null,
+          nota_final: null,
+          dispensada: false,
+          tipo_avaliacao: "Normal",
+        },
+      })
+
+      resetDisciplinas.push({
+        nome: nota.disciplina.nome_disciplina,
+        codigo: nota.disciplina.codigo_disciplina,
+      })
+    }
+
+    // Assign ONLY the disciplines for the NEW year (not from 1st year onwards)
+    // This avoids duplicating disciplines from previous years
     if (newAnoCurrent < duracaoAnos) {
-      await atribuirDisciplinasAoEstudante(
+      await atribuirDisciplinasParaAno(
+        prisma,
         id_estudante,
         estudante.id_curso,
         newAnoCurrent,
@@ -221,19 +253,24 @@ export async function processarRematricula(
         ano_lectivo: currentAnoLectivo,
         ano_current: newAnoCurrent,
         acao: "Avançou",
+        disciplinas_resetadas: resetDisciplinas.map((d) => d.nome),
       },
       ip_address: "sistema",
     })
 
+    const mensagem = resetDisciplinas.length > 0
+      ? `Avançou para o ${newAnoCurrent}º ano lectivo (${currentAnoLectivo}). ${resetDisciplinas.length} disciplina(s) reiniciada(s): ${resetDisciplinas.map((d) => d.nome).join(", ")}`
+      : `Avançou para o ${newAnoCurrent}º ano lectivo (${currentAnoLectivo})`
+
     return {
       success: true,
       tipo: "avancou" as const,
-      disciplinasFalhadas: [],
-      message: `Avançou para o ${newAnoCurrent}º ano lectivo (${currentAnoLectivo})`,
+      disciplinasFalhadas: resetDisciplinas.map((d) => d.nome),
+      message: mensagem,
     }
   }
 
-  // ── 7b. Path B — Some failed: repeat the year ──
+  // ── 7b. Path B — More than 2 failed in same year: repeat the year ──
   // Update ano_electivo only — ano_current stays the same
   await prisma.estudante.update({
     where: { id_estudante },
