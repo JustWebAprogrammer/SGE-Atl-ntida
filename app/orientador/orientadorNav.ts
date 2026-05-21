@@ -5,5 +5,6 @@ export const orientadorNavItems = [
   { label: "Visão Geral", path: "/orientador" },
   { label: "Disciplinas", path: "/orientador/disciplinas" },
   { label: "Solicitações", path: "/orientador/solicitacoes" },
+  { label: "Plano de Aula", path: "/orientador/plano-aula" },
   { label: "Monografias", path: "/orientador/monografias" },
 ]
