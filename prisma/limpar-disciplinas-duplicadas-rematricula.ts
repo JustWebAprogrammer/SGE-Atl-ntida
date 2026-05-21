@@ -1,3 +1,5 @@
+import "dotenv/config"
+
 /**
  * Script de limpeza: Remove disciplinas duplicadas criadas pela rematrícula.
  *
