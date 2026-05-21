@@ -88,11 +88,6 @@ export default function OrientadorMonografiasDashboard() {
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<"premonografias" | "monografias">("premonografias")
 
-  // Premonografia evaluation state
-  const [avalPreId, setAvalPreId] = useState<number | null>(null)
-  const [feedbackPre, setFeedbackPre] = useState("")
-  const [processandoPre, setProcessandoPre] = useState<number | null>(null)
-
   // Monografia evaluation state
   const [avalMonId, setAvalMonId] = useState<number | null>(null)
   const [feedbackMon, setFeedbackMon] = useState("")
@@ -112,31 +107,6 @@ export default function OrientadorMonografiasDashboard() {
   function handleDownload(caminho: string, nome: string, tipo: "monografia" | "premonografia" = "monografia") {
     const url = `/api/orientador/download?path=${encodeURIComponent(caminho)}&nome=${encodeURIComponent(nome)}&tipo=${tipo}`
     window.open(url, "_blank")
-  }
-
-  async function avaliarPremonografia(id: number, estado: "Aprovado" | "Reprovado") {
-    setProcessandoPre(id)
-    try {
-      const res = await fetch(`/api/orientador/premonografia/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ estado, feedback: feedbackPre || null })
-      })
-      if (res.ok) {
-        setPremonografias(prev => prev.map(p =>
-          p.id_premonografia === id ? { ...p, estado, feedback: feedbackPre || null } : p
-        ))
-        setAvalPreId(null)
-        setFeedbackPre("")
-      } else {
-        const d = await res.json()
-        alert(d.error || "Erro ao avaliar")
-      }
-    } catch {
-      alert("Erro de rede")
-    } finally {
-      setProcessandoPre(null)
-    }
   }
 
   async function avaliarMonografia(id: number) {
@@ -261,8 +231,6 @@ export default function OrientadorMonografiasDashboard() {
                 </div>
               )}
 
-              {/* Action row */}
-              <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
                 {/* Download */}
                 {p.caminho_arquivo && p.nome_arquivo && (
                   <button
@@ -272,67 +240,6 @@ export default function OrientadorMonografiasDashboard() {
                     ⬇ {p.nome_arquivo}
                   </button>
                 )}
-
-                {/* Evaluate — always available */}
-                {avalPreId !== p.id_premonografia && (
-                  <button
-                    onClick={() => { setAvalPreId(p.id_premonografia); setFeedbackPre(p.feedback ?? "") }}
-                    style={{ ...btnBase, background: "#f0a500" }}
-                  >
-                    {p.estado === "Proposto" ? "Avaliar" : "Editar Avaliação"}
-                  </button>
-                )}
-              </div>
-
-              {/* Inline evaluation form */}
-              {avalPreId === p.id_premonografia && (
-                <div style={{
-                  marginTop: "14px",
-                  padding: "16px",
-                  background: "#13161e",
-                  borderRadius: "10px",
-                  border: "1px solid rgba(255,255,255,0.07)"
-                }}>
-                  <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                    Feedback (opcional)
-                  </div>
-                  <textarea
-                    value={feedbackPre}
-                    onChange={e => setFeedbackPre(e.target.value)}
-                    placeholder="Deixe um comentário para o estudante..."
-                    rows={3}
-                    style={{
-                      width: "100%", boxSizing: "border-box",
-                      padding: "10px 14px", background: "#1e2230",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                      borderRadius: "8px", color: "#e8eaf0",
-                      fontSize: "13px", resize: "vertical", outline: "none"
-                    }}
-                  />
-                  <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
-                    <button
-                      onClick={() => avaliarPremonografia(p.id_premonografia, "Aprovado")}
-                      disabled={processandoPre === p.id_premonografia}
-                      style={{ ...btnBase, background: processandoPre === p.id_premonografia ? "#b0b8cf" : "#22c55e", flex: 1 }}
-                    >
-                      {processandoPre === p.id_premonografia ? "..." : "✓ Aprovar"}
-                    </button>
-                    <button
-                      onClick={() => avaliarPremonografia(p.id_premonografia, "Reprovado")}
-                      disabled={processandoPre === p.id_premonografia}
-                      style={{ ...btnBase, background: processandoPre === p.id_premonografia ? "#b0b8cf" : "#e03d3d", flex: 1 }}
-                    >
-                      {processandoPre === p.id_premonografia ? "..." : "✗ Reprovar"}
-                    </button>
-                    <button
-                      onClick={() => { setAvalPreId(null); setFeedbackPre("") }}
-                      style={{ ...btnBase, background: "#2d3348" }}
-                    >
-                      Cancelar
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </>
