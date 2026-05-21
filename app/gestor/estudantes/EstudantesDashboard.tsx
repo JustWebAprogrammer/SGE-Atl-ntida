@@ -437,6 +437,8 @@ export default function EstudantesDashboard() {
   const [podeAtribuir, setPodeAtribuir] = useState(false)
   const [motivosBloqueio, setMotivosBloqueio] = useState<string[]>([])
 
+  const [anoLectivo, setAnoLectivo] = useState("")
+
   // Filtros
   const [todosCursos, setTodosCursos] = useState<string[]>([])
   const [filtroCurso, setFiltroCurso] = useState<string>("")
@@ -455,6 +457,7 @@ export default function EstudantesDashboard() {
       .then(r => r.json())
       .then(data => {
         setEstudantes(data.estudantes)
+        setAnoLectivo(data.ano_lectivo || "")
         // Only set todosCursos once on initial load (not on filter changes)
         if (todosCursos.length === 0) {
           const cursosUnicos = [...new Set(data.estudantes.map((e: EstudanteResumo) => e.curso))] as string[]
@@ -769,7 +772,7 @@ export default function EstudantesDashboard() {
           { label: "Total Estudantes", value: totalEstudantes, color: "#2dd4bf" },
           { label: "Estudantes Ativos", value: estudantesAtivos, color: "#22c55e" },
           { label: "Propina Pendente", value: pagamentoPendente, color: "#f0a500" },
-          { label: "Ano Lectivo", value: "2025/2026", color: "#9b59b6" },
+          { label: "Ano Lectivo", value: anoLectivo || "—", color: "#9b59b6" },
         ].map((s) => (
           <div key={s.label} style={{
             background: "#1e2230",

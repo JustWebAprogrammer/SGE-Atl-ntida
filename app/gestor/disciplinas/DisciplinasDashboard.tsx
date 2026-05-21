@@ -98,6 +98,8 @@ export default function DisciplinasDashboard() {
   const [filtroTurno, setFiltroTurno] = useState<string | null>(null)
   const [filtroProfessorId, setFiltroProfessorId] = useState<number | null>(null)
 
+  const [anoLectivo, setAnoLectivo] = useState("")
+
   // Turnos disponíveis para o filtro (vem dos cursos do departamento)
   const [turnosDisponiveisFiltro, setTurnosDisponiveisFiltro] = useState<string[]>([])
 
@@ -126,6 +128,7 @@ export default function DisciplinasDashboard() {
       .then(r => r.json())
       .then(data => {
         setDisciplinas(data.disciplinas)
+        setAnoLectivo(data.ano_lectivo || "")
         setIdDepartamentoGestor(data.id_departamento_gestor)
         // Turnos padrão do sistema
         setTurnosDisponiveisFiltro(["Matinal", "Vespertino", "Noturno"])
@@ -605,7 +608,7 @@ export default function DisciplinasDashboard() {
         {[
           { label: "Total Disciplinas", value: disciplinas.length, color: "#2dd4bf" },
           { label: "Mostrando", value: disciplinasFiltradas.length, color: "#f0a500" },
-          { label: "Ano Lectivo", value: "2025/2026", color: "#22c55e" },
+          { label: "Ano Lectivo", value: anoLectivo || "—", color: "#22c55e" },
         ].map((s) => (
           <div key={s.label} style={{
             background: "#1e2230",
