@@ -4,6 +4,29 @@ import { prisma } from "@/lib/prisma"
 import { authOptions } from "@/lib/auth"
 import { logAudit } from "@/lib/audit"
 import { gerarPropinasAteData } from "@/lib/propinas"
+import { getAnoLectivo } from "@/lib/sistema"
+
+export async function GET() {
+  try {
+    const ano_lectivo = await getAnoLectivo()
+    const config = await prisma.sistemaConfig.findUnique({
+      where: { id_config: 1 },
+      select: { simulador_ativo: true, data_simulada: true }
+    })
+
+    return NextResponse.json({
+      ano_lectivo,
+      simulador_ativo: config?.simulador_ativo ?? false,
+      data_simulada: config?.data_simulada ?? null,
+    })
+  } catch {
+    return NextResponse.json({
+      ano_lectivo: "2025/2026",
+      simulador_ativo: false,
+      data_simulada: null,
+    })
+  }
+}
 
 export async function POST(request: Request) {
   try {

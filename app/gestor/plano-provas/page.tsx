@@ -90,7 +90,7 @@ export default function PlanoProvasPage() {
   const [cursoId, setCursoId] = useState<string>("")
   const [ano, setAno] = useState<string>("1")
   const [semestre, setSemestre] = useState<string>("S1")
-  const [anoLectivo, setAnoLectivo] = useState<string>("2025/2026")
+  const [anoLectivo, setAnoLectivo] = useState<string>("")
 
   // Período de provas
   const [periodoInicio, setPeriodoInicio] = useState<string>("")
@@ -132,6 +132,16 @@ export default function PlanoProvasPage() {
         setLoading(false)
       })
       .catch(() => setLoading(false))
+  }, [])
+
+  // Buscar ano lectivo do sistema (simulado ou real)
+  useEffect(() => {
+    fetch("/api/admin/sistema/simulador")
+      .then(r => r.json())
+      .then(data => {
+        if (data.ano_lectivo) setAnoLectivo(data.ano_lectivo)
+      })
+      .catch(() => setAnoLectivo("2025/2026"))
   }, [])
 
   // Carregar disciplinas do currículo filtradas por ano/semestre
@@ -498,7 +508,7 @@ export default function PlanoProvasPage() {
           </div>
           <div>
             <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano Lectivo</div>
-            <input type="text" value={anoLectivo} onChange={e => setAnoLectivo(e.target.value)} style={{ ...estiloSelect, minWidth: "100px" }} />
+            <span style={{ ...estiloSelect, minWidth: "100px", display: "inline-flex", alignItems: "center", opacity: 0.8 }}>{anoLectivo || "—"}</span>
           </div>
           <div>
             <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
