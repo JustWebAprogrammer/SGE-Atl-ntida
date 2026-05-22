@@ -6,14 +6,21 @@ import { arredondarNota } from "@/lib/notas"
 
 import { orientadorNavItems as navItems } from "../orientadorNav"
 
+type CursoDisciplina = {
+  id_curso: number
+  nome_curso: string
+  duracao_anos: number | null
+  ano_curricular: number
+  semestre: string
+}
+
 type Disciplina = {
   id: number
   nome: string
   codigo: string
   creditos: number
-  ano_curricular: number
-  semestre: string
   total_estudantes: number
+  cursos: CursoDisciplina[]
 }
 
 type Estudante = {
@@ -197,7 +204,15 @@ export default function DisciplinasPage() {
                 <div>
                   <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
                   <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
-                    {d.codigo} · {d.creditos} créditos · {d.ano_curricular}º Ano · {d.semestre}
+                    {d.codigo} · {d.creditos} créditos · {(() => {
+                      const pares = d.cursos.map(c => ({ ano: c.ano_curricular, sem: c.semestre }))
+                      const paresUnicos = pares.filter((p, i, self) =>
+                        i === self.findIndex(t => t.ano === p.ano && t.sem === p.sem)
+                      ).sort((a, b) => a.ano - b.ano || a.sem.localeCompare(b.sem))
+                      return paresUnicos.length > 0
+                        ? paresUnicos.map(p => `${p.ano}º Ano ${p.sem}`).join(", ")
+                        : "—"
+                    })()}
                   </div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>

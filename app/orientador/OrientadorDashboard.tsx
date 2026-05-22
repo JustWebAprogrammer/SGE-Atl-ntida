@@ -28,8 +28,6 @@ type Disciplina = {
   nome: string
   codigo: string
   creditos: number
-  ano_curricular: number
-  semestre: string
   total_estudantes: number
   cursos: CursoDisciplina[]
   duracao_maxima: number
@@ -211,20 +209,20 @@ export default function OrientadorDashboard() {
     return Array.from(map.entries()).map(([id, nome]) => ({ id, nome }))
   }, [disciplinas])
 
-  // Anos disponíveis baseados no filtro de curso
+  // Anos disponíveis baseados nas disciplinas reais
   const anosDisponiveis = useMemo(() => {
-    if (filtroCurso === "todos") {
-      const maxAno = disciplinas.length > 0
-        ? Math.max(...disciplinas.map(d => d.duracao_maxima))
-        : 6
-      return Array.from({ length: maxAno }, (_, i) => i + 1)
-    }
-    const cursoId = parseInt(filtroCurso)
-    const cursosFiltrados = disciplinas.flatMap(d => d.cursos).filter(c => c.id_curso === cursoId)
-    const duracao = cursosFiltrados.length > 0
-      ? (cursosFiltrados[0].duracao_anos || 6)
-      : 6
-    return Array.from({ length: duracao }, (_, i) => i + 1)
+    const anos = new Set<number>()
+    disciplinas.forEach(d => {
+      if (filtroCurso === "todos") {
+        d.cursos.forEach(c => anos.add(c.ano_curricular))
+      } else {
+        const cursoId = parseInt(filtroCurso)
+        d.cursos
+          .filter(c => c.id_curso === cursoId)
+          .forEach(c => anos.add(c.ano_curricular))
+      }
+    })
+    return Array.from(anos).sort((a, b) => a - b)
   }, [filtroCurso, disciplinas])
 
   // Disciplinas filtradas
@@ -236,7 +234,7 @@ export default function OrientadorDashboard() {
       }
       if (filtroAno !== "todos") {
         const ano = parseInt(filtroAno)
-        if (d.ano_curricular !== ano) return false
+        if (!d.cursos.some(c => c.ano_curricular === ano)) return false
       }
       return true
     })
@@ -778,7 +776,15 @@ export default function OrientadorDashboard() {
                   <div>
                     <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
                     <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
-                      {d.codigo} · {d.creditos} créditos · {d.ano_curricular}º Ano · {d.semestre}
+                      {d.codigo} · {d.creditos} créditos · {(() => {
+                        const pares = d.cursos.map(c => ({ ano: c.ano_curricular, sem: c.semestre }))
+                        const paresUnicos = pares.filter((p, i, self) =>
+                          i === self.findIndex(t => t.ano === p.ano && t.sem === p.sem)
+                        ).sort((a, b) => a.ano - b.ano || a.sem.localeCompare(b.sem))
+                        return paresUnicos.length > 0
+                          ? paresUnicos.map(p => `${p.ano}º Ano ${p.sem}`).join(", ")
+                          : "—"
+                      })()}
                       {d.cursos.length > 0 && (
                         <span> · {d.cursos.map(c => c.nome_curso).join(", ")}</span>
                       )}
