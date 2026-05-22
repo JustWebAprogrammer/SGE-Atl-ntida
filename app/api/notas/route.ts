@@ -199,16 +199,32 @@ export async function POST(request: Request) {
     })
   }
 
-  // Notificar estudante
+  // Notificar estudante — apenas os campos que foram enviados
   const nomeDisciplina = await prisma.disciplina.findUnique({
     where: { id_disciplina },
     select: { nome_disciplina: true }
   })
+
+  const camposNota: { key: string; label: string; valor: any }[] = [
+    { key: 'ac1', label: 'AC1', valor: ac1 },
+    { key: 'ac2', label: 'AC2', valor: ac2 },
+    { key: 'ac3', label: 'AC3', valor: ac3 },
+    { key: 'ttp', label: 'TTP', valor: ttp },
+    { key: 'pp1', label: 'PP1', valor: pp1 },
+    { key: 'pp2', label: 'PP2', valor: pp2 },
+    { key: 'exame', label: 'Exame', valor: exame },
+    { key: 'recurso', label: 'Recurso', valor: recurso },
+    { key: 'exame_especial', label: 'Exame Especial', valor: exame_especial },
+  ]
+
+  const preenchidos = camposNota.filter(c => c.valor != null)
+  const partesMsg = preenchidos.map(c => `${c.label}: ${c.valor}`)
+
   await criarNotificacao({
     id_usuario: estudante.id_usuario,
     tipo: "nota",
-    titulo: `Nota de ${nomeDisciplina?.nome_disciplina || "disciplina"} lançada`,
-    mensagem: `A sua nota final em ${nomeDisciplina?.nome_disciplina || "disciplina"} é ${resultado.nota_final ?? (resultado.dispensada ? "Dispensado(a)" : "—")}`,
+    titulo: `${nomeDisciplina?.nome_disciplina || "Disciplina"} — ${partesMsg.join(" | ")}`,
+    mensagem: partesMsg.join(" | "),
     link_url: "/estudante/notas"
   })
 
