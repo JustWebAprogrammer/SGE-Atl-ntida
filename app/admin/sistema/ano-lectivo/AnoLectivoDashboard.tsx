@@ -44,6 +44,7 @@ export default function AnoLectivoDashboard() {
   const [dataRealOriginal, setDataRealOriginal] = useState("")
   // Marcar que o simulador já foi usado (sticker persistente após desactivar)
   const [jaFoiSimulado, setJaFoiSimulado] = useState(false)
+  const [avancandoAno, setAvancandoAno] = useState(false)
 
   useEffect(() => {
     fetchConfig()
@@ -778,8 +779,43 @@ export default function AnoLectivoDashboard() {
                 Avançar 1 semana
               </button>
               
-              <button
-                onClick={handleResetSimulator}
+               <button
+                 onClick={async () => {
+                   if (!confirm(`⚠️ AVANÇAR ANO LECTIVO?\n\nVai:\n1. Avançar a data simulada para 1 de Setembro do próximo ano\n2. Actualizar o ano lectivo\n3. Processar rematrícula de TODOS os estudantes (avançar/repetir conforme notas)\n4. Suspender quem não rematricular\n5. Resetar para Semestre 1\n\nContinuar?`)) return
+                   setAvancandoAno(true)
+                   try {
+                     const res = await fetch("/api/admin/sistema/avancar-ano-lectivo", { method: "POST" })
+                     const data = await res.json()
+                     if (data.success) {
+                       setMessage({ type: "success", text: data.message })
+                     } else {
+                       setMessage({ type: "error", text: data.error || "Erro ao avançar ano" })
+                     }
+                     window.dispatchEvent(new CustomEvent('simulador-updated'))
+                     fetchConfig()
+                   } catch {
+                     setMessage({ type: "error", text: "Erro ao avançar ano lectivo" })
+                   } finally {
+                     setAvancandoAno(false)
+                   }
+                 }}
+                 disabled={avancandoAno}
+                 style={{
+                   padding: "8px 16px",
+                   background: avancandoAno ? "#b0b8cf" : "rgba(46,204,113,0.2)",
+                   border: "1px solid rgba(46,204,113,0.3)",
+                   borderRadius: "6px",
+                   color: avancandoAno ? "#d0d7e8" : "#2ecc71",
+                   cursor: avancandoAno ? "not-allowed" : "pointer",
+                   fontSize: "13px",
+                   fontWeight: "600"
+                 }}
+               >
+                 {avancandoAno ? "A avançar..." : "📆 Avançar 1 Ano Lectivo ⏭️"}
+               </button>
+
+               <button
+                 onClick={handleResetSimulator}
                 style={{
                   padding: "8px 16px",
                   background: "rgba(52,152,219,0.2)",
