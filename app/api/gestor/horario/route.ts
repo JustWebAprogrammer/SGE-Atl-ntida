@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { verificarConflitoProfessorHorario } from "@/lib/verificarConflitos"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 import { getAnoLectivo, getSemestreAtual } from "@/lib/sistema"
 
@@ -240,6 +241,35 @@ export async function POST(req: NextRequest) {
       },
       ip_address
     })
+
+    // Notificar estudantes do curso/ano
+    const estudantes = await prisma.estudante.findMany({
+      where: { id_curso: parseInt(id_curso), ano_current: parseInt(ano_curricular), estado: "EmCurso" },
+      select: { id_usuario: true }
+    })
+    for (const est of estudantes) {
+      await criarNotificacao({
+        id_usuario: est.id_usuario,
+        tipo: "horario",
+        titulo: `Horário atualizado — ${cursoInfo?.nome_curso || ""}`,
+        mensagem: `Nova aula de ${discInfo?.nome_disciplina || ""} adicionada: ${dia_semana} às ${horario.hora_inicio} (${turno})`,
+        link_url: "/estudante/horario"
+      })
+    }
+    // Notificar professor da disciplina
+    const professorDisciplina = await prisma.professorDisciplina.findFirst({
+      where: { id_disciplina: parseInt(id_disciplina), ano_lectivo: ano_lectivo || await getAnoLectivo(), semestre },
+      select: { id_usuario: true }
+    })
+    if (professorDisciplina) {
+      await criarNotificacao({
+        id_usuario: professorDisciplina.id_usuario,
+        tipo: "horario",
+        titulo: `Aula atribuída — ${discInfo?.nome_disciplina || ""}`,
+        mensagem: `Foi-lhe atribuída uma aula de ${discInfo?.nome_disciplina || ""} à ${dia_semana} às ${horario.hora_inicio} (${turno})`,
+        link_url: "/orientador/horario"
+      })
+    }
 
     return NextResponse.json({ aula })
   } catch {

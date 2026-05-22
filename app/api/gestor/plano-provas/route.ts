@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { verificarConflitoProfessorProva } from "@/lib/verificarConflitos"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 import { getAnoLectivo, getSemestreAtual } from "@/lib/sistema"
 
 export async function GET(req: NextRequest) {
@@ -187,6 +188,35 @@ export async function POST(req: NextRequest) {
       },
       ip_address
     })
+
+    // Notificar estudantes do curso/ano
+    const estudantes = await prisma.estudante.findMany({
+      where: { id_curso: parseInt(id_curso), ano_current: parseInt(ano_curricular), estado: "EmCurso" },
+      select: { id_usuario: true }
+    })
+    for (const est of estudantes) {
+      await criarNotificacao({
+        id_usuario: est.id_usuario,
+        tipo: "provas",
+        titulo: `Nova prova — ${discInfo?.nome_disciplina || ""}`,
+        mensagem: `${tipo_prova} de ${discInfo?.nome_disciplina || ""} agendada para ${data_prova} às ${hora_inicio} (${turno})`,
+        link_url: "/estudante/plano-provas"
+      })
+    }
+    // Notificar professor da disciplina
+    const professorDisciplina = await prisma.professorDisciplina.findFirst({
+      where: { id_disciplina: parseInt(id_disciplina), ano_lectivo: ano_lectivo || await getAnoLectivo(), semestre },
+      select: { id_usuario: true }
+    })
+    if (professorDisciplina) {
+      await criarNotificacao({
+        id_usuario: professorDisciplina.id_usuario,
+        tipo: "provas",
+        titulo: `Prova atribuída — ${discInfo?.nome_disciplina || ""}`,
+        mensagem: `Foi-lhe atribuída a prova ${tipo_prova} de ${discInfo?.nome_disciplina || ""} em ${data_prova} às ${hora_inicio} (${turno})`,
+        link_url: "/orientador/horario"
+      })
+    }
 
     return NextResponse.json({ prova })
   } catch (err: unknown) {
