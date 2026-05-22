@@ -108,6 +108,7 @@ export default function PlanoProvasPage() {
   const [dataProva, setDataProva] = useState<string>("")
   const [posicao, setPosicao] = useState<string>("1")
   const [salvando, setSalvando] = useState(false)
+  const [avançando, setAvançando] = useState(false)
   const [erroDataProva, setErroDataProva] = useState<string>("")
 
   // Configuração de horário
@@ -367,6 +368,45 @@ export default function PlanoProvasPage() {
     return () => window.removeEventListener("afterprint", handler)
   }, [])
 
+  // Ordem sequencial dos tipos de prova (waterfall)
+  const ORDEM_TIPOS_PROVA = ["PP1", "PP2", "Exame", "Recurso", "Exame_Especial"]
+
+  const idxTipoAtual = ORDEM_TIPOS_PROVA.indexOf(filtroTipoProva)
+  const temProxTipo = idxTipoAtual >= 0 && idxTipoAtual < ORDEM_TIPOS_PROVA.length - 1
+  const proxTipo = temProxTipo ? ORDEM_TIPOS_PROVA[idxTipoAtual + 1] : null
+
+  async function avancarTipo() {
+    if (!cursoId || !proxTipo) return
+    if (!confirm(`⚠️ Vai apagar TODAS as provas do tipo "${filtroTipoProva}" deste curso/ano/semestre e avançar para "${proxTipo}". Confirmar?`)) return
+    setAvançando(true)
+    try {
+      const res = await fetch("/api/gestor/plano-provas/avancar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cursoId: parseInt(cursoId),
+          ano: parseInt(ano),
+          semestre,
+          ano_lectivo: anoLectivo,
+          tipo_prova_atual: filtroTipoProva,
+        })
+      })
+      const data = await res.json()
+      if (data.success) {
+        alert(data.message)
+        setFiltroTipoProva(proxTipo)
+        const provasData = await fetch(`/api/gestor/plano-provas?cursoId=${cursoId}&ano=${ano}&semestre=${semestre}&ano_lectivo=${anoLectivo}`).then(r => r.json())
+        setProvas(provasData.provas || [])
+      } else {
+        alert(data.error || "Erro ao avançar tipo de prova")
+      }
+    } catch {
+      alert("Erro ao avançar tipo de prova")
+    } finally {
+      setAvançando(false)
+    }
+  }
+
   async function adicionarProva(e: React.FormEvent) {
     e.preventDefault()
     if (!cursoId || !disciplinaId || !dataProva || !filtroTurno || !posicao) {
@@ -622,6 +662,28 @@ export default function PlanoProvasPage() {
                 fontWeight: "600",
                 cursor: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "pointer" : "not-allowed"
               }}>{salvando ? "A adicionar..." : "+ Adicionar"}</button>
+                {temProxTipo && (
+                  <button
+                    type="button"
+                    onClick={avancarTipo}
+                    disabled={avançando}
+                    style={{
+                      padding: "8px 16px",
+                      background: "#f0a500",
+                      color: "#13161e",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      cursor: avançando ? "not-allowed" : "pointer",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    {avançando ? "A avançar..." : `⏭️ Avançar para ${proxTipo}`}
+                  </button>
+                )}
             </form>
             
             {/* Preview do horário calculado */}
