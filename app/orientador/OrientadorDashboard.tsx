@@ -581,7 +581,9 @@ export default function OrientadorDashboard() {
                         {aula ? (
                           <div style={{ background: "#1e2230", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
                             <div style={{ color: "#e8eaf0", fontWeight: "600", fontSize: "11px" }}>{aula.nome_disciplina}</div>
-                            <div style={{ color: "#d0d7e8", fontSize: "10px", marginTop: "3px" }}>{aula.nome_curso}</div>
+                            <div style={{ color: "#d0d7e8", fontSize: "10px", marginTop: "3px" }}>
+                              {aula.nome_curso} · {aula.ano_curricular}º Ano · {aula.turno}
+                            </div>
                             {aula.sala && <div style={{ color: "#b0b8cf", marginTop: "3px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                           </div>
                         ) : (
