@@ -267,7 +267,7 @@ export async function POST(req: NextRequest) {
         tipo: "horario",
         titulo: `Aula atribuída — ${discInfo?.nome_disciplina || ""}`,
         mensagem: `Foi-lhe atribuída uma aula de ${discInfo?.nome_disciplina || ""} à ${dia_semana} às ${horario.hora_inicio} (${turno})`,
-        link_url: "/orientador/horario"
+        link_url: "/orientador/plano-aula"
       })
     }
 

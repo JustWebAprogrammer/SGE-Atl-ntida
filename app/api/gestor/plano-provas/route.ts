@@ -214,7 +214,7 @@ export async function POST(req: NextRequest) {
         tipo: "provas",
         titulo: `Prova atribuída — ${discInfo?.nome_disciplina || ""}`,
         mensagem: `Foi-lhe atribuída a prova ${tipo_prova} de ${discInfo?.nome_disciplina || ""} em ${data_prova} às ${hora_inicio} (${turno})`,
-        link_url: "/orientador/horario"
+        link_url: "/orientador/plano-aula"
       })
     }
 
