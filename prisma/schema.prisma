@@ -24,6 +24,7 @@ model Usuario {
   precosCursos           PrecoCurso[]
   snapshots              SnapshotSemestre[] // NEW: Relation for snapshots created by this user
   sistemaConfigs         SistemaConfig[]
+  notificacoes           Notificacao[]
 }
 
 model Admin {
@@ -405,6 +406,18 @@ model AuditLog {
   ip_address   String   @db.VarChar(45)
   data_hora    DateTime @default(now())
   usuario      Usuario  @relation(fields: [id_usuario], references: [id_usuario])
+}
+
+model Notificacao {
+  id          Int      @id @default(autoincrement())
+  id_usuario  Int
+  tipo        String   @db.VarChar(50)
+  titulo      String   @db.VarChar(200)
+  mensagem    String   @db.Text
+  lida        Boolean  @default(false)
+  link_url    String?  @db.VarChar(500)
+  data_hora   DateTime @default(now())
+  usuario     Usuario  @relation(fields: [id_usuario], references: [id_usuario])
 }
 
 // NEW: SistemaConfig (Singleton)

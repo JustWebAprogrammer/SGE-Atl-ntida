@@ -144,6 +144,10 @@ export default function DashboardLayout({
   const [loadingPerfil, setLoadingPerfil] = useState(false)
   const [simuladorAtivo, setSimuladorAtivo] = useState(false)
   const [dataSimulada, setDataSimulada] = useState<Date | null>(null)
+  const [notificacoes, setNotificacoes] = useState<any[]>([])
+  const [notificacoesNaoLidas, setNotificacoesNaoLidas] = useState(0)
+  const [showNotificacoes, setShowNotificacoes] = useState(false)
+  const [loadingNotificacoes, setLoadingNotificacoes] = useState(false)
 
   // Tratar erro de sessão/expiração - NÃO chamar signOut() aqui pois causa loop infinito
   // signOut() força re-fetch do NextAuth que pode falhar e causar ciclo infinito
@@ -174,6 +178,66 @@ export default function DashboardLayout({
       return () => window.removeEventListener('simulador-updated', fetchSimuladorStatus)
     }
   }, [session?.user?.role])
+
+  // Carregar notificações
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchNotificacoes()
+      fetchContagem()
+      // Refresh periódico a cada 30s
+      const interval = setInterval(() => {
+        fetchContagem()
+      }, 30000)
+      return () => clearInterval(interval)
+    }
+  }, [session?.user?.id])
+
+  async function fetchNotificacoes() {
+    try {
+      setLoadingNotificacoes(true)
+      const res = await fetch('/api/notificacoes')
+      if (res.ok) {
+        const data = await res.json()
+        setNotificacoes(data)
+      }
+    } catch (error) {
+      console.error('Erro ao carregar notificações:', error)
+    } finally {
+      setLoadingNotificacoes(false)
+    }
+  }
+
+  async function fetchContagem() {
+    try {
+      const res = await fetch('/api/notificacoes/contagem')
+      if (res.ok) {
+        const data = await res.json()
+        setNotificacoesNaoLidas(data.total)
+      }
+    } catch (error) {
+      console.error('Erro ao carregar contagem:', error)
+    }
+  }
+
+  async function marcarLida(id: number) {
+    try {
+      await fetch(`/api/notificacoes/${id}`, { method: 'PUT' })
+      setNotificacoes(prev => prev.map(n => n.id === id ? { ...n, lida: true } : n))
+      setNotificacoesNaoLidas(prev => Math.max(0, prev - 1))
+    } catch (error) {
+      console.error('Erro ao marcar notificação:', error)
+    }
+  }
+
+  async function marcarTodasLidas() {
+    try {
+      await fetch('/api/notificacoes/marcar-todas', { method: 'PUT' })
+      setNotificacoes(prev => prev.map(n => ({ ...n, lida: true })))
+      setNotificacoesNaoLidas(0)
+    } catch (error) {
+      console.error('Erro ao marcar todas:', error)
+    }
+  }
 
   async function fetchSimuladorStatus() {
     try {
@@ -478,6 +542,188 @@ export default function DashboardLayout({
             )}
           </div>
           
+          {/* Notificações */}
+          <div style={{ position: "relative" }}>
+            <button
+              onClick={() => {
+                setShowNotificacoes(!showNotificacoes)
+                if (!showNotificacoes) fetchNotificacoes()
+              }}
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "8px",
+                borderRadius: "8px",
+                position: "relative",
+                color: "#d0d7e8",
+                fontSize: "20px",
+                display: "flex",
+                alignItems: "center"
+              }}
+            >
+              🔔
+              {notificacoesNaoLidas > 0 && (
+                <span style={{
+                  position: "absolute",
+                  top: "0px",
+                  right: "0px",
+                  background: "#e03d3d",
+                  color: "white",
+                  fontSize: "10px",
+                  fontWeight: "700",
+                  minWidth: "18px",
+                  height: "18px",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: "2px solid #0d0f14"
+                }}>
+                  {notificacoesNaoLidas > 99 ? "99+" : notificacoesNaoLidas}
+                </span>
+              )}
+            </button>
+
+            {/* Dropdown Notificações */}
+            {showNotificacoes && (
+              <>
+                {/* Overlay para fechar ao clicar fora */}
+                <div
+                  style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 99 }}
+                  onClick={() => setShowNotificacoes(false)}
+                />
+                <div style={{
+                  position: "absolute",
+                  top: "calc(100% + 8px)",
+                  right: 0,
+                  width: "380px",
+                  maxHeight: "480px",
+                  background: "#1e2230",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: "12px",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                  zIndex: 100,
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column"
+                }}>
+                  {/* Header do dropdown */}
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "14px 16px",
+                    borderBottom: "1px solid rgba(255,255,255,0.07)"
+                  }}>
+                    <span style={{ fontWeight: "600", fontSize: "14px", color: "#e8eaf0" }}>Notificações</span>
+                    {notificacoesNaoLidas > 0 && (
+                      <button
+                        onClick={marcarTodasLidas}
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#e03d3d",
+                          fontSize: "12px",
+                          cursor: "pointer",
+                          fontWeight: "500"
+                        }}
+                      >
+                        Marcar todas lidas
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Lista */}
+                  <div style={{
+                    overflowY: "auto",
+                    flex: 1,
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "#2a2f3d #1e2230"
+                  }}>
+                    {loadingNotificacoes ? (
+                      <div style={{ padding: "40px", textAlign: "center", color: "#d0d7e8", fontSize: "13px" }}>
+                        A carregar...
+                      </div>
+                    ) : notificacoes.length === 0 ? (
+                      <div style={{ padding: "40px", textAlign: "center", color: "#b0b8cf", fontSize: "13px" }}>
+                        Nenhuma notificação
+                      </div>
+                    ) : (
+                      notificacoes.map((n: any) => (
+                        <div
+                          key={n.id}
+                          onClick={() => {
+                            if (!n.lida) marcarLida(n.id)
+                            if (n.link_url) {
+                              router.push(n.link_url)
+                              setShowNotificacoes(false)
+                            }
+                          }}
+                          style={{
+                            padding: "12px 16px",
+                            borderBottom: "1px solid rgba(255,255,255,0.04)",
+                            cursor: n.link_url ? "pointer" : "default",
+                            background: n.lida ? "transparent" : "rgba(224,61,61,0.06)",
+                            transition: "background 0.15s"
+                          }}
+                        >
+                          <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "flex-start",
+                            gap: "8px"
+                          }}>
+                            <div style={{ flex: 1, minWidth: 0 }}>
+                              <div style={{
+                                fontSize: "13px",
+                                fontWeight: n.lida ? "400" : "600",
+                                color: "#e8eaf0",
+                                marginBottom: "3px"
+                              }}>{n.titulo}</div>
+                              <div style={{
+                                fontSize: "12px",
+                                color: "#b0b8cf",
+                                lineHeight: "1.4",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical"
+                              }}>{n.mensagem}</div>
+                              <div style={{
+                                fontSize: "11px",
+                                color: "#6b7280",
+                                marginTop: "4px"
+                              }}>
+                                {new Date(n.data_hora).toLocaleDateString('pt-PT', {
+                                  day: '2-digit',
+                                  month: '2-digit',
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })}
+                              </div>
+                            </div>
+                            {!n.lida && (
+                              <div style={{
+                                width: "8px",
+                                height: "8px",
+                                borderRadius: "50%",
+                                background: "#e03d3d",
+                                flexShrink: 0,
+                                marginTop: "6px"
+                              }} />
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
           {/* Simulador Indicator */}
           {simuladorAtivo && (
             <div style={{

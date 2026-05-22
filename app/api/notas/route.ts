@@ -5,6 +5,7 @@ import { NextResponse } from "next/server"
 import { calcularNotaFinal, validarNota, validarNotaSeca } from "@/lib/notas"
 import { logAudit } from "@/lib/audit"
 import { getAnoLectivo } from "@/lib/sistema"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions)
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
   // Validar que o estudante está no ano correcto para esta disciplina
   const estudante = await prisma.estudante.findUnique({
     where: { id_estudante },
-    select: { id_estudante: true, ano_current: true, id_curso: true }
+    select: { id_estudante: true, ano_current: true, id_curso: true, id_usuario: true }
   })
 
   if (!estudante) {
@@ -197,6 +198,19 @@ export async function POST(request: Request) {
       ip_address
     })
   }
+
+  // Notificar estudante
+  const nomeDisciplina = await prisma.disciplina.findUnique({
+    where: { id_disciplina },
+    select: { nome_disciplina: true }
+  })
+  await criarNotificacao({
+    id_usuario: estudante.id_usuario,
+    tipo: "nota",
+    titulo: `Nota de ${nomeDisciplina?.nome_disciplina || "disciplina"} lançada`,
+    mensagem: `A sua nota final em ${nomeDisciplina?.nome_disciplina || "disciplina"} é ${resultado.nota_final ?? (resultado.dispensada ? "Dispensado(a)" : "—")}`,
+    link_url: "/estudante/notas"
+  })
 
   return NextResponse.json({
     success: true,

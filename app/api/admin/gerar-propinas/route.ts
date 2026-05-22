@@ -5,6 +5,7 @@ import { NextResponse } from "next/server"
 import { getPrecoEstudante } from "@/lib/precos"
 import { logAudit } from "@/lib/audit"
 import { getSystemDate, getActivePropinaMonths } from "@/lib/sistema"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions)
@@ -31,6 +32,7 @@ export async function POST(request: Request) {
         id_estudante: true,
         ano_current: true,
         data_cadastro: true,
+        id_usuario: true,
         curso: {
           select: { duracao_anos: true },
         },
@@ -97,13 +99,23 @@ export async function POST(request: Request) {
           codigo_confirmacao: codigo,
           mes,
           ano,
-          valor_base: valor_propina, // valor original (sem desconto)
+          valor_base: valor_propina,
           valor_multa: 0,
-          valor_total: valor_com_desconto, // valor com desconto da bolsa aplicado
+          valor_total: valor_com_desconto,
           data_vencimento: dataVencimento,
           estado: "Pendente",
           emitido_por: "sistema",
         }
+      })
+
+      // Notificar estudante
+      const nomeMes = new Date(ano, mes - 1).toLocaleDateString('pt-PT', { month: 'long' })
+      await criarNotificacao({
+        id_usuario: estudante.id_usuario,
+        tipo: "propina",
+        titulo: `Propina de ${nomeMes} gerada`,
+        mensagem: `A propina referente a ${nomeMes}/${ano} no valor de ${valor_com_desconto} Kz foi gerada. Vencimento: ${dataVencimento.toLocaleDateString('pt-PT')}`,
+        link_url: "/estudante/pagamentos"
       })
 
       gerados++
