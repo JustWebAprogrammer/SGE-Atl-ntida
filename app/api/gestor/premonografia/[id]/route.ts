@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 export async function PATCH(
   request: Request,
@@ -31,6 +32,7 @@ export async function PATCH(
     include: {
       estudante: {
         select: {
+          id_usuario: true,
           nome_completo: true,
           numero_estudante: true,
           curso: {
@@ -87,6 +89,19 @@ export async function PATCH(
     })
   } catch (err) {
     console.error("Erro ao registrar audit log:", err)
+  }
+
+  // Notificar estudante
+  try {
+    await criarNotificacao({
+      id_usuario: premonografia.estudante.id_usuario,
+      tipo: "premonografia",
+      titulo: `Pré-projecto ${estado === "Aprovado" ? "aprovado" : "rejeitado"}`,
+      mensagem: `O seu pré-projecto "${premonografia.tema}" foi ${estado === "Aprovado" ? "aprovado" : "rejeitado"}${feedback ? `. Parecer: ${feedback}` : ""}`,
+      link_url: "/estudante/monografia"
+    })
+  } catch (err) {
+    console.error("Erro ao criar notificação:", err)
   }
 
   return NextResponse.json({
