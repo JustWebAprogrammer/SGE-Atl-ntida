@@ -6,6 +6,7 @@ import { writeFile, mkdir } from "fs/promises"
 import { existsSync } from "fs"
 import path from "path"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 // Pasta onde os arquivos serão guardados
 const UPLOAD_DIR = path.join(process.cwd(), "uploads", "monografias")
@@ -252,6 +253,25 @@ export async function POST(req: Request) {
     })
   } catch (err) {
     console.error("Erro ao registrar audit log:", err)
+  }
+
+  // Notificar gestores do departamento
+  try {
+    const gestores = await prisma.orientador.findMany({
+      where: { e_gestor: true },
+      select: { id_usuario: true }
+    })
+    for (const g of gestores) {
+      await criarNotificacao({
+        id_usuario: g.id_usuario,
+        tipo: "monografia",
+        titulo: "Nova monografia submetida",
+        mensagem: `Um estudante submeteu a monografia "${monografia.titulo}"`,
+        link_url: "/gestor/monografias"
+      })
+    }
+  } catch (err) {
+    console.error("Erro ao notificar gestores:", err)
   }
 
   return NextResponse.json({
