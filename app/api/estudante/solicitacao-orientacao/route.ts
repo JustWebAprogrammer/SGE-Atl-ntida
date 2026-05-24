@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 export async function GET() {
   const session = await getServerSession(authOptions)
@@ -204,6 +205,25 @@ export async function POST(request: Request) {
     })
   } catch (err) {
     console.error("Erro ao registrar audit log:", err)
+  }
+
+  // Notificar gestores do departamento
+  try {
+    const gestores = await prisma.orientador.findMany({
+      where: { e_gestor: true, id_departamento: orientador.id_departamento },
+      select: { id_usuario: true }
+    })
+    for (const g of gestores) {
+      await criarNotificacao({
+        id_usuario: g.id_usuario,
+        tipo: "solicitacao",
+        titulo: "Nova solicitação de orientação",
+        mensagem: `${solicitacao.estudante.nome_completo} (${solicitacao.estudante.numero_estudante}) solicita orientação com ${solicitacao.orientador.nome_completo}`,
+        link_url: "/gestor/estudantes"
+      })
+    }
+  } catch (err) {
+    console.error("Erro ao notificar gestores:", err)
   }
 
   return NextResponse.json({
