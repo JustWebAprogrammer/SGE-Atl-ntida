@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 import { SERVICOS } from "@/lib/servicos-tipos"
 import { getAnoLectivo, getSystemDate } from "@/lib/sistema"
 
@@ -135,6 +136,24 @@ export async function POST(request: Request) {
         codigo_confirmacao: codigoConfirmacao,
       }
     })
+
+    // Notificar recepcionistas
+    try {
+      const recepcionistas = await prisma.recepcionista.findMany({
+        select: { id_usuario: true }
+      })
+      for (const r of recepcionistas) {
+        await criarNotificacao({
+          id_usuario: r.id_usuario,
+          tipo: "pagamento_documento",
+          titulo: `Novo pedido: ${descricaoServico}`,
+          mensagem: `${estudante.nome_completo} (${estudante.numero_estudante}) solicitou ${descricaoServico} — valor ${valorTotal} Kz`,
+          link_url: "/recepcionista/estudante"
+        })
+      }
+    } catch (err) {
+      console.error("Erro ao notificar recepcionistas:", err)
+    }
 
     // Registar no audit log
     await logAudit({
