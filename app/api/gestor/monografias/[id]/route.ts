@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 export async function PATCH(
   request: Request,
@@ -65,6 +66,7 @@ export async function PATCH(
         estudante: {
           select: {
             id_estudante: true,
+            id_usuario: true,
             nome_completo: true,
             numero_estudante: true,
           }
@@ -209,6 +211,31 @@ export async function PATCH(
 
     return [monografiaAtualizada, estudanteFinalizado]
   })
+
+  // Notificar estudante
+  try {
+    let titulo = "Monografia atualizada"
+    let mensagem = `A sua monografia foi atualizada para "${monografiaAtualizada.estado}"`
+    if (monografiaAtualizada.estado === "Aprovada") {
+      titulo = "Monografia aprovada"
+      mensagem = "A sua monografia foi aprovada"
+    } else if (monografiaAtualizada.estado === "Rejeitada") {
+      titulo = "Monografia rejeitada"
+      mensagem = `A sua monografia foi rejeitada${feedback_gestor ? `. Feedback: ${feedback_gestor}` : ""}`
+    } else if (monografiaAtualizada.estado === "ParaDefender") {
+      titulo = "Defesa agendada"
+      mensagem = `A defesa foi agendada para ${data_defesa ? new Date(data_defesa).toLocaleDateString('pt-PT') : ""} às ${hora_defesa || ""} (${sala_defesa || "sala a definir"})`
+    }
+    await criarNotificacao({
+      id_usuario: monografiaAtualizada.estudante.id_usuario,
+      tipo: "monografia",
+      titulo,
+      mensagem,
+      link_url: "/estudante/monografia"
+    })
+  } catch (err) {
+    console.error("Erro ao criar notificação:", err)
+  }
 
   // Log audit
   try {
