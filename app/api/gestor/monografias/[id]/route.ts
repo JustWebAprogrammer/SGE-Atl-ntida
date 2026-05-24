@@ -237,6 +237,27 @@ export async function PATCH(
     console.error("Erro ao criar notificação:", err)
   }
 
+  // Notificar orientador quando defesa for agendada
+  if (monografiaAtualizada.estado === "ParaDefender" && monografia.id_orientador) {
+    try {
+      const orientadorData = await prisma.orientador.findUnique({
+        where: { id_orientador: monografia.id_orientador },
+        select: { id_usuario: true, nome_completo: true }
+      })
+      if (orientadorData) {
+        await criarNotificacao({
+          id_usuario: orientadorData.id_usuario,
+          tipo: "defesa",
+          titulo: `Defesa agendada — ${monografiaAtualizada.estudante.nome_completo}`,
+          mensagem: `A defesa do aluno ${monografiaAtualizada.estudante.nome_completo} foi agendada para ${data_defesa ? new Date(data_defesa).toLocaleDateString('pt-PT') : ""} às ${hora_defesa || ""} (${sala_defesa || "sala a definir"})`,
+          link_url: "/orientador/monografias"
+        })
+      }
+    } catch (err) {
+      console.error("Erro ao notificar orientador:", err)
+    }
+  }
+
   // Log audit
   try {
     const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown"
