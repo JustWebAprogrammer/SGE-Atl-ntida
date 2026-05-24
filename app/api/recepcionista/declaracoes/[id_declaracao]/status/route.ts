@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 // PUT /api/recepcionista/declaracoes/[id_declaracao]/status - Update declaration delivery status
 export async function PUT(
@@ -29,7 +30,10 @@ export async function PUT(
     }
 
     const declaracao = await prisma.declaracao.findUnique({
-      where: { id_declaracao: declaracaoId }
+      where: { id_declaracao: declaracaoId },
+      include: {
+        estudante: { select: { id_usuario: true, nome_completo: true } }
+      }
     })
 
     if (!declaracao) {
@@ -40,6 +44,17 @@ export async function PUT(
       where: { id_declaracao: declaracaoId },
       data: { status_entrega: status }
     })
+
+    // Notificar estudante quando declaração estiver pronta
+    if (status === "Pronto" && declaracao.estudante) {
+      await criarNotificacao({
+        id_usuario: declaracao.estudante.id_usuario,
+        tipo: "declaracao",
+        titulo: "Declaração disponível",
+        mensagem: "A sua declaração está disponível para levantar na secretaria.",
+        link_url: "/estudante/servicos"
+      })
+    }
 
     await logAudit({
       id_usuario: parseInt(session.user.id),

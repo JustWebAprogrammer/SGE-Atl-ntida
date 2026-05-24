@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 import { headers } from "next/headers"
 
 export async function PUT(
@@ -51,6 +52,18 @@ export async function PUT(
       where: { id_certificado: id },
       data: { status }
     })
+
+    // Notificar estudante quando certificado estiver pronto
+    if (status === "ProntoParaLevantamento" && currentCertificado.estudante) {
+      const certTipo = currentCertificado.tipo_certificado === "Conclusao" ? "Certificado de Conclusão" : "Certificado de Disciplinas"
+      await criarNotificacao({
+        id_usuario: currentCertificado.estudante.id_usuario,
+        tipo: "certificado",
+        titulo: `${certTipo} disponível`,
+        mensagem: `O seu ${certTipo} está disponível para levantar na secretaria.`,
+        link_url: "/estudante/servicos"
+      })
+    }
 
     // Audit log
     const headersList = await headers()
