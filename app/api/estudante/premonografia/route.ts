@@ -6,6 +6,7 @@ import { writeFile, mkdir } from "fs/promises"
 import { existsSync } from "fs"
 import path from "path"
 import { logAudit } from "@/lib/audit"
+import { criarNotificacao } from "@/lib/notificacoes"
 
 // Pasta onde os arquivos serão guardados
 const UPLOAD_DIR = path.join(process.cwd(), "uploads", "premonografias")
@@ -19,10 +20,11 @@ export async function POST(req: Request) {
     where: { id_usuario: parseInt(session.user.id) },
     select: {
       id_estudante: true,
+      nome_completo: true,
       ano_current: true,
       pagamento: true,
       curso: {
-        select: { duracao_anos: true }
+        select: { duracao_anos: true, id_departamento: true }
       }
     }
   })
@@ -182,6 +184,25 @@ export async function POST(req: Request) {
     })
   } catch (err) {
     console.error("Erro ao registrar audit log:", err)
+  }
+
+  // Notificar gestores do departamento
+  try {
+    const gestores = await prisma.orientador.findMany({
+      where: { e_gestor: true, id_departamento: estudante.curso.id_departamento },
+      select: { id_usuario: true }
+    })
+    for (const g of gestores) {
+      await criarNotificacao({
+        id_usuario: g.id_usuario,
+        tipo: "premonografia",
+        titulo: "Novo pré-projecto submetido",
+        mensagem: `${estudante.nome_completo} submeteu o pré-projecto "${premonografia.tema}"`,
+        link_url: "/gestor/premonografia"
+      })
+    }
+  } catch (err) {
+    console.error("Erro ao notificar gestores:", err)
   }
 
   return NextResponse.json({
