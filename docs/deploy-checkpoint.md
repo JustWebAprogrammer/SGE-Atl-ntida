@@ -76,8 +76,8 @@
 
 | Key | Value |
 |-----|-------|
-| `DATABASE_URL` | `postgresql://neondb_owner:npg_bTsvqyP39JSU@ep-noisy-silence-ap4ah0dr-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require` |
-| `DIRECT_URL` | `postgresql://neondb_owner:npg_bTsvqyP39JSU@ep-noisy-silence-ap4ah0dr.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require` |
+| `DATABASE_URL` | `postgresql://neondb_owner:npg_bTsvqyP39JSU@ep-noisy-silence-ap4ah0dr-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require` |
+| `DIRECT_URL` | `postgresql://neondb_owner:npg_bTsvqyP39JSU@ep-noisy-silence-ap4ah0dr.c-7.us-east-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require` |
 | `NEXTAUTH_SECRET` | `sge-atlantida-secret-key-2026` |
 | `NEXTAUTH_URL` | `https://sge-atl-ntida.vercel.app/` |
 | `BLOB_READ_WRITE_TOKEN` | `vercel_blob_rw_sGjPDm713ddWFa21_lrYDNQSYh1JJbEVxIIKbn87SvAb3aA` |
@@ -114,4 +114,4 @@ O `package.json` tem:
 - **QR codes antigos** (gerados antes de 15/05/2026) continuam com links quebrados — só novos documentos têm QR codes correctos
 - **Vercel Blob** configurado e funcional — ficheiros guardados como `public` na store `store_sGjPDm713ddWFa21`
 - Matrícula está **fechada** no seed base (admin precisa activar no painel)
-- SSL mode usa `require` — funciona, mas na próxima versão do pg será melhor usar `verify-full`
+- SSL mode atualizado para `verify-full` — silencia warning de segurança do pg-connection-string v3.0.0
