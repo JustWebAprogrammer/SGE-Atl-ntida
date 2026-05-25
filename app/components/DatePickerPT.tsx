@@ -35,6 +35,9 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
   const minDate = min ? new Date(min + "T00:00:00") : undefined
   const maxDate = max ? new Date(max + "T00:00:00") : undefined
 
+  // Data simulada como Date (para desativar dias anteriores)
+  const dataSimuladaDate = dataSimulada ? new Date(dataSimulada + "T00:00:00") : undefined
+
   // Determinar o mês padrão para o calendário:
   // 1. Se há data selecionada, usa essa
   // 2. Se o simulador está ativo, usa a data simulada
@@ -114,6 +117,7 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
                   className="rdp-dark rdp-portuguese"
                   locale={ptBR}
                   disabled={[
+                    ...(dataSimuladaDate ? [{ before: dataSimuladaDate } as const] : []),
                     ...(minDate ? [{ before: minDate } as const] : []),
                     ...(maxDate ? [{ after: maxDate } as const] : []),
                   ]}
