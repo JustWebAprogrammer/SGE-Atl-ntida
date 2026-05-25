@@ -38,6 +38,10 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
   // Data simulada como Date (para desativar dias anteriores)
   const dataSimuladaDate = dataSimulada ? new Date(dataSimulada + "T00:00:00") : undefined
 
+  // Data de hoje normalizada para meia-noite (para bloquear dias passados corretamente)
+  const hoje = new Date()
+  hoje.setHours(0, 0, 0, 0)
+
   // Determinar o mês padrão para o calendário:
   // 1. Se há data selecionada, usa essa
   // 2. Se o simulador está ativo, usa a data simulada
@@ -119,7 +123,7 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
                   disabled={[
                     ...(dataSimuladaDate
                       ? [{ before: dataSimuladaDate } as const]
-                      : [{ before: new Date() } as const]),
+                      : [{ before: hoje } as const]),
                     ...(minDate ? [{ before: minDate } as const] : []),
                     ...(maxDate ? [{ after: maxDate } as const] : []),
                   ]}
