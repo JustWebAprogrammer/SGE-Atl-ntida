@@ -117,7 +117,9 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
                   className="rdp-dark rdp-portuguese"
                   locale={ptBR}
                   disabled={[
-                    ...(dataSimuladaDate ? [{ before: dataSimuladaDate } as const] : []),
+                    ...(dataSimuladaDate
+                      ? [{ before: dataSimuladaDate } as const]
+                      : [{ before: new Date() } as const]),
                     ...(minDate ? [{ before: minDate } as const] : []),
                     ...(maxDate ? [{ after: maxDate } as const] : []),
                   ]}

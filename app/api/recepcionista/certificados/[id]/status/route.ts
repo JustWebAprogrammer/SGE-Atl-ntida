@@ -61,7 +61,7 @@ export async function PUT(
         tipo: "certificado",
         titulo: `${certTipo} disponível`,
         mensagem: `O seu ${certTipo} está disponível para levantar na secretaria.`,
-        link_url: "/estudante/servicos"
+        link_url: "/estudante/certificados"
       })
     }
 

@@ -52,7 +52,7 @@ export async function PUT(
         tipo: "declaracao",
         titulo: "Declaração disponível",
         mensagem: "A sua declaração está disponível para levantar na secretaria.",
-        link_url: "/estudante/servicos"
+        link_url: "/estudante/certificados"
       })
     }
 
