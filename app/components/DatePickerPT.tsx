@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { DayPicker } from "react-day-picker"
 import "react-day-picker/style.css"
 import { ptBR } from "date-fns/locale"
@@ -15,12 +15,35 @@ type DatePickerPTProps = {
 
 export default function DatePickerPT({ value, onChange, style, min, max }: DatePickerPTProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [dataSimulada, setDataSimulada] = useState<string | null>(null)
+
+  // Buscar a data simulada quando o componente monta
+  useEffect(() => {
+    fetch("/api/admin/sistema/simulador")
+      .then(r => r.json())
+      .then(data => {
+        if (data.simulador_ativo && data.data_simulada) {
+          setDataSimulada(data.data_simulada)
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   // Parse yyyy-mm-dd to Date object (local timezone safe)
   const selectedDate = value ? new Date(value + "T00:00:00") : undefined
 
   const minDate = min ? new Date(min + "T00:00:00") : undefined
   const maxDate = max ? new Date(max + "T00:00:00") : undefined
+
+  // Determinar o mês padrão para o calendário:
+  // 1. Se há data selecionada, usa essa
+  // 2. Se o simulador está ativo, usa a data simulada
+  // 3. Caso contrário, usa a data real do sistema
+  const defaultMonth = selectedDate
+    ? selectedDate
+    : dataSimulada
+      ? new Date(dataSimulada + "T00:00:00")
+      : new Date()
 
   // Format date for display: dd/MM/yyyy
   const display = value
@@ -87,6 +110,7 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
                   mode="single"
                   selected={selectedDate}
                   onSelect={handleSelect}
+                  defaultMonth={defaultMonth}
                   className="rdp-dark rdp-portuguese"
                   locale={ptBR}
                   disabled={[

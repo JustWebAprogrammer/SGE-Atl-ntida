@@ -253,7 +253,7 @@ export async function POST(req: NextRequest) {
         tipo: "horario",
         titulo: `Horário atualizado — ${cursoInfo?.nome_curso || ""}`,
         mensagem: `Nova aula de ${discInfo?.nome_disciplina || ""} adicionada: ${dia_semana} às ${horario.hora_inicio} (${turno})`,
-        link_url: "/estudante/horario"
+        link_url: "/estudante"
       })
     }
     // Notificar professor da disciplina
