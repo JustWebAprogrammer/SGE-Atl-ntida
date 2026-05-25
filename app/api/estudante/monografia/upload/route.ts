@@ -2,14 +2,9 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
-import { writeFile, mkdir } from "fs/promises"
-import { existsSync } from "fs"
-import path from "path"
+import { put } from "@vercel/blob"
 import { logAudit } from "@/lib/audit"
 import { criarNotificacao } from "@/lib/notificacoes"
-
-// Pasta onde os arquivos serão guardados
-const UPLOAD_DIR = path.join(process.cwd(), "uploads", "monografias")
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
@@ -50,7 +45,6 @@ export async function POST(req: Request) {
   }
 
   // Validar: propina deve estar paga (mas finalistas podem não ter propina mensal)
-  // Nota: finalistas não pagam propinas mensais, só a taxa de monografia
   if (estudante.ano_current !== duracaoCurso && estudante.pagamento !== "Pago") {
     return NextResponse.json({ error: "Precisa de estar com a propina em dia para submeter a monografia" }, { status: 400 })
   }
@@ -171,7 +165,7 @@ export async function POST(req: Request) {
   let caminho_arquivo = null
   let nome_arquivo = null
 
-  // Processar upload do arquivo
+  // Processar upload do arquivo para o Vercel Blob
   {
     // Validar tipo de ficheiro (PDF ou Word)
     const tiposPermitidos = [
@@ -189,30 +183,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "O ficheiro não pode exceder 10MB" }, { status: 400 })
     }
 
-    // Criar pasta de uploads se não existir
-    if (!existsSync(UPLOAD_DIR)) {
-      await mkdir(UPLOAD_DIR, { recursive: true })
-    }
-
-    // Criar pasta específica para este estudante
-    const studentDir = path.join(UPLOAD_DIR, estudante.id_estudante.toString())
-    if (!existsSync(studentDir)) {
-      await mkdir(studentDir, { recursive: true })
-    }
-
     // Gerar nome único para o ficheiro
     const timestamp = Date.now()
     const nomeOriginal = arquivo.name.replace(/[^a-zA-Z0-9.-]/g, "_")
-    const nomeFinal = `${timestamp}_${nomeOriginal}`
-    const filePath = path.join(studentDir, nomeFinal)
+    const blobPath = `monografias/${estudante.id_estudante}/${timestamp}_${nomeOriginal}`
 
-    // Ler bytes do arquivo e salvar no filesystem
-    const bytes = await arquivo.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-    await writeFile(filePath, buffer)
+    // Upload para Vercel Blob
+    const { url } = await put(blobPath, arquivo, {
+      access: "public",
+      contentType: arquivo.type,
+    })
 
-    // Guardar caminho relativo para o banco de dados
-    caminho_arquivo = path.join(estudante.id_estudante.toString(), nomeFinal)
+    // Guardar URL do Blob no banco de dados
+    caminho_arquivo = url
     nome_arquivo = arquivo.name
   }
 
@@ -223,7 +206,7 @@ export async function POST(req: Request) {
       resumo: resumo.trim(),
       descricao: descricao?.trim() || null,
       caminho_arquivo,
-      nome_arquivo: arquivo?.name || null,
+      nome_arquivo,
       data_submissao: new Date(),
       estado: "Submetida",
       id_orientador: orientacaoAceite.id_orientador,

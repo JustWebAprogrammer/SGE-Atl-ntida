@@ -24,6 +24,7 @@
     "@prisma/client": "^7.6.0",
     "@react-pdf/renderer": "^4.3.2",
     "@thednp/dommatrix": "^3.0.4",
+    "@vercel/blob": "^2.4.0",
     "bcryptjs": "^3.0.3",
     "date-fns": "^4.1.0",
     "minio": "^8.0.7",
