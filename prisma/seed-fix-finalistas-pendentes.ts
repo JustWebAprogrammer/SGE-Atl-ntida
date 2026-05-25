@@ -28,29 +28,22 @@ async function main() {
   console.log("🔄 FIX FINALISTAS PENDENTES DE DEFESA")
   console.log("=============================================\n")
 
-  // ── Passo 1: Obter o ano lectivo actual do sistema via API ──
-  console.log("🔍 A consultar ano lectivo do sistema simulado...")
-  console.log("   (Certifique-se que o servidor está a correr: npm run dev)\n")
+  // ── Passo 1: Obter o ano lectivo actual directamente da BD ──
+  console.log("🔍 A consultar ano lectivo do sistema...")
 
-  let anoLectivoAtual = ""
-  try {
-    const res = await fetch("http://localhost:3000/api/admin/sistema/config")
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    const data = await res.json()
-    anoLectivoAtual = data.ano_lectivo_atual || data.ano_lectivo_label || ""
+  const sistemaConfig = await prisma.sistemaConfig.findUnique({ where: { id_config: 1 } })
+  const anoLectivoAtual = sistemaConfig?.ano_lectivo_label || ""
 
-    if (!anoLectivoAtual) {
-      console.error("❌ ERRO: Não foi possível obter o ano lectivo do sistema.\n")
-      process.exit(1)
-    }
-
-    console.log(`   ✅ Ano lectivo do sistema: ${anoLectivoAtual}`)
-    console.log(`   📅 Data simulada: ${data.system_date || "desconhecida"}\n`)
-  } catch {
-    console.error("❌ ERRO: Não foi possível contactar o servidor em http://localhost:3000")
-    console.error("   Certifique-se que 'npm run dev' está a correr.\n")
+  if (!anoLectivoAtual) {
+    console.error("❌ ERRO: Não foi possível obter o ano lectivo do sistema (ano_lectivo_label vazio).\n")
     process.exit(1)
   }
+
+  console.log(`   ✅ Ano lectivo do sistema: ${anoLectivoAtual}`)
+  if (sistemaConfig?.data_simulada) {
+    console.log(`   📅 Data simulada: ${new Date(sistemaConfig.data_simulada).toLocaleDateString("pt-PT")}`)
+  }
+  console.log()
 
   // ── Passo 2: Buscar estudantes EmCurso ou Suspendido com curso ──
   console.log("🔍 A procurar finalistas pendentes de defesa...")
