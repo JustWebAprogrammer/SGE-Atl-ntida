@@ -200,7 +200,7 @@ export async function POST(req: NextRequest) {
         tipo: "provas",
         titulo: `Nova prova — ${discInfo?.nome_disciplina || ""}`,
         mensagem: `${tipo_prova} de ${discInfo?.nome_disciplina || ""} agendada para ${data_prova} às ${hora_inicio} (${turno})`,
-        link_url: "/estudante/plano-provas"
+        link_url: "/estudante"
       })
     }
     // Notificar professor da disciplina
