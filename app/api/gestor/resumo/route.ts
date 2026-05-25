@@ -33,19 +33,33 @@ export async function GET() {
     where: { id_usuario: parseInt(session.user.id), ano_lectivo: anoLectivo }
   })
 
-  // Buscar IDs dos estudantes tutelados (solicitacao aceite)
+  // Buscar IDs dos cursos no departamento do gestor
+  const cursosNoDepartamento = orientador.departamento
+    ? await prisma.curso.findMany({
+        where: { id_departamento: orientador.departamento.id_departamento },
+        select: { id_curso: true }
+      })
+    : []
+  const cursosIds = cursosNoDepartamento.map(c => c.id_curso)
+
+  // Pré-projetos para avaliar (Proposto) — todos os do departamento
+  const preProjetosParaAvaliar = cursosIds.length > 0
+    ? await prisma.premonografia.count({
+        where: {
+          estado: "Proposto",
+          estudante: {
+            id_curso: { in: cursosIds }
+          }
+        }
+      })
+    : 0
+
+  // Buscar IDs dos estudantes tutelados (solicitacao aceite) — para monografias
   const tutorias = await prisma.solicitacaoOrientacao.findMany({
     where: { id_orientador: orientador.id_orientador, estado: "Aceite" },
     select: { id_estudante: true }
   })
   const estudantesTuteladosIds = tutorias.map(t => t.id_estudante)
-
-  // Pré-projetos para avaliar (Proposto)
-  const preProjetosParaAvaliar = estudantesTuteladosIds.length > 0
-    ? await prisma.premonografia.count({
-        where: { id_estudante: { in: estudantesTuteladosIds }, estado: "Proposto" }
-      })
-    : 0
 
   // Monografias para avaliar (Submetida ou EmRevisao)
   const monografiasParaAvaliar = estudantesTuteladosIds.length > 0
