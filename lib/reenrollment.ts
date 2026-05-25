@@ -16,17 +16,18 @@ import { logAudit } from "./audit"
  * Nova regra de progressão:
  * - Se tiver NO MÁXIMO 2 reprovações no mesmo ano curricular → AVANÇA (reseta só as reprovadas)
  * - Se tiver MAIS de 2 reprovações no mesmo ano curricular → REPETE o ano
+ * - Se for finalista (ano_current >= duracao_anos) → apenas actualiza ano lectivo, sem snapshot
  *
  * @param id_estudante - Student ID
  * @param id_usuario_trigger - User ID who triggered the action (for audit)
- * @returns Result with success flag, type ("avancou" | "repetiu"), message, and failed disciplines list
+ * @returns Result with success flag, type ("avancou" | "repetiu" | "finalista_pendente"), message, and failed disciplines list
  */
 export async function processarRematricula(
   id_estudante: number,
   id_usuario_trigger: number
 ): Promise<{
   success: boolean
-  tipo?: "avancou" | "repetiu"
+  tipo?: "avancou" | "repetiu" | "finalista_pendente"
   disciplinasFalhadas?: string[]
   message: string
 }> {
@@ -35,21 +36,6 @@ export async function processarRematricula(
     where: { id_estudante: id_estudante },
     include: {
       curso: { select: { duracao_anos: true } },
-      notas: {
-        where: { ano_lectivo: (await getAnoLectivo()) }, // Will be overridden below — we want OLD year
-        include: {
-          disciplina: {
-            select: {
-              id_disciplina: true,
-              codigo_disciplina: true,
-              nome_disciplina: true,
-              ano_curricular: true,
-              tem_dispensa: true,
-              nota_dispensa: true,
-            },
-          },
-        },
-      },
     },
   })
 
@@ -94,19 +80,45 @@ export async function processarRematricula(
     }
   }
 
-  // ── 5. Block final year students from re-enrolling ──
+  // ── 5. Handle final year students (pendentes de defesa) ──
   const oldAnoCurrent = estudante.ano_current ?? 1
   const duracaoAnos = estudante.curso?.duracao_anos ?? 4
 
   if (oldAnoCurrent >= duracaoAnos) {
+    // Finalista pendente: apenas actualiza ano lectivo, sem snapshot, sem criar disciplinas
+    await prisma.estudante.update({
+      where: { id_estudante },
+      data: { ano_electivo: currentAnoLectivo },
+    })
+
+    // Log to audit
+    await logAudit({
+      id_usuario: id_usuario_trigger,
+      acao: "Rematrícula — Finalista Pendente",
+      tabela: "Estudante",
+      id_registro: id_estudante,
+      valor_antes: {
+        ano_lectivo: estudante.ano_electivo,
+        ano_current: oldAnoCurrent,
+      },
+      valor_depois: {
+        ano_lectivo: currentAnoLectivo,
+        ano_current: oldAnoCurrent,
+        acao: "Finalista pendente de defesa — ano lectivo actualizado sem snapshot",
+      },
+      ip_address: "sistema",
+    })
+
     return {
-      success: false,
-      message: "Estudante finalista não pode rematricular. Deve pagar a taxa de Monografia.",
+      success: true,
+      tipo: "finalista_pendente" as const,
+      message: `Finalista pendente de defesa. Ano lectivo actualizado para ${currentAnoLectivo}.`,
     }
   }
 
   // We need grades from the STUDENT'S current ano_lectivo (the one they're closing),
   // not the new one. Re-fetch with the correct year.
+  const oldAnoLectivo = estudante.ano_electivo
   const notas = await prisma.nota.findMany({
     where: {
       id_estudante,
@@ -125,8 +137,6 @@ export async function processarRematricula(
       },
     },
   })
-
-  const oldAnoLectivo = estudante.ano_electivo
 
   // ── 5. Take snapshot BEFORE any changes ──
   const snapshotData = notas.map((n) => ({
@@ -180,7 +190,7 @@ export async function processarRematricula(
   }
   
   // Se algum ano curricular tiver > 2 disciplinas falhadas, estudante repete
-  const anoComMaisDe2 = Array.from(falhadasPorAno.entries()).find(([_, count]) => count > 2)
+  const anoComMaisDe2 = Array.from(falhadasPorAno.entries()).find((entry) => entry[1] > 2)
   const maxDuasPorAno = !anoComMaisDe2
 
   // NOVA REGRA: pode avançar se tiver no máximo 2 reprovações no mesmo ano
@@ -342,7 +352,6 @@ export async function suspenderEstudantesSemRematricula(
   id_usuario_trigger: number
 ): Promise<number> {
   const currentAnoLectivo = await getAnoLectivo()
-  const systemDate = await getSystemDate()
 
   // Find all EmCurso students whose ano_electivo doesn't match the current year
   const estudantesParaSuspender = await prisma.estudante.findMany({

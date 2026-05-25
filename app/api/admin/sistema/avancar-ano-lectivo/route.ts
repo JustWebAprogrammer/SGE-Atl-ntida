@@ -58,6 +58,7 @@ export async function POST() {
       total: estudantes.length,
       avancaram: 0,
       repetiram: 0,
+      finalistas_pendentes: 0,
       erros: 0,
       suspensos: 0,
       detalhes: [] as string[],
@@ -71,6 +72,9 @@ export async function POST() {
           if (result.tipo === "avancou") {
             resultados.avancaram++
             resultados.detalhes.push(`✅ ${estudante.nome_completo}: ${result.message}`)
+          } else if (result.tipo === "finalista_pendente") {
+            resultados.finalistas_pendentes++
+            resultados.detalhes.push(`⏳ ${estudante.nome_completo}: ${result.message}`)
           } else {
             resultados.repetiram++
             resultados.detalhes.push(`🔄 ${estudante.nome_completo}: ${result.message}`)
@@ -106,6 +110,7 @@ export async function POST() {
         estudantes_processados: resultados.total,
         avancaram: resultados.avancaram,
         repetiram: resultados.repetiram,
+        finalistas_pendentes: resultados.finalistas_pendentes,
         suspensos: resultados.suspensos,
         erros: resultados.erros,
       },
@@ -114,7 +119,7 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      message: `Ano lectivo avançado para ${novoAnoLabel}. ${resultados.avancaram} estudantes avançaram, ${resultados.repetiram} repetiram, ${resultados.suspensos} suspensos.`,
+      message: `Ano lectivo avançado para ${novoAnoLabel}. ${resultados.avancaram} avançaram, ${resultados.repetiram} repetiram, ${resultados.finalistas_pendentes} finalistas pendentes, ${resultados.suspensos} suspensos.`,
       novo_ano_lectivo: novoAnoLabel,
       resultados,
     })
