@@ -36,7 +36,7 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
   const maxDate = max ? new Date(max + "T00:00:00") : undefined
 
   // Data simulada como Date (para desativar dias anteriores)
-  const dataSimuladaDate = dataSimulada ? new Date(dataSimulada + "T00:00:00") : undefined
+  const dataSimuladaDate = dataSimulada ? new Date(dataSimulada.split("T")[0] + "T00:00:00") : undefined
 
   // Data de hoje normalizada para meia-noite (para bloquear dias passados corretamente)
   const hoje = new Date()
@@ -49,7 +49,7 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
   const defaultMonth = selectedDate
     ? selectedDate
     : dataSimulada
-      ? new Date(dataSimulada + "T00:00:00")
+      ? new Date(dataSimulada.split("T")[0] + "T00:00:00")
       : new Date()
 
   // Format date for display: dd/MM/yyyy
