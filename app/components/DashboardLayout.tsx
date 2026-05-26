@@ -132,6 +132,12 @@ export default function DashboardLayout({
   const pathname = usePathname()
   const [sessionExpired, setSessionExpired] = useState(false)
   const [showPerfilModal, setShowPerfilModal] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  // Close mobile sidebar on route change
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
   const [dadosPerfil, setDadosPerfil] = useState({
     nome: "",
     nome_usuario: "",
@@ -396,16 +402,55 @@ export default function DashboardLayout({
   return (
     <div style={{
       display: "flex",
-      minHeight: "100vh",
+      minHeight: "100dvh",
       background: "#0d0f14",
       fontFamily: "system-ui, sans-serif",
       color: "#e8eaf0"
     }}>
 
-      {/* SIDEBAR */}
-      <aside style={{
+      {/* Responsive styles for mobile */}
+      <style>{`
+        @media (max-width: 768px) {
+          .sidebar-desktop { display: none !important; }
+          .sidebar-mobile-overlay { display: block !important; }
+          .topbar-hamburger { display: flex !important; }
+          .content-padding { padding: 16px !important; }
+          .main-margin { margin-left: 0 !important; }
+          .topbar-padding { padding: 12px 16px !important; }
+          .notif-dropdown { right: -60px !important; width: 300px !important; }
+          .perfil-modal { width: 95% !important; }
+        }
+        .sidebar-mobile-overlay { display: none; }
+        .topbar-hamburger { display: none; }
+        /* tables scroll horizontally on small screens */
+        @media (max-width: 768px) {
+          .responsive-table { overflow-x: auto; display: block; max-width: 100%; }
+          table { min-width: 600px; }
+        }
+      `}</style>
+
+      {/* MOBILE OVERLAY */}
+      <div
+        className="sidebar-mobile-overlay"
+        onClick={() => setMobileOpen(false)}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(0,0,0,0.6)",
+          zIndex: 99,
+          opacity: mobileOpen ? 1 : 0,
+          visibility: mobileOpen ? "visible" : "hidden",
+          transition: "opacity 0.3s ease, visibility 0.3s ease"
+        }}
+      />
+
+      {/* DESKTOP SIDEBAR (hidden on mobile) */}
+      <aside className="sidebar-desktop" style={{
         width: "240px",
-        height: "100vh",
+        height: "100dvh",
         background: "#13161e",
         borderRight: "1px solid rgba(255,255,255,0.07)",
         display: "flex",
@@ -518,11 +563,129 @@ export default function DashboardLayout({
         </div>
       </aside>
 
+      {/* MOBILE SIDEBAR (slide-in, hidden on desktop) */}
+      <aside style={{
+        width: "240px",
+        height: "100dvh",
+        background: "#13161e",
+        borderRight: "1px solid rgba(255,255,255,0.07)",
+        display: "flex",
+        flexDirection: "column",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 100,
+        overflow: "hidden",
+        transform: mobileOpen ? "translateX(0)" : "translateX(-100%)",
+        transition: "transform 0.3s ease"
+      }}>
+
+        {/* Brand */}
+        <div style={{
+          padding: "24px 20px",
+          borderBottom: "1px solid rgba(255,255,255,0.07)"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{
+              width: "32px", height: "32px",
+              background: "#e03d3d",
+              borderRadius: "8px",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontWeight: "800", fontSize: "15px", color: "white"
+            }}>A</div>
+            <span style={{ fontWeight: "700", fontSize: "15px" }}>ISP Atlântida</span>
+          </div>
+          <div style={{
+            fontSize: "11px",
+            color: "#b0b8cf",
+            marginTop: "4px",
+            paddingLeft: "42px"
+          }}>Portal Académico</div>
+        </div>
+
+        {/* User */}
+        <div 
+          style={{
+            padding: "14px 20px",
+            borderBottom: "1px solid rgba(255,255,255,0.07)",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            cursor: "pointer"
+          }}
+          onClick={() => setShowPerfilModal(true)}
+        >
+          <div style={{
+            width: "36px", height: "36px",
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, #e03d3d, #8b1a1a)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontWeight: "700", fontSize: "13px", color: "white",
+            flexShrink: 0
+          }}>{initials}</div>
+            <div style={{ minWidth: 0 }}>
+            <div style={{
+              fontSize: "13px",
+              fontWeight: "500",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}>{displayName}</div>
+            <div style={{ fontSize: "11px", color: "#b0b8cf" }}>
+              {dadosPerfil.email || session?.user?.email}
+            </div>
+          </div>
+        </div>
+
+        {/* Nav */}
+        <nav style={{ flex: 1, padding: "12px 10px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "#2a2f3d #13161e" }}>
+          {/* Webkit scrollbar styling for Chrome/Edge/Safari */}
+          <style>{`
+            nav::-webkit-scrollbar { width: 6px; }
+            nav::-webkit-scrollbar-track { background: #13161e; border-radius: 3px; }
+            nav::-webkit-scrollbar-thumb { background: #2a2f3d; border-radius: 3px; }
+            nav::-webkit-scrollbar-thumb:hover { background: #3a3f4d; }
+          `}</style>
+          <DropdownMenu items={navItems} pathname={pathname} router={router} />
+        </nav>
+
+        {/* Logout */}
+        <div style={{
+          padding: "14px 10px",
+          borderTop: "1px solid rgba(255,255,255,0.07)"
+        }}>
+          <button
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "9px 12px",
+              borderRadius: "8px",
+              border: "none",
+              background: "transparent",
+              color: "#b0b8cf",
+              fontSize: "13px",
+              textAlign: "left",
+              cursor: "pointer",
+              transition: "all 0.15s"
+            }}
+            onMouseEnter={e => {
+              (e.target as HTMLButtonElement).style.color = "#e03d3d"
+              ;(e.target as HTMLButtonElement).style.background = "rgba(224,61,61,0.12)"
+            }}
+            onMouseLeave={e => {
+              (e.target as HTMLButtonElement).style.color = "#b0b8cf"
+              ;(e.target as HTMLButtonElement).style.background = "transparent"
+            }}
+          >Terminar Sessão</button>
+        </div>
+      </aside>
+
       {/* MAIN */}
-      <main style={{ marginLeft: "240px",marginTop: 0,paddingTop: 0, flex: 1, display: "flex", flexDirection: "column", background: "#0d0f14", minHeight: "100vh" }}>
+      <main className="main-margin" style={{ marginLeft: "240px",marginTop: 0,paddingTop: 0, flex: 1, display: "flex", flexDirection: "column", background: "#0d0f14", minHeight: "100dvh" }}>
 
         {/* Topbar */}
-        <header style={{
+        <header className="topbar-padding" style={{
           padding: "18px 32px",
           borderBottom: "1px solid rgba(255,255,255,0.07)",
           background: "#0d0f14",
@@ -531,16 +694,39 @@ export default function DashboardLayout({
           zIndex: 50,
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          gap: "12px"
         }}>
-          <div>
-            <div style={{ fontSize: "18px", fontWeight: "700" }}>{title}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", minWidth: 0 }}>
+            {/* Hamburger — visible only on mobile */}
+            <button
+              className="topbar-hamburger"
+              onClick={() => setMobileOpen(true)}
+              style={{
+                display: "none",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "transparent",
+                border: "none",
+                color: "#d0d7e8",
+                fontSize: "22px",
+                cursor: "pointer",
+                padding: "4px",
+                borderRadius: "6px",
+                flexShrink: 0
+              }}
+            >
+              ☰
+            </button>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: "18px", fontWeight: "700", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{title}</div>
             {subtitle && (
               <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
                 {subtitle}
               </div>
             )}
           </div>
+          </div> {/* close hamburger/title wrapper */}
           
           {/* Notificações */}
           <div style={{ position: "relative" }}>
@@ -593,7 +779,7 @@ export default function DashboardLayout({
                   style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 99 }}
                   onClick={() => setShowNotificacoes(false)}
                 />
-                <div style={{
+                <div className="notif-dropdown" style={{
                   position: "absolute",
                   top: "calc(100% + 8px)",
                   right: 0,
@@ -750,7 +936,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Content */}
-        <div style={{ padding: "28px 32px", flex: 1, background: "#0d0f14" }}>
+        <div className="content-padding" style={{ padding: "28px 32px", flex: 1, background: "#0d0f14" }}>
           {children}
         </div>
       </main>
