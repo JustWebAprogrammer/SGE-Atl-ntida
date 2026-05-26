@@ -65,6 +65,17 @@ export async function PUT(
       })
     }
 
+    // Notificar recepcionista sobre a actualização
+    if (session.user.id) {
+      await criarNotificacao({
+        id_usuario: parseInt(session.user.id),
+        tipo: "certificado",
+        titulo: `Certificado actualizado`,
+        mensagem: `Certificado de ${currentCertificado.estudante?.nome_completo || "estudante"} foi actualizado para "${status}".`,
+        link_url: `/recepcionista/estudante/${currentCertificado.id_estudante}`
+      })
+    }
+
     // Audit log
     const headersList = await headers()
     const ipAddress = headersList.get("x-forwarded-for") || "unknown"

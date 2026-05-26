@@ -109,9 +109,9 @@ const styles = StyleSheet.create({
   },
   signatureImage: {
     width: 120,
-    height: 50,
+    maxHeight: 30,
     objectFit: "contain",
-    marginBottom: 4,
+    marginBottom: 1,
   },
   pageBorder: {
     position: "absolute",

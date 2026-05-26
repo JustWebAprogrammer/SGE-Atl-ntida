@@ -56,6 +56,15 @@ export async function PUT(
       })
     }
 
+    // Notificar recepcionista sobre a actualização
+    await criarNotificacao({
+      id_usuario: parseInt(session.user.id),
+      tipo: "declaracao",
+      titulo: `Declaração actualizada`,
+      mensagem: `Declaração de ${declaracao.estudante?.nome_completo || "estudante"} foi actualizada para "${status}".`,
+      link_url: `/recepcionista/estudante/${declaracao.id_estudante}`
+    })
+
     await logAudit({
       id_usuario: parseInt(session.user.id),
       acao: "ATUALIZAR_STATUS_DECLARACAO",

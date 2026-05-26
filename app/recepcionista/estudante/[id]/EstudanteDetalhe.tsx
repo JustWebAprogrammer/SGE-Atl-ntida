@@ -268,10 +268,12 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
     try {
       let res: Response
       if (doc.tipo === "certificado") {
+        // Map display status to API status
+        const apiStatus = nextStatus === "Pronto" ? "ProntoParaLevantamento" : nextStatus
         res = await fetch(`/api/recepcionista/certificados/${doc.ref_certificado}/status`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ status: nextStatus }),
+          body: JSON.stringify({ status: apiStatus }),
         })
       } else if (doc.tipo === "declaracao") {
         res = await fetch(`/api/recepcionista/declaracoes/${doc.ref_declaracao}/status`, {
