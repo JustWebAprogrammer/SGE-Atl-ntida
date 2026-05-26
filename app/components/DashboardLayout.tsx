@@ -412,6 +412,7 @@ export default function DashboardLayout({
       <style>{`
         @media (max-width: 768px) {
           .sidebar-desktop { display: none !important; }
+          .sidebar-mobile-content { display: flex !important; }
           .sidebar-mobile-overlay { display: block !important; }
           .topbar-hamburger { display: flex !important; }
           .content-padding { padding: 16px !important; }
@@ -421,6 +422,7 @@ export default function DashboardLayout({
           .perfil-modal { width: 95% !important; }
         }
         .sidebar-mobile-overlay { display: none; }
+        .sidebar-mobile-content { display: none; }
         .topbar-hamburger { display: none; }
         /* tables scroll horizontally on small screens */
         @media (max-width: 768px) {
@@ -450,13 +452,13 @@ export default function DashboardLayout({
       {/* DESKTOP SIDEBAR (hidden on mobile) */}
       <aside className="sidebar-desktop" style={{
         width: "240px",
-        height: "100dvh",
         background: "#13161e",
         borderRight: "1px solid rgba(255,255,255,0.07)",
         display: "flex",
         flexDirection: "column",
         position: "fixed",
         top: 0,
+        bottom: 0,
         left: 0,
         zIndex: 100,
         overflow: "hidden"
@@ -564,15 +566,15 @@ export default function DashboardLayout({
       </aside>
 
       {/* MOBILE SIDEBAR (slide-in, hidden on desktop) */}
-      <aside style={{
+      <aside className="sidebar-mobile-content" style={{
         width: "240px",
-        height: "100dvh",
         background: "#13161e",
         borderRight: "1px solid rgba(255,255,255,0.07)",
         display: "flex",
         flexDirection: "column",
         position: "fixed",
         top: 0,
+        bottom: 0,
         left: 0,
         zIndex: 100,
         overflow: "hidden",
