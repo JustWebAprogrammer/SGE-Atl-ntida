@@ -59,11 +59,15 @@ export async function GET(request: NextRequest) {
     const anoLectivo = student.ano_electivo || await getAnoLectivo()
     const duracaoAnos = student.curso.duracao_anos || 3
 
-    // Usar CursoDisciplina para saber a que ano cada disciplina pertence no currículo do estudante
-    // (igual ao que o Certificado de Disciplinas faz correctamente)
+    // Buscar notas com nota_final preenchida (ou dispensada), igual ao que o Certificado de Disciplinas faz
+    // Isso garante que só consideramos disciplinas com nota final calculada
     const notas = await prisma.nota.findMany({
       where: {
         id_estudante: student.id_estudante,
+        OR: [
+          { nota_final: { not: null } },
+          { dispensada: true }
+        ]
       },
       include: {
         disciplina: {
@@ -83,9 +87,13 @@ export async function GET(request: NextRequest) {
     const notasPorAno: Record<number, typeof notas> = {}
     for (const nota of notas) {
       const curriculo = nota.disciplina.cursos[0]
+      // Para dispensada, usar nota_final como 0 se null (a média ignora dispensadas no validGrades)
+      const notaFinal = nota.nota_final != null ? Number(nota.nota_final) : null
+      // Determinar o ano: usar CursoDisciplina se disponível, senão Disciplina.ano_curricular
       const ano = curriculo?.ano_curricular ?? nota.disciplina.ano_curricular
       // Só nos interessam anos dentro do range normal (1..duracaoAnos-1)
-      if (ano >= 1 && ano <= anosComDisciplinas) {
+      // Também incluímos anos maiores que duracaoAnos-1 se vierem do CursoDisciplina (caso o currículo tenha mudado)
+      if (ano >= 1 && ano <= anosComDisciplinas && notaFinal != null) {
         if (!notasPorAno[ano]) notasPorAno[ano] = []
         notasPorAno[ano].push(nota)
       }

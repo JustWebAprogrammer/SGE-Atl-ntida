@@ -115,6 +115,10 @@ export async function GET(
         const notas = await prisma.nota.findMany({
           where: {
             id_estudante: student.id_estudante,
+            OR: [
+              { nota_final: { not: null } },
+              { dispensada: true }
+            ]
           },
           include: {
             disciplina: {
@@ -131,8 +135,9 @@ export async function GET(
         const notasPorAno: Record<number, typeof notas> = {}
         for (const nota of notas) {
           const curriculo = nota.disciplina.cursos[0]
+          const notaFinal = nota.nota_final != null ? Number(nota.nota_final) : null
           const ano = curriculo?.ano_curricular ?? nota.disciplina.ano_curricular
-          if (ano >= 1 && ano <= anosComDisciplinas) {
+          if (ano >= 1 && ano <= anosComDisciplinas && notaFinal != null) {
             if (!notasPorAno[ano]) notasPorAno[ano] = []
             notasPorAno[ano].push(nota)
           }
@@ -160,9 +165,11 @@ export async function GET(
         const allGrades = [...yearAverages, monografiaGrade]
         const finalGradeRaw = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
 
-        // Arredondar: usar a mesma função do sistema (arredondarNota) em vez de Math.round manual
-        // Importado no topo mas vamos usar a lógica inline que o lib/notas faz: arredondar para 0.5 mais próximo
-        const finalGrade = Math.round(finalGradeRaw * 2) / 2
+        // Arredondar: mesma lógica do lib/notas (arredondarNota) — arredonda para o número inteiro mais próximo (>= 0.5 sobe)
+        const floor = Math.floor(finalGradeRaw)
+        const decimal = finalGradeRaw - floor
+        const epsilon = 1e-10
+        const finalGrade = (decimal - 0.5) >= -epsilon ? floor + 1 : floor
         const notaFinal = finalGrade.toFixed(2)
         const notaExtenso = numberToExtenso(Math.round(finalGrade))
 
