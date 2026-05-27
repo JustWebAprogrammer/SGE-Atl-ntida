@@ -219,7 +219,7 @@ export async function POST(request: Request) {
         tipo: "solicitacao",
         titulo: "Nova solicitação de orientação",
         mensagem: `${solicitacao.estudante.nome_completo} (${solicitacao.estudante.numero_estudante}) solicita orientação com ${solicitacao.orientador.nome_completo}`,
-        link_url: "/gestor/estudantes"
+        link_url: "/gestor/solicitacoes"
       })
     }
   } catch (err) {

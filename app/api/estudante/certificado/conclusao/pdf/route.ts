@@ -107,7 +107,7 @@ export async function GET(request: NextRequest) {
     const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1)
     const gradesByYear = allYears.map(year => {
       const yearNotas = notasPorAno[year] || []
-      const validGrades = yearNotas.filter(n => n.nota_final !== null && !n.dispensada)
+      const validGrades = yearNotas.filter(n => n.nota_final !== null)
       const average = validGrades.length > 0
         ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length)
         : 0
