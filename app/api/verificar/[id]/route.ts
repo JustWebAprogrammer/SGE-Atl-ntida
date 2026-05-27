@@ -107,28 +107,46 @@ export async function GET(
 
       if (isConclusao) {
         // Certificado de Conclusão — buscar a nota final calculada
-        // Precisamos buscar as notas do estudante para calcular a média
+        // Usar CursoDisciplina para saber a que ano cada disciplina pertence (igual ao PDF)
         const student = certificado.estudante
         const duracaoAnos = student.curso.duracao_anos || 3
         const anosComDisciplinas = duracaoAnos - 1
-        const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1)
 
-        const gradesByYear = await Promise.all(
-          allYears.map(async (year) => {
-            const notas = await prisma.nota.findMany({
-              where: {
-                id_estudante: student.id_estudante,
-                disciplina: { ano_curricular: year }
-              },
-              include: { disciplina: true }
-            })
-            const validGrades = notas.filter(n => n.nota_final !== null && !n.dispensada)
-            const average = validGrades.length > 0
-              ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length)
-              : 0
-            return { year, average }
-          })
-        )
+        const notas = await prisma.nota.findMany({
+          where: {
+            id_estudante: student.id_estudante,
+          },
+          include: {
+            disciplina: {
+              include: {
+                cursos: {
+                  where: { id_curso: student.id_curso }
+                }
+              }
+            }
+          }
+        })
+
+        // Agrupar notas por ano curricular usando CursoDisciplina (com fallback para Disciplina.ano_curricular)
+        const notasPorAno: Record<number, typeof notas> = {}
+        for (const nota of notas) {
+          const curriculo = nota.disciplina.cursos[0]
+          const ano = curriculo?.ano_curricular ?? nota.disciplina.ano_curricular
+          if (ano >= 1 && ano <= anosComDisciplinas) {
+            if (!notasPorAno[ano]) notasPorAno[ano] = []
+            notasPorAno[ano].push(nota)
+          }
+        }
+
+        const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1)
+        const gradesByYear = allYears.map(year => {
+          const yearNotas = notasPorAno[year] || []
+          const validGrades = yearNotas.filter(n => n.nota_final !== null && !n.dispensada)
+          const average = validGrades.length > 0
+            ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length)
+            : 0
+          return { year, average }
+        })
 
         const monografia = await prisma.monografia.findFirst({
           where: {
@@ -142,7 +160,8 @@ export async function GET(
         const allGrades = [...yearAverages, monografiaGrade]
         const finalGradeRaw = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
 
-        // Arredondar: mesma lógica do lib/notas
+        // Arredondar: usar a mesma função do sistema (arredondarNota) em vez de Math.round manual
+        // Importado no topo mas vamos usar a lógica inline que o lib/notas faz: arredondar para 0.5 mais próximo
         const finalGrade = Math.round(finalGradeRaw * 2) / 2
         const notaFinal = finalGrade.toFixed(2)
         const notaExtenso = numberToExtenso(Math.round(finalGrade))

@@ -59,39 +59,51 @@ export async function GET(request: NextRequest) {
     const anoLectivo = student.ano_electivo || await getAnoLectivo()
     const duracaoAnos = student.curso.duracao_anos || 3
 
-    // A monografia substitui as disciplinas do último ano do curso.
-    // Portanto, só buscamos notas dos anos 1..duracaoAnos-1 (anos com disciplinas normais).
-    const anosComDisciplinas = duracaoAnos - 1
-    const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1) // [1, 2, 3] para curso de 4 anos
-
-    const gradesByYear = await Promise.all(
-      allYears.map(async (year) => {
-        const notas = await prisma.nota.findMany({
-          where: {
-            id_estudante: student.id_estudante,
-            disciplina: {
-              ano_curricular: year
-            },
-            // Não filtrar por ano_lectivo: as notas de anos anteriores estão
-            // em anos lectivos diferentes (ex: 1º ano em 2021/2022, 2º em 2022/2023, etc.)
-          },
+    // Usar CursoDisciplina para saber a que ano cada disciplina pertence no currículo do estudante
+    // (igual ao que o Certificado de Disciplinas faz correctamente)
+    const notas = await prisma.nota.findMany({
+      where: {
+        id_estudante: student.id_estudante,
+      },
+      include: {
+        disciplina: {
           include: {
-            disciplina: true
+            cursos: {
+              where: { id_curso: student.id_curso }
+            }
           }
-        })
-
-        // Calculate average for this year
-        const validGrades = notas.filter(n => n.nota_final !== null && !n.dispensada)
-        const average = validGrades.length > 0
-          ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length)
-          : 0
-
-        return {
-          year,
-          average: average.toFixed(2)
         }
-      })
-    )
+      }
+    })
+
+    // Agrupar notas por ano curricular usando CursoDisciplina (com fallback para Disciplina.ano_curricular)
+    // A monografia substitui as disciplinas do último ano do curso.
+    // Portanto, só processamos anos 1..duracaoAnos-1 (anos com disciplinas normais).
+    const anosComDisciplinas = duracaoAnos - 1
+    const notasPorAno: Record<number, typeof notas> = {}
+    for (const nota of notas) {
+      const curriculo = nota.disciplina.cursos[0]
+      const ano = curriculo?.ano_curricular ?? nota.disciplina.ano_curricular
+      // Só nos interessam anos dentro do range normal (1..duracaoAnos-1)
+      if (ano >= 1 && ano <= anosComDisciplinas) {
+        if (!notasPorAno[ano]) notasPorAno[ano] = []
+        notasPorAno[ano].push(nota)
+      }
+    }
+
+    const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1)
+    const gradesByYear = allYears.map(year => {
+      const yearNotas = notasPorAno[year] || []
+      const validGrades = yearNotas.filter(n => n.nota_final !== null && !n.dispensada)
+      const average = validGrades.length > 0
+        ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length)
+        : 0
+
+      return {
+        year,
+        average: average.toFixed(2)
+      }
+    })
 
     // Fetch monografia grade — substitui o valor do último ano
     const monografia = await prisma.monografia.findFirst({
