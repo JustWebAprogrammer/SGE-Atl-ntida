@@ -153,11 +153,15 @@ export async function GET(
         const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1)
         const gradesByYear = allYears.map(year => {
           const yearNotas = notasPorAno[year] || []
-          const validGrades = yearNotas.filter(n => n.nota_final !== null && !n.dispensada)
+          const validGrades = yearNotas.filter(n => n.nota_final !== null)
           const average = validGrades.length > 0
             ? (validGrades.reduce((sum, n) => sum + Number(n.nota_final || 0), 0) / validGrades.length)
             : 0
-          return { year, average }
+          const floor = Math.floor(average)
+          const decimal = average - floor
+          const epsilon = 1e-10
+          const roundedAverage = (decimal - 0.5) >= -epsilon ? floor + 1 : floor
+          return { year, average: roundedAverage }
         })
 
         const monografia = await prisma.monografia.findFirst({

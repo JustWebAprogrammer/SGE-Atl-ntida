@@ -114,7 +114,7 @@ export async function GET(request: NextRequest) {
 
       return {
         year,
-        average: average.toFixed(2)
+       average: arredondarNota(average).toFixed(2)
       }
     })
 
