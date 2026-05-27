@@ -473,7 +473,7 @@ export default function MonografiasDashboard() {
                     if (abaActiva === "gestao") {
                       if (!["Aprovada", "ParaDefender", "Defendida"].includes(item.estado)) return false
                     } else if (abaActiva === "monografias") {
-                      if (!["EmRevisao"].includes(item.estado)) return false
+                      if (!["Submetida", "EmRevisao"].includes(item.estado)) return false
                     }
 
                     if (pesquisa) {

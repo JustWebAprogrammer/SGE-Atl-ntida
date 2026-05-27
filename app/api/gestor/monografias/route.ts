@@ -13,7 +13,13 @@ export async function GET() {
     where: { id_usuario: parseInt(session.user.id) }
   })
 
+  // Filtrar monografias por departamento do gestor
+  const whereMonografias = orientador?.id_departamento
+    ? { estudante: { curso: { id_departamento: orientador.id_departamento } } }
+    : {}
+
   const monografias = await prisma.monografia.findMany({
+    where: whereMonografias,
     include: {
       estudante: {
         select: {

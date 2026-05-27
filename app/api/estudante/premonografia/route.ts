@@ -181,7 +181,7 @@ export async function POST(req: Request) {
         tipo: "premonografia",
         titulo: "Novo pré-projecto submetido",
         mensagem: `${estudante.nome_completo} submeteu o pré-projecto "${premonografia.tema}"`,
-        link_url: "/gestor/premonografia"
+        link_url: "/gestor/monografias"
       })
     }
   } catch (err) {
