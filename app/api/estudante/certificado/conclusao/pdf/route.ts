@@ -58,9 +58,19 @@ export async function GET(request: NextRequest) {
 
     const anoLectivo = student.ano_electivo || await getAnoLectivo()
     const duracaoAnos = student.curso.duracao_anos || 3
+    const anosComDisciplinas = duracaoAnos - 1
 
-    // Buscar notas com nota_final preenchida (ou dispensada), igual ao que o Certificado de Disciplinas faz
-    // Isso garante que só consideramos disciplinas com nota final calculada
+    // 1. Buscar mapeamento curricular (CursoDisciplina) de forma independente
+    //    Isto é mais fiável que nested include com filter
+    const curriculum = await prisma.cursoDisciplina.findMany({
+      where: { id_curso: student.id_curso }
+    })
+    const disciplinaToAno: Record<number, number> = {}
+    for (const cd of curriculum) {
+      disciplinaToAno[cd.id_disciplina] = cd.ano_curricular
+    }
+
+    // 2. Buscar notas do estudante (só as que têm nota_final ou dispensada)
     const notas = await prisma.nota.findMany({
       where: {
         id_estudante: student.id_estudante,
@@ -71,34 +81,29 @@ export async function GET(request: NextRequest) {
       },
       include: {
         disciplina: {
-          include: {
-            cursos: {
-              where: { id_curso: student.id_curso }
-            }
+          select: {
+            id_disciplina: true,
+            nome_disciplina: true,
+            ano_curricular: true
           }
         }
       }
     })
 
-    // Agrupar notas por ano curricular usando CursoDisciplina (com fallback para Disciplina.ano_curricular)
-    // A monografia substitui as disciplinas do último ano do curso.
-    // Portanto, só processamos anos 1..duracaoAnos-1 (anos com disciplinas normais).
-    const anosComDisciplinas = duracaoAnos - 1
+    // 3. Agrupar notas por ano curricular usando o mapa (com fallback para Disciplina.ano_curricular)
     const notasPorAno: Record<number, typeof notas> = {}
     for (const nota of notas) {
-      const curriculo = nota.disciplina.cursos[0]
-      // Para dispensada, usar nota_final como 0 se null (a média ignora dispensadas no validGrades)
       const notaFinal = nota.nota_final != null ? Number(nota.nota_final) : null
-      // Determinar o ano: usar CursoDisciplina se disponível, senão Disciplina.ano_curricular
-      const ano = curriculo?.ano_curricular ?? nota.disciplina.ano_curricular
-      // Só nos interessam anos dentro do range normal (1..duracaoAnos-1)
-      // Também incluímos anos maiores que duracaoAnos-1 se vierem do CursoDisciplina (caso o currículo tenha mudado)
+      // Usar o mapa curricular se disponível, senão cair para o ano da disciplina
+      const ano = disciplinaToAno[nota.id_disciplina] ?? nota.disciplina.ano_curricular
+      // Só processar anos 1..duracaoAnos-1 (monografia substitui o último ano)
       if (ano >= 1 && ano <= anosComDisciplinas && notaFinal != null) {
         if (!notasPorAno[ano]) notasPorAno[ano] = []
         notasPorAno[ano].push(nota)
       }
     }
 
+    // 4. Calcular média por ano
     const allYears = Array.from({ length: anosComDisciplinas }, (_, i) => i + 1)
     const gradesByYear = allYears.map(year => {
       const yearNotas = notasPorAno[year] || []
@@ -113,7 +118,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // Fetch monografia grade — substitui o valor do último ano
+    // 5. Buscar monografia
     const monografia = await prisma.monografia.findFirst({
       where: {
         id_estudante: student.id_estudante,
@@ -123,8 +128,7 @@ export async function GET(request: NextRequest) {
 
     const monografiaGrade = monografia?.nota_final ? Number(monografia.nota_final) : 0
 
-    // Calculate final grade: average of all year averages + monografia (equal weight)
-    // A monografia tem o mesmo peso que cada ano curricular
+    // 6. Calcular nota final: média de todas as médias anuais + monografia (mesmo peso)
     const yearAverages = gradesByYear.map(y => Number(y.average))
     const allGrades = [...yearAverages, monografiaGrade]
     const finalGradeRaw = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
@@ -171,7 +175,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // Generate QR code — usa request.nextUrl.origin para funcionar em qualquer ambiente (dev/produção)
+    // Generate QR code
     const qrCodeUrl = `${request.nextUrl.origin}/verificar/${certificado.id_certificado}`
     const qrCodeBuffer = await QRCode.toBuffer(qrCodeUrl, {
       width: 200,

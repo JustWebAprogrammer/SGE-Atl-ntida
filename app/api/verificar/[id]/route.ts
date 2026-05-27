@@ -107,11 +107,20 @@ export async function GET(
 
       if (isConclusao) {
         // Certificado de Conclusão — buscar a nota final calculada
-        // Usar CursoDisciplina para saber a que ano cada disciplina pertence (igual ao PDF)
         const student = certificado.estudante
         const duracaoAnos = student.curso.duracao_anos || 3
         const anosComDisciplinas = duracaoAnos - 1
 
+        // 1. Buscar mapeamento curricular de forma independente (mais fiável)
+        const curriculum = await prisma.cursoDisciplina.findMany({
+          where: { id_curso: student.id_curso }
+        })
+        const disciplinaToAno: Record<number, number> = {}
+        for (const cd of curriculum) {
+          disciplinaToAno[cd.id_disciplina] = cd.ano_curricular
+        }
+
+        // 2. Buscar notas com nota_final
         const notas = await prisma.nota.findMany({
           where: {
             id_estudante: student.id_estudante,
@@ -122,21 +131,19 @@ export async function GET(
           },
           include: {
             disciplina: {
-              include: {
-                cursos: {
-                  where: { id_curso: student.id_curso }
-                }
+              select: {
+                id_disciplina: true,
+                ano_curricular: true
               }
             }
           }
         })
 
-        // Agrupar notas por ano curricular usando CursoDisciplina (com fallback para Disciplina.ano_curricular)
+        // 3. Agrupar por ano usando o mapa
         const notasPorAno: Record<number, typeof notas> = {}
         for (const nota of notas) {
-          const curriculo = nota.disciplina.cursos[0]
           const notaFinal = nota.nota_final != null ? Number(nota.nota_final) : null
-          const ano = curriculo?.ano_curricular ?? nota.disciplina.ano_curricular
+          const ano = disciplinaToAno[nota.id_disciplina] ?? nota.disciplina.ano_curricular
           if (ano >= 1 && ano <= anosComDisciplinas && notaFinal != null) {
             if (!notasPorAno[ano]) notasPorAno[ano] = []
             notasPorAno[ano].push(nota)
