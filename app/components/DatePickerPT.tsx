@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { DayPicker } from "react-day-picker"
 import "react-day-picker/style.css"
 import { ptBR } from "date-fns/locale"
@@ -16,6 +16,8 @@ type DatePickerPTProps = {
 export default function DatePickerPT({ value, onChange, style, min, max }: DatePickerPTProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [dataSimulada, setDataSimulada] = useState<string | null>(null)
+  const [calendarStyle, setCalendarStyle] = useState<React.CSSProperties>({ position: "fixed", zIndex: 1000 })
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Buscar a data simulada quando o componente monta
   useEffect(() => {
@@ -57,6 +59,19 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
     ? value.split("-").reverse().join("/")
     : ""
 
+  const abrirCalendario = () => {
+    if (inputRef.current) {
+      const rect = inputRef.current.getBoundingClientRect()
+      setCalendarStyle({
+        position: "fixed",
+        top: rect.bottom + 4,
+        left: Math.min(rect.left, window.innerWidth - 320),
+        zIndex: 1000,
+      })
+    }
+    setIsOpen(!isOpen)
+  }
+
   const handleSelect = (date: Date | undefined) => {
     if (date) {
       // Format back to yyyy-mm-dd for API (local timezone safe)
@@ -73,11 +88,12 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
   return (
     <div style={{ position: "relative" }}>
       <input
+        ref={inputRef}
         readOnly
         value={display}
         placeholder="dd/mm/aaaa"
         style={style}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={abrirCalendario}
       />
       {isOpen && (
         <>
@@ -90,14 +106,8 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
             }}
             onClick={() => setIsOpen(false)}
           />
-          {/* Calendar dropdown - positioned above overlay */}
-          <div style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            zIndex: 1000,
-            marginTop: "4px",
-          }}>
+          {/* Calendar dropdown - positioned using fixed positioning relative to input */}
+          <div style={calendarStyle}>
             <div style={{
               background: "#1e2230",
               border: "1px solid rgba(255,255,255,0.1)",
