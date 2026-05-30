@@ -390,10 +390,9 @@ sge-atlantida/
 # SGE Atlântida - Environment Variables
 
 # Neon Pooled URL (for runtime - app uses this)
-DATABASE_URL=postgresql://user:password@ep-xxxx-pooler.c.region.aws.neon.tech/db?sslmode=require
-
+DIRECT_URL=postgresql://*******
 # Neon Direct URL (for Prisma migrations)
-DIRECT_URL=postgresql://user:password@ep-xxxx.c.region.aws.neon.tech/db?sslmode=require
+DIRECT_URL=postgresql://*******
 
 NEXTAUTH_SECRET=sge-atlantida-secret-key-2026
 NEXTAUTH_URL=http://localhost:3000
