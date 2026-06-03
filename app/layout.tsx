@@ -1,5 +1,7 @@
+import "./globals.css"
 import type { Metadata } from "next"
 import NextAuthProvider from "./components/SessionProvider"
+
 
 export const metadata: Metadata = {
   title: "ISP Atlântida — Portal Académico",
@@ -16,8 +18,15 @@ const themeScript = `
         document.documentElement.classList.add('light');
       } else {
         document.documentElement.classList.remove('light');
+        // Garantir que dark mode é o padrão explícito
+        if (!theme) {
+          localStorage.setItem('sge-theme', 'dark');
+        }
       }
-    } catch(e) {}
+    } catch(e) {
+      // Se localStorage não disponível, dark mode como padrão
+      document.documentElement.classList.remove('light');
+    }
   })();
 `
 

@@ -31,42 +31,35 @@
   --foreground: var(--text-primary);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 /* ── LIGHT MODE ── */
 html.light {
-  --bg-primary: #f0f2f5;
-  --bg-secondary: #cecece;
-  --bg-card: #c0b8b8;
-  --bg-card-hover: #919192;
-  --bg-input: #8e8e8f;
-  --text-primary: #07090e;
-  --text-secondary: #101316;
-  --text-muted: #6b7280;
-  --text-faint: #9ca3af;
-  --border-color: rgba(0, 0, 0, 0.08);
-  --border-color-strong: rgba(0, 0, 0, 0.15);
-  --scrollbar-track: #e5e7eb;
-  --scrollbar-thumb: #c4c8d0;
+ --bg-primary:        #f4f6fb;
+  --bg-secondary:      #ffffff;
+  --bg-card:           #ffffff;
+  --bg-card-hover:     #eef0f6;
+  --bg-input:          #eef0f6;
+  --text-primary:      #0d0f14;
+  --text-secondary:    #1e2230;
+  --text-muted:        #4b5563;
+  --text-faint:        #9ca3af;
+  --border-color:        rgba(0, 0, 0, 0.08);
+  --border-color-strong: rgba(0, 0, 0, 0.13);
+  --scrollbar-track:   #e5e7eb;
+  --scrollbar-thumb:   #c4c8d0;
   --scrollbar-thumb-hover: #a0a5b0;
-  --accent: #dc2626;
-  --accent-bg: rgba(220, 38, 38, 0.08);
-  --accent-bg-subtle: rgba(220, 38, 38, 0.04);
-  --success: #16a34a;
-  --warning: #d97706;
-  --warning-bg: rgba(217, 119, 6, 0.1);
-  --warning-border: rgba(217, 119, 6, 0.25);
-  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  --shadow-dropdown: 0 4px 24px rgba(0, 0, 0, 0.1);
-  --overlay: rgba(0, 0, 0, 0.3);
-  --overlay-modal: rgba(0, 0, 0, 0.4);
-  --background: var(--bg-primary);
-  --foreground: var(--text-primary);
+  --accent:            #dc2626;
+  --accent-bg:         rgba(220, 38, 38, 0.08);
+  --accent-bg-subtle:  rgba(220, 38, 38, 0.04);
+  --success:           #16a34a;
+  --warning:           #d97706;
+  --warning-bg:        rgba(217, 119, 6, 0.10);
+  --warning-border:    rgba(217, 119, 6, 0.25);
+  --shadow-modal:      0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-dropdown:   0 4px 24px rgba(0, 0, 0, 0.10);
+  --overlay:           rgba(0, 0, 0, 0.30);
+  --overlay-modal:     rgba(0, 0, 0, 0.40);
+  --background:        var(--bg-primary);
+  --foreground:        var(--text-primary);
 }
 
 main {
@@ -74,8 +67,8 @@ main {
 }
 
 html, body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
   min-height: 100dvh;
@@ -84,9 +77,14 @@ html, body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Forçar variáveis CSS sobre qualquer reset do Tailwind */
+body {
+  color-scheme: light dark;
+}
+
 #__next {
   min-height: 100vh;
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
 }
 
 /* ── Scrollbar global ── */
