@@ -206,8 +206,8 @@ export default function AdminsAdminDashboard() {
             style={{
               width: '100%',
               padding: '10px 14px',
-              background: '#13161e',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--bg-input)',
+              border: '1px solid var(--border-color)',
               borderRadius: '8px',
               color: 'white',
               boxSizing: 'border-box',
@@ -219,7 +219,7 @@ export default function AdminsAdminDashboard() {
         <button 
           onClick={openCreateModal}
           style={{
-            background: '#e03d3d',
+            background: 'var(--accent)',
             color: 'white',
             border: 'none',
             padding: '12px 20px',
@@ -235,48 +235,48 @@ export default function AdminsAdminDashboard() {
 
       {/* Tabela */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar administradores...
         </div>
       ) : admins.length === 0 ? (
         <div style={{ 
-          background: '#1e2230', 
+          background: 'var(--bg-card)', 
           borderRadius: '12px', 
           padding: '60px', 
           textAlign: 'center',
-          color: '#d0d7e8'
+          color: 'var(--text-secondary)'
         }}>
           Nenhum administrador encontrado
         </div>
       ) : (
-        <div style={{ background: '#1e2230', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', borderRadius: '12px', overflow: 'hidden' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Utilizador</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Email</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Telefone</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Cadastro</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
+              <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Utilizador</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Email</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Telefone</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Cadastro</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {admins.map((admin) => (
                 <tr key={admin.id_admin} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <td style={{ padding: '14px', color: '#e8eaf0', fontSize: '14px', fontWeight: '500' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)', fontSize: '14px', fontWeight: '500' }}>
                     {admin.nome_completo || '—'}
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8', fontSize: '13px' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)', fontSize: '13px' }}>
                     @{admin.usuario.nome_usuario}
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8', fontSize: '13px' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)', fontSize: '13px' }}>
                     {admin.usuario.email}
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8', fontSize: '13px' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)', fontSize: '13px' }}>
                     {admin.numero_telemovel || '—'}
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8', fontSize: '13px' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)', fontSize: '13px' }}>
                     {new Date(admin.usuario.data_cadastro).toLocaleDateString('pt-AO')}
                   </td>
                   <td style={{ padding: '14px' }}>
@@ -315,21 +315,21 @@ export default function AdminsAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setShowModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '400px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>
               {editingAdmin ? 'Editar Administrador' : 'Adicionar Novo Administrador'}
             </h3>
             
             {error && (
               <div style={{ 
-                background: 'rgba(224,61,61,0.12)', 
-                border: '1px solid #e03d3d',
-                color: '#e03d3d',
+                background: 'var(--accent-bg)', 
+                border: '1px solid var(--accent)',
+                color: 'var(--accent)',
                 padding: '12px',
                 borderRadius: '8px',
                 marginBottom: '16px',
@@ -341,7 +341,7 @@ export default function AdminsAdminDashboard() {
 
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo *</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome Completo *</label>
                 <input
                   type="text"
                   required
@@ -350,8 +350,8 @@ export default function AdminsAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white',
                     boxSizing: 'border-box'
@@ -360,7 +360,7 @@ export default function AdminsAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Email *</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Email *</label>
                 <input
                   type="email"
                   required
@@ -369,8 +369,8 @@ export default function AdminsAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white',
                     boxSizing: 'border-box'
@@ -379,9 +379,9 @@ export default function AdminsAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telefone (+244 9)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Telefone (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     maxLength={8}
@@ -391,8 +391,8 @@ export default function AdminsAdminDashboard() {
                     style={{
                       flex: 1,
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white',
                       boxSizing: 'border-box'
@@ -430,9 +430,9 @@ export default function AdminsAdminDashboard() {
                       style={{
                         padding: '12px 20px',
                         background: 'transparent',
-                        border: '1px solid #e03d3d',
+                        border: '1px solid var(--accent)',
                         borderRadius: '8px',
-                        color: '#e03d3d',
+                        color: 'var(--accent)',
                         cursor: 'pointer'
                       }}
                     >
@@ -446,9 +446,9 @@ export default function AdminsAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -458,7 +458,7 @@ export default function AdminsAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',

@@ -31,11 +31,11 @@ function BadgeEstado({ estado }: { estado: string }) {
   const config: Record<string, { bg: string; color: string }> = {
     Pendente: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     Aceite: { bg: "rgba(34,197,94,0.12)", color: "#22c55e" },
-    Recusado: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
-    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" },
+    Recusado: { bg: "var(--accent-bg)", color: "var(--accent)" },
+    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" },
   }
 
-  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
+  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" }
 
   return (
     <span style={{
@@ -128,8 +128,8 @@ export default function SolicitacoesDashboard() {
         marginBottom: "24px"
       }}>
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px",
           padding: "20px",
           borderTop: "2px solid #f0a500"
@@ -138,18 +138,18 @@ export default function SolicitacoesDashboard() {
             fontSize: "11px",
             textTransform: "uppercase",
             letterSpacing: "0.5px",
-            color: "#b0b8cf",
+            color: "var(--text-muted)",
             marginBottom: "10px"
           }}>Pendentes</div>
           <div style={{
             fontSize: "16px",
             fontWeight: "700",
-            color: "#e8eaf0"
+            color: "var(--text-primary)"
           }}>{loading ? "..." : pendentes.length}</div>
         </div>
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px",
           padding: "20px",
           borderTop: "2px solid #22c55e"
@@ -158,41 +158,41 @@ export default function SolicitacoesDashboard() {
             fontSize: "11px",
             textTransform: "uppercase",
             letterSpacing: "0.5px",
-            color: "#b0b8cf",
+            color: "var(--text-muted)",
             marginBottom: "10px"
           }}>Aceites</div>
           <div style={{
             fontSize: "16px",
             fontWeight: "700",
-            color: "#e8eaf0"
+            color: "var(--text-primary)"
           }}>{loading ? "..." : aceites}</div>
         </div>
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px",
           padding: "20px",
-          borderTop: "2px solid #e03d3d"
+          borderTop: "2px solid var(--accent)"
         }}>
           <div style={{
             fontSize: "11px",
             textTransform: "uppercase",
             letterSpacing: "0.5px",
-            color: "#b0b8cf",
+            color: "var(--text-muted)",
             marginBottom: "10px"
           }}>Recusados</div>
           <div style={{
             fontSize: "16px",
             fontWeight: "700",
-            color: "#e8eaf0"
+            color: "var(--text-primary)"
           }}>{loading ? "..." : recusados}</div>
         </div>
       </div>
 
       {/* Filters */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "16px",
         marginBottom: "20px"
@@ -201,7 +201,7 @@ export default function SolicitacoesDashboard() {
           <div style={{ flex: 1, minWidth: "200px" }}>
             <label style={{
               fontSize: "11px",
-              color: "#d0d7e8",
+              color: "var(--text-secondary)",
               textTransform: "uppercase",
               marginBottom: "4px",
               display: "block"
@@ -214,10 +214,10 @@ export default function SolicitacoesDashboard() {
               style={{
                 width: "100%",
                 padding: "8px 12px",
-                background: "#13161e",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "var(--bg-input)",
+                border: "1px solid var(--border-color-strong)",
                 borderRadius: "8px",
-                color: "#e8eaf0",
+                color: "var(--text-primary)",
                 fontSize: "13px"
               }}
             />
@@ -226,7 +226,7 @@ export default function SolicitacoesDashboard() {
           <div>
             <label style={{
               fontSize: "11px",
-              color: "#d0d7e8",
+              color: "var(--text-secondary)",
               textTransform: "uppercase",
               marginBottom: "4px",
               display: "block"
@@ -236,10 +236,10 @@ export default function SolicitacoesDashboard() {
               onChange={(e) => setFiltroCurso(e.target.value)}
               style={{
                 padding: "8px 12px",
-                background: "#13161e",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "var(--bg-input)",
+                border: "1px solid var(--border-color-strong)",
                 borderRadius: "8px",
-                color: "#e8eaf0",
+                color: "var(--text-primary)",
                 fontSize: "13px",
                 minWidth: "180px"
               }}
@@ -254,7 +254,7 @@ export default function SolicitacoesDashboard() {
           <div>
             <label style={{
               fontSize: "11px",
-              color: "#d0d7e8",
+              color: "var(--text-secondary)",
               textTransform: "uppercase",
               marginBottom: "4px",
               display: "block"
@@ -264,10 +264,10 @@ export default function SolicitacoesDashboard() {
               onChange={(e) => setFiltroTurno(e.target.value)}
               style={{
                 padding: "8px 12px",
-                background: "#13161e",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "var(--bg-input)",
+                border: "1px solid var(--border-color-strong)",
                 borderRadius: "8px",
-                color: "#e8eaf0",
+                color: "var(--text-primary)",
                 fontSize: "13px",
                 minWidth: "140px"
               }}
@@ -285,9 +285,9 @@ export default function SolicitacoesDashboard() {
               style={{
                 padding: "8px 12px",
                 background: "transparent",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid var(--border-color-strong)",
                 borderRadius: "8px",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 fontSize: "13px",
                 cursor: "pointer"
               }}
@@ -300,8 +300,8 @@ export default function SolicitacoesDashboard() {
 
       {/* Pending Requests */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px",
         marginBottom: "20px"
@@ -310,20 +310,20 @@ export default function SolicitacoesDashboard() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "16px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Solicitações Pendentes</div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
         ) : pendentes.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
             {hasActiveFilters ? "Nenhuma solicitação pendente encontrada com os filtros selecionados" : "Nenhuma solicitação pendente"}
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {pendentes.map(s => (
               <div key={s.id_solicitacao} style={{
-                background: "#13161e",
+                background: "var(--bg-input)",
                 borderRadius: "10px",
                 padding: "16px",
                 border: "1px solid rgba(255,255,255,0.05)"
@@ -335,20 +335,20 @@ export default function SolicitacoesDashboard() {
                   marginBottom: "12px"
                 }}>
                   <div>
-                    <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>
+                    <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>
                       {s.estudante.nome}
                       {s.gestor_assigned && (
                         <span title="Atribuído pelo gestor" style={{ marginLeft: "6px", fontSize: "12px" }}>🔹</span>
                       )}
                     </div>
-                    <div style={{ color: "#b0b8cf", fontSize: "12px" }}>
+                    <div style={{ color: "var(--text-muted)", fontSize: "12px" }}>
                       {s.estudante.numero_estudante} · {s.estudante.curso} · {s.estudante.ano_current}º Ano · {s.estudante.turno}
                     </div>
                   </div>
                   <BadgeEstado estado={s.estado} />
                 </div>
 
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "8px" }}>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "8px" }}>
                   Solicitado em {new Date(s.data_solicitacao).toLocaleDateString("pt-AO")}
                 </div>
 
@@ -359,10 +359,10 @@ export default function SolicitacoesDashboard() {
                     padding: "10px",
                     marginBottom: "12px"
                   }}>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px", textTransform: "uppercase" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px", textTransform: "uppercase" }}>
                       Observações
                     </div>
-                    <div style={{ fontSize: "12px", color: "#d0d7e8", lineHeight: "1.5" }}>
+                    <div style={{ fontSize: "12px", color: "var(--text-secondary)", lineHeight: "1.5" }}>
                       {s.observacoes}
                     </div>
                   </div>
@@ -375,7 +375,7 @@ export default function SolicitacoesDashboard() {
                     style={{
                       flex: 1,
                       padding: "8px",
-                      background: processando === s.id_solicitacao ? "#b0b8cf" : "#22c55e",
+                      background: processando === s.id_solicitacao ? "var(--text-muted)" : "#22c55e",
                       color: "white",
                       border: "none",
                       borderRadius: "6px",
@@ -392,7 +392,7 @@ export default function SolicitacoesDashboard() {
                     style={{
                       flex: 1,
                       padding: "8px",
-                      background: processando === s.id_solicitacao ? "#b0b8cf" : "#e03d3d",
+                      background: processando === s.id_solicitacao ? "var(--text-muted)" : "var(--accent)",
                       color: "white",
                       border: "none",
                       borderRadius: "6px",
@@ -412,8 +412,8 @@ export default function SolicitacoesDashboard() {
 
       {/* History Section */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px"
       }}>
@@ -421,20 +421,20 @@ export default function SolicitacoesDashboard() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "16px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Histórico de Solicitações</div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
         ) : historico.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
             {hasActiveFilters ? "Nenhuma solicitação no histórico com os filtros selecionados" : "Nenhuma solicitação processada ainda"}
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {historico.map(s => (
               <div key={s.id_solicitacao} style={{
-                background: "#13161e",
+                background: "var(--bg-input)",
                 borderRadius: "10px",
                 padding: "16px",
                 border: "1px solid rgba(255,255,255,0.05)",
@@ -447,20 +447,20 @@ export default function SolicitacoesDashboard() {
                   marginBottom: "12px"
                 }}>
                   <div>
-                    <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>
+                    <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>
                       {s.estudante.nome}
                       {s.gestor_assigned && (
                         <span title="Atribuído pelo gestor" style={{ marginLeft: "6px", fontSize: "12px" }}>🔹</span>
                       )}
                     </div>
-                    <div style={{ color: "#b0b8cf", fontSize: "12px" }}>
+                    <div style={{ color: "var(--text-muted)", fontSize: "12px" }}>
                       {s.estudante.numero_estudante} · {s.estudante.curso} · {s.estudante.ano_current}º Ano · {s.estudante.turno}
                     </div>
                   </div>
                   <BadgeEstado estado={s.estado} />
                 </div>
 
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "8px" }}>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "8px" }}>
                   Solicitado em {new Date(s.data_solicitacao).toLocaleDateString("pt-AO")}
                 </div>
 
@@ -471,10 +471,10 @@ export default function SolicitacoesDashboard() {
                     padding: "10px",
                     marginBottom: "12px"
                   }}>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px", textTransform: "uppercase" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px", textTransform: "uppercase" }}>
                       Observações
                     </div>
-                    <div style={{ fontSize: "12px", color: "#d0d7e8", lineHeight: "1.5" }}>
+                    <div style={{ fontSize: "12px", color: "var(--text-secondary)", lineHeight: "1.5" }}>
                       {s.observacoes}
                     </div>
                   </div>
@@ -489,8 +489,8 @@ export default function SolicitacoesDashboard() {
                         disabled={processando === s.id_solicitacao}
                         style={{
                           padding: "6px 12px",
-                          background: processando === s.id_solicitacao ? "#b0b8cf" : "rgba(34,197,94,0.15)",
-                          color: processando === s.id_solicitacao ? "#d0d7e8" : "#22c55e",
+                          background: processando === s.id_solicitacao ? "var(--text-muted)" : "rgba(34,197,94,0.15)",
+                          color: processando === s.id_solicitacao ? "var(--text-secondary)" : "#22c55e",
                           border: "1px solid rgba(34,197,94,0.3)",
                           borderRadius: "6px",
                           fontSize: "11px",
@@ -507,8 +507,8 @@ export default function SolicitacoesDashboard() {
                         disabled={processando === s.id_solicitacao}
                         style={{
                           padding: "6px 12px",
-                          background: processando === s.id_solicitacao ? "#b0b8cf" : "rgba(224,61,61,0.15)",
-                          color: processando === s.id_solicitacao ? "#d0d7e8" : "#e03d3d",
+                          background: processando === s.id_solicitacao ? "var(--text-muted)" : "rgba(224,61,61,0.15)",
+                          color: processando === s.id_solicitacao ? "var(--text-secondary)" : "var(--accent)",
                           border: "1px solid rgba(224,61,61,0.3)",
                           borderRadius: "6px",
                           fontSize: "11px",

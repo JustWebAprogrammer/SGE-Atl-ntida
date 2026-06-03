@@ -89,7 +89,7 @@ function DocumentPreview({ config, tipo }: { config: LayoutConfig; tipo: TabKey 
             width: "36px",
             height: "36px",
             borderRadius: "50%",
-            background: "#e03d3d",
+            background: "var(--accent)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -297,10 +297,10 @@ export default function LayoutDocumentosDashboard() {
   const inputStyle = {
     width: "100%",
     padding: "10px 12px",
-    background: "#13161e",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "var(--bg-input)",
+    border: "1px solid var(--border-color)",
     borderRadius: "8px",
-    color: "#e8eaf0",
+    color: "var(--text-primary)",
     fontSize: "13px",
     outline: "none",
     boxSizing: "border-box" as const,
@@ -309,7 +309,7 @@ export default function LayoutDocumentosDashboard() {
   const labelStyle = {
     display: "block",
     marginBottom: "6px",
-    color: "#d0d7e8",
+    color: "var(--text-secondary)",
     fontSize: "12px",
     fontWeight: "500" as const,
     textTransform: "uppercase" as const,
@@ -319,7 +319,7 @@ export default function LayoutDocumentosDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={adminNavItems} title="Layout de Documentos" subtitle="A carregar...">
-        <div style={{ textAlign: "center", padding: "40px", color: "#d0d7e8" }}>A carregar...</div>
+        <div style={{ textAlign: "center", padding: "40px", color: "var(--text-secondary)" }}>A carregar...</div>
       </DashboardLayout>
     )
   }
@@ -339,8 +339,8 @@ export default function LayoutDocumentosDashboard() {
             marginBottom: "20px",
             fontSize: "13px",
             fontWeight: "500",
-            background: messageType === "success" ? "rgba(45,212,191,0.12)" : "rgba(224,61,61,0.12)",
-            color: messageType === "success" ? "#2dd4bf" : "#e03d3d",
+            background: messageType === "success" ? "rgba(45,212,191,0.12)" : "var(--accent-bg)",
+            color: messageType === "success" ? "#2dd4bf" : "var(--accent)",
             border: `1px solid ${messageType === "success" ? "rgba(45,212,191,0.25)" : "rgba(224,61,61,0.25)"}`,
           }}
         >
@@ -359,9 +359,9 @@ export default function LayoutDocumentosDashboard() {
               style={{
                 padding: "10px 18px",
                 borderRadius: "8px",
-                border: isActive ? "none" : "1px solid rgba(255,255,255,0.07)",
-                background: isActive ? "#e03d3d" : "transparent",
-                color: isActive ? "#fff" : "#d0d7e8",
+                border: isActive ? "none" : "1px solid var(--border-color)",
+                background: isActive ? "var(--accent)" : "transparent",
+                color: isActive ? "#fff" : "var(--text-secondary)",
                 fontSize: "13px",
                 fontWeight: isActive ? "600" : "400",
                 cursor: "pointer",
@@ -378,8 +378,8 @@ export default function LayoutDocumentosDashboard() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", alignItems: "start" }}>
 
         {/* Left: Form */}
-        <div style={{ background: "#1e2230", borderRadius: "12px", padding: "24px" }}>
-          <h3 style={{ margin: "0 0 20px 0", color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+        <div style={{ background: "var(--bg-card)", borderRadius: "12px", padding: "24px" }}>
+          <h3 style={{ margin: "0 0 20px 0", color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
             Campos Configuráveis
           </h3>
 
@@ -407,8 +407,8 @@ export default function LayoutDocumentosDashboard() {
                     title="Clique para copiar"
                     style={{
                       fontSize: "10px",
-                      background: "#13161e",
-                      border: "1px solid rgba(255,255,255,0.07)",
+                      background: "var(--bg-input)",
+                      border: "1px solid var(--border-color)",
                       color: "#f0a500",
                       padding: "3px 8px",
                       borderRadius: "4px",
@@ -494,7 +494,7 @@ export default function LayoutDocumentosDashboard() {
                     width: "40px",
                     height: "22px",
                     borderRadius: "11px",
-                    background: currentConfig.tem_qr_code ? "#e03d3d" : "rgba(255,255,255,0.1)",
+                    background: currentConfig.tem_qr_code ? "var(--accent)" : "var(--border-color-strong)",
                     position: "relative",
                     transition: "background 0.2s",
                     cursor: "pointer",
@@ -514,12 +514,12 @@ export default function LayoutDocumentosDashboard() {
                     }}
                   />
                 </div>
-                <span style={{ color: "#e8eaf0", fontSize: "13px" }}>
+                <span style={{ color: "var(--text-primary)", fontSize: "13px" }}>
                   Incluir QR Code no documento
                   {currentConfig.tem_qr_code ? (
                     <span style={{ color: "#2dd4bf", marginLeft: "8px", fontSize: "11px" }}>● Activo</span>
                   ) : (
-                    <span style={{ color: "#d0d7e8", marginLeft: "8px", fontSize: "11px" }}>○ Inactivo</span>
+                    <span style={{ color: "var(--text-secondary)", marginLeft: "8px", fontSize: "11px" }}>○ Inactivo</span>
                   )}
                 </span>
               </label>
@@ -539,7 +539,7 @@ export default function LayoutDocumentosDashboard() {
                 disabled={saving}
                 style={{
                   padding: "11px 22px",
-                  background: saving ? "rgba(224,61,61,0.4)" : "#e03d3d",
+                  background: saving ? "rgba(224,61,61,0.4)" : "var(--accent)",
                   border: "none",
                   borderRadius: "8px",
                   color: "white",
@@ -556,9 +556,9 @@ export default function LayoutDocumentosDashboard() {
                 style={{
                   padding: "11px 22px",
                   background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid var(--border-color-strong)",
                   borderRadius: "8px",
-                  color: "#d0d7e8",
+                  color: "var(--text-secondary)",
                   fontSize: "13px",
                   cursor: "pointer",
                 }}
@@ -579,14 +579,14 @@ export default function LayoutDocumentosDashboard() {
               marginBottom: "14px",
             }}
           >
-            <h3 style={{ margin: 0, color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+            <h3 style={{ margin: 0, color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
               Pré-visualização
             </h3>
             <span
               style={{
                 fontSize: "11px",
-                color: "#d0d7e8",
-                background: "#1e2230",
+                color: "var(--text-secondary)",
+                background: "var(--bg-card)",
                 padding: "4px 10px",
                 borderRadius: "12px",
               }}
@@ -601,10 +601,10 @@ export default function LayoutDocumentosDashboard() {
             style={{
               marginTop: "12px",
               padding: "10px 14px",
-              background: "#1e2230",
+              background: "var(--bg-card)",
               borderRadius: "8px",
               fontSize: "11px",
-              color: "#d0d7e8",
+              color: "var(--text-secondary)",
             }}
           >
             💡 A pré-visualização usa dados de exemplo. Os placeholders{" "}

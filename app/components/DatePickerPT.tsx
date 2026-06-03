@@ -109,8 +109,8 @@ export default function DatePickerPT({ value, onChange, style, min, max }: DateP
           {/* Calendar dropdown - positioned using fixed positioning relative to input */}
           <div style={calendarStyle}>
             <div style={{
-              background: "#1e2230",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-color-strong)",
               borderRadius: "8px",
               padding: "8px",
               boxShadow: "0 4px 20px rgba(0,0,0,0.5)",

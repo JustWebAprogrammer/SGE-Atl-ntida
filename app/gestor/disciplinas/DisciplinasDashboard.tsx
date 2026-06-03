@@ -364,10 +364,10 @@ export default function DisciplinasDashboard() {
   function getBadgeColor(avaliacao: string) {
     switch (avaliacao) {
       case "especial": return "#9b59b6"
-      case "recurso": return "#e03d3d"
+      case "recurso": return "var(--accent)"
       case "exame": return "#f0a500"
       case "ac": return "#22c55e"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -440,8 +440,8 @@ export default function DisciplinasDashboard() {
     >
       {/* Filtros */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "16px",
         marginBottom: "16px"
@@ -457,10 +457,10 @@ export default function DisciplinasDashboard() {
             style={{
               flex: 1,
               padding: "8px 12px",
-              background: "#13161e",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "var(--bg-input)",
+              border: "1px solid var(--border-color-strong)",
               borderRadius: "8px",
-              color: "#e8eaf0",
+              color: "var(--text-primary)",
               fontSize: "12px",
               outline: "none"
             }}
@@ -471,10 +471,10 @@ export default function DisciplinasDashboard() {
             onChange={(e) => setFiltroCursoId(e.target.value ? parseInt(e.target.value) : null)}
             style={{
               padding: "8px 12px",
-              background: "#13161e",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "var(--bg-input)",
+              border: "1px solid var(--border-color-strong)",
               borderRadius: "8px",
-              color: "#e8eaf0",
+              color: "var(--text-primary)",
               fontSize: "12px",
               minWidth: "200px"
             }}
@@ -492,10 +492,10 @@ export default function DisciplinasDashboard() {
             onChange={(e) => setFiltroTurno(e.target.value || null)}
             style={{
               padding: "8px 12px",
-              background: "#13161e",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "var(--bg-input)",
+              border: "1px solid var(--border-color-strong)",
               borderRadius: "8px",
-              color: "#e8eaf0",
+              color: "var(--text-primary)",
               fontSize: "12px",
               minWidth: "140px"
             }}
@@ -513,10 +513,10 @@ export default function DisciplinasDashboard() {
             onChange={(e) => setFiltroProfessorId(e.target.value ? parseInt(e.target.value) : null)}
             style={{
               padding: "8px 12px",
-              background: "#13161e",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "var(--bg-input)",
+              border: "1px solid var(--border-color-strong)",
               borderRadius: "8px",
-              color: "#e8eaf0",
+              color: "var(--text-primary)",
               fontSize: "12px",
               minWidth: "180px"
             }}
@@ -531,7 +531,7 @@ export default function DisciplinasDashboard() {
         </div>
         {/* Segunda linha: ano + semestre */}
         <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-          <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Filtrar:</span>
+          <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Filtrar:</span>
           <div style={{ display: "flex", gap: "4px" }}>
             {anosDisponiveis.map(ano => (
               <button
@@ -541,9 +541,9 @@ export default function DisciplinasDashboard() {
                   padding: "5px 12px",
                   borderRadius: "6px",
                   border: "1px solid",
-                  borderColor: filtroAno === ano ? "#2dd4bf" : "rgba(255,255,255,0.1)",
+                  borderColor: filtroAno === ano ? "#2dd4bf" : "var(--border-color-strong)",
                   background: filtroAno === ano ? "rgba(45,212,191,0.1)" : "transparent",
-                  color: filtroAno === ano ? "#2dd4bf" : "#d0d7e8",
+                  color: filtroAno === ano ? "#2dd4bf" : "var(--text-secondary)",
                   fontSize: "11px",
                   cursor: "pointer"
                 }}
@@ -561,9 +561,9 @@ export default function DisciplinasDashboard() {
                   padding: "5px 12px",
                   borderRadius: "6px",
                   border: "1px solid",
-                  borderColor: filtroSemestre === sem ? "#f0a500" : "rgba(255,255,255,0.1)",
+                  borderColor: filtroSemestre === sem ? "#f0a500" : "var(--border-color-strong)",
                   background: filtroSemestre === sem ? "rgba(240,165,0,0.1)" : "transparent",
-                  color: filtroSemestre === sem ? "#f0a500" : "#d0d7e8",
+                  color: filtroSemestre === sem ? "#f0a500" : "var(--text-secondary)",
                   fontSize: "11px",
                   cursor: "pointer"
                 }}
@@ -584,9 +584,9 @@ export default function DisciplinasDashboard() {
               style={{
                 padding: "5px 12px",
                 borderRadius: "6px",
-                border: "1px solid #e03d3d",
+                border: "1px solid var(--accent)",
                 background: "rgba(224,61,61,0.1)",
-                color: "#e03d3d",
+                color: "var(--accent)",
                 fontSize: "11px",
                 cursor: "pointer",
                 marginLeft: "auto"
@@ -611,8 +611,8 @@ export default function DisciplinasDashboard() {
           { label: "Ano Lectivo", value: anoLectivo || "—", color: "#22c55e" },
         ].map((s) => (
           <div key={s.label} style={{
-            background: "#1e2230",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-color)",
             borderRadius: "14px",
             padding: "20px",
             borderTop: `2px solid ${s.color}`
@@ -621,13 +621,13 @@ export default function DisciplinasDashboard() {
               fontSize: "11px",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
-              color: "#b0b8cf",
+              color: "var(--text-muted)",
               marginBottom: "10px"
             }}>{s.label}</div>
             <div style={{
               fontSize: "16px",
               fontWeight: "700",
-              color: "#e8eaf0"
+              color: "var(--text-primary)"
             }}>{loadingDisciplinas ? "..." : s.value}</div>
           </div>
         ))}
@@ -635,8 +635,8 @@ export default function DisciplinasDashboard() {
 
       {/* Disciplinas */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px",
         marginBottom: "20px"
@@ -645,13 +645,13 @@ export default function DisciplinasDashboard() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "16px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Todas as Disciplinas</div>
 
         {loadingDisciplinas ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
         ) : disciplinasFiltradas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
             Nenhuma disciplina encontrada
           </div>
         ) : (
@@ -662,7 +662,7 @@ export default function DisciplinasDashboard() {
                 <div 
                   onClick={() => selecionarDisciplina(d)}
                   style={{
-                    background: disciplinaSelecionada?.id === d.id ? "rgba(45,212,191,0.1)" : "#13161e",
+                    background: disciplinaSelecionada?.id === d.id ? "rgba(45,212,191,0.1)" : "var(--bg-input)",
                     borderRadius: "10px",
                     padding: "14px 18px",
                     display: "flex",
@@ -673,8 +673,8 @@ export default function DisciplinasDashboard() {
                   }}
                 >
                   <div>
-                    <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
-                    <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
+                    <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
+                    <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "2px" }}>
                       {d.codigo} · {d.creditos} créditos · {d.departamento}
                     </div>
                     {/* Mostrar colocações no currículo (curso + ano + semestre) */}
@@ -711,7 +711,7 @@ export default function DisciplinasDashboard() {
                              style={{
                                padding: "4px 10px",
                                background: "#f0a500",
-                               color: "#13161e",
+                               color: "var(--bg-input)",
                                border: "none",
                                borderRadius: "6px",
                                fontSize: "11px",
@@ -732,7 +732,7 @@ export default function DisciplinasDashboard() {
                      </div>
                      <div style={{
                        fontSize: "18px",
-                       color: "#b0b8cf",
+                       color: "var(--text-muted)",
                        transform: disciplinaSelecionada?.id === d.id ? "rotate(180deg)" : "rotate(0deg)",
                        transition: "transform 0.2s"
                      }}>
@@ -744,52 +744,52 @@ export default function DisciplinasDashboard() {
                 {/* Tabela de estudantes (accordion) */}
                 {disciplinaSelecionada?.id === d.id && (
                   <div style={{
-                    background: "#1e2230",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "0 0 10px 10px",
                     padding: "16px",
                     marginTop: "-1px"
                   }}>
                     {/* Contador de alunos (quando filtro de turno activo) */}
                     {filtroTurno && (
-                      <div style={{ color: "#d0d7e8", fontSize: "11px", marginBottom: "12px" }}>
+                      <div style={{ color: "var(--text-secondary)", fontSize: "11px", marginBottom: "12px" }}>
                         Mostrando {estudantesFiltrados.length} de {estudantes.length} alunos
                       </div>
                     )}
 
                     {loadingEstudantes ? (
-                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>A carregar estudantes...</div>
+                      <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "20px" }}>A carregar estudantes...</div>
                     ) : estudantesFiltrados.length === 0 ? (
-                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>
+                      <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "20px" }}>
                         {estudantes.length > 0 ? "Nenhum estudante encontrado neste turno" : "Nenhum estudante encontrado"}
                       </div>
                     ) : (
                       <div style={{ overflowX: "auto" }}>
                         <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
-                            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "10px", textTransform: "uppercase" }}>Estudante</th>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "10px", textTransform: "uppercase" }}>Turno</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC3</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>TTP</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>PP1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>PP2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Exame</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Recurso</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Especial</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Final</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Estado</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Ações</th>
+                            <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                              <th style={{ textAlign: "left", padding: "8px", color: "var(--text-muted)", fontSize: "10px", textTransform: "uppercase" }}>Estudante</th>
+                              <th style={{ textAlign: "left", padding: "8px", color: "var(--text-muted)", fontSize: "10px", textTransform: "uppercase" }}>Turno</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>AC1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>AC2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>AC3</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>TTP</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>PP1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>PP2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Exame</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Recurso</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Especial</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Final</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Estado</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Ações</th>
                             </tr>
                           </thead>
                           <tbody>
                             {estudantesFiltrados.map(e => (
                               <tr key={e.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                                 <td style={{ padding: "8px" }}>
-                                  <div style={{ color: "#e8eaf0", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
-                                  <div style={{ color: "#b0b8cf", fontSize: "10px" }}>{e.numero_estudante}</div>
+                                  <div style={{ color: "var(--text-primary)", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
+                                  <div style={{ color: "var(--text-muted)", fontSize: "10px" }}>{e.numero_estudante}</div>
                                 </td>
                                 <td style={{ padding: "8px" }}>
                                   <span style={{
@@ -820,14 +820,14 @@ export default function DisciplinasDashboard() {
                                           padding: "3px",
                                           borderRadius: "4px",
                                           border: "1px solid rgba(255,255,255,0.2)",
-                                          background: "#13161e",
-                                          color: "#e8eaf0",
+                                          background: "var(--bg-input)",
+                                          color: "var(--text-primary)",
                                           fontSize: "11px",
                                           textAlign: "center"
                                         }}
                                       />
                                     ) : (
-                                      <span style={{ color: "#e8eaf0", fontSize: "11px" }}>
+                                      <span style={{ color: "var(--text-primary)", fontSize: "11px" }}>
                                         {e[campo as keyof Estudante] != null ? arredondarNota(Number(e[campo as keyof Estudante])) : "—"}
                                       </span>
                                     )}
@@ -838,8 +838,8 @@ export default function DisciplinasDashboard() {
                                     fontWeight: "700",
                                     fontSize: "11px",
                                     color: e.nota_final != null 
-                                      ? (e.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                                      : "#b0b8cf"
+                                      ? (e.nota_final >= 10 ? "#22c55e" : "var(--accent)")
+                                      : "var(--text-muted)"
                                   }}>
                                     {e.nota_final != null ? arredondarNota(e.nota_final) : "—"}
                                   </span>
@@ -878,7 +878,7 @@ export default function DisciplinasDashboard() {
                                         onClick={cancelarEdicao}
                                         style={{
                                           padding: "3px 6px",
-                                          background: "#b0b8cf",
+                                          background: "var(--text-muted)",
                                           color: "white",
                                           border: "none",
                                           borderRadius: "4px",
@@ -895,7 +895,7 @@ export default function DisciplinasDashboard() {
                                       style={{
                                         padding: "3px 6px",
                                         background: "#2dd4bf",
-                                        color: "#13161e",
+                                        color: "var(--bg-input)",
                                         border: "none",
                                         borderRadius: "4px",
                                         fontSize: "10px",
@@ -937,31 +937,31 @@ export default function DisciplinasDashboard() {
            padding: "20px"
          }} onClick={() => setModalProfessoresAberto(false)}>
            <div onClick={e => e.stopPropagation()} style={{
-             background: "#1e2230",
+             background: "var(--bg-card)",
              borderRadius: "16px",
              padding: "24px",
              width: "100%",
              maxWidth: "500px",
-             border: "1px solid rgba(255,255,255,0.1)"
+             border: "1px solid var(--border-color-strong)"
            }}>
              <div style={{
                fontSize: "16px",
                fontWeight: "700",
-               color: "#e8eaf0",
+               color: "var(--text-primary)",
                marginBottom: "20px"
              }}>
                🧑‍🏫 Professores da Disciplina: {disciplinaSelecionada.nome}
              </div>
 
              {carregandoProfessores ? (
-               <div style={{ textAlign: "center", padding: "30px", color: "#b0b8cf" }}>A carregar...</div>
+               <div style={{ textAlign: "center", padding: "30px", color: "var(--text-muted)" }}>A carregar...</div>
              ) : (
                <>
                  {/* Lista de professores atribuídos */}
                  <div style={{ marginBottom: "20px" }}>
-                 <div style={{ fontSize: "12px", color: "#d0d7e8", marginBottom: "8px" }}>✅ Professor Responsável:</div>
+                 <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "8px" }}>✅ Professor Responsável:</div>
                    {professoresDisciplina.length === 0 ? (
-                     <div style={{ color: "#b0b8cf", fontSize: "12px", padding: "12px", background: "#13161e", borderRadius: "8px" }}>
+                     <div style={{ color: "var(--text-muted)", fontSize: "12px", padding: "12px", background: "var(--bg-input)", borderRadius: "8px" }}>
                        Nenhum professor atribuído a esta disciplina
                      </div>
                    ) : (
@@ -972,15 +972,15 @@ export default function DisciplinasDashboard() {
                            justifyContent: "space-between",
                            alignItems: "center",
                            padding: "10px 12px",
-                           background: "#13161e",
+                           background: "var(--bg-input)",
                            borderRadius: "8px"
                          }}>
                            <div>
-                             <div style={{ color: "#e8eaf0", fontSize: "13px" }}>{prof.usuario.nome_usuario}</div>
-                             <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{prof.usuario.email}</div>
+                             <div style={{ color: "var(--text-primary)", fontSize: "13px" }}>{prof.usuario.nome_usuario}</div>
+                             <div style={{ color: "var(--text-muted)", fontSize: "11px" }}>{prof.usuario.email}</div>
                            </div>
                            <button onClick={() => removerProfessor(prof.id_usuario)} style={{
-                             background: "#e03d3d",
+                             background: "var(--accent)",
                              color: "white",
                              border: "none",
                              padding: "4px 8px",
@@ -1008,10 +1008,10 @@ export default function DisciplinasDashboard() {
                      style={{
                        flex: 1,
                        padding: "8px 12px",
-                       background: "#13161e",
-                       border: "1px solid rgba(255,255,255,0.1)",
+                       background: "var(--bg-input)",
+                       border: "1px solid var(--border-color-strong)",
                        borderRadius: "8px",
-                       color: "#e8eaf0",
+                       color: "var(--text-primary)",
                        fontSize: "13px"
                      }}>
                      <option value="">Selecionar Professor...</option>
@@ -1047,7 +1047,7 @@ export default function DisciplinasDashboard() {
                width: "100%",
                marginTop: "20px",
                padding: "10px",
-               background: "#b0b8cf",
+               background: "var(--text-muted)",
                color: "white",
                border: "none",
                borderRadius: "8px",

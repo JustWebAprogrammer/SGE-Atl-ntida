@@ -45,16 +45,16 @@ function Badge({ estado }: { estado: string }) {
   const map: Record<string, { bg: string; color: string }> = {
     Proposto:    { bg: "rgba(240,165,0,0.12)",   color: "#f0a500" },
     Aprovado:    { bg: "rgba(34,197,94,0.12)",    color: "#22c55e" },
-    Reprovado:   { bg: "rgba(224,61,61,0.12)",    color: "#e03d3d" },
-    Cancelado:   { bg: "rgba(85,94,120,0.2)",     color: "#b0b8cf" },
+    Reprovado:   { bg: "var(--accent-bg)",    color: "var(--accent)" },
+    Cancelado:   { bg: "rgba(85,94,120,0.2)",     color: "var(--text-muted)" },
     Submetida:   { bg: "rgba(45,212,191,0.12)",   color: "#2dd4bf" },
     EmRevisao:   { bg: "rgba(240,165,0,0.12)",    color: "#f0a500" },
     Aprovada:    { bg: "rgba(34,197,94,0.12)",    color: "#22c55e" },
-    Rejeitada:   { bg: "rgba(224,61,61,0.12)",    color: "#e03d3d" },
+    Rejeitada:   { bg: "var(--accent-bg)",    color: "var(--accent)" },
     ParaDefender:{ bg: "rgba(155,89,182,0.12)",   color: "#9b59b6" },
     Defendida:   { bg: "rgba(34,197,94,0.12)",    color: "#22c55e" },
   }
-  const s = map[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
+  const s = map[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" }
   return (
     <span style={{
       background: s.bg, color: s.color,
@@ -65,8 +65,8 @@ function Badge({ estado }: { estado: string }) {
 }
 
 const card: React.CSSProperties = {
-  background: "#1e2230",
-  border: "1px solid rgba(255,255,255,0.07)",
+  background: "var(--bg-card)",
+  border: "1px solid var(--border-color)",
   borderRadius: "14px",
   padding: "20px",
   marginBottom: "12px",
@@ -149,16 +149,16 @@ export default function OrientadorMonografiasDashboard() {
           { label: "Pré-Projectos",     value: premonografias.length,  color: "#2dd4bf" },
           { label: "Aguardam Revisão",  value: totalProposto,           color: "#f0a500" },
           { label: "Monografias",       value: monografias.length,      color: "#9b59b6" },
-          { label: "Submetidas",        value: totalSubmetidas,         color: "#e03d3d" },
+          { label: "Submetidas",        value: totalSubmetidas,         color: "var(--accent)" },
         ].map(s => (
           <div key={s.label} style={{
-            background: "#1e2230",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-color)",
             borderRadius: "14px",
             padding: "20px",
             borderTop: `2px solid ${s.color}`
           }}>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#b0b8cf", marginBottom: "10px" }}>
+            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)", marginBottom: "10px" }}>
               {s.label}
             </div>
             <div style={{ fontSize: "24px", fontWeight: "700", color: s.color }}>{s.value}</div>
@@ -174,9 +174,9 @@ export default function OrientadorMonografiasDashboard() {
             onClick={() => setTab(t)}
             style={{
               ...btnBase,
-              background: tab === t ? "#2dd4bf" : "#1e2230",
-              color: tab === t ? "#0d0f14" : "#d0d7e8",
-              border: tab === t ? "none" : "1px solid rgba(255,255,255,0.07)",
+              background: tab === t ? "#2dd4bf" : "var(--bg-card)",
+              color: tab === t ? "var(--bg-primary)" : "var(--text-secondary)",
+              border: tab === t ? "none" : "1px solid var(--border-color)",
               padding: "8px 20px",
               fontSize: "13px",
             }}
@@ -187,14 +187,14 @@ export default function OrientadorMonografiasDashboard() {
       </div>
 
       {loading && (
-        <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>A carregar...</div>
+        <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "60px" }}>A carregar...</div>
       )}
 
       {/* ── PRÉ-PROJECTOS ── */}
       {!loading && tab === "premonografias" && (
         <>
           {premonografias.length === 0 && (
-            <div style={{ ...card, textAlign: "center", color: "#b0b8cf", padding: "40px" }}>
+            <div style={{ ...card, textAlign: "center", color: "var(--text-muted)", padding: "40px" }}>
               Nenhum pré-projecto encontrado.
             </div>
           )}
@@ -203,17 +203,17 @@ export default function OrientadorMonografiasDashboard() {
               {/* Header */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
                 <div>
-                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0", marginBottom: "4px" }}>
+                  <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "4px" }}>
                     {p.tema}
                   </div>
-                  <div style={{ fontSize: "12px", color: "#d0d7e8" }}>
+                  <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
                     {p.estudante.nome}
                     {p.estudante.numero_estudante && (
-                      <span style={{ color: "#b0b8cf" }}> · {p.estudante.numero_estudante}</span>
+                      <span style={{ color: "var(--text-muted)" }}> · {p.estudante.numero_estudante}</span>
                     )}
-                    <span style={{ color: "#b0b8cf" }}> · {p.estudante.curso}</span>
+                    <span style={{ color: "var(--text-muted)" }}> · {p.estudante.curso}</span>
                   </div>
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>
                     Submetido em {new Date(p.data_proposta).toLocaleDateString("pt-AO")}
                   </div>
                 </div>
@@ -225,9 +225,9 @@ export default function OrientadorMonografiasDashboard() {
                 <div style={{
                   background: "rgba(144,152,176,0.08)", borderRadius: "8px",
                   padding: "10px 14px", marginBottom: "12px",
-                  fontSize: "12px", color: "#d0d7e8"
+                  fontSize: "12px", color: "var(--text-secondary)"
                 }}>
-                  <strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{p.feedback}
+                  <strong style={{ color: "var(--text-muted)" }}>Feedback: </strong>{p.feedback}
                 </div>
               )}
 
@@ -249,7 +249,7 @@ export default function OrientadorMonografiasDashboard() {
       {!loading && tab === "monografias" && (
         <>
           {monografias.length === 0 && (
-            <div style={{ ...card, textAlign: "center", color: "#b0b8cf", padding: "40px" }}>
+            <div style={{ ...card, textAlign: "center", color: "var(--text-muted)", padding: "40px" }}>
               Nenhuma monografia encontrada.
             </div>
           )}
@@ -260,17 +260,17 @@ export default function OrientadorMonografiasDashboard() {
                 {/* Header */}
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0", marginBottom: "4px" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "4px" }}>
                       {m.titulo}
                     </div>
-                    <div style={{ fontSize: "12px", color: "#d0d7e8" }}>
+                    <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
                       {m.estudante.nome}
                       {m.estudante.numero_estudante && (
-                        <span style={{ color: "#b0b8cf" }}> · {m.estudante.numero_estudante}</span>
+                        <span style={{ color: "var(--text-muted)" }}> · {m.estudante.numero_estudante}</span>
                       )}
-                      <span style={{ color: "#b0b8cf" }}> · {m.estudante.curso}</span>
+                      <span style={{ color: "var(--text-muted)" }}> · {m.estudante.curso}</span>
                     </div>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>
                       Submetida em {m.data_submissao ? new Date(m.data_submissao).toLocaleDateString("pt-AO") : "—"}
                     </div>
                   </div>
@@ -279,7 +279,7 @@ export default function OrientadorMonografiasDashboard() {
                     {m.nota_final != null && (
                       <span style={{
                         fontSize: "13px", fontWeight: "700",
-                        color: m.nota_final >= 10 ? "#22c55e" : "#e03d3d"
+                        color: m.nota_final >= 10 ? "#22c55e" : "var(--accent)"
                       }}>
                         {arredondarNota(m.nota_final)} / 20
                       </span>
@@ -289,7 +289,7 @@ export default function OrientadorMonografiasDashboard() {
 
                 {/* Resumo */}
                 {m.resumo && (
-                  <div style={{ fontSize: "12px", color: "#d0d7e8", marginBottom: "10px", lineHeight: "1.5" }}>
+                  <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "10px", lineHeight: "1.5" }}>
                     {m.resumo.length > 200 ? m.resumo.slice(0, 200) + "…" : m.resumo}
                   </div>
                 )}
@@ -299,9 +299,9 @@ export default function OrientadorMonografiasDashboard() {
                   <div style={{
                     background: "rgba(144,152,176,0.08)", borderRadius: "8px",
                     padding: "10px 14px", marginBottom: "12px",
-                    fontSize: "12px", color: "#d0d7e8"
+                    fontSize: "12px", color: "var(--text-secondary)"
                   }}>
-                    <strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{m.feedback}
+                    <strong style={{ color: "var(--text-muted)" }}>Feedback: </strong>{m.feedback}
                   </div>
                 )}
 
@@ -333,11 +333,11 @@ export default function OrientadorMonografiasDashboard() {
                 {avalMonId === m.id_monografia && (
                   <div style={{
                     marginTop: "14px", padding: "16px",
-                    background: "#13161e", borderRadius: "10px",
-                    border: "1px solid rgba(255,255,255,0.07)"
+                    background: "var(--bg-input)", borderRadius: "10px",
+                    border: "1px solid var(--border-color)"
                   }}>
                     <div style={{ marginBottom: "12px" }}>
-                      <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                      <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                         Novo Estado
                       </div>
                       <div style={{ display: "flex", gap: "8px" }}>
@@ -355,7 +355,7 @@ export default function OrientadorMonografiasDashboard() {
                               style={{
                                 ...btnBase,
                                 background: estadoMon === e
-                                  ? (e === "Rejeitada" ? "#e03d3d" : e === "Aprovada" ? "#22c55e" : "#f0a500")
+                                  ? (e === "Rejeitada" ? "var(--accent)" : e === "Aprovada" ? "#22c55e" : "#f0a500")
                                   : "#2d3348",
                                 opacity: estadoMon === e ? 1 : 0.6,
                               }}
@@ -367,7 +367,7 @@ export default function OrientadorMonografiasDashboard() {
                     </div>
 
                     <div style={{ marginBottom: "12px" }}>
-                      <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                      <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                         Feedback (opcional)
                       </div>
                       <textarea
@@ -377,9 +377,9 @@ export default function OrientadorMonografiasDashboard() {
                         rows={3}
                         style={{
                           width: "100%", boxSizing: "border-box",
-                          padding: "10px 14px", background: "#1e2230",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                          borderRadius: "8px", color: "#e8eaf0",
+                          padding: "10px 14px", background: "var(--bg-card)",
+                          border: "1px solid var(--border-color-strong)",
+                          borderRadius: "8px", color: "var(--text-primary)",
                           fontSize: "13px", resize: "vertical", outline: "none"
                         }}
                       />
@@ -391,8 +391,8 @@ export default function OrientadorMonografiasDashboard() {
                         disabled={processandoMon === m.id_monografia}
                         style={{
                           ...btnBase, flex: 1,
-                          background: processandoMon === m.id_monografia ? "#b0b8cf" :
-                            estadoMon === "Rejeitada" ? "#e03d3d" :
+                          background: processandoMon === m.id_monografia ? "var(--text-muted)" :
+                            estadoMon === "Rejeitada" ? "var(--accent)" :
                             estadoMon === "Aprovada" ? "#22c55e" : "#f0a500"
                         }}
                       >

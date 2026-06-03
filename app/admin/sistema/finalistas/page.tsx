@@ -30,8 +30,8 @@ export default function FinalistasPage() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        background: '#0d0f14',
-        color: '#d0d7e8'
+        background: 'var(--bg-primary)',
+        color: 'var(--text-secondary)'
       }}>
         A carregar...
       </div>

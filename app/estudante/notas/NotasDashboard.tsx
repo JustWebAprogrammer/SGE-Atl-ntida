@@ -51,17 +51,17 @@ function calcNotaParcialDisplay(nota: NotaItem): string {
 }
 
 const ESTADO_CORES: Record<string, { bg: string; fg: string }> = {
-  "Em Curso":      { bg: "rgba(85,94,120,0.2)", fg: "#b0b8cf" },
+  "Em Curso":      { bg: "rgba(85,94,120,0.2)", fg: "var(--text-muted)" },
   "Exame":         { bg: "rgba(240,165,0,0.15)",  fg: "#f0a500" },
   "Dispensa":      { bg: "rgba(45,212,191,0.12)", fg: "#2dd4bf" },
   "Recurso":       { bg: "rgba(245,158,11,0.15)", fg: "#f59e0b" },
   "Exame Especial":{ bg: "rgba(139,92,246,0.15)", fg: "#8b5cf6" },
   "Aprovado":      { bg: "rgba(34,197,94,0.12)",  fg: "#22c55e" },
-  "Reprovado":     { bg: "rgba(224,61,61,0.12)",  fg: "#e03d3d" },
+  "Reprovado":     { bg: "var(--accent-bg)",  fg: "var(--accent)" },
 }
 
 function EstadoBadge({ estado }: { estado: string }) {
-  const cor = ESTADO_CORES[estado] ?? { bg: "rgba(85,94,120,0.2)", fg: "#b0b8cf" }
+  const cor = ESTADO_CORES[estado] ?? { bg: "rgba(85,94,120,0.2)", fg: "var(--text-muted)" }
   return (
     <span style={{
       background: cor.bg,
@@ -89,12 +89,12 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
 
   const fases = [
     { label: "Exame",    val: nota.exame,         cor: "#f0a500", chave: "exame"    },
-    { label: "Recurso",  val: nota.recurso,        cor: "#e03d3d", chave: "recurso"  },
+    { label: "Recurso",  val: nota.recurso,        cor: "var(--accent)", chave: "recurso"  },
     { label: "Especial", val: nota.exame_especial, cor: "#9b59b6", chave: "especial" },
   ].filter(f => f.val !== null)
 
   if (camposAC.length === 0 && fases.length === 0) return (
-    <div style={{ color: "#b0b8cf", fontSize: "12px", fontStyle: "italic" }}>
+    <div style={{ color: "var(--text-muted)", fontSize: "12px", fontStyle: "italic" }}>
       Sem componentes lançados ainda.
     </div>
   )
@@ -106,21 +106,21 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
       {camposAC.length > 0 && (
         <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <div style={{
-            fontSize: "10px", color: "#b0b8cf",
+            fontSize: "10px", color: "var(--text-muted)",
             textTransform: "uppercase", letterSpacing: "0.5px"
           }}>Avaliação Contínua</div>
           <div style={{ display: "flex", gap: "6px" }}>
             {camposAC.map(c => (
               <div key={c.label} style={{
-                background: "#0d0f14",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "var(--bg-primary)",
+                border: "1px solid var(--border-color)",
                 borderRadius: "8px", padding: "6px 10px",
                 textAlign: "center", minWidth: "48px",
               }}>
-                <div style={{ fontSize: "9px", color: "#b0b8cf", marginBottom: "3px", textTransform: "uppercase" }}>
+                <div style={{ fontSize: "9px", color: "var(--text-muted)", marginBottom: "3px", textTransform: "uppercase" }}>
                   {c.label}
                 </div>
-                <div style={{ fontSize: "14px", fontWeight: "700", color: "#e8eaf0" }}>
+                <div style={{ fontSize: "14px", fontWeight: "700", color: "var(--text-primary)" }}>
                   {arredondarNota(c.val)}
                 </div>
               </div>
@@ -132,7 +132,7 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
       {/* Separador vertical */}
       {camposAC.length > 0 && fases.length > 0 && (
         <div style={{
-          width: "1px", background: "rgba(255,255,255,0.07)",
+          width: "1px", background: "var(--border-color)",
           alignSelf: "stretch", marginTop: "18px",
         }} />
       )}
@@ -141,7 +141,7 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
       {fases.length > 0 && (
         <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <div style={{
-            fontSize: "10px", color: "#b0b8cf",
+            fontSize: "10px", color: "var(--text-muted)",
             textTransform: "uppercase", letterSpacing: "0.5px"
           }}>
             {fases.length > 1 ? "Cadeia de Exames" : fases[0].label}
@@ -153,10 +153,10 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
               return (
                 <div key={f.label} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                   {i > 0 && (
-                    <div style={{ color: "#b0b8cf", fontSize: "11px" }}>→</div>
+                    <div style={{ color: "var(--text-muted)", fontSize: "11px" }}>→</div>
                   )}
                   <div style={{
-                    background: "#0d0f14",
+                    background: "var(--bg-primary)",
                     border: `1px solid ${isDecisivo ? f.cor : "rgba(224,61,61,0.2)"}`,
                     borderRadius: "8px", padding: "6px 12px",
                     textAlign: "center", minWidth: "64px",
@@ -164,20 +164,20 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
                   }}>
                     <div style={{
                       fontSize: "9px", marginBottom: "3px", textTransform: "uppercase",
-                      color: isDecisivo ? f.cor : "#b0b8cf",
+                      color: isDecisivo ? f.cor : "var(--text-muted)",
                     }}>
                       {f.label}
                     </div>
                     <div style={{
                       fontSize: "14px", fontWeight: "700",
-                      color: isDecisivo ? (nota.aprovado ? "#22c55e" : "#e03d3d") : "#e03d3d",
+                      color: isDecisivo ? (nota.aprovado ? "#22c55e" : "var(--accent)") : "var(--accent)",
                     }}>
                       {arredondarNota(f.val)}
                     </div>
                     <div style={{
                       fontSize: "9px", marginTop: "2px",
                       textTransform: "uppercase", letterSpacing: "0.3px",
-                      color: isDecisivo ? (nota.aprovado ? "#22c55e" : "#e03d3d") : "#e03d3d",
+                      color: isDecisivo ? (nota.aprovado ? "#22c55e" : "var(--accent)") : "var(--accent)",
                     }}>
                       {isDecisivo ? (nota.aprovado ? "aprovado" : "reprovado") : "reprovado"}
                     </div>
@@ -187,7 +187,7 @@ function ComponentesAC({ nota }: { nota: NotaItem }) {
             })}
           </div>
           {(nota.avaliacao_atual === "recurso" || nota.avaliacao_atual === "especial") && (
-            <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "2px" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "2px" }}>
               Nota seca — máx. 12 · não combina com AC
             </div>
           )}
@@ -218,25 +218,25 @@ export default function NotasDashboard() {
       {/* Média geral */}
       {data && (
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px", padding: "20px 24px",
           marginBottom: "24px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}>
           <div>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#b0b8cf", letterSpacing: "0.5px" }}>
+            <div style={{ fontSize: "11px", textTransform: "uppercase", color: "var(--text-muted)", letterSpacing: "0.5px" }}>
               Média Geral
             </div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8", marginTop: "4px" }}>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)", marginTop: "4px" }}>
               Média das médias por ano · dispensadas contam com nota AC
             </div>
           </div>
             <div style={{
               fontSize: "32px", fontWeight: "800",
               color: data.mediaGeral !== null
-                ? (data.mediaGeral >= 10 ? "#22c55e" : "#e03d3d")
-                : "#b0b8cf"
+                ? (data.mediaGeral >= 10 ? "#22c55e" : "var(--accent)")
+                : "var(--text-muted)"
             }}>
               {data.mediaGeral !== null ? `${arredondarNota(data.mediaGeral)} / 20` : "—"}
             </div>
@@ -253,10 +253,10 @@ export default function NotasDashboard() {
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}>
           <div>
-            <div style={{ fontSize: "14px", fontWeight: "600", color: "#e03d3d", marginBottom: "4px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--accent)", marginBottom: "4px" }}>
               Notas do ano corrente bloqueadas
             </div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
               Regulariza a propina para ver as notas do ano actual.
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function NotasDashboard() {
             onClick={() => window.location.href = "/estudante/pagamentos"}
             style={{
               padding: "8px 18px",
-              background: "#e03d3d", color: "white",
+              background: "var(--accent)", color: "white",
               border: "none", borderRadius: "8px",
               fontSize: "13px", fontWeight: "600", cursor: "pointer"
             }}
@@ -275,7 +275,7 @@ export default function NotasDashboard() {
       )}
 
       {loading && (
-        <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>
+        <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "60px" }}>
           A carregar notas...
         </div>
       )}
@@ -289,21 +289,21 @@ export default function NotasDashboard() {
             justifyContent: "space-between", marginBottom: "12px",
           }}>
             <div style={{
-              fontSize: "13px", fontWeight: "700", color: "#e03d3d",
+              fontSize: "13px", fontWeight: "700", color: "var(--accent)",
               textTransform: "uppercase", letterSpacing: "0.8px",
             }}>
               {ano}º Ano
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span style={{ fontSize: "11px", color: "#b0b8cf", display: "flex", alignItems: "center", gap: "4px" }}>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "4px" }}>
                   <span style={{
                     display: "inline-block", width: "8px", height: "8px",
                     borderRadius: "50%", background: "#2dd4bf"
                   }} />
                   Dispensado conta com nota AC
                 </span>
-                <span style={{ fontSize: "11px", color: "#b0b8cf", display: "flex", alignItems: "center", gap: "4px" }}>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "4px" }}>
                   <span style={{
                     display: "inline-block", width: "8px", height: "8px",
                     borderRadius: "50%", background: "#f0a500"
@@ -311,13 +311,13 @@ export default function NotasDashboard() {
                   Em curso conta com nota parcial
                 </span>
               </div>
-              <div style={{ fontSize: "12px", color: "#d0d7e8" }}>
+              <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
                 Média:{" "}
                 <span style={{
                   fontWeight: "700",
                   color: data!.medias[ano] !== null
-                    ? (data!.medias[ano]! >= 10 ? "#22c55e" : "#e03d3d")
-                    : "#b0b8cf"
+                    ? (data!.medias[ano]! >= 10 ? "#22c55e" : "var(--accent)")
+                    : "var(--text-muted)"
                 }}>
                   {data!.medias[ano] !== null ? `${arredondarNota(data!.medias[ano])} / 20` : "—"}
                 </span>
@@ -327,14 +327,14 @@ export default function NotasDashboard() {
 
           {(["S1", "S2"] as const).filter(s => data!.notas[ano][s]).map(sem => (
             <div key={sem} style={{
-              background: "#1e2230",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-color)",
               borderRadius: "14px", overflow: "hidden", marginBottom: "12px",
             }}>
               <div style={{
                 padding: "10px 20px",
                 borderBottom: "1px solid rgba(255,255,255,0.05)",
-                fontSize: "11px", color: "#d0d7e8",
+                fontSize: "11px", color: "var(--text-secondary)",
                 textTransform: "uppercase", letterSpacing: "0.5px",
                 background: "rgba(255,255,255,0.02)",
               }}>
@@ -358,10 +358,10 @@ export default function NotasDashboard() {
                     onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                   >
                     <div>
-                      <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>
+                      <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "500" }}>
                         {nota.nome}
                       </div>
-                      <div style={{ color: "#b0b8cf", fontSize: "11px", marginTop: "2px" }}>
+                      <div style={{ color: "var(--text-muted)", fontSize: "11px", marginTop: "2px" }}>
                         {nota.codigo} · {nota.creditos} créditos
                       </div>
                       <div style={{ display: "flex", gap: "8px", marginTop: "4px", flexWrap: "wrap" }}>
@@ -375,7 +375,7 @@ export default function NotasDashboard() {
                           </span>
                         ) : (
                           <span style={{
-                            background: "rgba(85,94,120,0.15)", color: "#b0b8cf",
+                            background: "rgba(85,94,120,0.15)", color: "var(--text-muted)",
                             padding: "1px 6px", borderRadius: "4px", fontSize: "10px"
                           }}>
                             Sem dispensa
@@ -389,9 +389,9 @@ export default function NotasDashboard() {
                     <div style={{
                       fontSize: "16px", fontWeight: "800",
                       color: nota.nota_final !== null
-                        ? (nota.aprovado ? "#22c55e" : "#e03d3d")
+                        ? (nota.aprovado ? "#22c55e" : "var(--accent)")
                         : nota.avaliacao_atual === "em_curso" ? "#f0a500"
-                        : "#b0b8cf",
+                        : "var(--text-muted)",
                       minWidth: "52px", textAlign: "right",
                     }}>
                       {nota.nota_final !== null
@@ -402,7 +402,7 @@ export default function NotasDashboard() {
                     </div>
 
                     <div style={{
-                      color: "#b0b8cf", fontSize: "12px",
+                      color: "var(--text-muted)", fontSize: "12px",
                       transition: "transform 0.2s",
                       transform: expandido === nota.id ? "rotate(180deg)" : "rotate(0deg)",
                     }}>▼</div>
@@ -414,7 +414,7 @@ export default function NotasDashboard() {
                       background: "rgba(13,15,20,0.5)",
                     }}>
                       <div style={{
-                        fontSize: "11px", color: "#b0b8cf",
+                        fontSize: "11px", color: "var(--text-muted)",
                         textTransform: "uppercase", letterSpacing: "0.5px",
                         marginBottom: "12px",
                       }}>
@@ -432,10 +432,10 @@ export default function NotasDashboard() {
 
       {!loading && anos.length === 0 && (
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px", padding: "60px",
-          textAlign: "center", color: "#b0b8cf",
+          textAlign: "center", color: "var(--text-muted)",
         }}>
           Nenhuma nota lançada ainda.
         </div>

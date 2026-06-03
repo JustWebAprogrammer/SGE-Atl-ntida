@@ -40,29 +40,29 @@
 
 /* ── LIGHT MODE ── */
 html.light {
-  --bg-primary: #f5f6f8;
+  --bg-primary: #f0f2f5;
   --bg-secondary: #ffffff;
   --bg-card: #ffffff;
-  --bg-card-hover: #f0f1f3;
-  --bg-input: #f0f1f3;
-  --text-primary: #1a1a2e;
-  --text-secondary: #374151;
+  --bg-card-hover: #f8f9fa;
+  --bg-input: #ebedf0;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
   --text-muted: #6b7280;
   --text-faint: #9ca3af;
-  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.08);
   --border-color-strong: rgba(0, 0, 0, 0.15);
   --scrollbar-track: #e5e7eb;
   --scrollbar-thumb: #c4c8d0;
   --scrollbar-thumb-hover: #a0a5b0;
   --accent: #dc2626;
-  --accent-bg: rgba(220, 38, 38, 0.1);
-  --accent-bg-subtle: rgba(220, 38, 38, 0.05);
+  --accent-bg: rgba(220, 38, 38, 0.08);
+  --accent-bg-subtle: rgba(220, 38, 38, 0.04);
   --success: #16a34a;
   --warning: #d97706;
   --warning-bg: rgba(217, 119, 6, 0.1);
   --warning-border: rgba(217, 119, 6, 0.25);
   --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  --shadow-dropdown: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --shadow-dropdown: 0 4px 24px rgba(0, 0, 0, 0.1);
   --overlay: rgba(0, 0, 0, 0.3);
   --overlay-modal: rgba(0, 0, 0, 0.4);
   --background: var(--bg-primary);

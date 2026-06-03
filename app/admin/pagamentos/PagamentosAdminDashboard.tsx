@@ -58,7 +58,7 @@ export default function PagamentosAdminDashboard() {
       subtitle="Ver todos os pagamentos de propinas do sistema"
     >
       <div style={{ marginBottom: '20px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-        <span style={{ color: '#d0d7e8' }}>Filtrar estado:</span>
+        <span style={{ color: 'var(--text-secondary)' }}>Filtrar estado:</span>
         {['todos', 'Pago', 'Pendente', 'Atrasado'].map(estado => (
           <button
             key={estado}
@@ -67,7 +67,7 @@ export default function PagamentosAdminDashboard() {
               padding: '8px 16px',
               borderRadius: '8px',
               border: 'none',
-              background: filtroEstado === estado ? '#e03d3d' : 'rgba(255,255,255,0.05)',
+              background: filtroEstado === estado ? 'var(--accent)' : 'rgba(255,255,255,0.05)',
               color: 'white',
               cursor: 'pointer'
             }}
@@ -78,30 +78,30 @@ export default function PagamentosAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar pagamentos...
         </div>
       ) : (
-        <div style={{ background: '#1e2230', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', borderRadius: '12px', overflow: 'hidden' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estudante</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Referência</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Mês/Ano</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Valor</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Vencimento</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estado</th>
+              <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estudante</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Referência</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Mês/Ano</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Valor</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Vencimento</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Estado</th>
               </tr>
             </thead>
             <tbody>
               {pagamentosFiltrados.map((pagamento) => (
                 <tr key={pagamento.id_pagamento} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <td style={{ padding: '14px', color: '#e8eaf0' }}>{pagamento.estudante.nome_completo}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8', fontFamily: 'monospace' }}>{pagamento.referencia}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{pagamento.mes}/{pagamento.ano}</td>
-                  <td style={{ padding: '14px', color: '#e8eaf0' }}>{Number(pagamento.valor_total).toLocaleString('pt-AO')} Kz</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{formatarData(pagamento.data_vencimento)}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)' }}>{pagamento.estudante.nome_completo}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{pagamento.referencia}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{pagamento.mes}/{pagamento.ano}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)' }}>{Number(pagamento.valor_total).toLocaleString('pt-AO')} Kz</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{formatarData(pagamento.data_vencimento)}</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '4px 10px',
@@ -110,10 +110,10 @@ export default function PagamentosAdminDashboard() {
                       fontWeight: '600',
                       background: 
                         pagamento.estado === 'Pago' ? '#22c55e20' :
-                        pagamento.estado === 'Pendente' ? '#f0a50020' : '#e03d3d20',
+                        pagamento.estado === 'Pendente' ? '#f0a50020' : 'var(--accent)20',
                       color: 
                         pagamento.estado === 'Pago' ? '#22c55e' :
-                        pagamento.estado === 'Pendente' ? '#f0a500' : '#e03d3d'
+                        pagamento.estado === 'Pendente' ? '#f0a500' : 'var(--accent)'
                     }}>
                       {pagamento.estado}
                     </span>

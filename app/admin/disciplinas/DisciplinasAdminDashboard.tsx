@@ -148,7 +148,7 @@ export default function DisciplinasAdminDashboard() {
         <button 
           onClick={() => setShowModal(true)}
           style={{
-            background: '#e03d3d',
+            background: 'var(--accent)',
             color: 'white',
             border: 'none',
             padding: '12px 20px',
@@ -163,30 +163,30 @@ export default function DisciplinasAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar disciplinas...
         </div>
       ) : (
-        <div style={{ background: '#1e2230', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', borderRadius: '12px', overflow: 'hidden' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Código</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ano</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Semestre</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Créditos</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Dispensa</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
+              <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Código</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ano</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Semestre</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Créditos</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Dispensa</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {disciplinas.map((disciplina) => (
                 <tr key={disciplina.id_disciplina} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <td style={{ padding: '14px', color: '#d0d7e8', fontFamily: 'monospace' }}>{disciplina.codigo_disciplina}</td>
-                  <td style={{ padding: '14px', color: '#e8eaf0' }}>{disciplina.nome_disciplina}</td>
-                  <td style={{ padding: '14px', color: '#e8eaf0' }}>{disciplina.ano_curricular}º</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>{disciplina.codigo_disciplina}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)' }}>{disciplina.nome_disciplina}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)' }}>{disciplina.ano_curricular}º</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '3px 8px',
@@ -199,16 +199,16 @@ export default function DisciplinasAdminDashboard() {
                       {disciplina.semestre === 'S1' ? 'S1' : 'S2'}
                     </span>
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{disciplina.departamento?.nome_departamento || '-'}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{disciplina.creditos} ECTS</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{disciplina.departamento?.nome_departamento || '-'}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{disciplina.creditos} ECTS</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '4px 10px',
                       borderRadius: '12px',
                       fontSize: '11px',
                       fontWeight: '600',
-                      background: disciplina.tem_dispensa ? '#2dd4bf20' : '#e03d3d20',
-                      color: disciplina.tem_dispensa ? '#2dd4bf' : '#e03d3d'
+                      background: disciplina.tem_dispensa ? '#2dd4bf20' : 'var(--accent)20',
+                      color: disciplina.tem_dispensa ? '#2dd4bf' : 'var(--accent)'
                     }}>
                       {disciplina.tem_dispensa ? `✅ ${disciplina.nota_dispensa} valores` : '❌ Sem dispensa'}
                     </span>
@@ -243,18 +243,18 @@ export default function DisciplinasAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setShowModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '500px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Adicionar Nova Disciplina</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Adicionar Nova Disciplina</h3>
             
             <form onSubmit={handleSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome da Disciplina</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome da Disciplina</label>
                   <input
                     type="text"
                     value={formData.nome_disciplina}
@@ -262,8 +262,8 @@ export default function DisciplinasAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -272,7 +272,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Código</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Código</label>
                   <input
                     type="text"
                     value={formData.codigo_disciplina}
@@ -280,8 +280,8 @@ export default function DisciplinasAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -292,15 +292,15 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Ano Curricular</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Ano Curricular</label>
                   <select
                     value={formData.ano_curricular}
                     onChange={(e) => setFormData({...formData, ano_curricular: Number(e.target.value)})}
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -312,15 +312,15 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Semestre</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Semestre</label>
                   <select
                     value={formData.semestre}
                     onChange={(e) => setFormData({...formData, semestre: e.target.value})}
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -331,7 +331,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Créditos</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Créditos</label>
                   <input
                     type="number"
                     min="1"
@@ -341,8 +341,8 @@ export default function DisciplinasAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -353,15 +353,15 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Departamento</label>
                   <select
                     value={formData.id_departamento}
                     onChange={(e) => setFormData({...formData, id_departamento: Number(e.target.value)})}
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -374,7 +374,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>&nbsp;</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>&nbsp;</label>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center', paddingTop: '4px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
                       <input
@@ -383,7 +383,7 @@ export default function DisciplinasAdminDashboard() {
                         onChange={(e) => setFormData({...formData, tem_dispensa: e.target.checked})}
                         style={{ width: '18px', height: '18px' }}
                       />
-                      <span style={{ color: '#e8eaf0' }}>Permite dispensa</span>
+                      <span style={{ color: 'var(--text-primary)' }}>Permite dispensa</span>
                     </label>
 
                     {formData.tem_dispensa && (
@@ -397,8 +397,8 @@ export default function DisciplinasAdminDashboard() {
                           style={{
                             width: '70px',
                             padding: '8px',
-                            background: '#13161e',
-                            border: '1px solid rgba(255,255,255,0.07)',
+                            background: 'var(--bg-input)',
+                            border: '1px solid var(--border-color)',
                             borderRadius: '8px',
                             color: 'white'
                           }}
@@ -416,9 +416,9 @@ export default function DisciplinasAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -428,7 +428,7 @@ export default function DisciplinasAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',
@@ -459,18 +459,18 @@ export default function DisciplinasAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setEditModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '500px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Editar Disciplina</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Editar Disciplina</h3>
             
             <form onSubmit={handleEditSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome da Disciplina</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome da Disciplina</label>
                   <input
                     type="text"
                     value={editFormData.nome_disciplina}
@@ -478,8 +478,8 @@ export default function DisciplinasAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -488,7 +488,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Código</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Código</label>
                   <input
                     type="text"
                     value={editFormData.codigo_disciplina}
@@ -496,8 +496,8 @@ export default function DisciplinasAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -508,15 +508,15 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Ano Curricular</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Ano Curricular</label>
                   <select
                     value={editFormData.ano_curricular}
                     onChange={(e) => setEditFormData({...editFormData, ano_curricular: Number(e.target.value)})}
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -528,15 +528,15 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Semestre</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Semestre</label>
                   <select
                     value={editFormData.semestre}
                     onChange={(e) => setEditFormData({...editFormData, semestre: e.target.value})}
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -547,7 +547,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Créditos</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Créditos</label>
                   <input
                     type="number"
                     min="1"
@@ -557,8 +557,8 @@ export default function DisciplinasAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -569,15 +569,15 @@ export default function DisciplinasAdminDashboard() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Departamento</label>
                   <select
                     value={editFormData.id_departamento}
                     onChange={(e) => setEditFormData({...editFormData, id_departamento: Number(e.target.value)})}
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -590,7 +590,7 @@ export default function DisciplinasAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>&nbsp;</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>&nbsp;</label>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center', paddingTop: '4px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
                       <input
@@ -599,7 +599,7 @@ export default function DisciplinasAdminDashboard() {
                         onChange={(e) => setEditFormData({...editFormData, tem_dispensa: e.target.checked})}
                         style={{ width: '18px', height: '18px' }}
                       />
-                      <span style={{ color: '#e8eaf0' }}>Permite dispensa</span>
+                      <span style={{ color: 'var(--text-primary)' }}>Permite dispensa</span>
                     </label>
 
                     {editFormData.tem_dispensa && (
@@ -613,8 +613,8 @@ export default function DisciplinasAdminDashboard() {
                           style={{
                             width: '70px',
                             padding: '8px',
-                            background: '#13161e',
-                            border: '1px solid rgba(255,255,255,0.07)',
+                            background: 'var(--bg-input)',
+                            border: '1px solid var(--border-color)',
                             borderRadius: '8px',
                             color: 'white'
                           }}
@@ -632,9 +632,9 @@ export default function DisciplinasAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >

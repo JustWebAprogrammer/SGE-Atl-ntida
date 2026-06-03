@@ -205,7 +205,7 @@ export default function DepartamentosAdminDashboard() {
         <button 
           onClick={() => setShowModal(true)}
           style={{
-            background: '#e03d3d',
+            background: 'var(--accent)',
             color: 'white',
             border: 'none',
             padding: '12px 20px',
@@ -220,31 +220,31 @@ export default function DepartamentosAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar departamentos...
         </div>
       ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '16px', alignItems: 'start' }}>
           {departamentos.map((departamento) => (
             <div key={departamento.id_departamento} style={{
-              background: '#1e2230',
+              background: 'var(--bg-card)',
               borderRadius: '12px',
               padding: '20px',
               borderTop: '3px solid #9b59b6'
             }}>
-              <h3 style={{ margin: '0 0 10px 0', color: '#e8eaf0', fontSize: '18px' }}>{departamento.nome_departamento}</h3>
-              <div style={{ color: '#d0d7e8', fontSize: '13px', marginBottom: '16px', minHeight: '38px' }}>
+              <h3 style={{ margin: '0 0 10px 0', color: 'var(--text-primary)', fontSize: '18px' }}>{departamento.nome_departamento}</h3>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '16px', minHeight: '38px' }}>
                 {departamento.descricao || "Sem descrição"}
               </div>
               
               <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '16px' }}>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: '24px', fontWeight: '700', color: '#2dd4bf' }}>{departamento._count.cursos}</div>
-                  <div style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase' }}>Cursos</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Cursos</div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: '24px', fontWeight: '700', color: '#f0a500' }}>{departamento._count.estudantes}</div>
-                  <div style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase' }}>Estudantes</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Estudantes</div>
                 </div>
               </div>
 
@@ -277,7 +277,7 @@ export default function DepartamentosAdminDashboard() {
                     flex: 1,
                     padding: '10px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
                     color: '#f0a500',
                     cursor: 'pointer',
@@ -291,7 +291,7 @@ export default function DepartamentosAdminDashboard() {
                     flex: 1,
                     padding: '10px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
                     color: '#ef4444',
                     cursor: 'pointer',
@@ -319,18 +319,18 @@ export default function DepartamentosAdminDashboard() {
 
               {/* Expandido - detalhes do departamento */}
               {expandedIds.includes(departamento.id_departamento) && (
-                <div style={{ marginTop: '16px', padding: '16px', background: '#13161e', borderRadius: '8px' }}>
+                <div style={{ marginTop: '16px', padding: '16px', background: 'var(--bg-input)', borderRadius: '8px' }}>
                   {loadingDetalhesIds.includes(departamento.id_departamento) ? (
-                    <div style={{ color: '#d0d7e8', textAlign: 'center' }}>A carregar...</div>
+                    <div style={{ color: 'var(--text-secondary)', textAlign: 'center' }}>A carregar...</div>
                   ) : detalhesMap[departamento.id_departamento] ? (
                     <>
                       {/* Cursos */}
                       <div style={{ marginBottom: '16px' }}>
-                        <h4 style={{ color: '#e8eaf0', margin: '0 0 10px 0', fontSize: '14px' }}>Cursos ({detalhesMap[departamento.id_departamento].cursos.length})</h4>
+                        <h4 style={{ color: 'var(--text-primary)', margin: '0 0 10px 0', fontSize: '14px' }}>Cursos ({detalhesMap[departamento.id_departamento].cursos.length})</h4>
                         {detalhesMap[departamento.id_departamento].cursos.length === 0 ? (
-                          <div style={{ color: '#d0d7e8', fontSize: '13px' }}>Sem cursos</div>
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Sem cursos</div>
                         ) : (
-                          <ul style={{ margin: 0, paddingLeft: '20px', color: '#d0d7e8', fontSize: '13px' }}>
+                          <ul style={{ margin: 0, paddingLeft: '20px', color: 'var(--text-secondary)', fontSize: '13px' }}>
                             {detalhesMap[departamento.id_departamento].cursos.map((c: { id_curso: number; nome_curso: string; _count: { estudantes: number } }) => (
                               <li key={c.id_curso} style={{ marginBottom: '4px' }}>
                                 {c.nome_curso} ({c._count.estudantes} estudantes)
@@ -342,16 +342,16 @@ export default function DepartamentosAdminDashboard() {
 
                       {/* Orientadores */}
                       <div style={{ marginBottom: '16px' }}>
-                        <h4 style={{ color: '#e8eaf0', margin: '0 0 10px 0', fontSize: '14px' }}>Orientadores ({detalhesMap[departamento.id_departamento].orientadores.length})</h4>
+                        <h4 style={{ color: 'var(--text-primary)', margin: '0 0 10px 0', fontSize: '14px' }}>Orientadores ({detalhesMap[departamento.id_departamento].orientadores.length})</h4>
                         {detalhesMap[departamento.id_departamento].orientadores.length === 0 ? (
-                          <div style={{ color: '#d0d7e8', fontSize: '13px' }}>Sem orientadores</div>
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Sem orientadores</div>
                         ) : (
-                          <ul style={{ margin: 0, paddingLeft: '20px', color: '#d0d7e8', fontSize: '13px' }}>
+                          <ul style={{ margin: 0, paddingLeft: '20px', color: 'var(--text-secondary)', fontSize: '13px' }}>
                             {detalhesMap[departamento.id_departamento].orientadores.map((o: { id_orientador: number; nome: string; especialidade: string; e_gestor: boolean }) => (
                               <li key={o.id_orientador} style={{ marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span>{o.nome} - {o.especialidade}</span>
                                 {o.e_gestor && (
-                                  <span style={{ background: '#2dd4bf', color: '#13161e', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: '600' }}>GESTOR</span>
+                                  <span style={{ background: '#2dd4bf', color: 'var(--bg-input)', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: '600' }}>GESTOR</span>
                                 )}
                               </li>
                             ))}
@@ -361,23 +361,23 @@ export default function DepartamentosAdminDashboard() {
 
                       {/* Estatísticas Monografias */}
                       <div>
-                        <h4 style={{ color: '#e8eaf0', margin: '0 0 10px 0', fontSize: '14px' }}>Monografias</h4>
+                        <h4 style={{ color: 'var(--text-primary)', margin: '0 0 10px 0', fontSize: '14px' }}>Monografias</h4>
                         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                          <div style={{ background: '#1e2230', padding: '8px 12px', borderRadius: '6px' }}>
+                          <div style={{ background: 'var(--bg-card)', padding: '8px 12px', borderRadius: '6px' }}>
                             <div style={{ fontSize: '16px', color: '#2dd4bf' }}>{detalhesMap[departamento.id_departamento].estatisticas.totalMonografias}</div>
-                            <div style={{ fontSize: '10px', color: '#b0b8cf' }}>Total</div>
+                            <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>Total</div>
                           </div>
                           {Object.entries(detalhesMap[departamento.id_departamento].estatisticas.monografias).map(([estado, qtd]: [string, number]) => (
-                            <div key={estado} style={{ background: '#1e2230', padding: '8px 12px', borderRadius: '6px' }}>
+                            <div key={estado} style={{ background: 'var(--bg-card)', padding: '8px 12px', borderRadius: '6px' }}>
                               <div style={{ fontSize: '16px', color: '#f0a500' }}>{qtd}</div>
-                              <div style={{ fontSize: '10px', color: '#b0b8cf' }}>{estado}</div>
+                              <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{estado}</div>
                             </div>
                           ))}
                         </div>
                       </div>
                     </>
                   ) : (
-                    <div style={{ color: '#d0d7e8' }}>Erro ao carregar detalhes</div>
+                    <div style={{ color: 'var(--text-secondary)' }}>Erro ao carregar detalhes</div>
                   )}
                 </div>
               )}
@@ -401,17 +401,17 @@ export default function DepartamentosAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setShowModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '400px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Adicionar Novo Departamento</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Adicionar Novo Departamento</h3>
             
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome do Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome do Departamento</label>
                 <input
                   type="text"
                   value={formData.nome_departamento}
@@ -419,8 +419,8 @@ export default function DepartamentosAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -429,15 +429,15 @@ export default function DepartamentosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Descrição</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Descrição</label>
                 <textarea
                   value={formData.descricao}
                   onChange={(e) => setFormData({...formData, descricao: e.target.value})}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white',
                     minHeight: '80px',
@@ -453,9 +453,9 @@ export default function DepartamentosAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -465,7 +465,7 @@ export default function DepartamentosAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',
@@ -496,17 +496,17 @@ export default function DepartamentosAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setEditingDept(null)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '400px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Editar Departamento</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Editar Departamento</h3>
             
             <form onSubmit={handleEditSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome do Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome do Departamento</label>
                 <input
                   type="text"
                   value={editFormData.nome_departamento}
@@ -514,8 +514,8 @@ export default function DepartamentosAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -524,15 +524,15 @@ export default function DepartamentosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Descrição</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Descrição</label>
                 <textarea
                   value={editFormData.descricao}
                   onChange={(e) => setEditFormData({...editFormData, descricao: e.target.value})}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white',
                     minHeight: '80px',
@@ -543,9 +543,9 @@ export default function DepartamentosAdminDashboard() {
 
               {/* Dropdown Gestor */}
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Gestor do Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Gestor do Departamento</label>
                 {loadingOrientadores ? (
-                  <div style={{ color: '#d0d7e8', fontSize: '13px' }}>A carregar orientadores...</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>A carregar orientadores...</div>
                 ) : (
                   <select
                     value={editFormData.id_gestor}
@@ -553,8 +553,8 @@ export default function DepartamentosAdminDashboard() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
                       color: 'white'
                     }}
@@ -576,9 +576,9 @@ export default function DepartamentosAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -619,14 +619,14 @@ export default function DepartamentosAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setDeletingId(null)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '400px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
             <h3 style={{ margin: '0 0 16px 0', color: '#ef4444', fontSize: '20px' }}>⚠️ Confirmar Eliminação</h3>
-            <p style={{ color: '#d0d7e8', marginBottom: '20px', lineHeight: '1.5' }}>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', lineHeight: '1.5' }}>
               Tem a certeza que deseja eliminar este departamento? Esta ação não pode ser desfeita.
             </p>
             
@@ -636,9 +636,9 @@ export default function DepartamentosAdminDashboard() {
                 style={{
                   padding: '12px 20px',
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: '1px solid var(--border-color-strong)',
                   borderRadius: '8px',
-                  color: '#d0d7e8',
+                  color: 'var(--text-secondary)',
                   cursor: 'pointer'
                 }}
               >

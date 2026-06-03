@@ -139,10 +139,10 @@ export default function DisciplinasPage() {
   function getBadgeColor(avaliacao: string) {
     switch (avaliacao) {
       case "especial": return "#9b59b6"
-      case "recurso": return "#e03d3d"
+      case "recurso": return "var(--accent)"
       case "exame": return "#f0a500"
       case "ac": return "#22c55e"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -164,8 +164,8 @@ export default function DisciplinasPage() {
     >
       {/* Disciplinas */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px",
         marginBottom: "20px"
@@ -174,13 +174,13 @@ export default function DisciplinasPage() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "16px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Minhas Disciplinas</div>
 
         {loadingDisciplinas ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
         ) : disciplinas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
             Nenhuma disciplina atribuída
           </div>
         ) : (
@@ -190,7 +190,7 @@ export default function DisciplinasPage() {
                 key={d.id} 
                 onClick={() => selecionarDisciplina(d)}
                 style={{
-                  background: disciplinaSelecionada?.id === d.id ? "rgba(45,212,191,0.1)" : "#13161e",
+                  background: disciplinaSelecionada?.id === d.id ? "rgba(45,212,191,0.1)" : "var(--bg-input)",
                   borderRadius: "10px",
                   padding: "14px 18px",
                   display: "flex",
@@ -202,8 +202,8 @@ export default function DisciplinasPage() {
                 }}
               >
                 <div>
-                  <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
-                  <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
+                  <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
+                  <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "2px" }}>
                     {d.codigo} · {d.creditos} créditos · {(() => {
                       const pares = d.cursos.map(c => ({ ano: c.ano_curricular, sem: c.semestre }))
                       const paresUnicos = pares.filter((p, i, self) =>
@@ -224,7 +224,7 @@ export default function DisciplinasPage() {
                     {d.total_estudantes} estudantes
                   </div>
                   <div style={{
-                    color: "#b0b8cf",
+                    color: "var(--text-muted)",
                     fontSize: "12px",
                     transition: "transform 0.2s",
                     transform: disciplinaSelecionada?.id === d.id ? "rotate(180deg)" : "rotate(0deg)"
@@ -239,8 +239,8 @@ export default function DisciplinasPage() {
       {/* Estudantes da disciplina selecionada */}
       {disciplinaSelecionada && (
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px",
           padding: "20px"
         }}>
@@ -248,43 +248,43 @@ export default function DisciplinasPage() {
             fontSize: "14px",
             fontWeight: "600",
             marginBottom: "16px",
-            color: "#e8eaf0"
+            color: "var(--text-primary)"
           }}>
             Estudantes — {disciplinaSelecionada.nome}
           </div>
 
           {loadingEstudantes ? (
-            <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar estudantes...</div>
+            <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar estudantes...</div>
           ) : estudantes.length === 0 ? (
-            <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+            <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
               Nenhum estudante encontrado
             </div>
           ) : (
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
-                  <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                    <th style={{ textAlign: "left", padding: "10px", color: "#b0b8cf", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>AC1</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>AC2</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>AC3</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>TTP</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>PP1</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>PP2</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Exame</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Recurso</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Especial</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Final</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Estado</th>
-                    <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Ações</th>
+                  <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                    <th style={{ textAlign: "left", padding: "10px", color: "var(--text-muted)", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>AC1</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>AC2</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>AC3</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>TTP</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>PP1</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>PP2</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Exame</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Recurso</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Especial</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Final</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Estado</th>
+                    <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {estudantes.map(e => (
                     <tr key={e.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                       <td style={{ padding: "10px" }}>
-                        <div style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>{e.nome}</div>
-                        <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{e.numero_estudante}</div>
+                        <div style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>{e.nome}</div>
+                        <div style={{ color: "var(--text-muted)", fontSize: "11px" }}>{e.numero_estudante}</div>
                       </td>
                       {["ac1", "ac2", "ac3", "ttp", "pp1", "pp2", "exame", "recurso", "exame_especial"].map((campo) => (
                         <td key={campo} style={{ textAlign: "center", padding: "10px" }}>
@@ -304,14 +304,14 @@ export default function DisciplinasPage() {
                                 padding: "4px",
                                 borderRadius: "4px",
                                 border: "1px solid rgba(255,255,255,0.2)",
-                                background: "#13161e",
-                                color: "#e8eaf0",
+                                background: "var(--bg-input)",
+                                color: "var(--text-primary)",
                                 fontSize: "12px",
                                 textAlign: "center"
                               }}
                             />
                           ) : (
-                            <span style={{ color: "#e8eaf0", fontSize: "12px" }}>
+                            <span style={{ color: "var(--text-primary)", fontSize: "12px" }}>
                               {e[campo as keyof Estudante] != null ? arredondarNota(Number(e[campo as keyof Estudante])) : "—"}
                             </span>
                           )}
@@ -321,8 +321,8 @@ export default function DisciplinasPage() {
                         <span style={{
                           fontWeight: "700",
                           color: e.nota_final != null 
-                            ? (e.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                            : "#b0b8cf"
+                            ? (e.nota_final >= 10 ? "#22c55e" : "var(--accent)")
+                            : "var(--text-muted)"
                         }}>
                             {e.nota_final != null ? arredondarNota(e.nota_final) : "—"}
                         </span>
@@ -361,7 +361,7 @@ export default function DisciplinasPage() {
                               onClick={cancelarEdicao}
                               style={{
                                 padding: "4px 8px",
-                                background: "#b0b8cf",
+                                background: "var(--text-muted)",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -378,7 +378,7 @@ export default function DisciplinasPage() {
                             style={{
                               padding: "4px 8px",
                               background: "#2dd4bf",
-                              color: "#13161e",
+                              color: "var(--bg-input)",
                               border: "none",
                               borderRadius: "4px",
                               fontSize: "11px",

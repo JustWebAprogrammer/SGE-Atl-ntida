@@ -72,11 +72,11 @@ function calcularMaxPosicoes(turno: string, duracao: number, intervalo: number) 
 }
 
 const estiloSelect: React.CSSProperties = {
-  background: "#13161e",
-  border: "1px solid rgba(255,255,255,0.1)",
+  background: "var(--bg-input)",
+  border: "1px solid var(--border-color-strong)",
   borderRadius: "8px",
   padding: "8px 12px",
-  color: "#e8eaf0",
+  color: "var(--text-primary)",
   fontSize: "13px",
   minWidth: "120px"
 }
@@ -476,9 +476,9 @@ export default function PlanoProvasPage() {
       case "PP1": return "#22c55e"
       case "PP2": return "#3b82f6"
       case "Exame": return "#f0a500"
-      case "Recurso": return "#e03d3d"
+      case "Recurso": return "var(--accent)"
       case "Exame_Especial": return "#a855f7"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -509,8 +509,8 @@ export default function PlanoProvasPage() {
   if (loading) {
     return (
       <DashboardLayout navItems={gestorNavItems} title="Horário de Prova" subtitle="Gerir calendário de avaliações por curso">
-        <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "40px", textAlign: "center" }}>
-          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "40px", textAlign: "center" }}>
+          <div style={{ color: "var(--text-muted)" }}>A carregar...</div>
         </div>
       </DashboardLayout>
     )
@@ -519,11 +519,11 @@ export default function PlanoProvasPage() {
   return (
     <DashboardLayout navItems={gestorNavItems} title="Horário de Prova" subtitle="Gerir calendário de avaliações por curso">
       {/* Selecionar Turma */}
-      <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Selecionar Turma</div>
+      <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Selecionar Turma</div>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Curso</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Curso</div>
             <select value={cursoId} onChange={e => setCursoId(e.target.value)} style={estiloSelect}>
               <option value="">Selecionar...</option>
               {cursos.map(c => (
@@ -534,30 +534,30 @@ export default function PlanoProvasPage() {
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Ano</div>
             <select value={ano} onChange={e => setAno(e.target.value)} style={estiloSelect}>
               {anosDisponiveis.map(a => <option key={a} value={a}>{a}º</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Semestre</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Semestre</div>
             <select value={semestre} onChange={e => setSemestre(e.target.value)} style={estiloSelect}>
               <option value="S1">S1</option>
               <option value="S2">S2</option>
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano Lectivo</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Ano Lectivo</div>
             <span style={{ ...estiloSelect, minWidth: "100px", display: "inline-flex", alignItems: "center", opacity: 0.8 }}>{anoLectivo || "—"}</span>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurno} onChange={e => { setFiltroTurno(e.target.value); setPosicao("1") }} style={estiloSelect}>
               {turnosDoCurso.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Tipo de Prova</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Tipo de Prova</div>
             <select value={filtroTipoProva} onChange={e => setFiltroTipoProva(e.target.value)} style={estiloSelect}>
               {tiposProva.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -566,24 +566,24 @@ export default function PlanoProvasPage() {
       </div>
 
       {/* Período de Provas */}
-      <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Período de Provas</div>
+      <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Período de Provas</div>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Data Início</div>
-            <DatePickerPT value={periodoInicio} onChange={setPeriodoInicio} style={{ ...estiloSelect, borderColor: erroPeriodo ? "#e03d3d" : "rgba(255,255,255,0.1)" }} />
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Data Início</div>
+            <DatePickerPT value={periodoInicio} onChange={setPeriodoInicio} style={{ ...estiloSelect, borderColor: erroPeriodo ? "var(--accent)" : "var(--border-color-strong)" }} />
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Data Fim</div>
-            <DatePickerPT value={periodoFim} onChange={setPeriodoFim} style={{ ...estiloSelect, borderColor: erroPeriodo ? "#e03d3d" : "rgba(255,255,255,0.1)" }} />
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Data Fim</div>
+            <DatePickerPT value={periodoFim} onChange={setPeriodoFim} style={{ ...estiloSelect, borderColor: erroPeriodo ? "var(--accent)" : "var(--border-color-strong)" }} />
           </div>
           <button 
             onClick={guardarPeriodo}
             disabled={guardandoPeriodo || !periodoInicio || !periodoFim || !!erroPeriodo}
             style={{
               padding: "8px 14px",
-              background: periodoInicio && periodoFim && !erroPeriodo ? "#2dd4bf" : "#b0b8cf",
-              color: periodoInicio && periodoFim && !erroPeriodo ? "#13161e" : "#d0d7e8",
+              background: periodoInicio && periodoFim && !erroPeriodo ? "#2dd4bf" : "var(--text-muted)",
+              color: periodoInicio && periodoFim && !erroPeriodo ? "var(--bg-input)" : "var(--text-secondary)",
               border: "none",
               borderRadius: "8px",
               fontSize: "12px",
@@ -599,7 +599,7 @@ export default function PlanoProvasPage() {
             </div>
           )}
           {erroPeriodo && (
-            <div style={{ color: "#e03d3d", fontSize: "12px", alignSelf: "center" }}>{erroPeriodo}</div>
+            <div style={{ color: "var(--accent)", fontSize: "12px", alignSelf: "center" }}>{erroPeriodo}</div>
           )}
         </div>
       </div>
@@ -607,11 +607,11 @@ export default function PlanoProvasPage() {
       {cursoId && (
         <>
           {/* Formulário para adicionar prova */}
-          <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Adicionar Prova</div>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Adicionar Prova</div>
             <form onSubmit={adicionarProva} style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "flex-end" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Disciplina</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Disciplina</div>
                 <select value={disciplinaId} onChange={e => setDisciplinaId(e.target.value)} required style={{ ...estiloSelect, minWidth: "220px" }}>
                   <option value="">Selecionar...</option>
                   {disciplinas.map(d => (
@@ -622,30 +622,30 @@ export default function PlanoProvasPage() {
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Tipo</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Tipo</div>
                 <select value={filtroTipoProva} disabled style={{ ...estiloSelect, opacity: 0.7, cursor: "not-allowed" }}>
                   {tiposProva.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Data</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Data</div>
                 <DatePickerPT 
                   value={dataProva} 
                   onChange={setDataProva} 
                   min={periodoInicio || undefined}
                   max={periodoFim || undefined}
-                  style={{ ...estiloSelect, borderColor: erroDataProva ? "#e03d3d" : "rgba(255,255,255,0.1)" }} 
+                  style={{ ...estiloSelect, borderColor: erroDataProva ? "var(--accent)" : "var(--border-color-strong)" }} 
                 />
-                {erroDataProva && <div style={{ color: "#e03d3d", fontSize: "11px", marginTop: "4px" }}>{erroDataProva}</div>}
+                {erroDataProva && <div style={{ color: "var(--accent)", fontSize: "11px", marginTop: "4px" }}>{erroDataProva}</div>}
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Turno</div>
                 <select value={filtroTurno} disabled style={{ ...estiloSelect, opacity: 0.7, cursor: "not-allowed" }}>
                   {turnosDoCurso.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
                 <select value={posicao} onChange={e => setPosicao(e.target.value)} style={estiloSelect}>
                   {Array.from({ length: Math.max(maxPosicoes, 1) }, (_, i) => (
                     <option key={i + 1} value={i + 1}>{i + 1}ª Prova</option>
@@ -654,8 +654,8 @@ export default function PlanoProvasPage() {
               </div>
                 <button type="submit" disabled={salvando || !disciplinaId || !dataProva || !filtroTurno || !!erroPeriodo || !!erroDataProva} style={{
                 padding: "8px 16px",
-                background: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#2dd4bf" : "#b0b8cf",
-                color: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#13161e" : "#d0d7e8",
+                background: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "#2dd4bf" : "var(--text-muted)",
+                color: disciplinaId && dataProva && filtroTurno && !erroPeriodo && !erroDataProva ? "var(--bg-input)" : "var(--text-secondary)",
                 border: "none",
                 borderRadius: "8px",
                 fontSize: "13px",
@@ -670,7 +670,7 @@ export default function PlanoProvasPage() {
                     style={{
                       padding: "8px 16px",
                       background: "#f0a500",
-                      color: "#13161e",
+                      color: "var(--bg-input)",
                       border: "none",
                       borderRadius: "8px",
                       fontSize: "13px",
@@ -694,15 +694,15 @@ export default function PlanoProvasPage() {
             )}
             
             {disciplinas.length === 0 && (
-              <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "10px" }}>
+              <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "10px" }}>
                 Nenhuma disciplina encontrada no currículo para {ano}º ano, {semestre}. Adicione disciplinas no <a href="/gestor/curriculo" style={{ color: "#2dd4bf" }}>Currículo</a> primeiro.
               </div>
             )}
           </div>
 
           {/* Calendário de Provas */}
-          <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "#e8eaf0" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "var(--text-primary)" }}>
               Calendário de Provas — {cursos.find(c => c.id_curso === parseInt(cursoId))?.nome_curso} ({ano}º ano, {semestre})
               {periodoInicio && periodoFim && !erroPeriodo && ` — ${new Date(periodoInicio + "T00:00:00").toLocaleDateString("pt-BR")} a ${new Date(periodoFim + "T00:00:00").toLocaleDateString("pt-BR")}`}
             </div>
@@ -715,7 +715,7 @@ export default function PlanoProvasPage() {
                   style={{
                     padding: "10px 18px",
                     background: getCorTipo(filtroTipoProva),
-                    color: "#13161e",
+                    color: "var(--bg-input)",
                     border: "none",
                     borderRadius: "8px",
                     fontSize: "13px",
@@ -755,7 +755,7 @@ export default function PlanoProvasPage() {
                   }
 
                   return (
-                    <div key={dataStr} style={{ background: "#13161e", borderRadius: "8px", padding: "12px" }}>
+                    <div key={dataStr} style={{ background: "var(--bg-input)", borderRadius: "8px", padding: "12px" }}>
                       <div style={{ fontSize: "12px", fontWeight: "600", color: "#2dd4bf", marginBottom: "8px" }}>
                         {diasSemana[diaSemana]} — {new Date(dataStr + "T00:00:00").toLocaleDateString("pt-BR")}
                       </div>
@@ -769,17 +769,17 @@ export default function PlanoProvasPage() {
                               </div>
                               <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                                 {provasDoTipo.map(prova => (
-                                  <div key={prova.id_prova} style={{ background: "#1e2230", borderRadius: "6px", padding: "8px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                  <div key={prova.id_prova} style={{ background: "var(--bg-card)", borderRadius: "6px", padding: "8px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                     <div>
-                                      <div style={{ color: "#e8eaf0", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "180px" }}>
+                                      <div style={{ color: "var(--text-primary)", fontSize: "12px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "180px" }}>
                                         {prova.disciplina.nome_disciplina}
                                       </div>
-                                      <div style={{ color: "#d0d7e8", fontSize: "10px" }}>
+                                      <div style={{ color: "var(--text-secondary)", fontSize: "10px" }}>
                                         {prova.disciplina.codigo_disciplina} • <strong>{prova.hora_inicio}-{prova.hora_fim}</strong>
                                       </div>
                                     </div>
                                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "4px" }}>
-                                      <span style={{ color: "#b0b8cf", fontSize: "10px" }}>{prova.turno}</span>
+                                      <span style={{ color: "var(--text-muted)", fontSize: "10px" }}>{prova.turno}</span>
                                       <button 
                                         onClick={() => removerProva(prova.id_prova)} 
                                         style={{
@@ -787,7 +787,7 @@ export default function PlanoProvasPage() {
                                           background: "transparent",
                                           border: "1px solid rgba(224,61,61,0.3)",
                                           borderRadius: "4px",
-                                          color: "#e03d3d",
+                                          color: "var(--accent)",
                                           fontSize: "10px",
                                           cursor: "pointer",
                                         }}
@@ -802,14 +802,14 @@ export default function PlanoProvasPage() {
                           ))}
                         </div>
                       ) : (
-                        !filtroTurno && <div style={{ color: "#b0b8cf", fontSize: "11px", fontStyle: "italic" }}>— Sem provas</div>
+                        !filtroTurno && <div style={{ color: "var(--text-muted)", fontSize: "11px", fontStyle: "italic" }}>— Sem provas</div>
                       )}
                     </div>
                   )
                 })}
               </div>
             ) : (
-              <div style={{ color: "#b0b8cf", textAlign: "center", padding: "30px" }}>
+              <div style={{ color: "var(--text-muted)", textAlign: "center", padding: "30px" }}>
                 {!periodoInicio ? "Defina o período de provas acima para ver o calendário." : erroPeriodo ? "Corrija o período de provas." : "Nenhuma data no período seleccionado."}
               </div>
             )}
@@ -817,7 +817,7 @@ export default function PlanoProvasPage() {
             {/* Todas as Provas - Grid de Cartões */}
             {provas.length > 0 && (
               <div style={{ marginTop: "20px" }}>
-                <div style={{ fontSize: "12px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>
+                <div style={{ fontSize: "12px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>
                   Todas as Provas ({provas.length})
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "12px", maxHeight: "360px", overflowY: "auto" }}>
@@ -826,7 +826,7 @@ export default function PlanoProvasPage() {
                     const dia = String(data.getDate()).padStart(2, "0")
                     const mes = String(data.getMonth() + 1).padStart(2, "0")
                     return (
-                      <div key={prova.id_prova} style={{ background: "#13161e", borderRadius: "10px", padding: "14px", position: "relative", border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", gap: "8px" }}>
+                      <div key={prova.id_prova} style={{ background: "var(--bg-input)", borderRadius: "10px", padding: "14px", position: "relative", border: "1px solid rgba(255,255,255,0.05)", display: "flex", flexDirection: "column", gap: "8px" }}>
                         <button 
                           onClick={() => removerProva(prova.id_prova)} 
                           style={{
@@ -837,7 +837,7 @@ export default function PlanoProvasPage() {
                             background: "transparent",
                             border: "1px solid rgba(224,61,61,0.25)",
                             borderRadius: "4px",
-                            color: "#e03d3d",
+                            color: "var(--accent)",
                             fontSize: "10px",
                             cursor: "pointer",
                             lineHeight: "1.4"
@@ -850,17 +850,17 @@ export default function PlanoProvasPage() {
                           <span style={{ padding: "2px 7px", borderRadius: "4px", background: `${getCorTipo(prova.tipo_prova)}18`, color: getCorTipo(prova.tipo_prova), fontSize: "11px", fontWeight: "600" }}>{prova.tipo_prova}</span>
                         </div>
                         <div>
-                          <div style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", lineHeight: "1.3", marginBottom: "2px" }}>{prova.disciplina.nome_disciplina}</div>
-                          <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{prova.disciplina.codigo_disciplina}</div>
+                          <div style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500", lineHeight: "1.3", marginBottom: "2px" }}>{prova.disciplina.nome_disciplina}</div>
+                          <div style={{ color: "var(--text-muted)", fontSize: "11px" }}>{prova.disciplina.codigo_disciplina}</div>
                         </div>
                         <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "3px" }}>
-                          <div style={{ color: "#d0d7e8", fontSize: "11px" }}>
+                          <div style={{ color: "var(--text-secondary)", fontSize: "11px" }}>
                             📅 {diasSemana[data.getDay()]}, <strong>{dia}/{mes}</strong>
                           </div>
-                          <div style={{ color: "#d0d7e8", fontSize: "11px" }}>
+                          <div style={{ color: "var(--text-secondary)", fontSize: "11px" }}>
                             🕐 <strong>{prova.hora_inicio} — {prova.hora_fim}</strong>
                           </div>
-                          <div style={{ color: "#d0d7e8", fontSize: "11px" }}>
+                          <div style={{ color: "var(--text-secondary)", fontSize: "11px" }}>
                             🔄 {prova.turno}
                           </div>
                         </div>
@@ -890,7 +890,7 @@ export default function PlanoProvasPage() {
               .print-section { margin-bottom: 16px; page-break-inside: avoid; }
               .print-table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
               .print-table th, .print-table td { border: 1px solid #333; padding: 4px 6px; text-align: center; font-size: 10px; height: 28px; }
-              .print-table th { background: #e8eaf0; font-weight: 700; font-size: 11px; height: 32px; }
+              .print-table th { background: var(--text-primary); font-weight: 700; font-size: 11px; height: 32px; }
               .print-table td.hora { font-weight: 600; white-space: nowrap; text-align: right; background: #f5f6fa; width: 100px; font-size: 9px; }
               .print-header { text-align: center; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
               .print-sub { text-align: center; font-size: 11px; color: #555; margin-bottom: 12px; }

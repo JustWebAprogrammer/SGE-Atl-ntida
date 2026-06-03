@@ -247,10 +247,10 @@ export default function AnoLectivoDashboard() {
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "4px" }}>
           <span style={{ fontSize: "24px" }}>💰</span>
           <div>
-            <div style={{ fontSize: "15px", fontWeight: "600", color: "#e8eaf0" }}>
+            <div style={{ fontSize: "15px", fontWeight: "600", color: "var(--text-primary)" }}>
               Gerar Propinas em Falta
             </div>
-            <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
               Gera propinas para todos os meses do ano lectivo cujo dia de geração já passou.
               Respeita o simulador de tempo.
             </div>
@@ -279,7 +279,7 @@ export default function AnoLectivoDashboard() {
           style={{
             marginTop: "16px",
             padding: "10px 24px",
-            background: saving ? "#b0b8cf" : "#22c55e",
+            background: saving ? "var(--text-muted)" : "#22c55e",
             border: "none",
             borderRadius: "6px",
             color: "white",
@@ -300,19 +300,19 @@ export default function AnoLectivoDashboard() {
         marginBottom: "24px",
         boxShadow: "0 4px 6px rgba(0,0,0,0.3)"
       }}>
-        <h2 style={{ margin: "0 0 20px 0", color: "#e8eaf0", fontSize: "18px" }}>
+        <h2 style={{ margin: "0 0 20px 0", color: "var(--text-primary)", fontSize: "18px" }}>
           📅 Configuração do Ano Lectivo
         </h2>
 
         {loading ? (
-          <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>
+          <div style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
             A carregar...
           </div>
         ) : (
           <form onSubmit={handleSaveConfig}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "16px" }}>
               <div>
-                <label style={{ display: "block", marginBottom: "6px", color: "#d0d7e8", fontSize: "13px" }}>
+                <label style={{ display: "block", marginBottom: "6px", color: "var(--text-secondary)", fontSize: "13px" }}>
                   Ano Lectivo Início
                 </label>
                 <DatePickerPT
@@ -321,17 +321,17 @@ export default function AnoLectivoDashboard() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    background: "#13161e",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-input)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "6px",
-                    color: "#e8eaf0",
+                    color: "var(--text-primary)",
                     fontSize: "14px"
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", marginBottom: "6px", color: "#d0d7e8", fontSize: "13px" }}>
+                <label style={{ display: "block", marginBottom: "6px", color: "var(--text-secondary)", fontSize: "13px" }}>
                   Ano Lectivo Fim
                 </label>
                 <DatePickerPT
@@ -340,17 +340,17 @@ export default function AnoLectivoDashboard() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    background: "#13161e",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-input)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "6px",
-                    color: "#e8eaf0",
+                    color: "var(--text-primary)",
                     fontSize: "14px"
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", marginBottom: "6px", color: "#d0d7e8", fontSize: "13px" }}>
+                <label style={{ display: "block", marginBottom: "6px", color: "var(--text-secondary)", fontSize: "13px" }}>
                   Ano Lectivo (Auto-calculado)
                 </label>
                 <input
@@ -365,16 +365,16 @@ export default function AnoLectivoDashboard() {
                     width: "100%",
                     padding: "10px 12px",
                     background: "#2a2f3d",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "6px",
-                    color: "#d0d7e8",
+                    color: "var(--text-secondary)",
                     fontSize: "14px"
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", marginBottom: "6px", color: "#d0d7e8", fontSize: "13px" }}>
+                <label style={{ display: "block", marginBottom: "6px", color: "var(--text-secondary)", fontSize: "13px" }}>
                   Início do Período de Matrícula
                 </label>
                 <DatePickerPT
@@ -383,17 +383,17 @@ export default function AnoLectivoDashboard() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    background: "#13161e",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-input)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "6px",
-                    color: "#e8eaf0",
+                    color: "var(--text-primary)",
                     fontSize: "14px"
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", marginBottom: "6px", color: "#d0d7e8", fontSize: "13px" }}>
+                <label style={{ display: "block", marginBottom: "6px", color: "var(--text-secondary)", fontSize: "13px" }}>
                   Fim do Período de Matrícula
                 </label>
                 <DatePickerPT
@@ -402,17 +402,17 @@ export default function AnoLectivoDashboard() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    background: "#13161e",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-input)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "6px",
-                    color: "#e8eaf0",
+                    color: "var(--text-primary)",
                     fontSize: "14px"
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: "block", marginBottom: "6px", color: "#d0d7e8", fontSize: "13px" }}>
+                <label style={{ display: "block", marginBottom: "6px", color: "var(--text-secondary)", fontSize: "13px" }}>
                   Dia de Geração de Propinas
                 </label>
                 <input
@@ -425,14 +425,14 @@ export default function AnoLectivoDashboard() {
                   style={{
                     width: "100%",
                     padding: "10px 12px",
-                    background: "#13161e",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-input)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "6px",
-                    color: "#e8eaf0",
+                    color: "var(--text-primary)",
                     fontSize: "14px"
                   }}
                 />
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>
                   dia do mês em que as propinas são geradas automaticamente
                 </div>
               </div>
@@ -444,7 +444,7 @@ export default function AnoLectivoDashboard() {
                 disabled={saving}
                 style={{
                   padding: "10px 24px",
-                  background: saving ? "#b0b8cf" : "#e03d3d",
+                  background: saving ? "var(--text-muted)" : "var(--accent)",
                   border: "none",
                   borderRadius: "6px",
                   color: "white",
@@ -473,8 +473,8 @@ export default function AnoLectivoDashboard() {
           padding: "16px",
           textAlign: "center"
         }}>
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Ano Lectivo Actual</div>
-          <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0" }}>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Ano Lectivo Actual</div>
+          <div style={{ fontSize: "18px", fontWeight: "700", color: "var(--text-primary)" }}>
             {config?.ano_lectivo_label || "—"}
           </div>
         </div>
@@ -485,7 +485,7 @@ export default function AnoLectivoDashboard() {
           padding: "16px",
           textAlign: "center"
         }}>
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Estado do Ano</div>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Estado do Ano</div>
           <div style={{
             fontSize: "18px",
             fontWeight: "700",
@@ -501,7 +501,7 @@ export default function AnoLectivoDashboard() {
           padding: "16px",
           textAlign: "center"
         }}>
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Matrículas</div>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Matrículas</div>
           <div style={{
             fontSize: "18px",
             fontWeight: "700",
@@ -517,8 +517,8 @@ export default function AnoLectivoDashboard() {
           padding: "16px",
           textAlign: "center"
         }}>
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Data do Sistema</div>
-          <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Data do Sistema</div>
+          <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>
             {systemDate.toLocaleDateString("pt-PT")}
           </div>
           {simuladorAtivo ? (
@@ -526,7 +526,7 @@ export default function AnoLectivoDashboard() {
               🕐 Simulada
             </div>
           ) : jaFoiSimulado ? (
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>
               ℹ️ Anteriormente simulada
             </div>
           ) : null}
@@ -538,8 +538,8 @@ export default function AnoLectivoDashboard() {
           padding: "16px",
           textAlign: "center"
         }}>
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Dias Restantes</div>
-          <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0" }}>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Dias Restantes</div>
+          <div style={{ fontSize: "18px", fontWeight: "700", color: "var(--text-primary)" }}>
             {config?.dias_restantes_ano ?? 0}
           </div>
         </div>
@@ -553,10 +553,10 @@ export default function AnoLectivoDashboard() {
         marginBottom: "24px",
         border: "1px solid rgba(100,200,255,0.2)"
       }}>
-        <h2 style={{ margin: "0 0 16px 0", color: "#e8eaf0", fontSize: "18px" }}>
+        <h2 style={{ margin: "0 0 16px 0", color: "var(--text-primary)", fontSize: "18px" }}>
           📚 Controlo de Semestre
         </h2>
-        <p style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "16px" }}>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "16px" }}>
           Seleciona o semestre actual da simulação. Quando mudas para S2, os orientadores perdem as disciplinas do S1 e podes re-atribuí-las.
         </p>
         
@@ -566,7 +566,7 @@ export default function AnoLectivoDashboard() {
           alignItems: "center",
           marginBottom: "12px"
         }}>
-          <div style={{ fontSize: "14px", color: "#d0d7e8", fontWeight: "500" }}>
+          <div style={{ fontSize: "14px", color: "var(--text-secondary)", fontWeight: "500" }}>
             Semestre Actual:
           </div>
           
@@ -589,7 +589,7 @@ export default function AnoLectivoDashboard() {
               borderColor: config?.semestre_atual === "S1" ? "#4fc3f7" : "rgba(255,255,255,0.15)",
               borderRadius: "8px",
               background: config?.semestre_atual === "S1" ? "rgba(79,195,247,0.15)" : "transparent",
-              color: config?.semestre_atual === "S1" ? "#4fc3f7" : "#d0d7e8",
+              color: config?.semestre_atual === "S1" ? "#4fc3f7" : "var(--text-secondary)",
               cursor: "pointer",
               fontSize: "14px",
               fontWeight: config?.semestre_atual === "S1" ? "700" : "400",
@@ -637,7 +637,7 @@ export default function AnoLectivoDashboard() {
               borderColor: config?.semestre_atual === "S2" ? "#ffa726" : "rgba(255,255,255,0.15)",
               borderRadius: "8px",
               background: config?.semestre_atual === "S2" ? "rgba(255,167,38,0.15)" : "transparent",
-              color: config?.semestre_atual === "S2" ? "#ffa726" : "#d0d7e8",
+              color: config?.semestre_atual === "S2" ? "#ffa726" : "var(--text-secondary)",
               cursor: saving ? "not-allowed" : "pointer",
               fontSize: "14px",
               fontWeight: config?.semestre_atual === "S2" ? "700" : "400",
@@ -683,7 +683,7 @@ export default function AnoLectivoDashboard() {
             MODO DE TESTE — Simulador de Tempo
           </h2>
         </div>
-        <p style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "20px" }}>
+        <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>
           O simulador substitui a data real do sistema. Desactive antes de usar em produção.
         </p>
 
@@ -713,7 +713,7 @@ export default function AnoLectivoDashboard() {
                 onChange={(val) => setSimuladorData(val)}
                 style={{
                   padding: "8px 12px",
-                  background: "#13161e",
+                  background: "var(--bg-input)",
                   border: "1px solid rgba(255,165,0,0.3)",
                   borderRadius: "6px",
                   color: "#ffa500",
@@ -802,10 +802,10 @@ export default function AnoLectivoDashboard() {
                  disabled={avancandoAno}
                  style={{
                    padding: "8px 16px",
-                   background: avancandoAno ? "#b0b8cf" : "rgba(46,204,113,0.2)",
+                   background: avancandoAno ? "var(--text-muted)" : "rgba(46,204,113,0.2)",
                    border: "1px solid rgba(46,204,113,0.3)",
                    borderRadius: "6px",
-                   color: avancandoAno ? "#d0d7e8" : "#2ecc71",
+                   color: avancandoAno ? "var(--text-secondary)" : "#2ecc71",
                    cursor: avancandoAno ? "not-allowed" : "pointer",
                    fontSize: "13px",
                    fontWeight: "600"
@@ -855,7 +855,7 @@ export default function AnoLectivoDashboard() {
             padding: "16px",
             marginBottom: "16px"
           }}>
-            <div style={{ color: "#b0b8cf", marginBottom: "12px" }}>
+            <div style={{ color: "var(--text-muted)", marginBottom: "12px" }}>
               <strong>Simulador Inactivo</strong> — Sistema a usar data real: {systemDate.toLocaleDateString("pt-PT")}
             </div>
             
@@ -865,10 +865,10 @@ export default function AnoLectivoDashboard() {
                 onChange={(val) => setSimuladorData(val)}
                 style={{
                   padding: "8px 12px",
-                  background: "#13161e",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--bg-input)",
+                  border: "1px solid var(--border-color)",
                   borderRadius: "6px",
-                  color: "#e8eaf0",
+                  color: "var(--text-primary)",
                   fontSize: "14px"
                 }}
               />
@@ -878,10 +878,10 @@ export default function AnoLectivoDashboard() {
                 disabled={!simuladorData}
                 style={{
                   padding: "8px 16px",
-                  background: simuladorData ? "#ffa500" : "#b0b8cf",
+                  background: simuladorData ? "#ffa500" : "var(--text-muted)",
                   border: "none",
                   borderRadius: "6px",
-                  color: simuladorData ? "#13161e" : "#d0d7e8",
+                  color: simuladorData ? "var(--bg-input)" : "var(--text-secondary)",
                   cursor: simuladorData ? "pointer" : "not-allowed",
                   fontSize: "13px",
                   fontWeight: "600"

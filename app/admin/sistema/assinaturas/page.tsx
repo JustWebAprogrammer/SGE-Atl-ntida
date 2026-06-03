@@ -53,7 +53,7 @@ interface AssinaturaDiretor {
 
 // ─── Shared style tokens (matches the rest of the dashboard) ────────────────
 const card = {
-  background: "#1e2230",
+  background: "var(--bg-card)",
   borderRadius: "12px",
   padding: "24px",
 } as const
@@ -61,10 +61,10 @@ const card = {
 const inputStyle = {
   width: "100%",
   padding: "10px 12px",
-  background: "#13161e",
-  border: "1px solid rgba(255,255,255,0.07)",
+  background: "var(--bg-input)",
+  border: "1px solid var(--border-color)",
   borderRadius: "8px",
-  color: "#e8eaf0",
+  color: "var(--text-primary)",
   fontSize: "13px",
   outline: "none",
   boxSizing: "border-box" as const,
@@ -73,7 +73,7 @@ const inputStyle = {
 const labelStyle = {
   display: "block",
   marginBottom: "6px",
-  color: "#d0d7e8",
+  color: "var(--text-secondary)",
   fontSize: "12px",
   fontWeight: "500" as const,
   textTransform: "uppercase" as const,
@@ -214,7 +214,7 @@ function SignaturePreview({
             width: "36px",
             height: "36px",
             borderRadius: "50%",
-            background: "#e03d3d",
+            background: "var(--accent)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -601,7 +601,7 @@ export default function AssinaturasDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={adminNavItems} title="Assinaturas" subtitle="A carregar...">
-        <div style={{ textAlign: "center", padding: "40px", color: "#d0d7e8" }}>A carregar...</div>
+        <div style={{ textAlign: "center", padding: "40px", color: "var(--text-secondary)" }}>A carregar...</div>
       </DashboardLayout>
     )
   }
@@ -621,8 +621,8 @@ export default function AssinaturasDashboard() {
             marginBottom: "20px",
             fontSize: "13px",
             fontWeight: "500",
-            background: messageType === "success" ? "rgba(45,212,191,0.12)" : "rgba(224,61,61,0.12)",
-            color: messageType === "success" ? "#2dd4bf" : "#e03d3d",
+            background: messageType === "success" ? "rgba(45,212,191,0.12)" : "var(--accent-bg)",
+            color: messageType === "success" ? "#2dd4bf" : "var(--accent)",
             border: `1px solid ${messageType === "success" ? "rgba(45,212,191,0.25)" : "rgba(224,61,61,0.25)"}`,
           }}
         >
@@ -641,9 +641,9 @@ export default function AssinaturasDashboard() {
               style={{
                 padding: "10px 18px",
                 borderRadius: "8px",
-                border: isActive ? "none" : "1px solid rgba(255,255,255,0.07)",
-                background: isActive ? "#e03d3d" : "transparent",
-                color: isActive ? "#fff" : "#d0d7e8",
+                border: isActive ? "none" : "1px solid var(--border-color)",
+                background: isActive ? "var(--accent)" : "transparent",
+                color: isActive ? "#fff" : "var(--text-secondary)",
                 fontSize: "13px",
                 fontWeight: isActive ? "600" : "400",
                 cursor: "pointer",
@@ -665,7 +665,7 @@ export default function AssinaturasDashboard() {
           {/* Upload form */}
           {activeTab === "presidente" ? (
             <div style={card}>
-              <h3 style={{ margin: "0 0 20px 0", color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+              <h3 style={{ margin: "0 0 20px 0", color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
                 Carregar Nova Assinatura
               </h3>
               <form onSubmit={uploadPresidenteSignature} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -698,7 +698,7 @@ export default function AssinaturasDashboard() {
                     style={{
                       width: "100%",
                       padding: "24px 12px",
-                      background: "#13161e",
+                      background: "var(--bg-input)",
                       border: "1px dashed rgba(255,255,255,0.12)",
                       borderRadius: "8px",
                       cursor: "pointer",
@@ -716,7 +716,7 @@ export default function AssinaturasDashboard() {
                     ) : (
                       <>
                         <div style={{ fontSize: "20px", marginBottom: "6px" }}>🖊️</div>
-                        <div style={{ fontSize: "12px", color: "#d0d7e8" }}>Clique para seleccionar imagem</div>
+                        <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Clique para seleccionar imagem</div>
                         <div style={{ fontSize: "11px", color: "rgba(144,152,176,0.5)", marginTop: "2px" }}>PNG ou JPEG</div>
                       </>
                     )}
@@ -735,7 +735,7 @@ export default function AssinaturasDashboard() {
                     disabled={uploading}
                     style={{
                       padding: "11px 22px",
-                      background: uploading ? "rgba(224,61,61,0.4)" : "#e03d3d",
+                      background: uploading ? "rgba(224,61,61,0.4)" : "var(--accent)",
                       border: "none",
                       borderRadius: "8px",
                       color: "white",
@@ -751,7 +751,7 @@ export default function AssinaturasDashboard() {
             </div>
            ) : activeTab === "diretor" ? (
              <div style={card}>
-               <h3 style={{ margin: "0 0 20px 0", color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+               <h3 style={{ margin: "0 0 20px 0", color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
                  Carregar Assinatura do Director(a) Académico(a)
                </h3>
                <form onSubmit={uploadDiretorSignature} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -784,7 +784,7 @@ export default function AssinaturasDashboard() {
                      style={{
                        width: "100%",
                        padding: "24px 12px",
-                       background: "#13161e",
+                       background: "var(--bg-input)",
                        border: "1px dashed rgba(255,255,255,0.12)",
                        borderRadius: "8px",
                        cursor: "pointer",
@@ -801,7 +801,7 @@ export default function AssinaturasDashboard() {
                      ) : (
                        <>
                          <div style={{ fontSize: "20px", marginBottom: "6px" }}>🖊️</div>
-                         <div style={{ fontSize: "12px", color: "#d0d7e8" }}>Clique para seleccionar imagem</div>
+                         <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Clique para seleccionar imagem</div>
                          <div style={{ fontSize: "11px", color: "rgba(144,152,176,0.5)", marginTop: "2px" }}>PNG ou JPEG</div>
                        </>
                      )}
@@ -820,7 +820,7 @@ export default function AssinaturasDashboard() {
                      disabled={uploading}
                      style={{
                        padding: "11px 22px",
-                       background: uploading ? "rgba(224,61,61,0.4)" : "#e03d3d",
+                       background: uploading ? "rgba(224,61,61,0.4)" : "var(--accent)",
                        border: "none",
                        borderRadius: "8px",
                        color: "white",
@@ -836,7 +836,7 @@ export default function AssinaturasDashboard() {
              </div>
            ) : (
              <div style={card}>
-               <h3 style={{ margin: "0 0 20px 0", color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+               <h3 style={{ margin: "0 0 20px 0", color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
                  Carregar Assinatura de Gestor
                </h3>
                <form onSubmit={uploadGestorSignature} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -890,7 +890,7 @@ export default function AssinaturasDashboard() {
                      style={{
                        width: "100%",
                        padding: "24px 12px",
-                       background: "#13161e",
+                       background: "var(--bg-input)",
                        border: "1px dashed rgba(255,255,255,0.12)",
                        borderRadius: "8px",
                        cursor: "pointer",
@@ -907,7 +907,7 @@ export default function AssinaturasDashboard() {
                      ) : (
                        <>
                          <div style={{ fontSize: "20px", marginBottom: "6px" }}>🖊️</div>
-                         <div style={{ fontSize: "12px", color: "#d0d7e8" }}>Clique para seleccionar imagem</div>
+                         <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Clique para seleccionar imagem</div>
                          <div style={{ fontSize: "11px", color: "rgba(144,152,176,0.5)", marginTop: "2px" }}>PNG ou JPEG</div>
                        </>
                      )}
@@ -926,7 +926,7 @@ export default function AssinaturasDashboard() {
                      disabled={uploading}
                      style={{
                        padding: "11px 22px",
-                       background: uploading ? "rgba(224,61,61,0.4)" : "#e03d3d",
+                       background: uploading ? "rgba(224,61,61,0.4)" : "var(--accent)",
                        border: "none",
                        borderRadius: "8px",
                        color: "white",
@@ -945,26 +945,26 @@ export default function AssinaturasDashboard() {
           {/* Signature history table */}
           <div style={{ ...card, padding: "0", overflow: "hidden" }}>
             <div style={{ padding: "18px 24px 14px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 style={{ margin: 0, color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+              <h3 style={{ margin: 0, color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
                 {activeTab === "presidente" ? "Histórico — Presidente" : activeTab === "diretor" ? "Histórico — Director(a) Académico(a)" : "Histórico — Gestores"}
               </h3>
             </div>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
-                <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-                  <th style={{ textAlign: "left", padding: "12px 24px", color: "#d0d7e8", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>
+                <tr style={{ borderBottom: "1px solid var(--border-color)" }}>
+                  <th style={{ textAlign: "left", padding: "12px 24px", color: "var(--text-secondary)", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>
                     {activeTab === "presidente" ? "Nome" : activeTab === "diretor" ? "Nome" : "Gestor / Departamento"}
                   </th>
-                  <th style={{ textAlign: "left", padding: "12px 16px", color: "#d0d7e8", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>Ano</th>
-                  <th style={{ textAlign: "left", padding: "12px 16px", color: "#d0d7e8", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>Data</th>
-                  <th style={{ textAlign: "left", padding: "12px 16px", color: "#d0d7e8", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>Estado</th>
+                  <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-secondary)", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>Ano</th>
+                  <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-secondary)", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>Data</th>
+                  <th style={{ textAlign: "left", padding: "12px 16px", color: "var(--text-secondary)", fontWeight: "500", fontSize: "11px", textTransform: "uppercase" }}>Estado</th>
                 </tr>
               </thead>
               <tbody>
                 {activeTab === "presidente"
                   ? presidenteSignatures.map((sig) => (
                       <tr key={sig.id_assinatura} style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
-                        <td style={{ padding: "12px 24px", color: "#e8eaf0", fontSize: "13px" }}>
+                        <td style={{ padding: "12px 24px", color: "var(--text-primary)", fontSize: "13px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             <img
                               src={getImageSrc(sig)}
@@ -974,13 +974,13 @@ export default function AssinaturasDashboard() {
                             {sig.nome_presidente}
                           </div>
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#d0d7e8", fontSize: "13px" }}>{sig.ano_lectivo}</td>
-                        <td style={{ padding: "12px 16px", color: "#d0d7e8", fontSize: "13px" }}>{new Date(sig.data_inicio).toLocaleDateString("pt-PT")}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: "13px" }}>{sig.ano_lectivo}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: "13px" }}>{new Date(sig.data_inicio).toLocaleDateString("pt-PT")}</td>
                         <td style={{ padding: "12px 16px" }}>
                           <span style={{
                             padding: "3px 10px", borderRadius: "12px", fontSize: "11px", fontWeight: "600",
                             background: sig.ativo ? "rgba(45,212,191,0.12)" : "rgba(255,255,255,0.05)",
-                            color: sig.ativo ? "#2dd4bf" : "#d0d7e8",
+                            color: sig.ativo ? "#2dd4bf" : "var(--text-secondary)",
                           }}>
                             {sig.ativo ? "● Ativo" : "○ Inativo"}
                           </span>
@@ -990,7 +990,7 @@ export default function AssinaturasDashboard() {
                   : activeTab === "diretor"
                   ? diretorSignatures.map((sig) => (
                       <tr key={sig.id_assinatura} style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
-                        <td style={{ padding: "12px 24px", color: "#e8eaf0", fontSize: "13px" }}>
+                        <td style={{ padding: "12px 24px", color: "var(--text-primary)", fontSize: "13px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             <img
                               src={getImageSrc(sig)}
@@ -1000,13 +1000,13 @@ export default function AssinaturasDashboard() {
                             {sig.nome_diretor}
                           </div>
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#d0d7e8", fontSize: "13px" }}>{sig.ano_lectivo}</td>
-                        <td style={{ padding: "12px 16px", color: "#d0d7e8", fontSize: "13px" }}>{new Date(sig.data_inicio).toLocaleDateString("pt-PT")}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: "13px" }}>{sig.ano_lectivo}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: "13px" }}>{new Date(sig.data_inicio).toLocaleDateString("pt-PT")}</td>
                         <td style={{ padding: "12px 16px" }}>
                           <span style={{
                             padding: "3px 10px", borderRadius: "12px", fontSize: "11px", fontWeight: "600",
                             background: sig.ativo ? "rgba(45,212,191,0.12)" : "rgba(255,255,255,0.05)",
-                            color: sig.ativo ? "#2dd4bf" : "#d0d7e8",
+                            color: sig.ativo ? "#2dd4bf" : "var(--text-secondary)",
                           }}>
                             {sig.ativo ? "● Ativo" : "○ Inativo"}
                           </span>
@@ -1015,7 +1015,7 @@ export default function AssinaturasDashboard() {
                     ))
                   : gestorSignatures.map((sig) => (
                       <tr key={sig.id_assinatura} style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
-                        <td style={{ padding: "12px 24px", color: "#e8eaf0", fontSize: "13px" }}>
+                        <td style={{ padding: "12px 24px", color: "var(--text-primary)", fontSize: "13px" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             <img
                               src={getImageSrc(sig)}
@@ -1024,17 +1024,17 @@ export default function AssinaturasDashboard() {
                             />
                             <div>
                               <div>{sig.gestor?.nome_completo}</div>
-                              <div style={{ fontSize: "11px", color: "#d0d7e8" }}>{sig.departamento?.nome_departamento}</div>
+                              <div style={{ fontSize: "11px", color: "var(--text-secondary)" }}>{sig.departamento?.nome_departamento}</div>
                             </div>
                           </div>
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#d0d7e8", fontSize: "13px" }}>{sig.ano_lectivo}</td>
-                        <td style={{ padding: "12px 16px", color: "#d0d7e8", fontSize: "13px" }}>{new Date(sig.data_inicio).toLocaleDateString("pt-PT")}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: "13px" }}>{sig.ano_lectivo}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-secondary)", fontSize: "13px" }}>{new Date(sig.data_inicio).toLocaleDateString("pt-PT")}</td>
                         <td style={{ padding: "12px 16px" }}>
                           <span style={{
                             padding: "3px 10px", borderRadius: "12px", fontSize: "11px", fontWeight: "600",
                             background: sig.ativo ? "rgba(45,212,191,0.12)" : "rgba(255,255,255,0.05)",
-                            color: sig.ativo ? "#2dd4bf" : "#d0d7e8",
+                            color: sig.ativo ? "#2dd4bf" : "var(--text-secondary)",
                           }}>
                             {sig.ativo ? "● Ativo" : "○ Inativo"}
                           </span>
@@ -1043,7 +1043,7 @@ export default function AssinaturasDashboard() {
                     ))}
                 {(activeTab === "presidente" ? presidenteSignatures : activeTab === "diretor" ? diretorSignatures : gestorSignatures).length === 0 && (
                   <tr>
-                    <td colSpan={4} style={{ padding: "24px", textAlign: "center", color: "#d0d7e8", fontSize: "13px" }}>
+                    <td colSpan={4} style={{ padding: "24px", textAlign: "center", color: "var(--text-secondary)", fontSize: "13px" }}>
                       Nenhuma assinatura registada
                     </td>
                   </tr>
@@ -1056,17 +1056,17 @@ export default function AssinaturasDashboard() {
         {/* ── RIGHT COLUMN — Live Preview ── */}
         <div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
-            <h3 style={{ margin: 0, color: "#e8eaf0", fontSize: "14px", fontWeight: "600" }}>
+            <h3 style={{ margin: 0, color: "var(--text-primary)", fontSize: "14px", fontWeight: "600" }}>
               Pré-visualização
             </h3>
-            <span style={{ fontSize: "11px", color: "#d0d7e8", background: "#1e2230", padding: "4px 10px", borderRadius: "12px" }}>
+            <span style={{ fontSize: "11px", color: "var(--text-secondary)", background: "var(--bg-card)", padding: "4px 10px", borderRadius: "12px" }}>
               Documento de exemplo
             </span>
           </div>
 
           <SignaturePreview presidenteSig={previewPresidenteSig} gestorSig={previewGestorSig} diretorSig={previewDiretorSig} />
 
-          <div style={{ marginTop: "12px", padding: "10px 14px", background: "#1e2230", borderRadius: "8px", fontSize: "11px", color: "#d0d7e8" }}>
+          <div style={{ marginTop: "12px", padding: "10px 14px", background: "var(--bg-card)", borderRadius: "8px", fontSize: "11px", color: "var(--text-secondary)" }}>
             💡 A pré-visualização actualiza em tempo real ao seleccionar uma imagem. As assinaturas activas são usadas nos documentos emitidos.
           </div>
 
@@ -1078,7 +1078,7 @@ export default function AssinaturasDashboard() {
               { label: "Gestor Activo", sig: activeGestor, name: activeGestor?.gestor?.nome_completo },
             ].map(({ label, sig, name }) => (
               <div key={label} style={{ ...card, padding: "14px 16px" }}>
-                <div style={{ fontSize: "11px", color: "#d0d7e8", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                   {label}
                 </div>
                 {sig ? (
@@ -1088,11 +1088,11 @@ export default function AssinaturasDashboard() {
                       alt={name}
                       style={{ height: "32px", maxWidth: "100%", objectFit: "contain", display: "block", background: "#fff", borderRadius: "4px", padding: "3px", marginBottom: "6px" }}
                     />
-                    <div style={{ fontSize: "12px", color: "#e8eaf0", fontWeight: "500" }}>{name}</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-primary)", fontWeight: "500" }}>{name}</div>
                     <div style={{ fontSize: "11px", color: "#2dd4bf", marginTop: "2px" }}>● Ativo</div>
                   </>
                 ) : (
-                  <div style={{ fontSize: "12px", color: "#d0d7e8" }}>Sem assinatura activa</div>
+                  <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Sem assinatura activa</div>
                 )}
               </div>
             ))}

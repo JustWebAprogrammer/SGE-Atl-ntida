@@ -106,8 +106,8 @@ function CardStat({
 }) {
   const content = (
     <div style={{
-      background: "#1e2230",
-      border: "1px solid rgba(255,255,255,0.07)",
+      background: "var(--bg-card)",
+      border: "1px solid var(--border-color)",
       borderRadius: "14px",
       padding: "20px",
       borderTop: `2px solid ${color}`,
@@ -122,7 +122,7 @@ function CardStat({
     }}
     onMouseLeave={e => {
       if (href) {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"
+        e.currentTarget.style.borderColor = "var(--border-color)"
         e.currentTarget.style.transform = "translateY(0)"
       }
     }}
@@ -131,13 +131,13 @@ function CardStat({
         fontSize: "11px",
         textTransform: "uppercase",
         letterSpacing: "0.5px",
-        color: "#b0b8cf",
+        color: "var(--text-muted)",
         marginBottom: "10px"
       }}>{label}</div>
       <div style={{
         fontSize: "22px",
         fontWeight: "700",
-        color: "#e8eaf0"
+        color: "var(--text-primary)"
       }}>{value}</div>
     </div>
   )
@@ -456,10 +456,10 @@ export default function GestorDashboard() {
   function getBadgeColor(avaliacao: string) {
     switch (avaliacao) {
       case "especial": return "#9b59b6"
-      case "recurso": return "#e03d3d"
+      case "recurso": return "var(--accent)"
       case "exame": return "#f0a500"
       case "ac": return "#22c55e"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -478,9 +478,9 @@ export default function GestorDashboard() {
       case "PP1": return "#22c55e"
       case "PP2": return "#3b82f6"
       case "Exame": return "#f0a500"
-      case "Recurso": return "#e03d3d"
+      case "Recurso": return "var(--accent)"
       case "Exame_Especial": return "#a855f7"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -490,17 +490,17 @@ export default function GestorDashboard() {
     { label: "Ano Lectivo", value: resumo.anoLectivo, color: "#22c55e" },
     { label: "Semestre Actual", value: resumo.semestreAtual === "S1" ? "📖 S1" : "📗 S2", color: resumo.semestreAtual === "S1" ? "#4fc3f7" : "#ffa726" },
     { label: "Pré-Projetos p/ Avaliar", value: resumo.preProjetosParaAvaliar, color: "#f0a500", href: "/gestor/monografias" },
-    { label: "Monografias p/ Avaliar", value: resumo.monografiasParaAvaliar, color: "#e03d3d", href: "/gestor/monografias" },
+    { label: "Monografias p/ Avaliar", value: resumo.monografiasParaAvaliar, color: "var(--accent)", href: "/gestor/monografias" },
     { label: "Monografias p/ Defender", value: resumo.monografiasParaDefender, color: "#3498db", href: "/gestor/monografias" },
     { label: "Defendidas sem Nota", value: resumo.monografiasSemNota, color: "#e67e22", href: "/gestor/monografias" },
   ] : []
 
   const estiloSelect: React.CSSProperties = {
-    background: "#13161e",
-    border: "1px solid rgba(255,255,255,0.1)",
+    background: "var(--bg-input)",
+    border: "1px solid var(--border-color-strong)",
     borderRadius: "8px",
     padding: "8px 12px",
-    color: "#e8eaf0",
+    color: "var(--text-primary)",
     fontSize: "13px",
     minWidth: "120px"
   }
@@ -521,14 +521,14 @@ export default function GestorDashboard() {
         {loading ? (
           Array.from({ length: 7 }).map((_, i) => (
             <div key={i} style={{
-              background: "#1e2230",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-color)",
               borderRadius: "14px",
               padding: "20px",
-              borderTop: "2px solid #b0b8cf"
+              borderTop: "2px solid var(--text-muted)"
             }}>
-              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#b0b8cf", marginBottom: "10px" }}>A carregar...</div>
-              <div style={{ fontSize: "22px", fontWeight: "700", color: "#b0b8cf" }}>...</div>
+              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: "10px" }}>A carregar...</div>
+              <div style={{ fontSize: "22px", fontWeight: "700", color: "var(--text-muted)" }}>...</div>
             </div>
           ))
         ) : (
@@ -540,8 +540,8 @@ export default function GestorDashboard() {
 
       {/* Secção de Disciplinas com Filtros */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px",
         marginBottom: "20px"
@@ -550,7 +550,7 @@ export default function GestorDashboard() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "16px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Minhas Disciplinas</div>
 
         {/* Filtros */}
@@ -593,10 +593,10 @@ export default function GestorDashboard() {
               onClick={() => { setFiltroCurso("todos"); setFiltroAno("todos"); setFiltroTurno("todos") }}
               style={{
                 background: "transparent",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid var(--border-color-strong)",
                 borderRadius: "8px",
                 padding: "8px 12px",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 fontSize: "13px",
                 cursor: "pointer"
               }}
@@ -607,9 +607,9 @@ export default function GestorDashboard() {
         </div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
         ) : disciplinasFiltradas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
             Nenhuma disciplina encontrada para os filtros selecionados
           </div>
         ) : (
@@ -619,7 +619,7 @@ export default function GestorDashboard() {
                 <div
                   onClick={() => selecionarDisciplina(d)}
                   style={{
-                    background: disciplinaSelecionada?.id === d.id ? "rgba(45,212,191,0.1)" : "#13161e",
+                    background: disciplinaSelecionada?.id === d.id ? "rgba(45,212,191,0.1)" : "var(--bg-input)",
                     borderRadius: "10px",
                     padding: "14px 18px",
                     display: "flex",
@@ -631,8 +631,8 @@ export default function GestorDashboard() {
                   }}
                 >
                   <div>
-                    <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
-                    <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "2px" }}>
+                    <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "500" }}>{d.nome}</div>
+                    <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "2px" }}>
                       {d.codigo} · {d.creditos} créditos
                       {(() => {
                         // Extrair pares (ano_curricular, semestre) únicos e ordenados
@@ -655,7 +655,7 @@ export default function GestorDashboard() {
                       {d.total_estudantes} estudantes
                     </div>
                     <div style={{
-                      color: "#b0b8cf",
+                      color: "var(--text-muted)",
                       fontSize: "12px",
                       transition: "transform 0.2s",
                       transform: disciplinaSelecionada?.id === d.id ? "rotate(180deg)" : "rotate(0deg)"
@@ -666,8 +666,8 @@ export default function GestorDashboard() {
                 {/* Dropdown de estudantes */}
                 {disciplinaSelecionada?.id === d.id && (
                   <div style={{
-                    background: "#1e2230",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--bg-card)",
+                    border: "1px solid var(--border-color)",
                     borderRadius: "10px",
                     padding: "16px",
                     marginTop: "8px",
@@ -675,37 +675,37 @@ export default function GestorDashboard() {
                     marginRight: "8px"
                   }}>
                     {loadingEstudantes ? (
-                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>A carregar estudantes...</div>
+                      <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "20px" }}>A carregar estudantes...</div>
                     ) : estudantes.length === 0 ? (
-                      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>
+                      <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "20px" }}>
                         Nenhum estudante encontrado
                       </div>
                     ) : (
                       <div style={{ overflowX: "auto" }}>
                         <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
-                            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                              <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>AC3</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>TTP</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>PP1</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>PP2</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Exame</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Rec</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Esp</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Final</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}>Estado</th>
-                              <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "11px" }}></th>
+                            <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                              <th style={{ textAlign: "left", padding: "8px", color: "var(--text-muted)", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>AC1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>AC2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>AC3</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>TTP</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>PP1</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>PP2</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>Exame</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>Rec</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>Esp</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>Final</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}>Estado</th>
+                              <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "11px" }}></th>
                             </tr>
                           </thead>
                           <tbody>
                             {estudantes.map(e => (
                               <tr key={e.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                                 <td style={{ padding: "8px" }}>
-                                  <div style={{ color: "#e8eaf0", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
-                                  <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{e.numero_estudante}</div>
+                                  <div style={{ color: "var(--text-primary)", fontSize: "12px", fontWeight: "500" }}>{e.nome}</div>
+                                  <div style={{ color: "var(--text-muted)", fontSize: "11px" }}>{e.numero_estudante}</div>
                                 </td>
                                 {["ac1", "ac2", "ac3", "ttp", "pp1", "pp2", "exame", "recurso", "exame_especial"].map((campo) => (
                                   <td key={campo} style={{ textAlign: "center", padding: "8px" }}>
@@ -725,14 +725,14 @@ export default function GestorDashboard() {
                                           padding: "3px",
                                           borderRadius: "4px",
                                           border: "1px solid rgba(255,255,255,0.2)",
-                                          background: "#13161e",
-                                          color: "#e8eaf0",
+                                          background: "var(--bg-input)",
+                                          color: "var(--text-primary)",
                                           fontSize: "11px",
                                           textAlign: "center"
                                         }}
                                       />
                                     ) : (
-                                      <span style={{ color: "#e8eaf0", fontSize: "11px" }}>
+                                      <span style={{ color: "var(--text-primary)", fontSize: "11px" }}>
                                         {e[campo as keyof Estudante] != null ? arredondarNota(Number(e[campo as keyof Estudante])) : "—"}
                                       </span>
                                     )}
@@ -742,8 +742,8 @@ export default function GestorDashboard() {
                                   <span style={{
                                     fontWeight: "700",
                                     color: e.nota_final != null
-                                      ? (e.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                                      : "#b0b8cf",
+                                      ? (e.nota_final >= 10 ? "#22c55e" : "var(--accent)")
+                                      : "var(--text-muted)",
                                     fontSize: "12px"
                                   }}>
                                     {e.nota_final != null ? arredondarNota(e.nota_final) : "—"}
@@ -783,7 +783,7 @@ export default function GestorDashboard() {
                                         onClick={cancelarEdicao}
                                         style={{
                                           padding: "3px 6px",
-                                          background: "#b0b8cf",
+                                          background: "var(--text-muted)",
                                           color: "white",
                                           border: "none",
                                           borderRadius: "4px",
@@ -800,7 +800,7 @@ export default function GestorDashboard() {
                                       style={{
                                         padding: "3px 8px",
                                         background: "#2dd4bf",
-                                        color: "#13161e",
+                                        color: "var(--bg-input)",
                                         border: "none",
                                         borderRadius: "4px",
                                         fontSize: "10px",
@@ -828,8 +828,8 @@ export default function GestorDashboard() {
 
       {/* ===== LESSON CALENDAR SECTION ===== */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px",
         marginBottom: "20px"
@@ -838,13 +838,13 @@ export default function GestorDashboard() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "12px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Calendário de Aulas</div>
 
         {/* Only Turno filter visible */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end", marginBottom: "16px" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurnoHorario} onChange={e => setFiltroTurnoHorario(e.target.value)} style={estiloSelect}>
               {turnosHorario.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -852,12 +852,12 @@ export default function GestorDashboard() {
         </div>
 
         {loadingAulas ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar aulas...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar aulas...</div>
         ) : aulas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>Nenhuma aula encontrada para este turno</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>Nenhuma aula encontrada para este turno</div>
         ) : (
           <div style={{ overflowX: "auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`, gap: "1px", background: "#13161e", borderRadius: "10px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`, gap: "1px", background: "var(--bg-input)", borderRadius: "10px" }}>
               {/* Header row */}
               <div style={{ padding: "12px", fontWeight: "600", color: "#2dd4bf", borderBottom: "1px solid rgba(45,212,191,0.2)", textAlign: "center" }}></div>
               {diasSemana.map(dia => (
@@ -872,8 +872,8 @@ export default function GestorDashboard() {
                   <div style={{ 
                     padding: "12px", 
                     fontWeight: "700", 
-                    color: "#e8eaf0", 
-                    borderRight: "1px solid rgba(255,255,255,0.1)", 
+                    color: "var(--text-primary)", 
+                    borderRight: "1px solid var(--border-color-strong)", 
                     borderBottom: "1px solid rgba(255,255,255,0.05)",
                     fontSize: "12px",
                     display: "flex",
@@ -894,8 +894,8 @@ export default function GestorDashboard() {
                         justifyContent: "center"
                       }}>
                         {aula ? (
-                          <div style={{ background: "#1e2230", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
-                            <div style={{ color: "#e8eaf0", fontWeight: "500", fontSize: "11px" }}>{aula.disciplina.nome_disciplina}</div>
+                          <div style={{ background: "var(--bg-card)", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
+                            <div style={{ color: "var(--text-primary)", fontWeight: "500", fontSize: "11px" }}>{aula.disciplina.nome_disciplina}</div>
                             {aula.disciplina.codigo_disciplina && (
                               <div style={{ marginTop: "4px" }}>
                                 <span style={{ 
@@ -908,10 +908,10 @@ export default function GestorDashboard() {
                                 }}>{aula.disciplina.codigo_disciplina}</span>
                               </div>
                             )}
-                            {aula.sala && <div style={{ color: "#d0d7e8", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
+                            {aula.sala && <div style={{ color: "var(--text-secondary)", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                           </div>
                         ) : (
-                          <div style={{ color: "#b0b8cf", fontSize: "10px" }}>—</div>
+                          <div style={{ color: "var(--text-muted)", fontSize: "10px" }}>—</div>
                         )}
                       </div>
                     )
@@ -925,8 +925,8 @@ export default function GestorDashboard() {
 
       {/* ===== EXAMS CALENDAR SECTION ===== */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "20px",
         marginBottom: "20px"
@@ -935,13 +935,13 @@ export default function GestorDashboard() {
           fontSize: "14px",
           fontWeight: "600",
           marginBottom: "12px",
-          color: "#e8eaf0"
+          color: "var(--text-primary)"
         }}>Calendário de Provas</div>
 
         {/* Only Turno filter visible */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end", marginBottom: "16px" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurnoProvas} onChange={e => setFiltroTurnoProvas(e.target.value)} style={estiloSelect}>
               {turnosProvas.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -949,12 +949,12 @@ export default function GestorDashboard() {
         </div>
 
         {loadingProvas ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar provas...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar provas...</div>
         ) : provas.length === 0 ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>Nenhuma prova encontrada para este turno</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>Nenhuma prova encontrada para este turno</div>
         ) : (
           <div style={{ overflowX: "auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: `160px 1fr`, gap: "1px", background: "#13161e", borderRadius: "10px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: `160px 1fr`, gap: "1px", background: "var(--bg-input)", borderRadius: "10px" }}>
               {/* Header row */}
               <div style={{ padding: "12px", fontWeight: "600", color: "#2dd4bf", borderBottom: "1px solid rgba(45,212,191,0.2)", textAlign: "center" }}>Horário</div>
               <div style={{ padding: "12px", fontWeight: "600", color: "#2dd4bf", borderBottom: "1px solid rgba(45,212,191,0.2)", textAlign: "center" }}>Provas</div>
@@ -973,8 +973,8 @@ export default function GestorDashboard() {
                     <div style={{
                       padding: "12px",
                       fontWeight: "700",
-                      color: "#e8eaf0",
-                      borderRight: "1px solid rgba(255,255,255,0.1)",
+                      color: "var(--text-primary)",
+                      borderRight: "1px solid var(--border-color-strong)",
                       borderBottom: "1px solid rgba(255,255,255,0.05)",
                       fontSize: "12px",
                       display: "flex",
@@ -996,7 +996,7 @@ export default function GestorDashboard() {
                     }}>
                       {provasDesteDia.map(prova => (
                         <div key={prova.id_prova} style={{
-                          background: "#1e2230",
+                          background: "var(--bg-card)",
                           borderRadius: "6px",
                           padding: "10px 14px",
                           display: "flex",
@@ -1004,7 +1004,7 @@ export default function GestorDashboard() {
                           alignItems: "center"
                         }}>
                           <div>
-                            <div style={{ color: "#e8eaf0", fontWeight: "500", fontSize: "12px" }}>{prova.disciplina.nome_disciplina}</div>
+                            <div style={{ color: "var(--text-primary)", fontWeight: "500", fontSize: "12px" }}>{prova.disciplina.nome_disciplina}</div>
                             {prova.disciplina.codigo_disciplina && (
                               <div style={{ marginTop: "3px" }}>
                                 <span style={{
@@ -1021,7 +1021,7 @@ export default function GestorDashboard() {
                           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                             <div style={{
                               fontWeight: "700",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "12px",
                               whiteSpace: "nowrap"
                             }}>

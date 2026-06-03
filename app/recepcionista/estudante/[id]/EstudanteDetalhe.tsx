@@ -125,8 +125,8 @@ function Secao({ titulo, children, defaultExpanded = true }: { titulo: string; c
   const [expanded, setExpanded] = useState(defaultExpanded)
   return (
     <div style={{
-      background: "#1e2230",
-      border: "1px solid rgba(255,255,255,0.07)",
+      background: "var(--bg-card)",
+      border: "1px solid var(--border-color)",
       borderRadius: "14px", overflow: "hidden",
       marginBottom: "16px"
     }}>
@@ -134,16 +134,16 @@ function Secao({ titulo, children, defaultExpanded = true }: { titulo: string; c
         onClick={() => setExpanded(!expanded)}
         style={{
           padding: "14px 24px",
-          borderBottom: expanded ? "1px solid rgba(255,255,255,0.07)" : "none",
+          borderBottom: expanded ? "1px solid var(--border-color)" : "none",
           fontSize: "12px", fontWeight: "600",
-          color: "#d0d7e8", textTransform: "uppercase" as const,
+          color: "var(--text-secondary)", textTransform: "uppercase" as const,
           letterSpacing: "0.5px",
           cursor: "pointer",
           display: "flex", justifyContent: "space-between", alignItems: "center"
         }}
       >
         <span>{titulo}</span>
-        <span style={{ fontSize: "14px", color: "#b0b8cf" }}>{expanded ? "▲" : "▼"}</span>
+        <span style={{ fontSize: "14px", color: "var(--text-muted)" }}>{expanded ? "▲" : "▼"}</span>
       </div>
       {expanded && <div style={{ padding: "20px 24px" }}>{children}</div>}
     </div>
@@ -378,13 +378,13 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
   // ===== RENDER =====
   if (loading) return (
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
-      <div style={{ textAlign: "center", color: "#b0b8cf", padding: "80px" }}>A carregar...</div>
+      <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "80px" }}>A carregar...</div>
     </DashboardLayout>
   )
 
   if (erro || !dados) return (
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
-      <div style={{ background: "#1e2230", border: "1px solid rgba(224,61,61,0.3)", borderRadius: "14px", padding: "40px", textAlign: "center", color: "#e03d3d" }}>
+      <div style={{ background: "var(--bg-card)", border: "1px solid rgba(224,61,61,0.3)", borderRadius: "14px", padding: "40px", textAlign: "center", color: "var(--accent)" }}>
         {erro || "Estudante não encontrado"}
       </div>
     </DashboardLayout>
@@ -407,8 +407,8 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
     <DashboardLayout navItems={navItems} title="Recepção" subtitle="Ficha de estudante">
       {/* Botão voltar */}
       <button onClick={() => router.push("/recepcionista")} style={{
-        background: "transparent", border: "1px solid rgba(255,255,255,0.1)",
-        color: "#d0d7e8", borderRadius: "8px", padding: "8px 16px",
+        background: "transparent", border: "1px solid var(--border-color-strong)",
+        color: "var(--text-secondary)", borderRadius: "8px", padding: "8px 16px",
         fontSize: "13px", cursor: "pointer", marginBottom: "20px",
         display: "flex", alignItems: "center", gap: "6px"
       }}>← Voltar à pesquisa</button>
@@ -419,7 +419,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
           background: mensagem.tipo === "ok" ? "rgba(34,197,94,0.1)" : "rgba(224,61,61,0.1)",
           border: `1px solid ${mensagem.tipo === "ok" ? "rgba(34,197,94,0.3)" : "rgba(224,61,61,0.3)"}`,
           borderRadius: "10px", padding: "12px 20px",
-          color: mensagem.tipo === "ok" ? "#22c55e" : "#e03d3d",
+          color: mensagem.tipo === "ok" ? "#22c55e" : "var(--accent)",
           fontSize: "13px", marginBottom: "16px",
           display: "flex", alignItems: "center", gap: "8px"
         }}>
@@ -429,36 +429,36 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
 
       {/* Header do estudante */}
       <div style={{
-        background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)", border: "1px solid var(--border-color)",
         borderRadius: "16px", padding: "24px 28px", marginBottom: "16px",
         display: "flex", justifyContent: "space-between", alignItems: "flex-start",
         flexWrap: "wrap" as const, gap: "16px"
       }}>
         <div>
-          <div style={{ fontSize: "22px", fontWeight: "700", color: "#e8eaf0", marginBottom: "6px" }}>
+          <div style={{ fontSize: "22px", fontWeight: "700", color: "var(--text-primary)", marginBottom: "6px" }}>
             {dados.nome_completo}
           </div>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" as const }}>
             {dados.numero_estudante && (
-              <span style={{ fontSize: "13px", color: "#d0d7e8" }}>
-                Nº <strong style={{ color: "#e8eaf0" }}>{dados.numero_estudante}</strong>
+              <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
+                Nº <strong style={{ color: "var(--text-primary)" }}>{dados.numero_estudante}</strong>
               </span>
             )}
-            <span style={{ fontSize: "13px", color: "#d0d7e8" }}>{dados.curso.nome_curso}</span>
-            {dados.ano_current && <span style={{ fontSize: "13px", color: "#d0d7e8" }}>{dados.ano_current}º ano</span>}
-            {dados.numero_telemovel && <span style={{ fontSize: "13px", color: "#d0d7e8" }}>📞 {dados.numero_telemovel}</span>}
+            <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>{dados.curso.nome_curso}</span>
+            {dados.ano_current && <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>{dados.ano_current}º ano</span>}
+            {dados.numero_telemovel && <span style={{ fontSize: "13px", color: "var(--text-secondary)" }}>📞 {dados.numero_telemovel}</span>}
           </div>
         </div>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" as const, alignItems: "center" }}>
           {{
             EmCurso:    <Badge label="Em Curso"   color="#2dd4bf" bg="rgba(45,212,191,0.1)" />,
             Finalizado: <Badge label="Finalizado" color="#22c55e" bg="rgba(34,197,94,0.12)" />,
-            Desistente: <Badge label="Desistente" color="#e03d3d" bg="rgba(224,61,61,0.12)" />,
+            Desistente: <Badge label="Desistente" color="var(--accent)" bg="var(--accent-bg)" />,
           }[dados.estado] ?? null}
           {{
             Pago:     <Badge label="Propina OK" color="#22c55e" bg="rgba(34,197,94,0.12)" />,
             Pendente: <Badge label="Propina Pendente" color="#f0a500" bg="rgba(240,165,0,0.12)" />,
-            Atrasado: <Badge label="Propina Atrasada" color="#e03d3d" bg="rgba(224,61,61,0.12)" />,
+            Atrasado: <Badge label="Propina Atrasada" color="var(--accent)" bg="var(--accent-bg)" />,
           }[dados.pagamento] ?? null}
         </div>
       </div>
@@ -481,16 +481,16 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                 <div key={doc.id} style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
                   background: isEntregue ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.4)",
-                  border: `1px solid ${isEntregue ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.07)"}`,
+                  border: `1px solid ${isEntregue ? "rgba(34,197,94,0.15)" : "var(--border-color)"}`,
                   borderRadius: "10px", padding: "12px 16px",
                   flexWrap: "wrap", gap: "10px"
                 }}>
                   {/* Informação do documento */}
                   <div style={{ minWidth: "200px", flex: 1 }}>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>
                       {doc.nome}
                     </div>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>
                       {new Date(doc.data).toLocaleDateString("pt-AO")}
                       {doc.descricao ? ` — ${doc.descricao}` : ""}
                     </div>
@@ -656,28 +656,28 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
               <div key={f.id_factura} style={{
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 background: "rgba(13,15,20,0.4)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                border: "1px solid var(--border-color)",
                 borderRadius: "10px", padding: "12px 16px",
                 flexWrap: "wrap", gap: "10px"
               }}>
                 <div>
-                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                  <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>
                     {f.descricao_servico ?? "Serviço"}
                   </div>
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>
                     {f.numero_factura && `Nº ${f.numero_factura} | `}
                     {new Date(f.data_emissao).toLocaleDateString("pt-AO")}
                     {f.ano_lectivo && ` | ${f.ano_lectivo}`}
                   </div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-                  <div style={{ fontSize: "14px", fontWeight: "700", color: "#e8eaf0" }}>
+                  <div style={{ fontSize: "14px", fontWeight: "700", color: "var(--text-primary)" }}>
                     {Number(f.valor_final ?? f.valor_total).toLocaleString("pt-AO")} Kz
                   </div>
                   <Badge
                     label={f.estado}
-                    color={f.estado === "Pago" ? "#22c55e" : f.estado === "Atrasado" ? "#e03d3d" : "#f0a500"}
-                    bg={f.estado === "Pago" ? "rgba(34,197,94,0.12)" : f.estado === "Atrasado" ? "rgba(224,61,61,0.12)" : "rgba(240,165,0,0.12)"}
+                    color={f.estado === "Pago" ? "#22c55e" : f.estado === "Atrasado" ? "var(--accent)" : "#f0a500"}
+                    bg={f.estado === "Pago" ? "rgba(34,197,94,0.12)" : f.estado === "Atrasado" ? "var(--accent-bg)" : "rgba(240,165,0,0.12)"}
                   />
                 </div>
               </div>
@@ -701,10 +701,10 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                   flexWrap: "wrap", gap: "10px"
                 }}>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>
                       {MESES[p.mes - 1]} {p.ano}
                     </div>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>
                       Ref: {p.referencia} | Venc: {new Date(p.data_vencimento).toLocaleDateString("pt-AO")}
                     </div>
                     {p.data_pagamento && (
@@ -716,18 +716,18 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <div style={{ textAlign: "right" }}>
                       {p.valor_multa > 0 && (
-                        <div style={{ fontSize: "11px", color: "#e03d3d" }}>
+                        <div style={{ fontSize: "11px", color: "var(--accent)" }}>
                           Multa: +{Number(p.valor_multa).toLocaleString("pt-AO")} Kz
                         </div>
                       )}
-                      <div style={{ fontSize: "15px", fontWeight: "700", color: isPago ? "#22c55e" : "#e03d3d" }}>
+                      <div style={{ fontSize: "15px", fontWeight: "700", color: isPago ? "#22c55e" : "var(--accent)" }}>
                         {Number(p.valor_total).toLocaleString("pt-AO")} Kz
                       </div>
                     </div>
                     <Badge
                       label={p.estado}
-                      color={isPago ? "#22c55e" : p.estado === "Atrasado" ? "#e03d3d" : "#f0a500"}
-                      bg={isPago ? "rgba(34,197,94,0.12)" : p.estado === "Atrasado" ? "rgba(224,61,61,0.12)" : "rgba(240,165,0,0.12)"}
+                      color={isPago ? "#22c55e" : p.estado === "Atrasado" ? "var(--accent)" : "#f0a500"}
+                      bg={isPago ? "rgba(34,197,94,0.12)" : p.estado === "Atrasado" ? "var(--accent-bg)" : "rgba(240,165,0,0.12)"}
                     />
                   </div>
                 </div>
@@ -743,7 +743,7 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
             <span style={{ color: "#22c55e" }}>
               ✓ {propinasPagas.length} paga{propinasPagas.length !== 1 ? "s" : ""}
             </span>
-            <span style={{ color: "#e03d3d" }}>
+            <span style={{ color: "var(--accent)" }}>
               ⚠ {propinasPendentes.length} pendente{propinasPendentes.length !== 1 ? "s" : ""}
             </span>
           </div>
@@ -758,10 +758,10 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
               <div key={n.id_nota_cobranca} style={{
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 background: "rgba(13,15,20,0.4)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                border: "1px solid var(--border-color)",
                 borderRadius: "10px", padding: "12px 16px"
               }}>
-                <div style={{ fontSize: "14px", color: "#e8eaf0" }}>{n.descricao}</div>
+                <div style={{ fontSize: "14px", color: "var(--text-primary)" }}>{n.descricao}</div>
                 <div style={{ fontSize: "14px", fontWeight: "700", color: "#f0a500" }}>
                   {Number(n.valor).toLocaleString("pt-AO")} Kz
                 </div>

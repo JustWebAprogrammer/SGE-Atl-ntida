@@ -263,8 +263,8 @@ export default function OrientadoresAdminDashboard() {
             style={{
               width: '100%',
               padding: '10px 14px',
-              background: '#13161e',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--bg-input)',
+              border: '1px solid var(--border-color)',
               borderRadius: '8px',
               color: 'white',
               fontSize: '14px'
@@ -278,8 +278,8 @@ export default function OrientadoresAdminDashboard() {
           onChange={(e) => setFiltroDepartamento(e.target.value)}
           style={{
             padding: '10px 14px',
-            background: '#13161e',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'white',
             fontSize: '14px',
@@ -300,8 +300,8 @@ export default function OrientadoresAdminDashboard() {
           onChange={(e) => setFiltroCurso(e.target.value)}
           style={{
             padding: '10px 14px',
-            background: '#13161e',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'white',
             fontSize: '14px',
@@ -320,7 +320,7 @@ export default function OrientadoresAdminDashboard() {
         <button 
           onClick={() => setShowModal(true)}
           style={{
-            background: '#e03d3d',
+            background: 'var(--accent)',
             color: 'white',
             border: 'none',
             padding: '12px 20px',
@@ -335,37 +335,37 @@ export default function OrientadoresAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar orientadores...
         </div>
       ) : (
-        <div style={{ background: '#1e2230', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', borderRadius: '12px', overflow: 'hidden' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Email</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Especialidade</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Função</th>
-                <th style={{ textAlign: 'left', padding: '14px', color: '#d0d7e8', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
+              <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Nome</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Email</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Departamento</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Especialidade</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Função</th>
+                <th style={{ textAlign: 'left', padding: '14px', color: 'var(--text-secondary)', fontWeight: '500', fontSize: '12px', textTransform: 'uppercase' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {orientadores.map((orientador) => (
                 <tr key={orientador.id_orientador} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                  <td style={{ padding: '14px', color: '#e8eaf0' }}>{orientador.nome_completo}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{orientador.usuario.email}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{orientador.departamento?.nome_departamento || '—'}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{orientador.especialidade}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)' }}>{orientador.nome_completo}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{orientador.usuario.email}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{orientador.departamento?.nome_departamento || '—'}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{orientador.especialidade}</td>
                   <td style={{ padding: '14px' }}>
                     <span style={{
                       padding: '4px 10px',
                       borderRadius: '12px',
                       fontSize: '11px',
                       fontWeight: '600',
-                      background: orientador.e_gestor ? '#9b59b620' : '#b0b8cf20',
-                      color: orientador.e_gestor ? '#9b59b6' : '#b0b8cf'
+                      background: orientador.e_gestor ? '#9b59b620' : 'var(--text-muted)20',
+                      color: orientador.e_gestor ? '#9b59b6' : 'var(--text-muted)'
                     }}>
                       {orientador.e_gestor ? '✅ Gestor' : 'Professor'}
                     </span>
@@ -400,17 +400,17 @@ export default function OrientadoresAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setShowModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '500px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Adicionar Novo Orientador</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Adicionar Novo Orientador</h3>
             
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome Completo</label>
                 <input
                   type="text"
                   value={formData.nome}
@@ -418,8 +418,8 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -428,7 +428,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Email</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Email</label>
                 <input
                   type="email"
                   value={formData.email}
@@ -436,8 +436,8 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -446,15 +446,15 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Departamento</label>
                 <select
                   value={formData.id_departamento}
                   onChange={(e) => setFormData({...formData, id_departamento: e.target.value})}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -469,7 +469,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Especialidade</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Especialidade</label>
                 <input
                   type="text"
                   value={formData.especialidade}
@@ -477,8 +477,8 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -487,9 +487,9 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telemóvel (+244 9)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Telemóvel (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={formData.numero_telemovel}
@@ -499,7 +499,7 @@ export default function OrientadoresAdminDashboard() {
                     }}
                     placeholder="XXXXXXXX"
                     maxLength={8}
-                    style={{ flex: 1, width: 'auto', padding: '12px', background: '#13161e', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '8px', color: 'white' }}
+                    style={{ flex: 1, width: 'auto', padding: '12px', background: 'var(--bg-input)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'white' }}
                   />
                 </div>
               </div>
@@ -515,9 +515,9 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -527,7 +527,7 @@ export default function OrientadoresAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',
@@ -558,14 +558,14 @@ export default function OrientadoresAdminDashboard() {
           zIndex: 1100
         }} onClick={() => setShowReplaceGestorModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '400px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 16px 0', color: '#e8eaf0' }}>⚠️ Substituir Gestor</h3>
-            <p style={{ color: '#d0d7e8', marginBottom: '20px', lineHeight: '1.5' }}>
+            <h3 style={{ margin: '0 0 16px 0', color: 'var(--text-primary)' }}>⚠️ Substituir Gestor</h3>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', lineHeight: '1.5' }}>
               Já existe um gestor neste departamento (<strong>{gestorExistente}</strong>). 
               Deseja remover o gestor atual e tornar este orientador no novo gestor?
             </p>
@@ -579,9 +579,9 @@ export default function OrientadoresAdminDashboard() {
                 style={{
                   padding: '12px 20px',
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: '1px solid var(--border-color-strong)',
                   borderRadius: '8px',
-                  color: '#d0d7e8',
+                  color: 'var(--text-secondary)',
                   cursor: 'pointer'
                 }}
               >
@@ -592,7 +592,7 @@ export default function OrientadoresAdminDashboard() {
                 onClick={confirmarSubstituirGestor}
                 style={{
                   padding: '12px 20px',
-                  background: '#e03d3d',
+                  background: 'var(--accent)',
                   border: 'none',
                   borderRadius: '8px',
                   color: 'white',
@@ -622,17 +622,17 @@ export default function OrientadoresAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setShowEditModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '500px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Editar Orientador</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Editar Orientador</h3>
             
             <form onSubmit={handleEditSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome Completo</label>
                 <input
                   type="text"
                   value={editFormData.nome_completo}
@@ -640,8 +640,8 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -650,15 +650,15 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Departamento</label>
                 <select
                   value={editFormData.id_departamento}
                   onChange={(e) => setEditFormData({...editFormData, id_departamento: e.target.value})}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -673,7 +673,7 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Especialidade</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Especialidade</label>
                 <input
                   type="text"
                   value={editFormData.especialidade}
@@ -681,8 +681,8 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -691,9 +691,9 @@ export default function OrientadoresAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telemóvel (+244 9)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Telemóvel (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={editFormData.numero_telemovel}
@@ -703,7 +703,7 @@ export default function OrientadoresAdminDashboard() {
                     }}
                     placeholder="XXXXXXXX"
                     maxLength={8}
-                    style={{ flex: 1, width: 'auto', padding: '12px', background: '#13161e', border: '1px solid rgba(255,255,255,0.07)', borderRadius: '8px', color: 'white' }}
+                    style={{ flex: 1, width: 'auto', padding: '12px', background: 'var(--bg-input)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'white' }}
                   />
                 </div>
               </div>
@@ -716,7 +716,7 @@ export default function OrientadoresAdminDashboard() {
                     onChange={(e) => setEditFormData({...editFormData, e_gestor: e.target.checked})}
                     style={{ width: '18px', height: '18px' }}
                   />
-                  <span style={{ color: '#e8eaf0' }}>Este orientador é Gestor de Departamento</span>
+                  <span style={{ color: 'var(--text-primary)' }}>Este orientador é Gestor de Departamento</span>
                 </label>
               </div>
 
@@ -741,9 +741,9 @@ export default function OrientadoresAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -753,7 +753,7 @@ export default function OrientadoresAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',

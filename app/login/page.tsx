@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import ThemeToggle from "@/app/components/ThemeToggle"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -34,7 +35,7 @@ export default function LoginPage() {
   return (
     <main style={{
       minHeight: "100vh",
-      background: "#0d0f14",
+      background: "var(--bg-primary)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -48,10 +49,14 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          {/* Theme toggle no canto superior direito */}
+          <div style={{ position: "fixed", top: "20px", right: "20px", zIndex: 1000 }}>
+            <ThemeToggle />
+          </div>
           <div style={{
             width: "48px",
             height: "48px",
-            background: "#e03d3d",
+            background: "var(--accent)",
             borderRadius: "12px",
             display: "flex",
             alignItems: "center",
@@ -62,13 +67,13 @@ export default function LoginPage() {
             margin: "0 auto 16px"
           }}>A</div>
           <h1 style={{
-            color: "#e8eaf0",
+            color: "var(--text-primary)",
             fontSize: "22px",
             fontWeight: "700",
             margin: "0 0 4px"
           }}>ISP Atlântida</h1>
           <p style={{
-            color: "#b0b8cf",
+            color: "var(--text-muted)",
             fontSize: "13px",
             margin: 0
           }}>Portal Académico</p>
@@ -76,13 +81,13 @@ export default function LoginPage() {
 
         {/* Card */}
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "16px",
           padding: "32px"
         }}>
           <h2 style={{
-            color: "#e8eaf0",
+            color: "var(--text-primary)",
             fontSize: "18px",
             fontWeight: "600",
             margin: "0 0 24px"
@@ -93,7 +98,7 @@ export default function LoginPage() {
             <div style={{ marginBottom: "16px" }}>
               <label style={{
                 display: "block",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 fontSize: "12px",
                 fontWeight: "500",
                 marginBottom: "8px",
@@ -109,10 +114,10 @@ export default function LoginPage() {
                 style={{
                   width: "100%",
                   padding: "12px 14px",
-                  background: "#13161e",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--bg-input)",
+                  border: "1px solid var(--border-color)",
                   borderRadius: "8px",
-                  color: "#e8eaf0",
+                  color: "var(--text-primary)",
                   fontSize: "14px",
                   outline: "none",
                   boxSizing: "border-box"
@@ -124,7 +129,7 @@ export default function LoginPage() {
             <div style={{ marginBottom: "24px" }}>
               <label style={{
                 display: "block",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 fontSize: "12px",
                 fontWeight: "500",
                 marginBottom: "8px",
@@ -140,10 +145,10 @@ export default function LoginPage() {
                 style={{
                   width: "100%",
                   padding: "12px 14px",
-                  background: "#13161e",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--bg-input)",
+                  border: "1px solid var(--border-color)",
                   borderRadius: "8px",
-                  color: "#e8eaf0",
+                  color: "var(--text-primary)",
                   fontSize: "14px",
                   outline: "none",
                   boxSizing: "border-box"
@@ -154,11 +159,11 @@ export default function LoginPage() {
             {/* Error */}
             {error && (
               <div style={{
-                background: "rgba(224,61,61,0.12)",
-                border: "1px solid rgba(224,61,61,0.3)",
+                background: "var(--accent-bg)",
+                border: "1px solid var(--accent)",
                 borderRadius: "8px",
                 padding: "10px 14px",
-                color: "#e03d3d",
+                color: "var(--accent)",
                 fontSize: "13px",
                 marginBottom: "16px"
               }}>{error}</div>
@@ -171,7 +176,7 @@ export default function LoginPage() {
               style={{
                 width: "100%",
                 padding: "13px",
-                background: loading ? "#b0b8cf" : "#e03d3d",
+                background: loading ? "var(--text-muted)" : "var(--accent)",
                 color: "white",
                 border: "none",
                 borderRadius: "8px",
@@ -188,7 +193,7 @@ export default function LoginPage() {
 
         <p style={{
           textAlign: "center",
-          color: "#b0b8cf",
+          color: "var(--text-muted)",
           fontSize: "12px",
           marginTop: "24px"
         }}>

@@ -41,8 +41,8 @@ type ProvaInfo = {
 }
 
 const cardStyle: React.CSSProperties = {
-  background: "#1e2230",
-  border: "1px solid rgba(255,255,255,0.07)",
+  background: "var(--bg-card)",
+  border: "1px solid var(--border-color)",
   borderRadius: "14px",
   padding: "20px",
   marginBottom: "20px",
@@ -143,24 +143,24 @@ export default function PlanoAulaDashboard() {
     >
       {loading ? (
         <div style={{ ...cardStyle, textAlign: "center", padding: "60px" }}>
-          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
+          <div style={{ color: "var(--text-muted)" }}>A carregar...</div>
         </div>
       ) : (
         <>
           {/* ── HORÁRIO ── */}
           <div style={cardStyle}>
-            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ background: "#2dd4bf", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ background: "#2dd4bf", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
                 HORÁRIO
               </span>
               Horário Semanal
             </div>
-            <div style={{ color: "#d0d7e8", fontSize: "12px", marginBottom: "16px" }}>
+            <div style={{ color: "var(--text-secondary)", fontSize: "12px", marginBottom: "16px" }}>
               {anoLectivo} · {semestre === "S1" ? "1º Semestre" : "2º Semestre"}
             </div>
 
             {horarios.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>
+              <div style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
                 Nenhuma aula registada para as suas disciplinas.
               </div>
             ) : (
@@ -169,7 +169,7 @@ export default function PlanoAulaDashboard() {
                   display: "grid",
                   gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`,
                   gap: "1px",
-                  background: "#13161e",
+                  background: "var(--bg-input)",
                   borderRadius: "10px",
                 }}>
                   <div style={{ padding: "12px", fontWeight: "600", color: "#2dd4bf", borderBottom: "1px solid rgba(45,212,191,0.2)", textAlign: "center" }}></div>
@@ -182,8 +182,8 @@ export default function PlanoAulaDashboard() {
                   {posicoesTurno.map(pos => (
                     <div key={pos.posicao} style={{ display: "contents" }}>
                       <div style={{
-                        padding: "12px", fontWeight: "700", color: "#e8eaf0",
-                        borderRight: "1px solid rgba(255,255,255,0.1)", borderBottom: "1px solid rgba(255,255,255,0.05)",
+                        padding: "12px", fontWeight: "700", color: "var(--text-primary)",
+                        borderRight: "1px solid var(--border-color-strong)", borderBottom: "1px solid rgba(255,255,255,0.05)",
                         fontSize: "12px", display: "flex", alignItems: "center", justifyContent: "center",
                       }}>
                         {pos.inicio} – {pos.fim}
@@ -196,13 +196,13 @@ export default function PlanoAulaDashboard() {
                             display: "flex", alignItems: "center", justifyContent: "center",
                           }}>
                             {aula ? (
-                              <div style={{ background: "#1e2230", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
-                                <div style={{ color: "#e8eaf0", fontWeight: "600", fontSize: "11px" }}>{aula.nome_disciplina}</div>
-                                <div style={{ color: "#d0d7e8", fontSize: "10px", marginTop: "3px" }}>{aula.nome_curso} · {aula.ano_curricular}º</div>
-                                {aula.sala && <div style={{ color: "#b0b8cf", marginTop: "3px", fontSize: "10px" }}>📍 {aula.sala}</div>}
+                              <div style={{ background: "var(--bg-card)", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
+                                <div style={{ color: "var(--text-primary)", fontWeight: "600", fontSize: "11px" }}>{aula.nome_disciplina}</div>
+                                <div style={{ color: "var(--text-secondary)", fontSize: "10px", marginTop: "3px" }}>{aula.nome_curso} · {aula.ano_curricular}º</div>
+                                {aula.sala && <div style={{ color: "var(--text-muted)", marginTop: "3px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                               </div>
                             ) : (
-                              <div style={{ color: "#b0b8cf", fontSize: "10px" }}>—</div>
+                              <div style={{ color: "var(--text-muted)", fontSize: "10px" }}>—</div>
                             )}
                           </div>
                         )
@@ -216,18 +216,18 @@ export default function PlanoAulaDashboard() {
 
           {/* ── PROVAS ── */}
           <div style={cardStyle}>
-            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ background: "#f0a500", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ background: "#f0a500", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
                 PROVAS
               </span>
               Plano de Provas
             </div>
-            <div style={{ color: "#d0d7e8", fontSize: "12px", marginBottom: "16px" }}>
+            <div style={{ color: "var(--text-secondary)", fontSize: "12px", marginBottom: "16px" }}>
               {anoLectivo} · {semestre === "S1" ? "1º Semestre" : "2º Semestre"}
             </div>
 
             {provas.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>
+              <div style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
                 Nenhuma prova registada para as suas disciplinas.
               </div>
             ) : (
@@ -239,37 +239,37 @@ export default function PlanoAulaDashboard() {
                   <div style={{ overflowX: "auto" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
                       <thead>
-                        <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                          <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Data</th>
-                          <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Horário</th>
-                          <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Tipo</th>
-                          <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
-                          <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Curso</th>
+                        <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                          <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Data</th>
+                          <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Horário</th>
+                          <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Tipo</th>
+                          <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
+                          <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Curso</th>
                         </tr>
                       </thead>
                       <tbody>
                         {grupo.items.map((p) => (
                           <tr key={p.id_prova} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                            <td style={{ padding: "10px 12px", color: "#e8eaf0", fontWeight: "600", whiteSpace: "nowrap" }}>
+                            <td style={{ padding: "10px 12px", color: "var(--text-primary)", fontWeight: "600", whiteSpace: "nowrap" }}>
                               {new Date(p.data_prova + "T12:00:00").toLocaleDateString("pt-AO", { weekday: "short", day: "2-digit", month: "2-digit" })}
                             </td>
-                            <td style={{ padding: "10px 12px", color: "#e8eaf0", whiteSpace: "nowrap" }}>
+                            <td style={{ padding: "10px 12px", color: "var(--text-primary)", whiteSpace: "nowrap" }}>
                               {p.hora_inicio} — {p.hora_fim}
                             </td>
                             <td style={{ padding: "10px 12px" }}>
                               <span style={{
                                 background: p.tipo_prova === "Exame" ? "rgba(155,89,182,0.1)" : p.tipo_prova === "Recurso" ? "rgba(224,61,61,0.1)" : "rgba(45,212,191,0.1)",
-                                color: p.tipo_prova === "Exame" ? "#9b59b6" : p.tipo_prova === "Recurso" ? "#e03d3d" : "#2dd4bf",
+                                color: p.tipo_prova === "Exame" ? "#9b59b6" : p.tipo_prova === "Recurso" ? "var(--accent)" : "#2dd4bf",
                                 padding: "3px 10px", borderRadius: "20px", fontSize: "11px", fontWeight: "600",
                               }}>
                                 {TIPO_PROVA_LABELS[p.tipo_prova] || p.tipo_prova}
                               </span>
                             </td>
-                            <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>
+                            <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>
                               {p.nome_disciplina}
-                              <span style={{ color: "#b0b8cf", marginLeft: "6px", fontSize: "11px" }}>({p.codigo_disciplina})</span>
+                              <span style={{ color: "var(--text-muted)", marginLeft: "6px", fontSize: "11px" }}>({p.codigo_disciplina})</span>
                             </td>
-                            <td style={{ padding: "10px 12px", color: "#d0d7e8" }}>
+                            <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>
                               {p.nome_curso} · {p.ano_curricular}º · {p.turno}
                             </td>
                           </tr>

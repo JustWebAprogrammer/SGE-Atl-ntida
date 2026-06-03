@@ -33,8 +33,8 @@ function BadgePagamento({ estado }: { estado: string }) {
   const cfg = {
     Pago:     { bg: "rgba(34,197,94,0.12)",  color: "#22c55e", label: "Propina OK" },
     Pendente: { bg: "rgba(240,165,0,0.12)",   color: "#f0a500", label: "Pendente" },
-    Atrasado: { bg: "rgba(224,61,61,0.12)",   color: "#e03d3d", label: "Atrasado" },
-  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf", label: estado }
+    Atrasado: { bg: "var(--accent-bg)",   color: "var(--accent)", label: "Atrasado" },
+  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)", label: estado }
 
   return (
     <span style={{
@@ -49,8 +49,8 @@ function BadgeEstado({ estado }: { estado: string }) {
   const cfg = {
     EmCurso:    { bg: "rgba(45,212,191,0.1)",  color: "#2dd4bf" },
     Finalizado: { bg: "rgba(34,197,94,0.12)",  color: "#22c55e" },
-    Desistente: { bg: "rgba(224,61,61,0.12)",  color: "#e03d3d" },
-  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
+    Desistente: { bg: "var(--accent-bg)",  color: "var(--accent)" },
+  }[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" }
 
   return (
     <span style={{
@@ -135,10 +135,10 @@ export default function RecepcionistaDashboard() {
 
   const selectStyle: React.CSSProperties = {
     padding: "10px 14px",
-    background: "#0d0f14",
-    border: "1px solid rgba(255,255,255,0.1)",
+    background: "var(--bg-primary)",
+    border: "1px solid var(--border-color-strong)",
     borderRadius: "10px",
-    color: "#e8eaf0",
+    color: "var(--text-primary)",
     fontSize: "14px",
     outline: "none",
     cursor: "pointer",
@@ -152,13 +152,13 @@ export default function RecepcionistaDashboard() {
     >
       {/* Barra de filtros */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "16px",
         padding: "28px 32px",
         marginBottom: "24px",
       }}>
-        <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "16px", fontWeight: "500" }}>
+        <div style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "16px", fontWeight: "500" }}>
           Filtros de pesquisa
         </div>
 
@@ -168,7 +168,7 @@ export default function RecepcionistaDashboard() {
             <span style={{
               position: "absolute", left: "14px", top: "50%",
               transform: "translateY(-50%)",
-              color: "#b0b8cf", fontSize: "14px", pointerEvents: "none"
+              color: "var(--text-muted)", fontSize: "14px", pointerEvents: "none"
             }}>🔍</span>
             <input
               type="text"
@@ -178,10 +178,10 @@ export default function RecepcionistaDashboard() {
               style={{
                 width: "100%",
                 padding: "10px 14px 10px 40px",
-                background: "#0d0f14",
-                border: `1px solid ${erro ? "#e03d3d" : "rgba(255,255,255,0.1)"}`,
+                background: "var(--bg-primary)",
+                border: `1px solid ${erro ? "var(--accent)" : "var(--border-color-strong)"}`,
                 borderRadius: "10px",
-                color: "#e8eaf0",
+                color: "var(--text-primary)",
                 fontSize: "14px",
                 outline: "none",
                 boxSizing: "border-box",
@@ -214,15 +214,15 @@ export default function RecepcionistaDashboard() {
         </div>
 
         {erro && (
-          <div style={{ fontSize: "12px", color: "#e03d3d", marginTop: "10px" }}>{erro}</div>
+          <div style={{ fontSize: "12px", color: "var(--accent)", marginTop: "10px" }}>{erro}</div>
         )}
         {!pesquisou && !loading && (
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "10px" }}>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "10px" }}>
             Use os filtros acima para pesquisar estudantes
           </div>
         )}
         {loading && (
-          <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "10px" }}>
+          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "10px" }}>
             A pesquisar...
           </div>
         )}
@@ -232,27 +232,27 @@ export default function RecepcionistaDashboard() {
       {pesquisou && !loading && (
         resultados.length === 0 ? (
           <div style={{
-            background: "#1e2230",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-color)",
             borderRadius: "14px", padding: "60px",
-            textAlign: "center", color: "#b0b8cf"
+            textAlign: "center", color: "var(--text-muted)"
           }}>
             Nenhum estudante encontrado com os filtros seleccionados.
           </div>
         ) : (
           <div style={{
-            background: "#1e2230",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-color)",
             borderRadius: "14px", overflow: "hidden"
           }}>
             {/* Cabeçalho */}
             <div style={{
               padding: "12px 24px",
-              borderBottom: "1px solid rgba(255,255,255,0.07)",
+              borderBottom: "1px solid var(--border-color)",
               display: "grid",
               gridTemplateColumns: "2fr 1fr 80px 100px 110px",
               gap: "12px",
-              fontSize: "11px", color: "#b0b8cf",
+              fontSize: "11px", color: "var(--text-muted)",
               textTransform: "uppercase", letterSpacing: "0.5px"
             }}>
               <span>Estudante</span>
@@ -282,19 +282,19 @@ export default function RecepcionistaDashboard() {
                 onMouseLeave={ev => (ev.currentTarget.style.background = "transparent")}
               >
                 <div>
-                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                  <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>
                     {e.nome_completo}
                   </div>
                   {e.numero_estudante && (
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>
                       Nº {e.numero_estudante}
                     </div>
                   )}
                 </div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
                   {e.curso.nome_curso}
                 </div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
                   {e.ano_current ? `${e.ano_current}º ano` : "—"}
                 </div>
                 <BadgeEstado estado={e.estado} />
@@ -305,7 +305,7 @@ export default function RecepcionistaDashboard() {
             <div style={{
               padding: "10px 24px",
               borderTop: "1px solid rgba(255,255,255,0.05)",
-              fontSize: "11px", color: "#b0b8cf"
+              fontSize: "11px", color: "var(--text-muted)"
             }}>
               {resultados.length} resultado{resultados.length !== 1 ? "s" : ""}
             </div>

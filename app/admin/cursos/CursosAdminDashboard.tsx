@@ -43,9 +43,9 @@ function ToggleTurno({ turnos, onChange }: { turnos: string[], onChange: (t: str
               padding: "8px 14px",
               borderRadius: "8px",
               border: "1px solid",
-              borderColor: ativo ? "#2dd4bf" : "rgba(255,255,255,0.1)",
-              background: ativo ? "rgba(45,212,191,0.15)" : "#13161e",
-              color: ativo ? "#2dd4bf" : "#d0d7e8",
+              borderColor: ativo ? "#2dd4bf" : "var(--border-color-strong)",
+              background: ativo ? "rgba(45,212,191,0.15)" : "var(--bg-input)",
+              color: ativo ? "#2dd4bf" : "var(--text-secondary)",
               fontSize: "13px",
               fontWeight: ativo ? "600" : "400",
               cursor: "pointer"
@@ -364,7 +364,7 @@ export default function CursosAdminDashboard() {
         <button 
           onClick={() => setShowModal(true)}
           style={{
-            background: '#e03d3d',
+            background: 'var(--accent)',
             color: 'white',
             border: 'none',
             padding: '12px 20px',
@@ -379,31 +379,31 @@ export default function CursosAdminDashboard() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar cursos...
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '16px' }}>
           {cursos.map((curso) => (
             <div key={curso.id_curso} style={{
-              background: '#1e2230',
+              background: 'var(--bg-card)',
               borderRadius: '12px',
               padding: '20px',
-              borderTop: '3px solid #e03d3d'
+              borderTop: '3px solid var(--accent)'
             }}>
-              <h3 style={{ margin: '0 0 10px 0', color: '#e8eaf0', fontSize: '18px' }}>{curso.nome_curso}</h3>
-              <div style={{ color: '#d0d7e8', fontSize: '13px', marginBottom: '16px' }}>
+              <h3 style={{ margin: '0 0 10px 0', color: 'var(--text-primary)', fontSize: '18px' }}>{curso.nome_curso}</h3>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '16px' }}>
                 {curso.departamento.nome_departamento}
               </div>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: '24px', fontWeight: '700', color: '#2dd4bf' }}>{curso._count.estudantes}</div>
-                  <div style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase' }}>Estudantes</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Estudantes</div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: '24px', fontWeight: '700', color: '#9b59b6' }}>{curso.duracao_anos}</div>
-                  <div style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase' }}>Anos</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Anos</div>
                 </div>
               </div>
               <div style={{ marginBottom: '12px', display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
@@ -425,7 +425,7 @@ export default function CursosAdminDashboard() {
                   width: '100%',
                   padding: '10px',
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: '1px solid var(--border-color-strong)',
                   borderRadius: '8px',
                   color: '#f0a500',
                   cursor: 'pointer'
@@ -450,17 +450,17 @@ export default function CursosAdminDashboard() {
           zIndex: 1000
         }} onClick={() => setShowModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '400px',
             maxWidth: '90%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Adicionar Novo Curso</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Adicionar Novo Curso</h3>
             
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome do Curso</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome do Curso</label>
                 <input
                   type="text"
                   value={formData.nome_curso}
@@ -468,8 +468,8 @@ export default function CursosAdminDashboard() {
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -478,15 +478,15 @@ export default function CursosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Departamento</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Departamento</label>
                 <select
                   value={formData.id_departamento}
                   onChange={(e) => setFormData({...formData, id_departamento: Number(e.target.value)})}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -498,15 +498,15 @@ export default function CursosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Duração (Anos)</label>
+                <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Duração (Anos)</label>
                 <select
                   value={formData.duracao_anos}
                   onChange={(e) => setFormData({...formData, duracao_anos: Number(e.target.value)})}
                   style={{
                     width: '100%',
                     padding: '12px',
-                    background: '#13161e',
-                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'var(--bg-input)',
+                    border: '1px solid var(--border-color)',
                     borderRadius: '8px',
                     color: 'white'
                   }}
@@ -518,7 +518,7 @@ export default function CursosAdminDashboard() {
               </div>
 
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', color: '#d0d7e8', fontSize: '13px' }}>Turnos</label>
+                <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '13px' }}>Turnos</label>
                 <ToggleTurno turnos={formData.turnos} onChange={(t) => setFormData({...formData, turnos: t})} />
               </div>
 
@@ -529,9 +529,9 @@ export default function CursosAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer'
                   }}
                 >
@@ -541,7 +541,7 @@ export default function CursosAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',
@@ -574,21 +574,21 @@ export default function CursosAdminDashboard() {
           padding: '30px 0'
         }} onClick={() => setShowEditModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '750px',
             maxWidth: '95%'
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Editar Curso: {cursoSelecionado.nome_curso}</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Editar Curso: {cursoSelecionado.nome_curso}</h3>
 
             {/* Dados Básicos */}
-            <div style={{ marginBottom: '20px', paddingBottom: '15px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-              <h4 style={{ color: '#e8eaf0', marginBottom: '15px' }}>📋 Dados Básicos</h4>
+            <div style={{ marginBottom: '20px', paddingBottom: '15px', borderBottom: '1px solid var(--border-color-strong)' }}>
+              <h4 style={{ color: 'var(--text-primary)', marginBottom: '15px' }}>📋 Dados Básicos</h4>
 
               <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '15px', marginBottom: '15px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '12px' }}>Nome do Curso</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '12px' }}>Nome do Curso</label>
                   <input
                     type="text"
                     value={editFormData.nome_curso}
@@ -597,14 +597,14 @@ export default function CursosAdminDashboard() {
                       width: '100%',
                       padding: '10px',
                       background: '#0a0c12',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '6px',
                       color: 'white'
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '12px' }}>Duração</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '12px' }}>Duração</label>
                   <select
                     value={editFormData.duracao_anos}
                     onChange={(e) => setEditFormData({...editFormData, duracao_anos: Number(e.target.value)})}
@@ -612,7 +612,7 @@ export default function CursosAdminDashboard() {
                       width: '100%',
                       padding: '10px',
                       background: '#0a0c12',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '6px',
                       color: 'white'
                     }}
@@ -623,7 +623,7 @@ export default function CursosAdminDashboard() {
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '12px' }}>Departamento</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '12px' }}>Departamento</label>
                   <select
                     value={editFormData.id_departamento}
                     onChange={(e) => setEditFormData({...editFormData, id_departamento: Number(e.target.value)})}
@@ -631,7 +631,7 @@ export default function CursosAdminDashboard() {
                       width: '100%',
                       padding: '10px',
                       background: '#0a0c12',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '6px',
                       color: 'white'
                     }}
@@ -643,7 +643,7 @@ export default function CursosAdminDashboard() {
                 </div>
               </div>
               <div>
-                <label style={{ display: 'block', marginBottom: '8px', color: '#d0d7e8', fontSize: '12px' }}>Turnos</label>
+                <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '12px' }}>Turnos</label>
                 <ToggleTurno turnos={editFormData.turnos} onChange={(t) => setEditFormData({...editFormData, turnos: t})} />
               </div>
             </div>
@@ -659,7 +659,7 @@ export default function CursosAdminDashboard() {
                     borderRadius: '8px',
                     border: 'none',
                     cursor: 'pointer',
-                    background: tabActiva === ano ? '#e03d3d' : '#13161e',
+                    background: tabActiva === ano ? 'var(--accent)' : 'var(--bg-input)',
                     color: 'white',
                     fontWeight: tabActiva === ano ? '600' : '400'
                   }}
@@ -670,8 +670,8 @@ export default function CursosAdminDashboard() {
             </div>
 
             {/* Conteudo do Ano Selecionado */}
-            <div style={{ background: '#13161e', padding: '18px', borderRadius: '10px', marginBottom: '20px' }}>
-              <div style={{ fontWeight: '600', color: '#e8eaf0', marginBottom: '15px', fontSize: '16px' }}>
+            <div style={{ background: 'var(--bg-input)', padding: '18px', borderRadius: '10px', marginBottom: '20px' }}>
+              <div style={{ fontWeight: '600', color: 'var(--text-primary)', marginBottom: '15px', fontSize: '16px' }}>
                 Configuração do {tabActiva}º Ano
               </div>
 
@@ -680,7 +680,7 @@ export default function CursosAdminDashboard() {
               
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '4px', color: '#d0d7e8', fontSize: '12px' }}>Propina (Kz)</label>
+                  <label style={{ display: 'block', marginBottom: '4px', color: 'var(--text-secondary)', fontSize: '12px' }}>Propina (Kz)</label>
                   <input
                     type="number"
                     value={precosCurso[tabActiva]?.valor_propina || ""}
@@ -693,7 +693,7 @@ export default function CursosAdminDashboard() {
                       width: '100%',
                       padding: '10px',
                       background: '#0a0c12',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '6px',
                       color: 'white'
                     }}
@@ -701,7 +701,7 @@ export default function CursosAdminDashboard() {
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '4px', color: '#d0d7e8', fontSize: '12px' }}>Multa (Kz)</label>
+                  <label style={{ display: 'block', marginBottom: '4px', color: 'var(--text-secondary)', fontSize: '12px' }}>Multa (Kz)</label>
                   <input
                     type="number"
                     value={precosCurso[tabActiva]?.valor_multa || ""}
@@ -714,7 +714,7 @@ export default function CursosAdminDashboard() {
                       width: '100%',
                       padding: '10px',
                       background: '#0a0c12',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '6px',
                       color: 'white'
                     }}
@@ -730,13 +730,13 @@ export default function CursosAdminDashboard() {
                 padding: '20px', 
                 borderRadius: '8px', 
                 textAlign: 'center',
-                color: '#d0d7e8',
+                color: 'var(--text-secondary)',
                 border: '1px solid rgba(155, 89, 182, 0.3)'
               }}>
                 <div style={{ fontSize: '16px', marginBottom: '8px' }}>
                   🎓 As disciplinas são geridas pelo Gestor do Departamento
                 </div>
-                <div style={{ fontSize: '12px', color: '#b0b8cf' }}>
+                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
                   O gestor de cada departamento é responsável por atribuir as disciplinas aos cursos definindo o ano e semestre.
                 </div>
               </div>
@@ -759,7 +759,7 @@ export default function CursosAdminDashboard() {
                 onClick={() => setShowEditModal(false)}
                 style={{
                   padding: '12px 24px',
-                  background: '#b0b8cf',
+                  background: 'var(--text-muted)',
                   border: 'none',
                   borderRadius: '8px',
                   color: 'white',

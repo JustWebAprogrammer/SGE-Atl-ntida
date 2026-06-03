@@ -74,7 +74,7 @@ const modalBackdropStyle: React.CSSProperties = {
 }
 
 const modalBoxStyle: React.CSSProperties = {
-  background: '#1e2230',
+  background: 'var(--bg-card)',
   borderRadius: '16px',
   padding: '24px',
   width: '450px',
@@ -84,8 +84,8 @@ const modalBoxStyle: React.CSSProperties = {
 const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '12px',
-  background: '#13161e',
-  border: '1px solid rgba(255,255,255,0.07)',
+  background: 'var(--bg-input)',
+  border: '1px solid var(--border-color)',
   borderRadius: '8px',
   color: 'white',
   boxSizing: 'border-box',
@@ -94,7 +94,7 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   display: 'block',
   marginBottom: '6px',
-  color: '#d0d7e8',
+  color: 'var(--text-secondary)',
   fontSize: '13px',
 }
 
@@ -550,8 +550,8 @@ export default function EstudantesAdminDashboard() {
             style={{
               width: '100%',
               padding: '10px 14px',
-              background: '#13161e',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: 'var(--bg-input)',
+              border: '1px solid var(--border-color)',
               borderRadius: '8px',
               color: 'white',
               boxSizing: 'border-box',
@@ -565,8 +565,8 @@ export default function EstudantesAdminDashboard() {
           onChange={(e) => setFiltroCurso(e.target.value)}
           style={{
             padding: '10px 14px',
-            background: '#13161e',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'white',
             minWidth: '150px',
@@ -586,8 +586,8 @@ export default function EstudantesAdminDashboard() {
           onChange={(e) => setFiltroAno(e.target.value)}
           style={{
             padding: '10px 14px',
-            background: '#13161e',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'white',
             minWidth: '120px',
@@ -607,8 +607,8 @@ export default function EstudantesAdminDashboard() {
           onChange={(e) => setFiltroTurno(e.target.value)}
           style={{
             padding: '10px 14px',
-            background: '#13161e',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'white',
             minWidth: '120px',
@@ -626,8 +626,8 @@ export default function EstudantesAdminDashboard() {
           onChange={(e) => setFiltroBolsa(e.target.value)}
           style={{
             padding: '10px 14px',
-            background: '#13161e',
-            border: '1px solid rgba(255,255,255,0.07)',
+            background: 'var(--bg-input)',
+            border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'white',
             minWidth: '150px',
@@ -643,7 +643,7 @@ export default function EstudantesAdminDashboard() {
         <button
           onClick={() => setShowModal(true)}
           style={{
-            background: '#e03d3d',
+            background: 'var(--accent)',
             color: 'white',
             border: 'none',
             padding: '12px 20px',
@@ -659,21 +659,21 @@ export default function EstudantesAdminDashboard() {
 
       {/* ── Tabela ──────────────────────────────────────────── */}
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
           A carregar estudantes...
         </div>
       ) : (
-        <div style={{ background: '#1e2230', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--bg-card)', borderRadius: '12px', overflow: 'hidden' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+              <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
                 {['Nome', 'Nº Estudante', 'Email', 'Curso', 'Ano', 'Turno', 'Estado', 'Bolsa', 'Ações'].map((h) => (
                   <th
                     key={h}
                     style={{
                       textAlign: 'left',
                       padding: '14px',
-                      color: '#d0d7e8',
+                      color: 'var(--text-secondary)',
                       fontWeight: '500',
                       fontSize: '12px',
                       textTransform: 'uppercase',
@@ -698,18 +698,18 @@ export default function EstudantesAdminDashboard() {
                     setActiveTab('notas')
                   }}
                 >
-                  <td style={{ padding: '14px', color: '#e8eaf0' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-primary)' }}>
                     <span style={{ color: '#3b82f6' }}>
                       {estudante.nome_completo}
                     </span>
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.numero_estudante}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.usuario.email}</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{estudante.numero_estudante}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{estudante.usuario.email}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>
                     {estudante.curso?.nome_curso ?? '—'}
                   </td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.ano_current}º Ano</td>
-                  <td style={{ padding: '14px', color: '#d0d7e8' }}>{estudante.turno || '—'}</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{estudante.ano_current}º Ano</td>
+                  <td style={{ padding: '14px', color: 'var(--text-secondary)' }}>{estudante.turno || '—'}</td>
                   <td style={{ padding: '14px' }}>
                     <span
                       style={{
@@ -717,8 +717,8 @@ export default function EstudantesAdminDashboard() {
                         borderRadius: '12px',
                         fontSize: '11px',
                         fontWeight: '600',
-                        background: estudante.estado === 'EmCurso' ? '#22c55e20' : '#e03d3d20',
-                        color: estudante.estado === 'EmCurso' ? '#22c55e' : '#e03d3d',
+                        background: estudante.estado === 'EmCurso' ? '#22c55e20' : 'var(--accent)20',
+                        color: estudante.estado === 'EmCurso' ? '#22c55e' : 'var(--accent)',
                       }}
                     >
                       {estudante.estado}
@@ -772,7 +772,7 @@ export default function EstudantesAdminDashboard() {
       {showModal && (
         <div style={modalBackdropStyle} onClick={() => setShowModal(false)}>
           <div style={modalBoxStyle} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Adicionar Novo Estudante</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Adicionar Novo Estudante</h3>
 
             <form onSubmit={handleSubmit}>
               {/* Nome */}
@@ -803,7 +803,7 @@ export default function EstudantesAdminDashboard() {
               <div style={{ marginBottom: '16px' }}>
                 <label style={labelStyle}>Telefone (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={formData.telefone}
@@ -832,7 +832,7 @@ export default function EstudantesAdminDashboard() {
                 <p style={{ margin: 0, color: '#22c55e', fontSize: '13px', fontWeight: 500 }}>
                   ℹ️ Senha padrão: <strong>estudante12345</strong>
                 </p>
-                <p style={{ margin: '4px 0 0 0', color: '#d0d7e8', fontSize: '12px' }}>
+                <p style={{ margin: '4px 0 0 0', color: 'var(--text-secondary)', fontSize: '12px' }}>
                   O estudante poderá alterar depois no seu perfil
                 </p>
               </div>
@@ -921,9 +921,9 @@ export default function EstudantesAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid var(--border-color-strong)',
                     borderRadius: '8px',
-                    color: '#d0d7e8',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer',
                   }}
                 >
@@ -933,7 +933,7 @@ export default function EstudantesAdminDashboard() {
                   type="submit"
                   style={{
                     padding: '12px 20px',
-                    background: '#e03d3d',
+                    background: 'var(--accent)',
                     border: 'none',
                     borderRadius: '8px',
                     color: 'white',
@@ -953,7 +953,7 @@ export default function EstudantesAdminDashboard() {
       {editingStudent && (
         <div style={modalBackdropStyle} onClick={() => setEditingStudent(null)}>
           <div style={modalBoxStyle} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Editar Estudante</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Editar Estudante</h3>
 
             <form onSubmit={handleEditSubmit}>
               {/* Nome */}
@@ -972,7 +972,7 @@ export default function EstudantesAdminDashboard() {
               <div style={{ marginBottom: '16px' }}>
                 <label style={labelStyle}>Telefone (+244 9)</label>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <span style={{ color: '#d0d7e8', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
+                  <span style={{ color: 'var(--text-secondary)', fontSize: '14px', whiteSpace: 'nowrap' }}>+244 9</span>
                   <input
                     type="text"
                     value={editFormData.numero_telemovel}
@@ -1083,9 +1083,9 @@ export default function EstudantesAdminDashboard() {
                   style={{
                     padding: '12px 20px',
                     background: 'transparent',
-                    border: '1px solid #e03d3d',
+                    border: '1px solid var(--accent)',
                     borderRadius: '8px',
-                    color: '#e03d3d',
+                    color: 'var(--accent)',
                     fontWeight: '600',
                     cursor: 'pointer',
                   }}
@@ -1099,9 +1099,9 @@ export default function EstudantesAdminDashboard() {
                     style={{
                       padding: '12px 20px',
                       background: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      border: '1px solid var(--border-color-strong)',
                       borderRadius: '8px',
-                      color: '#d0d7e8',
+                      color: 'var(--text-secondary)',
                       cursor: 'pointer',
                     }}
                   >
@@ -1145,10 +1145,10 @@ export default function EstudantesAdminDashboard() {
             {/* Header */}
             <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <h3 style={{ margin: '0 0 8px 0', color: '#e8eaf0', fontSize: '20px' }}>
+                <h3 style={{ margin: '0 0 8px 0', color: 'var(--text-primary)', fontSize: '20px' }}>
                   {selectedStudent.nome_completo}
                 </h3>
-                <p style={{ margin: 0, color: '#d0d7e8', fontSize: '14px' }}>
+                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '14px' }}>
                   Nº {selectedStudent.numero_estudante} • {selectedStudent.curso?.nome_curso} • {selectedStudent.ano_current}º Ano
                 </p>
               </div>
@@ -1157,7 +1157,7 @@ export default function EstudantesAdminDashboard() {
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: '#d0d7e8',
+                  color: 'var(--text-secondary)',
                   fontSize: '24px',
                   cursor: 'pointer',
                   padding: '0 8px'
@@ -1168,15 +1168,15 @@ export default function EstudantesAdminDashboard() {
             </div>
 
             {/* Abas */}
-            <div style={{ display: 'flex', gap: '4px', marginBottom: '20px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ display: 'flex', gap: '4px', marginBottom: '20px', borderBottom: '1px solid var(--border-color-strong)' }}>
               <button
                 onClick={() => setActiveTab('notas')}
                 style={{
                   padding: '12px 24px',
-                  background: activeTab === 'notas' ? '#e03d3d' : 'transparent',
+                  background: activeTab === 'notas' ? 'var(--accent)' : 'transparent',
                   border: 'none',
                   borderRadius: '8px 8px 0 0',
-                  color: activeTab === 'notas' ? 'white' : '#d0d7e8',
+                  color: activeTab === 'notas' ? 'white' : 'var(--text-secondary)',
                   fontWeight: '600',
                   cursor: 'pointer',
                 }}
@@ -1187,10 +1187,10 @@ export default function EstudantesAdminDashboard() {
                 onClick={() => { setActiveTab('pagamentos'); fetchPagamentos() }}
                 style={{
                   padding: '12px 24px',
-                  background: activeTab === 'pagamentos' ? '#e03d3d' : 'transparent',
+                  background: activeTab === 'pagamentos' ? 'var(--accent)' : 'transparent',
                   border: 'none',
                   borderRadius: '8px 8px 0 0',
-                  color: activeTab === 'pagamentos' ? 'white' : '#d0d7e8',
+                  color: activeTab === 'pagamentos' ? 'white' : 'var(--text-secondary)',
                   fontWeight: '600',
                   cursor: 'pointer',
                 }}
@@ -1223,9 +1223,9 @@ export default function EstudantesAdminDashboard() {
                   </div>
 
                   {loadingDetails ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>A carregar...</div>
+                    <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>A carregar...</div>
                   ) : notas.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>
+                    <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>
                       Sem notas registradas para este ano
                     </div>
                   ) : (
@@ -1234,24 +1234,24 @@ export default function EstudantesAdminDashboard() {
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                       <thead>
                         <tr style={{ borderBottom: '2px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.03)' }}>
-                          <th style={{ textAlign: 'left', padding: '10px 12px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Disciplina</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>AC1</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>AC2</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>AC3</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>TTP</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>PP1</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>PP2</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Exame</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Rec.</th>
-                          <th style={{ textAlign: 'center', padding: '10px 6px', color: '#d0d7e8', fontSize: '13px', fontWeight: '600' }}>Esp.</th>
+                          <th style={{ textAlign: 'left', padding: '10px 12px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>Disciplina</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>AC1</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>AC2</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>AC3</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>TTP</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>PP1</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>PP2</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>Exame</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>Rec.</th>
+                          <th style={{ textAlign: 'center', padding: '10px 6px', color: 'var(--text-secondary)', fontSize: '13px', fontWeight: '600' }}>Esp.</th>
                         </tr>
                       </thead>
                       <tbody>
                     {notas.map((nota) => (
                       <tr key={nota.id_nota} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-                        <td style={{ padding: '10px', color: '#e8eaf0' }}>
+                        <td style={{ padding: '10px', color: 'var(--text-primary)' }}>
                           {nota.disciplina?.nome_disciplina}
-                          <div style={{ fontSize: '11px', color: '#d0d7e8' }}>{nota.disciplina?.codigo_disciplina}</div>
+                          <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{nota.disciplina?.codigo_disciplina}</div>
                         </td>
         {(['ac1', 'ac2', 'ac3', 'ttp', 'pp1', 'pp2', 'exame', 'recurso', 'exame_especial'] as const).map((campo) => {
                           const valor = localGrades[nota.id_nota]?.[campo] ?? null
@@ -1279,8 +1279,8 @@ export default function EstudantesAdminDashboard() {
                                 style={{
                                   width: '50px',
                                   padding: '6px',
-                                  background: '#13161e',
-                                  border: '1px solid rgba(255,255,255,0.1)',
+                                  background: 'var(--bg-input)',
+                                  border: '1px solid var(--border-color-strong)',
                                   borderRadius: '4px',
                                   color: 'white',
                                   textAlign: 'center',
@@ -1306,7 +1306,7 @@ export default function EstudantesAdminDashboard() {
                           borderRadius: '8px',
                           background: saveMessage.type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(224, 61, 61, 0.1)',
                           border: `1px solid ${saveMessage.type === 'success' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(224, 61, 61, 0.3)'}`,
-                          color: saveMessage.type === 'success' ? '#22c55e' : '#e03d3d',
+                          color: saveMessage.type === 'success' ? '#22c55e' : 'var(--accent)',
                           fontSize: '14px',
                           display: 'flex',
                           alignItems: 'center',
@@ -1321,7 +1321,7 @@ export default function EstudantesAdminDashboard() {
                         disabled={savingGrades || !hasChanges}
                         style={{
                           padding: '12px 24px',
-                          background: savingGrades ? '#b0b8cf' : hasChanges ? '#22c55e' : '#3a3f4d',
+                          background: savingGrades ? 'var(--text-muted)' : hasChanges ? '#22c55e' : '#3a3f4d',
                           border: 'none',
                           borderRadius: '8px',
                           color: 'white',
@@ -1376,8 +1376,8 @@ export default function EstudantesAdminDashboard() {
                       onChange={(e) => setFiltroTipoPagamento(e.target.value as "todos" | "propina" | "servico")}
                       style={{
                         padding: '10px 14px',
-                        background: '#1e2230',
-                        border: '1px solid rgba(255,255,255,0.1)',
+                        background: 'var(--bg-card)',
+                        border: '1px solid var(--border-color-strong)',
                         borderRadius: '6px',
                         color: 'white',
                         fontSize: '14px',
@@ -1391,9 +1391,9 @@ export default function EstudantesAdminDashboard() {
                   </div>
 
                   {loadingDetails ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>A carregar...</div>
+                    <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>A carregar...</div>
                   ) : pagamentos.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#d0d7e8' }}>
+                    <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>
                       Sem pagamentos registrados
                     </div>
                   ) : (
@@ -1410,7 +1410,7 @@ export default function EstudantesAdminDashboard() {
                         <div
                           key={`${pagamento.tipo}-${pagamento.id}`}
                           style={{
-                            background: '#13161e',
+                            background: 'var(--bg-input)',
                             padding: '16px',
                             borderRadius: '8px',
                             display: 'flex',
@@ -1429,14 +1429,14 @@ export default function EstudantesAdminDashboard() {
                               }}>
                                 {pagamento.tipo === 'propina' ? 'Propina' : 'Serviço'}
                               </span>
-                              <div style={{ color: '#e8eaf0', fontWeight: '500' }}>
+                              <div style={{ color: 'var(--text-primary)', fontWeight: '500' }}>
                                 {pagamento.descricao}
                               </div>
                             </div>
-                            <div style={{ color: '#d0d7e8', fontSize: '13px' }}>
+                            <div style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
                               Ref: {pagamento.referencia || '—'} • {pagamento.data ? new Date(pagamento.data).toLocaleDateString('pt-AO') : '—'}
                             </div>
-                            <div style={{ color: '#d0d7e8', fontSize: '13px' }}>
+                            <div style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
                               Valor: {Number(pagamento.valor_total).toLocaleString('pt-AO', { style: 'currency', currency: 'AOA' })}
                               {Number(pagamento.valor_base) !== Number(pagamento.valor_total) && (
                                 <span style={{ marginLeft: '8px', color: '#22c55e', fontSize: '11px' }}>
@@ -1452,10 +1452,10 @@ export default function EstudantesAdminDashboard() {
                               disabled={pagamento.tipo === 'servico'}
                               style={{
                                 padding: '8px 12px',
-                                background: '#1e2230',
-                                border: '1px solid rgba(255,255,255,0.1)',
+                                background: 'var(--bg-card)',
+                                border: '1px solid var(--border-color-strong)',
                                 borderRadius: '6px',
-                                color: pagamento.estado === 'Pago' ? '#22c55e' : pagamento.estado === 'Pendente' ? '#f0a500' : '#e03d3d',
+                                color: pagamento.estado === 'Pago' ? '#22c55e' : pagamento.estado === 'Pendente' ? '#f0a500' : 'var(--accent)',
                                 fontWeight: '600',
                                 cursor: pagamento.tipo === 'servico' ? 'not-allowed' : 'pointer',
                                 opacity: pagamento.tipo === 'servico' ? 0.5 : 1,

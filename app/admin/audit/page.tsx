@@ -333,11 +333,11 @@ const s = {
   page: { padding: '0' } as React.CSSProperties,
 
   filtrosContainer: {
-    background: '#1e2230',
+    background: 'var(--bg-card)',
     borderRadius: '12px',
     padding: '20px',
     marginBottom: '24px',
-    border: '1px solid rgba(255,255,255,0.07)',
+    border: '1px solid var(--border-color)',
   } as React.CSSProperties,
 
   filtrosGrid: {
@@ -350,7 +350,7 @@ const s = {
   label: {
     display: 'block',
     marginBottom: '5px',
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     fontSize: '12px',
     fontWeight: '500',
     textTransform: 'uppercase' as const,
@@ -360,8 +360,8 @@ const s = {
   select: {
     width: '100%',
     padding: '10px 12px',
-    background: '#13161e',
-    border: '1px solid rgba(255,255,255,0.07)',
+    background: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
     borderRadius: '8px',
     color: 'white',
     fontSize: '14px',
@@ -370,8 +370,8 @@ const s = {
   input: {
     width: '100%',
     padding: '10px 12px',
-    background: '#13161e',
-    border: '1px solid rgba(255,255,255,0.07)',
+    background: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
     borderRadius: '8px',
     color: 'white',
     fontSize: '14px',
@@ -389,7 +389,7 @@ const s = {
     background: 'rgba(224, 61, 61, 0.15)',
     border: '1px solid rgba(224, 61, 61, 0.3)',
     borderRadius: '8px',
-    color: '#e03d3d',
+    color: 'var(--accent)',
     fontSize: '13px',
     fontWeight: '500',
     cursor: 'pointer',
@@ -402,7 +402,7 @@ const s = {
   },
 
   logCard: (expandido: boolean): React.CSSProperties => ({
-    background: '#1e2230',
+    background: 'var(--bg-card)',
     borderRadius: '12px',
     border: `1px solid ${expandido ? 'rgba(99,102,241,0.3)' : 'rgba(255,255,255,0.05)'}`,
     overflow: 'hidden',
@@ -446,7 +446,7 @@ const s = {
   } as React.CSSProperties,
 
   nomeusuario: {
-    color: '#e8eaf0',
+    color: 'var(--text-primary)',
     fontSize: '14px',
     fontWeight: '500',
   } as React.CSSProperties,
@@ -467,12 +467,12 @@ const s = {
     borderRadius: '6px',
     fontSize: '11px',
     background: 'rgba(255,255,255,0.06)',
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     border: '1px solid rgba(255,255,255,0.08)',
   } as React.CSSProperties,
 
   sumario: {
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     fontSize: '13px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -488,18 +488,18 @@ const s = {
   } as React.CSSProperties,
 
   hora: {
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     fontSize: '12px',
   } as React.CSSProperties,
 
   ip: {
-    color: '#b0b8cf',
+    color: 'var(--text-muted)',
     fontSize: '11px',
     fontFamily: 'monospace',
   } as React.CSSProperties,
 
   chevron: (expandido: boolean): React.CSSProperties => ({
-    color: '#b0b8cf',
+    color: 'var(--text-muted)',
     fontSize: '12px',
     transition: 'transform 0.2s',
     transform: expandido ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -509,7 +509,7 @@ const s = {
   expandido: {
     borderTop: '1px solid rgba(255,255,255,0.05)',
     padding: '16px',
-    background: '#13161e',
+    background: 'var(--bg-input)',
   } as React.CSSProperties,
 
   diffGrid: {
@@ -530,7 +530,7 @@ const s = {
   } as React.CSSProperties,
 
   diffCampo: {
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     fontSize: '12px',
     fontWeight: '500',
     textTransform: 'uppercase' as const,
@@ -538,7 +538,7 @@ const s = {
   } as React.CSSProperties,
 
   diffAntes: {
-    color: '#e8eaf0',
+    color: 'var(--text-primary)',
     fontSize: '13px',
     background: 'rgba(224,61,61,0.1)',
     padding: '3px 8px',
@@ -548,7 +548,7 @@ const s = {
   } as React.CSSProperties,
 
   diffSeta: {
-    color: '#b0b8cf',
+    color: 'var(--text-muted)',
     fontSize: '14px',
     textAlign: 'center' as const,
   } as React.CSSProperties,
@@ -644,7 +644,7 @@ const s = {
   } as React.CSSProperties,
 
   contextoNome: {
-    color: '#e8eaf0',
+    color: 'var(--text-primary)',
     fontSize: '14px',
     fontWeight: '600',
     marginBottom: '6px',
@@ -667,7 +667,7 @@ const s = {
   }),
 
   semAlteracoes: {
-    color: '#b0b8cf',
+    color: 'var(--text-muted)',
     fontSize: '13px',
     fontStyle: 'italic',
     textAlign: 'center' as const,
@@ -676,7 +676,7 @@ const s = {
 
   diffLabel: {
     fontSize: '11px',
-    color: '#b0b8cf',
+    color: 'var(--text-muted)',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
     marginBottom: '8px',
@@ -693,8 +693,8 @@ const s = {
 
   btnPagina: (ativo: boolean): React.CSSProperties => ({
     padding: '8px 16px',
-    background: '#1e2230',
-    border: '1px solid rgba(255,255,255,0.07)',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '8px',
     color: 'white',
     cursor: ativo ? 'pointer' : 'not-allowed',
@@ -703,7 +703,7 @@ const s = {
   }),
 
   paginaInfo: {
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     fontSize: '13px',
     padding: '0 8px',
   } as React.CSSProperties,
@@ -711,9 +711,9 @@ const s = {
   vazio: {
     textAlign: 'center' as const,
     padding: '60px 20px',
-    color: '#b0b8cf',
+    color: 'var(--text-muted)',
     fontSize: '14px',
-    background: '#1e2230',
+    background: 'var(--bg-card)',
     borderRadius: '12px',
   } as React.CSSProperties,
 
@@ -725,7 +725,7 @@ const s = {
   } as React.CSSProperties,
 
   statCard: {
-    background: '#1e2230',
+    background: 'var(--bg-card)',
     borderRadius: '10px',
     padding: '14px 16px',
     border: '1px solid rgba(255,255,255,0.05)',
@@ -733,14 +733,14 @@ const s = {
   } as React.CSSProperties,
 
   statNum: {
-    color: '#e8eaf0',
+    color: 'var(--text-primary)',
     fontSize: '22px',
     fontWeight: '600',
     display: 'block',
   } as React.CSSProperties,
 
   statLabel: {
-    color: '#d0d7e8',
+    color: 'var(--text-secondary)',
     fontSize: '11px',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
@@ -949,7 +949,7 @@ export default function AuditPage() {
           </div>
         </div>
         <div style={s.filtrosRodape}>
-          <span style={{ color: '#d0d7e8', fontSize: '13px' }}>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
             A mostrar <strong style={{ color: 'white' }}>{logs.length}</strong> de <strong style={{ color: 'white' }}>{total}</strong> registos
           </span>
           <button onClick={resetFilters} style={s.btnLimpar}>Limpar filtros</button>
@@ -1018,7 +1018,7 @@ export default function AuditPage() {
                               {ctx.tipo === 'estudante' ? (
                                 <>
                                   {ctx.numero && (
-                                    <span style={s.contextoPill('#d0d7e8')}>#{ctx.numero}</span>
+                                    <span style={s.contextoPill('var(--text-secondary)')}>#{ctx.numero}</span>
                                   )}
                                   <span style={s.contextoPill('#6366f1')}>{ctx.ano}</span>
                                   <span style={s.contextoPill('#0ea5e9')}>{ctx.curso}</span>
@@ -1150,7 +1150,7 @@ export default function AuditPage() {
                                   <span style={s.contextoPill('#8b5cf6')}>{log.contexto_horario.turno}</span>
                                 )}
                                 {log.contexto_horario.sala && (
-                                  <span style={s.contextoPill('#d0d7e8')}>📍 {log.contexto_horario.sala}</span>
+                                  <span style={s.contextoPill('var(--text-secondary)')}>📍 {log.contexto_horario.sala}</span>
                                 )}
                               </div>
                             </div>
@@ -1180,7 +1180,7 @@ export default function AuditPage() {
                                   <span style={s.contextoPill('#8b5cf6')}>{log.contexto_prova.turno}</span>
                                 )}
                                 {log.contexto_prova.hora_inicio && log.contexto_prova.hora_fim && (
-                                  <span style={s.contextoPill('#d0d7e8')}>
+                                  <span style={s.contextoPill('var(--text-secondary)')}>
                                     {log.contexto_prova.hora_inicio} — {log.contexto_prova.hora_fim}
                                   </span>
                                 )}
@@ -1245,16 +1245,16 @@ export default function AuditPage() {
                               gap: '8px',
                               padding: '0 12px 8px',
                             }}>
-                              <span style={{ ...s.diffCampo, color: '#b0b8cf' }}>Campo</span>
+                              <span style={{ ...s.diffCampo, color: 'var(--text-muted)' }}>Campo</span>
                               {isCriacao ? (
                                 <span style={{ fontSize: '11px', color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.4px', gridColumn: '2 / 5' }}>
                                   Valor registado
                                 </span>
                               ) : (
                                 <>
-                                  <span style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Antes</span>
+                                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Antes</span>
                                   <span />
-                                  <span style={{ fontSize: '11px', color: '#b0b8cf', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Depois</span>
+                                  <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.4px' }}>Depois</span>
                                 </>
                               )}
                             </div>

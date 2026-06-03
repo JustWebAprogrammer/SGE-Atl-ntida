@@ -255,12 +255,12 @@ export default function MonografiasDashboard() {
       case "Aprovada": return "#22c55e"
       case "ParaDefender": return "#9b59b6"
       case "Defendida": return "#22c55e"
-      case "Rejeitada": return "#e03d3d"
+      case "Rejeitada": return "var(--accent)"
       case "Proposto": return "#f0a500"
       case "Aprovado": return "#22c55e"
-      case "Reprovado": return "#e03d3d"
-      case "Cancelado": return "#b0b8cf"
-      default: return "#b0b8cf"
+      case "Reprovado": return "var(--accent)"
+      case "Cancelado": return "var(--text-muted)"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -310,8 +310,8 @@ export default function MonografiasDashboard() {
           { label: "Para Defender", value: paraDefender, color: "#9b59b6" },
         ].map((s) => (
           <div key={s.label} style={{
-            background: "#1e2230",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-color)",
             borderRadius: "14px",
             padding: "20px",
             borderTop: `2px solid ${s.color}`
@@ -320,13 +320,13 @@ export default function MonografiasDashboard() {
               fontSize: "11px",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
-              color: "#b0b8cf",
+              color: "var(--text-muted)",
               marginBottom: "10px"
             }}>{s.label}</div>
             <div style={{
               fontSize: "16px",
               fontWeight: "700",
-              color: "#e8eaf0"
+              color: "var(--text-primary)"
             }}>{loading ? "..." : s.value}</div>
           </div>
         ))}
@@ -342,9 +342,9 @@ export default function MonografiasDashboard() {
           onClick={() => setAbaActiva("preprojetos")}
           style={{
             padding: "10px 20px",
-            background: abaActiva === "preprojetos" ? "#f0a500" : "#1e2230",
-            color: abaActiva === "preprojetos" ? "#13161e" : "#e8eaf0",
-            border: abaActiva === "preprojetos" ? "1px solid #f0a500" : "1px solid rgba(255,255,255,0.07)",
+            background: abaActiva === "preprojetos" ? "#f0a500" : "var(--bg-card)",
+            color: abaActiva === "preprojetos" ? "var(--bg-input)" : "var(--text-primary)",
+            border: abaActiva === "preprojetos" ? "1px solid #f0a500" : "1px solid var(--border-color)",
             borderRadius: "10px",
             fontSize: "13px",
             fontWeight: "600",
@@ -356,9 +356,9 @@ export default function MonografiasDashboard() {
           onClick={() => setAbaActiva("monografias")}
           style={{
             padding: "10px 20px",
-            background: abaActiva === "monografias" ? "#2dd4bf" : "#1e2230",
-            color: abaActiva === "monografias" ? "#13161e" : "#e8eaf0",
-            border: abaActiva === "monografias" ? "1px solid #2dd4bf" : "1px solid rgba(255,255,255,0.07)",
+            background: abaActiva === "monografias" ? "#2dd4bf" : "var(--bg-card)",
+            color: abaActiva === "monografias" ? "var(--bg-input)" : "var(--text-primary)",
+            border: abaActiva === "monografias" ? "1px solid #2dd4bf" : "1px solid var(--border-color)",
             borderRadius: "10px",
             fontSize: "13px",
             fontWeight: "600",
@@ -370,9 +370,9 @@ export default function MonografiasDashboard() {
           onClick={() => setAbaActiva("gestao")}
           style={{
             padding: "10px 20px",
-            background: abaActiva === "gestao" ? "#22c55e" : "#1e2230",
-            color: abaActiva === "gestao" ? "#13161e" : "#e8eaf0",
-            border: abaActiva === "gestao" ? "1px solid #22c55e" : "1px solid rgba(255,255,255,0.07)",
+            background: abaActiva === "gestao" ? "#22c55e" : "var(--bg-card)",
+            color: abaActiva === "gestao" ? "var(--bg-input)" : "var(--text-primary)",
+            border: abaActiva === "gestao" ? "1px solid #22c55e" : "1px solid var(--border-color)",
             borderRadius: "10px",
             fontSize: "13px",
             fontWeight: "600",
@@ -384,8 +384,8 @@ export default function MonografiasDashboard() {
 
        {/* Filtros */}
        <div style={{
-         background: "#1e2230",
-         border: "1px solid rgba(255,255,255,0.07)",
+         background: "var(--bg-card)",
+         border: "1px solid var(--border-color)",
          borderRadius: "14px",
          padding: "16px",
          marginBottom: "16px"
@@ -400,10 +400,10 @@ export default function MonografiasDashboard() {
                flex: 1,
                minWidth: "250px",
                padding: "8px 12px",
-               background: "#13161e",
-               border: "1px solid rgba(255,255,255,0.1)",
+               background: "var(--bg-input)",
+               border: "1px solid var(--border-color-strong)",
                borderRadius: "8px",
-               color: "#e8eaf0",
+               color: "var(--text-primary)",
                fontSize: "13px"
              }}
            />
@@ -413,10 +413,10 @@ export default function MonografiasDashboard() {
              onChange={(e) => setFiltroCurso(e.target.value || null)}
              style={{
                padding: "8px 12px",
-               background: "#13161e",
-               border: "1px solid rgba(255,255,255,0.1)",
+               background: "var(--bg-input)",
+               border: "1px solid var(--border-color-strong)",
                borderRadius: "8px",
-               color: "#e8eaf0",
+               color: "var(--text-primary)",
                fontSize: "13px",
                minWidth: "180px"
              }}>
@@ -430,8 +430,8 @@ export default function MonografiasDashboard() {
 
        {/* Lista de Monografias */}
        <div style={{
-         background: "#1e2230",
-         border: "1px solid rgba(255,255,255,0.07)",
+         background: "var(--bg-card)",
+         border: "1px solid var(--border-color)",
          borderRadius: "14px",
          padding: "20px"
        }}>
@@ -439,7 +439,7 @@ export default function MonografiasDashboard() {
            fontSize: "14px",
            fontWeight: "600",
            marginBottom: "16px",
-           color: "#e8eaf0"
+           color: "var(--text-primary)"
          }}>
            {abaActiva === "preprojetos" ? "Pré-Projetos dos Meus Tutorados" :
             abaActiva === "monografias" ? "Monografias dos Meus Tutorados (para Aprovar/Rejeitar)" :
@@ -447,20 +447,20 @@ export default function MonografiasDashboard() {
          </div>
 
         {loading ? (
-          <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+          <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
         ) : (
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
-                <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                  <th style={{ textAlign: "left", padding: "10px", color: "#b0b8cf", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
-                  <th style={{ textAlign: "left", padding: "10px", color: "#b0b8cf", fontSize: "11px", textTransform: "uppercase" }}>Título</th>
-                  <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Estado</th>
-                  <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Co-autores</th>
-                  <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Nota Final</th>
-                  <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Data Defesa</th>
-                  <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Sala</th>
-                  <th style={{ textAlign: "center", padding: "10px", color: "#b0b8cf", fontSize: "11px" }}>Ações</th>
+                <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                  <th style={{ textAlign: "left", padding: "10px", color: "var(--text-muted)", fontSize: "11px", textTransform: "uppercase" }}>Estudante</th>
+                  <th style={{ textAlign: "left", padding: "10px", color: "var(--text-muted)", fontSize: "11px", textTransform: "uppercase" }}>Título</th>
+                  <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Estado</th>
+                  <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Co-autores</th>
+                  <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Nota Final</th>
+                  <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Data Defesa</th>
+                  <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Sala</th>
+                  <th style={{ textAlign: "center", padding: "10px", color: "var(--text-muted)", fontSize: "11px" }}>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -495,11 +495,11 @@ export default function MonografiasDashboard() {
                     return (
                   <tr key={key} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                     <td style={{ padding: "10px" }}>
-                      <div style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>{item.estudante.nome}</div>
-                      <div style={{ color: "#b0b8cf", fontSize: "11px" }}>{item.estudante.numero_estudante} · {item.estudante.curso}</div>
+                      <div style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>{item.estudante.nome}</div>
+                      <div style={{ color: "var(--text-muted)", fontSize: "11px" }}>{item.estudante.numero_estudante} · {item.estudante.curso}</div>
                     </td>
                     <td style={{ padding: "10px" }}>
-                      <div style={{ color: "#e8eaf0", fontSize: "13px", maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.titulo}</div>
+                      <div style={{ color: "var(--text-primary)", fontSize: "13px", maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.titulo}</div>
                     </td>
                     <td style={{ textAlign: "center", padding: "10px" }}>
                       <span style={{
@@ -515,25 +515,25 @@ export default function MonografiasDashboard() {
                     </td>
                     <td style={{ textAlign: "center", padding: "10px" }}>
                       {'nome_co_orientador' in item && item.nome_co_orientador && (
-                        <div style={{ fontSize: "11px", color: "#d0d7e8", marginBottom: "2px" }}>
+                        <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginBottom: "2px" }}>
                           Co-orientador: {item.nome_co_orientador}
                         </div>
                       )}
                       {'nome_co_autor' in item && item.nome_co_autor && (
-                        <div style={{ fontSize: "11px", color: "#d0d7e8" }}>
+                        <div style={{ fontSize: "11px", color: "var(--text-secondary)" }}>
                           Co-autor: {item.nome_co_autor}
                         </div>
                       )}
                       {(!('nome_co_orientador' in item) || (!item.nome_co_orientador && !item.nome_co_autor)) && (
-                        <span style={{ color: "#b0b8cf", fontSize: "11px" }}>—</span>
+                        <span style={{ color: "var(--text-muted)", fontSize: "11px" }}>—</span>
                       )}
                     </td>
                     <td style={{ textAlign: "center", padding: "10px" }}>
                       <span style={{
                         fontWeight: "700",
                         color: 'nota_final' in item && item.nota_final != null
-                          ? (item.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                          : "#b0b8cf"
+                          ? (item.nota_final >= 10 ? "#22c55e" : "var(--accent)")
+                          : "var(--text-muted)"
                       }}>
                         {'nota_final' in item && item.nota_final != null ? arredondarNota(item.nota_final) : "—"}
                       </span>
@@ -547,10 +547,10 @@ export default function MonografiasDashboard() {
                             min={new Date().toISOString().split("T")[0]}
                             style={{
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               width: "130px"
                             }}
@@ -561,10 +561,10 @@ export default function MonografiasDashboard() {
                             onChange={e => setHoraDefesaEdit(e.target.value)}
                             style={{
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               width: "130px"
                             }}
@@ -575,7 +575,7 @@ export default function MonografiasDashboard() {
                               disabled={processando === mono.id_monografia}
                               style={{
                                 padding: "4px 8px",
-                                background: processando === mono.id_monografia ? "#b0b8cf" : "#22c55e",
+                                background: processando === mono.id_monografia ? "var(--text-muted)" : "#22c55e",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -590,7 +590,7 @@ export default function MonografiasDashboard() {
                               onClick={() => { setEditandoDataHoraDefesa(null); setDataDefesaEdit(""); setHoraDefesaEdit("") }}
                               style={{
                                 padding: "4px 6px",
-                                background: "#b0b8cf",
+                                background: "var(--text-muted)",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -604,7 +604,7 @@ export default function MonografiasDashboard() {
                         </div>
                       ) : mono && mono.estado === "ParaDefender" ? (
                         <div style={{ display: "flex", gap: "4px", alignItems: "center", justifyContent: "center" }}>
-                          <span style={{ color: "#e8eaf0", fontSize: "12px" }}>
+                          <span style={{ color: "var(--text-primary)", fontSize: "12px" }}>
                             {mono.data_defesa ? new Date(mono.data_defesa).toLocaleDateString("pt-PT") + (mono.hora_defesa ? ` ${mono.hora_defesa}h` : "") : "—"}
                           </span>
                           <button
@@ -623,7 +623,7 @@ export default function MonografiasDashboard() {
                           </button>
                         </div>
                       ) : (
-                        <span style={{ color: "#e8eaf0", fontSize: "12px" }}>
+                        <span style={{ color: "var(--text-primary)", fontSize: "12px" }}>
                           {mono?.data_defesa ? new Date(mono.data_defesa).toLocaleDateString("pt-PT") + (mono.hora_defesa ? ` ${mono.hora_defesa}h` : "") : "—"}
                         </span>
                       )}
@@ -640,10 +640,10 @@ export default function MonografiasDashboard() {
                             style={{
                               width: "80px",
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px"
                             }}
                           />
@@ -667,7 +667,7 @@ export default function MonografiasDashboard() {
                             onClick={() => { setEditandoDefesa(null); setSalaDefesa("") }}
                             style={{
                               padding: "4px 6px",
-                              background: "#b0b8cf",
+                              background: "var(--text-muted)",
                               color: "white",
                               border: "none",
                               borderRadius: "4px",
@@ -680,7 +680,7 @@ export default function MonografiasDashboard() {
                         </div>
                       ) : mono && (mono.estado === "ParaDefender" || mono.estado === "Defendida") ? (
                         <div style={{ display: "flex", gap: "4px", alignItems: "center", justifyContent: "center" }}>
-                          <span style={{ color: "#e8eaf0", fontSize: "12px" }}>{mono.sala_defesa || "—"}</span>
+                          <span style={{ color: "var(--text-primary)", fontSize: "12px" }}>{mono.sala_defesa || "—"}</span>
                           <button
                             onClick={() => { setEditandoDefesa(mono.id_monografia); setSalaDefesa(mono.sala_defesa || "") }}
                             style={{
@@ -697,7 +697,7 @@ export default function MonografiasDashboard() {
                           </button>
                         </div>
                       ) : (
-                        <span style={{ color: "#b0b8cf", fontSize: "11px" }}>—</span>
+                        <span style={{ color: "var(--text-muted)", fontSize: "11px" }}>—</span>
                       )}
                     </td>
                     <td style={{ textAlign: "center", padding: "10px" }}>
@@ -793,7 +793,7 @@ export default function MonografiasDashboard() {
                             }}
                             style={{
                               padding: "4px 8px",
-                              background: "#e03d3d",
+                              background: "var(--accent)",
                               color: "white",
                               border: "none",
                               borderRadius: "4px",
@@ -831,10 +831,10 @@ export default function MonografiasDashboard() {
                             min={new Date().toISOString().split("T")[0]}
                             style={{
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               width: "130px"
                             }}
@@ -845,10 +845,10 @@ export default function MonografiasDashboard() {
                             onChange={e => setHoraDefesa(e.target.value)}
                             style={{
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               width: "130px"
                             }}
@@ -860,10 +860,10 @@ export default function MonografiasDashboard() {
                             onChange={e => setSalaDefesa(e.target.value)}
                             style={{
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               width: "130px"
                             }}
@@ -874,7 +874,7 @@ export default function MonografiasDashboard() {
                               disabled={processando === item.id_monografia}
                               style={{
                                 padding: "4px 8px",
-                                background: processando === item.id_monografia ? "#b0b8cf" : "#22c55e",
+                                background: processando === item.id_monografia ? "var(--text-muted)" : "#22c55e",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -889,7 +889,7 @@ export default function MonografiasDashboard() {
                               onClick={() => { setEditandoDefesa(null); setDataDefesa(""); setHoraDefesa(""); setSalaDefesa("") }}
                               style={{
                                 padding: "4px 8px",
-                                background: "#b0b8cf",
+                                background: "var(--text-muted)",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -933,10 +933,10 @@ export default function MonografiasDashboard() {
                             style={{
                               width: "80px",
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               textAlign: "center"
                             }}
@@ -949,10 +949,10 @@ export default function MonografiasDashboard() {
                             style={{
                               width: "150px",
                               padding: "4px 8px",
-                              background: "#13161e",
+                              background: "var(--bg-input)",
                               border: "1px solid rgba(255,255,255,0.2)",
                               borderRadius: "4px",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               fontSize: "11px",
                               resize: "vertical"
                             }}
@@ -963,7 +963,7 @@ export default function MonografiasDashboard() {
                               disabled={processando === item.id_monografia}
                               style={{
                                 padding: "4px 8px",
-                                background: processando === item.id_monografia ? "#b0b8cf" : "#22c55e",
+                                background: processando === item.id_monografia ? "var(--text-muted)" : "#22c55e",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -978,7 +978,7 @@ export default function MonografiasDashboard() {
                               onClick={() => { setEditandoNota(null); setNotaFinal(""); setFeedbackGestor("") }}
                               style={{
                                 padding: "4px 8px",
-                                background: "#b0b8cf",
+                                background: "var(--text-muted)",
                                 color: "white",
                                 border: "none",
                                 borderRadius: "4px",
@@ -1000,7 +1000,7 @@ export default function MonografiasDashboard() {
                             style={{
                               padding: "3px 8px",
                               background: "#2d3348",
-                              color: "#e8eaf0",
+                              color: "var(--text-primary)",
                               border: "none",
                               borderRadius: "4px",
                               fontSize: "10px",
@@ -1044,7 +1044,7 @@ export default function MonografiasDashboard() {
                                 }}
                                 style={{
                                   padding: "4px 8px",
-                                  background: "#e03d3d",
+                                  background: "var(--accent)",
                                   color: "white",
                                   border: "none",
                                   borderRadius: "4px",
@@ -1061,13 +1061,13 @@ export default function MonografiasDashboard() {
                             <span style={{ color: "#22c55e", fontSize: "11px", fontWeight: "600" }}>✅ Aprovado</span>
                           )}
                           {item.estado === "Reprovado" && (
-                            <span style={{ color: "#e03d3d", fontSize: "11px", fontWeight: "600" }}>❌ Reprovado</span>
+                            <span style={{ color: "var(--accent)", fontSize: "11px", fontWeight: "600" }}>❌ Reprovado</span>
                           )}
                         </>
                       )}
                       {/* Monografias: mostrar "—" quando sem acção */}
                       {isMonografia && (item.estado === "Submetida" || item.estado === "EmRevisao" || item.estado === "Defendida" || item.estado === "Rejeitada") && (
-                        <span style={{ color: "#b0b8cf", fontSize: "11px" }}>—</span>
+                        <span style={{ color: "var(--text-muted)", fontSize: "11px" }}>—</span>
                       )}
                     </td>
                   </tr>

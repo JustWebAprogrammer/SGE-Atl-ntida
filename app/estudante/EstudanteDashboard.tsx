@@ -132,8 +132,8 @@ function getEstadoMonografia(estado: string) {
     case "Aprovada": return { label: "Aprovada", bg: "rgba(34,197,94,0.12)", color: "#22c55e" }
     case "ParaDefender": return { label: "Para Defender", bg: "rgba(155,89,182,0.12)", color: "#9b59b6" }
     case "Defendida": return { label: "Defendida", bg: "rgba(34,197,94,0.12)", color: "#22c55e" }
-    case "Rejeitada": return { label: "Rejeitada", bg: "rgba(224,61,61,0.12)", color: "#e03d3d" }
-    default: return { label: estado, bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
+    case "Rejeitada": return { label: "Rejeitada", bg: "var(--accent-bg)", color: "var(--accent)" }
+    default: return { label: estado, bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" }
   }
 }
 
@@ -298,8 +298,8 @@ export default function EstudanteDashboard() {
   }, [provas])
 
   const cardStyle: React.CSSProperties = {
-    background: "#1e2230",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "var(--bg-card)",
+    border: "1px solid var(--border-color)",
     borderRadius: "14px",
     padding: "20px",
     marginBottom: "20px",
@@ -309,7 +309,7 @@ export default function EstudanteDashboard() {
     return (
       <DashboardLayout navItems={navItems} title="Visão Geral" subtitle="Resumo académico do estudante">
         <div style={{ ...cardStyle, textAlign: "center", padding: "60px" }}>
-          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
+          <div style={{ color: "var(--text-muted)" }}>A carregar...</div>
         </div>
       </DashboardLayout>
     )
@@ -319,7 +319,7 @@ export default function EstudanteDashboard() {
     return (
       <DashboardLayout navItems={navItems} title="Visão Geral" subtitle="Resumo académico do estudante">
         <div style={{ ...cardStyle, textAlign: "center", padding: "60px" }}>
-          <div style={{ color: "#e03d3d" }}>{error || "Dados não encontrados"}</div>
+          <div style={{ color: "var(--accent)" }}>{error || "Dados não encontrados"}</div>
         </div>
       </DashboardLayout>
     )
@@ -333,7 +333,7 @@ export default function EstudanteDashboard() {
         <div
           onClick={() => router.push("/estudante/pagamentos")}
           style={{
-            background: "linear-gradient(135deg, #1e3a5f 0%, #1e2230 100%)",
+            background: "linear-gradient(135deg, #1e3a5f 0%, var(--bg-card) 100%)",
             border: "1px solid rgba(59,130,246,0.3)",
             borderRadius: "14px",
             padding: "24px",
@@ -347,13 +347,13 @@ export default function EstudanteDashboard() {
           <div style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}>
             <div style={{ fontSize: "28px" }}>📋</div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0", marginBottom: "8px" }}>
+              <div style={{ fontSize: "18px", fontWeight: "700", color: "var(--text-primary)", marginBottom: "8px" }}>
                 Rematrícula para o Ano Lectivo {currentAnoLectivo}
               </div>
-              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6", marginBottom: "12px" }}>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.6", marginBottom: "12px" }}>
                 A Taxa de Rematrícula determina a sua continuidade no curso.
                 {estudante.ano_current && (
-                  <span> Seu ano curricular actual é <strong style={{ color: "#e8eaf0" }}>{estudante.ano_current}º</strong>.</span>
+                  <span> Seu ano curricular actual é <strong style={{ color: "var(--text-primary)" }}>{estudante.ano_current}º</strong>.</span>
                 )}
               </div>
               <div style={{ fontSize: "13px", color: "#3b82f6", fontWeight: "600" }}>
@@ -366,8 +366,8 @@ export default function EstudanteDashboard() {
 
       {/* ── Informação do Estudante ── */}
       <div style={cardStyle}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ background: "#2dd4bf", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
+        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <span style={{ background: "#2dd4bf", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
             ESTUDANTE
           </span>
           Dados Pessoais
@@ -379,7 +379,7 @@ export default function EstudanteDashboard() {
           <InfoCampo label="Ano Curricular" value={estudante.ano_current ? `${estudante.ano_current}º Ano` : "—"} />
           <InfoCampo label="Ano Lectivo" value={estudante.ano_electivo || "—"} />
           <div>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#b0b8cf", marginBottom: "4px" }}>
+            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)", marginBottom: "4px" }}>
               Semestre Actual
             </div>
             <div style={{
@@ -404,13 +404,13 @@ export default function EstudanteDashboard() {
 
       {/* ── Horário de Aulas ── */}
       <div style={cardStyle}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ background: "#2dd4bf", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
+        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <span style={{ background: "#2dd4bf", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
             HORÁRIO
           </span>
           Horário Semanal
         </div>
-        <div style={{ color: "#d0d7e8", fontSize: "12px", marginBottom: "16px" }}>
+        <div style={{ color: "var(--text-secondary)", fontSize: "12px", marginBottom: "16px" }}>
           {estudante.curso.nome_curso} · {estudante.ano_current}º ano · {estudante.turno} · {estudante.ano_electivo || "2025/2026"}
         </div>
 
@@ -428,7 +428,7 @@ export default function EstudanteDashboard() {
                   fontWeight: "600",
                   cursor: "pointer",
                   background: anoSelecionadoHorario === ano ? "#2dd4bf" : "rgba(45,212,191,0.1)",
-                  color: anoSelecionadoHorario === ano ? "#13161e" : "#2dd4bf",
+                  color: anoSelecionadoHorario === ano ? "var(--bg-input)" : "#2dd4bf",
                   border: anoSelecionadoHorario === ano ? "none" : "1px solid rgba(45,212,191,0.2)",
                 }}
               >
@@ -446,7 +446,7 @@ export default function EstudanteDashboard() {
 
           if (horariosVisiveis.length === 0) {
             return (
-              <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>
+              <div style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
                 {anoSelecionadoHorario !== (estudante.ano_current || 1)
                   ? "Nenhuma aula pendente registada para este ano."
                   : "Nenhuma aula registada para este horário."}
@@ -461,7 +461,7 @@ export default function EstudanteDashboard() {
                   display: "grid",
                   gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`,
                   gap: "1px",
-                  background: "#13161e",
+                  background: "var(--bg-input)",
                   borderRadius: "10px",
                 }}>
                   {/* Header */}
@@ -478,8 +478,8 @@ export default function EstudanteDashboard() {
                       <div style={{
                         padding: "12px",
                         fontWeight: "700",
-                        color: "#e8eaf0",
-                        borderRight: "1px solid rgba(255,255,255,0.1)",
+                        color: "var(--text-primary)",
+                        borderRight: "1px solid var(--border-color-strong)",
                         borderBottom: "1px solid rgba(255,255,255,0.05)",
                         fontSize: "12px",
                         display: "flex",
@@ -501,13 +501,13 @@ export default function EstudanteDashboard() {
                             justifyContent: "center",
                           }}>
                             {aula ? (
-                              <div style={{ background: "#1e2230", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
-                                <div style={{ color: "#e8eaf0", fontWeight: "600", fontSize: "11px" }}>{aula.nome_disciplina}</div>
+                              <div style={{ background: "var(--bg-card)", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
+                                <div style={{ color: "var(--text-primary)", fontWeight: "600", fontSize: "11px" }}>{aula.nome_disciplina}</div>
                                 <div style={{ color: "#2dd4bf", fontSize: "10px", marginTop: "3px" }}>{aula.nome_professor}</div>
-                                {aula.sala && <div style={{ color: "#d0d7e8", marginTop: "3px", fontSize: "10px" }}>📍 {aula.sala}</div>}
+                                {aula.sala && <div style={{ color: "var(--text-secondary)", marginTop: "3px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                               </div>
                             ) : (
-                              <div style={{ color: "#b0b8cf", fontSize: "10px" }}>—</div>
+                              <div style={{ color: "var(--text-muted)", fontSize: "10px" }}>—</div>
                             )}
                           </div>
                         )
@@ -520,8 +520,8 @@ export default function EstudanteDashboard() {
                   {/* Professores & Disciplinas table */}
                   {horariosVisiveis.length > 0 && (
                     <div style={{ marginTop: "16px" }}>
-                      <div style={{ fontSize: "13px", fontWeight: "600", marginBottom: "10px", color: "#e8eaf0" }}>
-                        <span style={{ background: "#2dd4bf", color: "#13161e", padding: "2px 8px", borderRadius: "6px", fontSize: "10px", fontWeight: "700", marginRight: "8px" }}>
+                      <div style={{ fontSize: "13px", fontWeight: "600", marginBottom: "10px", color: "var(--text-primary)" }}>
+                        <span style={{ background: "#2dd4bf", color: "var(--bg-input)", padding: "2px 8px", borderRadius: "6px", fontSize: "10px", fontWeight: "700", marginRight: "8px" }}>
                           DOCENTES
                         </span>
                         Professores e Disciplinas
@@ -529,10 +529,10 @@ export default function EstudanteDashboard() {
                       <div style={{ overflowX: "auto" }}>
                         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
                           <thead>
-                            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                              <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Professor</th>
-                              <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
-                              <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Código</th>
+                            <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                              <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Professor</th>
+                              <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
+                              <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Código</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -545,9 +545,9 @@ export default function EstudanteDashboard() {
                                 return true
                               }).map((a, idx) => (
                                 <tr key={idx} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                                  <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>{a.nome_professor}</td>
-                                  <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>{a.nome_disciplina}</td>
-                                  <td style={{ padding: "10px 12px", color: "#b0b8cf" }}>{a.codigo_disciplina}</td>
+                                  <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>{a.nome_professor}</td>
+                                  <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>{a.nome_disciplina}</td>
+                                  <td style={{ padding: "10px 12px", color: "var(--text-muted)" }}>{a.codigo_disciplina}</td>
                                 </tr>
                               ))
                             })()}
@@ -564,7 +564,7 @@ export default function EstudanteDashboard() {
       {/* ── Monografia (final year only) ── */}
       {estudante.ano_current && estudante.curso.duracao_anos && estudante.ano_current >= estudante.curso.duracao_anos && monografia && (
         <div style={cardStyle}>
-          <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
+          <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{ background: "#9b59b6", color: "#fff", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
               MONOGRAFIA
             </span>
@@ -582,12 +582,12 @@ export default function EstudanteDashboard() {
 
             {monografia.estado === "Defendida" && monografia.nota_final !== null && (
               <div>
-                <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "#b0b8cf", marginBottom: "4px" }}>
+                <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)", marginBottom: "4px" }}>
                   Nota Final
                 </div>
                 <div style={{
                   fontSize: "28px", fontWeight: "700",
-                  color: monografia.nota_final >= 10 ? "#22c55e" : "#e03d3d",
+                  color: monografia.nota_final >= 10 ? "#22c55e" : "var(--accent)",
                 }}>
                   {arredondarNota(monografia.nota_final)}
                 </div>
@@ -611,8 +611,8 @@ export default function EstudanteDashboard() {
 
           {monografia.feedback_gestor && (
             <div style={{ marginTop: "16px", padding: "14px", background: "rgba(13,15,20,0.5)", borderRadius: "10px", borderLeft: "3px solid #f0a500" }}>
-              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Gestor</div>
-              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{monografia.feedback_gestor}</div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Gestor</div>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.5" }}>{monografia.feedback_gestor}</div>
             </div>
           )}
         </div>
@@ -620,18 +620,18 @@ export default function EstudanteDashboard() {
 
       {/* ── Plano de Provas ── */}
       <div style={cardStyle}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
-          <span style={{ background: "#f0a500", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
+        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+          <span style={{ background: "#f0a500", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
             PROVAS
           </span>
           Plano de Provas
         </div>
-        <div style={{ color: "#d0d7e8", fontSize: "12px", marginBottom: "16px" }}>
+        <div style={{ color: "var(--text-secondary)", fontSize: "12px", marginBottom: "16px" }}>
           {estudante.curso.nome_curso} · {estudante.ano_current}º ano · {estudante.turno} · {estudante.ano_electivo || "2025/2026"}
         </div>
 
         {provas.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "40px", color: "#b0b8cf" }}>
+          <div style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
             Nenhuma prova registada para este horário.
           </div>
         ) : (
@@ -643,21 +643,21 @@ export default function EstudanteDashboard() {
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
                   <thead>
-                    <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Data</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Horário</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Tipo</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Professor</th>
+                    <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Data</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Horário</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Tipo</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Professor</th>
                     </tr>
                   </thead>
                   <tbody>
                     {grupo.items.map((p) => (
                       <tr key={p.id_prova} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                        <td style={{ padding: "10px 12px", color: "#e8eaf0", fontWeight: "600", whiteSpace: "nowrap" }}>
+                        <td style={{ padding: "10px 12px", color: "var(--text-primary)", fontWeight: "600", whiteSpace: "nowrap" }}>
                           {new Date(p.data_prova + "T12:00:00").toLocaleDateString("pt-AO", { weekday: "short", day: "2-digit", month: "2-digit" })}
                         </td>
-                        <td style={{ padding: "10px 12px", color: "#e8eaf0", whiteSpace: "nowrap" }}>
+                        <td style={{ padding: "10px 12px", color: "var(--text-primary)", whiteSpace: "nowrap" }}>
                           {p.hora_inicio} — {p.hora_fim}
                         </td>
                         <td style={{ padding: "10px 12px" }}>
@@ -670,7 +670,7 @@ export default function EstudanteDashboard() {
                             color: p.tipo_prova === "Exame"
                               ? "#9b59b6"
                               : p.tipo_prova === "Recurso"
-                                ? "#e03d3d"
+                                ? "var(--accent)"
                                 : "#2dd4bf",
                             padding: "3px 10px",
                             borderRadius: "20px",
@@ -680,11 +680,11 @@ export default function EstudanteDashboard() {
                             {TIPO_PROVA_LABELS[p.tipo_prova] || p.tipo_prova}
                           </span>
                         </td>
-                        <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>
+                        <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>
                           {p.nome_disciplina}
-                          <span style={{ color: "#b0b8cf", marginLeft: "6px", fontSize: "11px" }}>({p.codigo_disciplina})</span>
+                          <span style={{ color: "var(--text-muted)", marginLeft: "6px", fontSize: "11px" }}>({p.codigo_disciplina})</span>
                         </td>
-                        <td style={{ padding: "10px 12px", color: "#d0d7e8" }}>
+                        <td style={{ padding: "10px 12px", color: "var(--text-secondary)" }}>
                           {p.nome_professor}
                         </td>
                       </tr>
@@ -700,40 +700,40 @@ export default function EstudanteDashboard() {
       {/* ── Notas (only if current month propina is paid) ── */}
       {pagamentoEmDia && notasResumo.length > 0 && (
         <div style={cardStyle}>
-          <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "#e8eaf0", display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ background: "#22c55e", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
+          <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "4px", color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ background: "#22c55e", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700" }}>
               NOTAS
             </span>
             Resumo — {estudante.ano_electivo || "2025/2026"}
           </div>
-          <div style={{ color: "#d0d7e8", fontSize: "12px", marginBottom: "16px" }}>
+          <div style={{ color: "var(--text-secondary)", fontSize: "12px", marginBottom: "16px" }}>
             Notas do ano lectivo actual
           </div>
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
               <thead>
-                <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                  <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
-                  <th style={{ textAlign: "center", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Semestre</th>
-                  <th style={{ textAlign: "center", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Nota Final</th>
-                  <th style={{ textAlign: "center", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Dispensável</th>
-                  <th style={{ textAlign: "center", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Estado</th>
+                <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                  <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
+                  <th style={{ textAlign: "center", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Semestre</th>
+                  <th style={{ textAlign: "center", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Nota Final</th>
+                  <th style={{ textAlign: "center", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Dispensável</th>
+                  <th style={{ textAlign: "center", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Estado</th>
                 </tr>
               </thead>
               <tbody>
                 {notasResumo.map((n) => (
                   <tr key={n.id_nota} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                    <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>
+                    <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>
                       {n.nome_disciplina}
-                      <span style={{ color: "#b0b8cf", marginLeft: "6px", fontSize: "11px" }}>({n.codigo_disciplina})</span>
+                      <span style={{ color: "var(--text-muted)", marginLeft: "6px", fontSize: "11px" }}>({n.codigo_disciplina})</span>
                     </td>
-                    <td style={{ padding: "10px 12px", color: "#d0d7e8", textAlign: "center" }}>{n.semestre}</td>
+                    <td style={{ padding: "10px 12px", color: "var(--text-secondary)", textAlign: "center" }}>{n.semestre}</td>
                     <td style={{ padding: "10px 12px", textAlign: "center" }}>
                       <span style={{
                         fontWeight: "700",
                         color: n.nota_final != null
-                          ? (n.aprovado ? "#22c55e" : "#e03d3d")
-                          : "#b0b8cf",
+                          ? (n.aprovado ? "#22c55e" : "var(--accent)")
+                          : "var(--text-muted)",
                       }}>
                         {n.nota_final != null ? arredondarNota(n.nota_final) : "—"}
                       </span>
@@ -751,7 +751,7 @@ export default function EstudanteDashboard() {
                           Sim
                         </span>
                       ) : (
-                        <span style={{ color: "#b0b8cf", fontSize: "11px" }}>Não</span>
+                        <span style={{ color: "var(--text-muted)", fontSize: "11px" }}>Não</span>
                       )}
                     </td>
                     <td style={{ padding: "10px 12px", textAlign: "center" }}>
@@ -761,19 +761,19 @@ export default function EstudanteDashboard() {
                         fontSize: "11px",
                         fontWeight: "600",
                         background: n.estado === "Aprovado" ? "rgba(34,197,94,0.12)"
-                          : n.estado === "Reprovado" ? "rgba(224,61,61,0.12)"
+                          : n.estado === "Reprovado" ? "var(--accent-bg)"
                           : n.estado === "Exame" ? "rgba(240,165,0,0.15)"
                           : n.estado === "Recurso" ? "rgba(245,158,11,0.15)"
                           : n.estado === "Exame Especial" ? "rgba(139,92,246,0.15)"
                           : n.estado === "Dispensa" ? "rgba(45,212,191,0.12)"
                           : "rgba(85,94,120,0.2)",
                         color: n.estado === "Aprovado" ? "#22c55e"
-                          : n.estado === "Reprovado" ? "#e03d3d"
+                          : n.estado === "Reprovado" ? "var(--accent)"
                           : n.estado === "Exame" ? "#f0a500"
                           : n.estado === "Recurso" ? "#f59e0b"
                           : n.estado === "Exame Especial" ? "#8b5cf6"
                           : n.estado === "Dispensa" ? "#2dd4bf"
-                          : "#b0b8cf",
+                          : "var(--text-muted)",
                       }}>
                         {n.estado}
                       </span>
@@ -797,7 +797,7 @@ function InfoCampo({ label, value }: { label: string; value: string | number }) 
         fontSize: "11px",
         textTransform: "uppercase",
         letterSpacing: "0.5px",
-        color: "#b0b8cf",
+        color: "var(--text-muted)",
         marginBottom: "4px",
       }}>
         {label}
@@ -805,7 +805,7 @@ function InfoCampo({ label, value }: { label: string; value: string | number }) 
       <div style={{
         fontSize: "14px",
         fontWeight: "600",
-        color: "#e8eaf0",
+        color: "var(--text-primary)",
       }}>
         {value}
       </div>

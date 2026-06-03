@@ -53,7 +53,7 @@ export default function AdminDashboard() {
         marginBottom: "24px"
       }}>
         {[
-          { label: "Total Estudantes", value: stats.totalEstudantes.toString(), color: "#e03d3d" },
+          { label: "Total Estudantes", value: stats.totalEstudantes.toString(), color: "var(--accent)" },
           { label: "Monografias Activas", value: stats.totalMonografiasAtivas.toString(), color: "#f0a500" },
           { label: "Pagamentos Pendentes", value: stats.pagamentosPendentes.toString(), color: "#2dd4bf" },
           { label: "Arrecadado Mês", value: stats.totalArrecadadoMes.toLocaleString('pt-AO') + " Kz", color: "#22c55e" },
@@ -65,7 +65,7 @@ export default function AdminDashboard() {
           },
         ].map((stat) => (
           <div key={stat.label} style={{
-            background: "#1e2230",
+            background: "var(--bg-card)",
             border: "1px solid rgba(255,255,0.07)",
             borderRadius: "14px",
             padding: "20px",
@@ -75,13 +75,13 @@ export default function AdminDashboard() {
               fontSize: "11px",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
-              color: "#b0b8cf",
+              color: "var(--text-muted)",
               marginBottom: "10px"
             }}>{stat.label}</div>
             <div style={{
               fontSize: "32px",
               fontWeight: "700",
-              color: "#e8eaf0"
+              color: "var(--text-primary)"
             }}>{stat.value}</div>
           </div>
         ))}

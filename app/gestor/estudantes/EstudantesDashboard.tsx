@@ -203,7 +203,7 @@ function ModalEditarNota({
       zIndex: 1000,
     }} onClick={onClose}>
       <div style={{
-        background: "#1e2230",
+        background: "var(--bg-card)",
         borderRadius: "16px",
         padding: "24px",
         width: "500px",
@@ -211,15 +211,15 @@ function ModalEditarNota({
         maxHeight: "90vh",
         overflow: "auto",
       }} onClick={(e) => e.stopPropagation()}>
-        <h3 style={{ margin: "0 0 4px 0", color: "#e8eaf0" }}>✏️ Editar Nota</h3>
-        <div style={{ color: "#d0d7e8", fontSize: "13px", marginBottom: "16px" }}>
+        <h3 style={{ margin: "0 0 4px 0", color: "var(--text-primary)" }}>✏️ Editar Nota</h3>
+        <div style={{ color: "var(--text-secondary)", fontSize: "13px", marginBottom: "16px" }}>
           {nota.disciplina} ({nota.codigo})
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px", marginBottom: "16px" }}>
           {(["ac1", "ac2", "ac3"] as const).map(campo => (
             <div key={campo}>
-              <label style={{ fontSize: "11px", color: "#b0b8cf", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
+              <label style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
                 {campo.toUpperCase()}
               </label>
               <input
@@ -231,14 +231,14 @@ function ModalEditarNota({
                 onChange={(e) => handleChange(campo, e.target.value)}
                 style={{
                   width: "100%", padding: "8px",
-                  background: "#0a0c12", border: "1px solid rgba(255,255,255,0.07)",
+                  background: "#0a0c12", border: "1px solid var(--border-color)",
                   borderRadius: "6px", color: "white", fontSize: "13px"
                 }}
               />
             </div>
           ))}
           <div>
-            <label style={{ fontSize: "11px", color: "#b0b8cf", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
+            <label style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
               TTP
             </label>
             <input
@@ -247,13 +247,13 @@ function ModalEditarNota({
               onChange={(e) => handleChange("ttp", e.target.value)}
               style={{
                 width: "100%", padding: "8px",
-                background: "#0a0c12", border: "1px solid rgba(255,255,255,0.07)",
+                background: "#0a0c12", border: "1px solid var(--border-color)",
                 borderRadius: "6px", color: "white", fontSize: "13px"
               }}
             />
           </div>
           <div>
-            <label style={{ fontSize: "11px", color: "#b0b8cf", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
+            <label style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
               PP1
             </label>
             <input
@@ -262,13 +262,13 @@ function ModalEditarNota({
               onChange={(e) => handleChange("pp1", e.target.value)}
               style={{
                 width: "100%", padding: "8px",
-                background: "#0a0c12", border: "1px solid rgba(255,255,255,0.07)",
+                background: "#0a0c12", border: "1px solid var(--border-color)",
                 borderRadius: "6px", color: "white", fontSize: "13px"
               }}
             />
           </div>
           <div>
-            <label style={{ fontSize: "11px", color: "#b0b8cf", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
+            <label style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
               PP2
             </label>
             <input
@@ -277,7 +277,7 @@ function ModalEditarNota({
               onChange={(e) => handleChange("pp2", e.target.value)}
               style={{
                 width: "100%", padding: "8px",
-                background: "#0a0c12", border: "1px solid rgba(255,255,255,0.07)",
+                background: "#0a0c12", border: "1px solid var(--border-color)",
                 borderRadius: "6px", color: "white", fontSize: "13px"
               }}
             />
@@ -301,7 +301,7 @@ function ModalEditarNota({
             />
           </div>
           <div>
-            <label style={{ fontSize: "11px", color: "#e03d3d", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
+            <label style={{ fontSize: "11px", color: "var(--accent)", textTransform: "uppercase", marginBottom: "4px", display: "block" }}>
               Recurso (max 12)
             </label>
             <input
@@ -334,7 +334,7 @@ function ModalEditarNota({
 
         {/* Preview da nota final */}
         <div style={{
-          background: "#13161e",
+          background: "var(--bg-input)",
           borderRadius: "8px",
           padding: "12px 16px",
           marginBottom: "16px",
@@ -342,7 +342,7 @@ function ModalEditarNota({
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-          <span style={{ color: "#d0d7e8", fontSize: "13px" }}>Pré-visualização:</span>
+          <span style={{ color: "var(--text-secondary)", fontSize: "13px" }}>Pré-visualização:</span>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             {preview?.is_provisional && (
               <span style={{
@@ -360,8 +360,8 @@ function ModalEditarNota({
               fontWeight: "700",
               fontSize: "18px",
               color: preview && preview.nota !== null
-                ? (preview.nota >= 10 ? "#22c55e" : "#e03d3d")
-                : "#b0b8cf",
+                ? (preview.nota >= 10 ? "#22c55e" : "var(--accent)")
+                : "var(--text-muted)",
             }}>
               {preview ? `${preview.nota} (${preview.tipo})` : "— (incompleto)"}
             </span>
@@ -374,9 +374,9 @@ function ModalEditarNota({
             style={{
               padding: "10px 20px",
               background: "transparent",
-              border: "1px solid rgba(255,255,255,0.1)",
+              border: "1px solid var(--border-color-strong)",
               borderRadius: "8px",
-              color: "#d0d7e8",
+              color: "var(--text-secondary)",
               cursor: "pointer",
             }}
           >
@@ -387,7 +387,7 @@ function ModalEditarNota({
             disabled={saving}
             style={{
               padding: "10px 24px",
-              background: saving ? "#b0b8cf" : "#2dd4bf",
+              background: saving ? "var(--text-muted)" : "#2dd4bf",
               border: "none",
               borderRadius: "8px",
               color: "white",
@@ -589,8 +589,8 @@ export default function EstudantesDashboard() {
     switch (estado) {
       case "EmCurso": return "#22c55e"
       case "Finalizado": return "#2dd4bf"
-      case "Desistente": return "#e03d3d"
-      default: return "#b0b8cf"
+      case "Desistente": return "var(--accent)"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -598,7 +598,7 @@ export default function EstudantesDashboard() {
     switch (pagamento) {
       case "Pago": return "#22c55e"
       case "Pendente": return "#f0a500"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -644,24 +644,24 @@ export default function EstudantesDashboard() {
     >
       {/* Filtros */}
       <div style={{
-        background: "#1e2230",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-color)",
         borderRadius: "14px",
         padding: "16px",
         marginBottom: "16px"
       }}>
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={{ fontSize: "11px", color: "#d0d7e8", textTransform: "uppercase" }}>Curso</label>
+            <label style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase" }}>Curso</label>
             <select
               value={filtroCurso}
               onChange={(e) => setFiltroCurso(e.target.value)}
               style={{
                 padding: "8px 12px",
                 borderRadius: "6px",
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "#13161e",
-                color: "#e8eaf0",
+                border: "1px solid var(--border-color-strong)",
+                background: "var(--bg-input)",
+                color: "var(--text-primary)",
                 fontSize: "12px"
               }}
             >
@@ -671,16 +671,16 @@ export default function EstudantesDashboard() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={{ fontSize: "11px", color: "#d0d7e8", textTransform: "uppercase" }}>Ano</label>
+            <label style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase" }}>Ano</label>
             <select
               value={filtroAno}
               onChange={(e) => setFiltroAno(e.target.value)}
               style={{
                 padding: "8px 12px",
                 borderRadius: "6px",
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "#13161e",
-                color: "#e8eaf0",
+                border: "1px solid var(--border-color-strong)",
+                background: "var(--bg-input)",
+                color: "var(--text-primary)",
                 fontSize: "12px"
               }}
             >
@@ -692,16 +692,16 @@ export default function EstudantesDashboard() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            <label style={{ fontSize: "11px", color: "#d0d7e8", textTransform: "uppercase" }}>Turno</label>
+            <label style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase" }}>Turno</label>
             <select
               value={filtroTurno}
               onChange={(e) => setFiltroTurno(e.target.value)}
               style={{
                 padding: "8px 12px",
                 borderRadius: "6px",
-                border: "1px solid rgba(255,255,255,0.1)",
-                background: "#13161e",
-                color: "#e8eaf0",
+                border: "1px solid var(--border-color-strong)",
+                background: "var(--bg-input)",
+                color: "var(--text-primary)",
                 fontSize: "12px"
               }}
             >
@@ -713,7 +713,7 @@ export default function EstudantesDashboard() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1, minWidth: "200px" }}>
-            <label style={{ fontSize: "11px", color: "#d0d7e8", textTransform: "uppercase" }}>Pesquisar</label>
+            <label style={{ fontSize: "11px", color: "var(--text-secondary)", textTransform: "uppercase" }}>Pesquisar</label>
             <div style={{ display: "flex", gap: "4px" }}>
               <select
                 value={tipoPesquisa}
@@ -721,9 +721,9 @@ export default function EstudantesDashboard() {
                 style={{
                   padding: "8px",
                   borderRadius: "6px 0 0 6px",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  background: "#13161e",
-                  color: "#e8eaf0",
+                  border: "1px solid var(--border-color-strong)",
+                  background: "var(--bg-input)",
+                  color: "var(--text-primary)",
                   fontSize: "11px"
                 }}
               >
@@ -750,9 +750,9 @@ export default function EstudantesDashboard() {
                   flex: 1,
                   padding: "8px 12px",
                   borderRadius: "0 6px 6px 0",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  background: "#13161e",
-                  color: "#e8eaf0",
+                  border: "1px solid var(--border-color-strong)",
+                  background: "var(--bg-input)",
+                  color: "var(--text-primary)",
                   fontSize: "12px"
                 }}
               />
@@ -775,8 +775,8 @@ export default function EstudantesDashboard() {
           { label: "Ano Lectivo", value: anoLectivo || "—", color: "#9b59b6" },
         ].map((s) => (
           <div key={s.label} style={{
-            background: "#1e2230",
-            border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border-color)",
             borderRadius: "14px",
             padding: "20px",
             borderTop: `2px solid ${s.color}`
@@ -785,13 +785,13 @@ export default function EstudantesDashboard() {
               fontSize: "11px",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
-              color: "#b0b8cf",
+              color: "var(--text-muted)",
               marginBottom: "10px"
             }}>{s.label}</div>
             <div style={{
               fontSize: "16px",
               fontWeight: "700",
-              color: "#e8eaf0"
+              color: "var(--text-primary)"
             }}>{loading ? "..." : s.value}</div>
           </div>
         ))}
@@ -806,8 +806,8 @@ export default function EstudantesDashboard() {
       }}>
         {/* Coluna da lista */}
         <div style={{
-          background: "#1e2230",
-          border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "14px",
           padding: "20px",
         }}>
@@ -815,20 +815,20 @@ export default function EstudantesDashboard() {
             fontSize: "14px",
             fontWeight: "600",
             marginBottom: "16px",
-            color: "#e8eaf0"
+            color: "var(--text-primary)"
           }}>Estudantes do Departamento</div>
 
           {loading ? (
-            <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>A carregar...</div>
+            <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>A carregar...</div>
           ) : estudantes.length === 0 ? (
-            <div style={{ textAlign: "center", color: "#b0b8cf", padding: "30px" }}>
+            <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "30px" }}>
               Nenhum estudante encontrado
             </div>
           ) : (
-            <div id="lista-estudantes" style={{ display: "flex", flexDirection: "column", gap: "6px", maxHeight: "500px", overflow: "auto", scrollbarWidth: "thin", scrollbarColor: "#2a2f3d #1e2230" }}>
+            <div id="lista-estudantes" style={{ display: "flex", flexDirection: "column", gap: "6px", maxHeight: "500px", overflow: "auto", scrollbarWidth: "thin", scrollbarColor: "#2a2f3d var(--bg-card)" }}>
               <style>{`
                 #lista-estudantes::-webkit-scrollbar { width: 6px; }
-                #lista-estudantes::-webkit-scrollbar-track { background: #1e2230; border-radius: 3px; }
+                #lista-estudantes::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 3px; }
                 #lista-estudantes::-webkit-scrollbar-thumb { background: #2a2f3d; border-radius: 3px; }
                 #lista-estudantes::-webkit-scrollbar-thumb:hover { background: #3a3f4d; }
               `}</style>
@@ -837,15 +837,15 @@ export default function EstudantesDashboard() {
                   key={e.id_estudante} 
                   onClick={() => selecionarEstudante(e)}
                   style={{
-                    background: estudanteSelecionado?.id_estudante === e.id_estudante ? "rgba(45,212,191,0.1)" : "#13161e",
+                    background: estudanteSelecionado?.id_estudante === e.id_estudante ? "rgba(45,212,191,0.1)" : "var(--bg-input)",
                     borderRadius: "10px",
                     padding: "12px 16px",
                     cursor: "pointer",
                     border: estudanteSelecionado?.id_estudante === e.id_estudante ? "1px solid #2dd4bf" : "1px solid transparent"
                   }}
                 >
-                  <div style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>{e.nome}</div>
-                  <div style={{ color: "#b0b8cf", fontSize: "11px", marginTop: "2px" }}>
+                  <div style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>{e.nome}</div>
+                  <div style={{ color: "var(--text-muted)", fontSize: "11px", marginTop: "2px" }}>
                     {e.numero_estudante} · {e.curso} · {e.ano_current}º Ano
                   </div>
                   <div style={{ display: "flex", gap: "6px", marginTop: "6px" }}>
@@ -881,22 +881,22 @@ export default function EstudantesDashboard() {
           <div>
             {/* Info do estudante */}
             <div style={{
-              background: "#1e2230",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-color)",
               borderRadius: "14px",
               padding: "20px",
               marginBottom: "16px",
             }}>
               {loadingDetalhe ? (
-                <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>A carregar detalhes...</div>
+                <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "20px" }}>A carregar detalhes...</div>
               ) : (
                 <>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <div>
-                      <div style={{ fontSize: "16px", fontWeight: "700", color: "#e8eaf0" }}>
+                      <div style={{ fontSize: "16px", fontWeight: "700", color: "var(--text-primary)" }}>
                         {estudanteSelecionado.nome}
                       </div>
-                      <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "4px" }}>
+                      <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "4px" }}>
                         {estudanteSelecionado.numero_estudante} · {estudanteSelecionado.curso.nome}
                       </div>
                     </div>
@@ -923,7 +923,7 @@ export default function EstudantesDashboard() {
                       </span>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "16px", marginTop: "12px", fontSize: "12px", color: "#d0d7e8" }}>
+                  <div style={{ display: "flex", gap: "16px", marginTop: "12px", fontSize: "12px", color: "var(--text-secondary)" }}>
                     <span>📚 {estudanteSelecionado.ano_current}º Ano</span>
                     <span>🎓 {estudanteSelecionado.curso.duracao_anos} anos</span>
                     <span>💳 {estudanteSelecionado.pagamento}</span>
@@ -937,8 +937,8 @@ export default function EstudantesDashboard() {
 
             {/* Orientador Section */}
             <div style={{
-              background: "#1e2230",
-              border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-color)",
               borderRadius: "14px",
               padding: "20px",
               marginBottom: "16px",
@@ -947,27 +947,27 @@ export default function EstudantesDashboard() {
                 fontSize: "14px",
                 fontWeight: "600",
                 marginBottom: "12px",
-                color: "#e8eaf0"
+                color: "var(--text-primary)"
               }}>Orientador</div>
 
               {loadingOrientador ? (
-                <div style={{ textAlign: "center", color: "#b0b8cf", padding: "16px" }}>A carregar orientador...</div>
+                <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "16px" }}>A carregar orientador...</div>
               ) : orientadorAtual ? (
                 <div style={{
-                  background: "#13161e",
+                  background: "var(--bg-input)",
                   borderRadius: "10px",
                   padding: "14px",
                   border: "1px solid rgba(255,255,255,0.05)"
                 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
-                      <div style={{ color: "#e8eaf0", fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>
+                      <div style={{ color: "var(--text-primary)", fontSize: "14px", fontWeight: "600", marginBottom: "4px" }}>
                         {orientadorAtual.nome}
                         {orientadorAtual.gestor_assigned && (
                           <span title="Atribuido pelo gestor" style={{ marginLeft: "6px", fontSize: "12px" }}>🔹</span>
                         )}
                       </div>
-                      <div style={{ color: "#b0b8cf", fontSize: "12px" }}>
+                      <div style={{ color: "var(--text-muted)", fontSize: "12px" }}>
                         {orientadorAtual.especialidade}
                       </div>
                     </div>
@@ -994,7 +994,7 @@ export default function EstudantesDashboard() {
                           background: "rgba(224,61,61,0.15)",
                           border: "1px solid rgba(224,61,61,0.3)",
                           borderRadius: "6px",
-                          color: "#e03d3d",
+                          color: "var(--accent)",
                           fontSize: "11px",
                           fontWeight: "600",
                           cursor: "pointer",
@@ -1024,7 +1024,7 @@ export default function EstudantesDashboard() {
                       ))}
                     </div>
                   )}
-                  <div style={{ color: "#b0b8cf", fontSize: "13px", marginBottom: "12px", textAlign: "center" }}>
+                  <div style={{ color: "var(--text-muted)", fontSize: "13px", marginBottom: "12px", textAlign: "center" }}>
                     Nenhum orientador atribuido
                   </div>
                   <div style={{ textAlign: "center" }}>
@@ -1034,10 +1034,10 @@ export default function EstudantesDashboard() {
                       title={!podeAtribuir ? motivosBloqueio.join("; ") : ""}
                       style={{
                         padding: "8px 16px",
-                        background: podeAtribuir ? "#2dd4bf" : "#b0b8cf",
+                        background: podeAtribuir ? "#2dd4bf" : "var(--text-muted)",
                         border: "none",
                         borderRadius: "6px",
-                        color: podeAtribuir ? "#0a0c12" : "#d0d7e8",
+                        color: podeAtribuir ? "#0a0c12" : "var(--text-secondary)",
                         fontSize: "12px",
                         fontWeight: "600",
                         cursor: podeAtribuir ? "pointer" : "not-allowed",
@@ -1053,8 +1053,8 @@ export default function EstudantesDashboard() {
             {/* Tabs de anos curriculares */}
             {estudanteSelecionado.anos_curriculares.length > 0 && (
               <div style={{
-                background: "#1e2230",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-color)",
                 borderRadius: "14px",
                 padding: "20px",
               }}>
@@ -1062,7 +1062,7 @@ export default function EstudantesDashboard() {
                   fontSize: "14px",
                   fontWeight: "600",
                   marginBottom: "12px",
-                  color: "#e8eaf0"
+                  color: "var(--text-primary)"
                 }}>
                   Percurso Académico
                 </div>
@@ -1080,8 +1080,8 @@ export default function EstudantesDashboard() {
                           borderRadius: "8px",
                           border: "none",
                           cursor: "pointer",
-                          background: anoSelecionado === a.ano ? "#2dd4bf" : isCurrent ? "rgba(45,212,191,0.15)" : "#13161e",
-                          color: anoSelecionado === a.ano ? "#0a0c12" : isCurrent ? "#2dd4bf" : "#d0d7e8",
+                          background: anoSelecionado === a.ano ? "#2dd4bf" : isCurrent ? "rgba(45,212,191,0.15)" : "var(--bg-input)",
+                          color: anoSelecionado === a.ano ? "#0a0c12" : isCurrent ? "#2dd4bf" : "var(--text-secondary)",
                           fontWeight: anoSelecionado === a.ano ? "700" : "500",
                           fontSize: "13px",
                         }}
@@ -1109,9 +1109,9 @@ export default function EstudantesDashboard() {
                           padding: "4px 12px",
                           borderRadius: "6px",
                           border: "1px solid",
-                          borderColor: filtroSemestre === sem ? "#f0a500" : "rgba(255,255,255,0.1)",
+                          borderColor: filtroSemestre === sem ? "#f0a500" : "var(--border-color-strong)",
                           background: filtroSemestre === sem ? "rgba(240,165,0,0.1)" : "transparent",
-                          color: filtroSemestre === sem ? "#f0a500" : "#d0d7e8",
+                          color: filtroSemestre === sem ? "#f0a500" : "var(--text-secondary)",
                           fontSize: "11px",
                           cursor: "pointer"
                         }}
@@ -1124,59 +1124,59 @@ export default function EstudantesDashboard() {
 
                 {/* Tabela de disciplinas */}
                 {disciplinasFiltradas.length === 0 ? (
-                  <div style={{ textAlign: "center", color: "#b0b8cf", padding: "20px" }}>
+                  <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "20px" }}>
                     Nenhuma disciplina encontrada para este ano/semestre
                   </div>
                 ) : (
                   <div style={{ overflowX: "auto" }}>
                     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
                       <thead>
-                        <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                          <th style={{ textAlign: "left", padding: "8px", color: "#b0b8cf", fontSize: "10px", textTransform: "uppercase" }}>Disciplina</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Sem</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC1</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC2</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>AC3</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>TTP</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>PP1</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>PP2</th>
+                        <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                          <th style={{ textAlign: "left", padding: "8px", color: "var(--text-muted)", fontSize: "10px", textTransform: "uppercase" }}>Disciplina</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Sem</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>AC1</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>AC2</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>AC3</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>TTP</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>PP1</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>PP2</th>
                           <th style={{ textAlign: "center", padding: "8px", color: "#f0a500", fontSize: "10px" }}>Exame</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#e03d3d", fontSize: "10px" }}>Rec</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--accent)", fontSize: "10px" }}>Rec</th>
                           <th style={{ textAlign: "center", padding: "8px", color: "#9b59b6", fontSize: "10px" }}>Ex.Esp</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#e8eaf0", fontSize: "10px" }}>Final</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Estado</th>
-                          <th style={{ textAlign: "center", padding: "8px", color: "#b0b8cf", fontSize: "10px" }}>Acção</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-primary)", fontSize: "10px" }}>Final</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Estado</th>
+                          <th style={{ textAlign: "center", padding: "8px", color: "var(--text-muted)", fontSize: "10px" }}>Acção</th>
                         </tr>
                       </thead>
                       <tbody>
                         {disciplinasFiltradas.map((n, idx) => (
                           <tr key={idx} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
                             <td style={{ padding: "8px" }}>
-                              <div style={{ color: "#e8eaf0", fontWeight: "500" }}>{n.disciplina}</div>
-                              <div style={{ color: "#b0b8cf", fontSize: "10px" }}>{n.codigo}</div>
+                              <div style={{ color: "var(--text-primary)", fontWeight: "500" }}>{n.disciplina}</div>
+                              <div style={{ color: "var(--text-muted)", fontSize: "10px" }}>{n.codigo}</div>
                             </td>
-                            <td style={{ textAlign: "center", padding: "8px", color: "#d0d7e8" }}>{n.semestre}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.ac1 != null ? "#e8eaf0" : "#b0b8cf" }}>{n.ac1 != null ? arredondarNota(n.ac1) : "—"}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.ac2 != null ? "#e8eaf0" : "#b0b8cf" }}>{n.ac2 != null ? arredondarNota(n.ac2) : "—"}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.ac3 != null ? "#e8eaf0" : "#b0b8cf" }}>{n.ac3 != null ? arredondarNota(n.ac3) : "—"}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.ttp != null ? "#e8eaf0" : "#b0b8cf" }}>{n.ttp != null ? arredondarNota(n.ttp) : "—"}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.pp1 != null ? "#e8eaf0" : "#b0b8cf" }}>{n.pp1 != null ? arredondarNota(n.pp1) : "—"}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.pp2 != null ? "#e8eaf0" : "#b0b8cf" }}>{n.pp2 != null ? arredondarNota(n.pp2) : "—"}</td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.exame != null ? "#f0a500" : "#b0b8cf" }}>
+                            <td style={{ textAlign: "center", padding: "8px", color: "var(--text-secondary)" }}>{n.semestre}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.ac1 != null ? "var(--text-primary)" : "var(--text-muted)" }}>{n.ac1 != null ? arredondarNota(n.ac1) : "—"}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.ac2 != null ? "var(--text-primary)" : "var(--text-muted)" }}>{n.ac2 != null ? arredondarNota(n.ac2) : "—"}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.ac3 != null ? "var(--text-primary)" : "var(--text-muted)" }}>{n.ac3 != null ? arredondarNota(n.ac3) : "—"}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.ttp != null ? "var(--text-primary)" : "var(--text-muted)" }}>{n.ttp != null ? arredondarNota(n.ttp) : "—"}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.pp1 != null ? "var(--text-primary)" : "var(--text-muted)" }}>{n.pp1 != null ? arredondarNota(n.pp1) : "—"}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.pp2 != null ? "var(--text-primary)" : "var(--text-muted)" }}>{n.pp2 != null ? arredondarNota(n.pp2) : "—"}</td>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.exame != null ? "#f0a500" : "var(--text-muted)" }}>
                               {n.exame != null ? arredondarNota(n.exame) : "—"}
                             </td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.recurso != null ? "#e03d3d" : "#b0b8cf" }}>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.recurso != null ? "var(--accent)" : "var(--text-muted)" }}>
                               {n.recurso != null ? arredondarNota(n.recurso) : "—"}
                             </td>
-                            <td style={{ textAlign: "center", padding: "8px", color: n.exame_especial != null ? "#9b59b6" : "#b0b8cf" }}>
+                            <td style={{ textAlign: "center", padding: "8px", color: n.exame_especial != null ? "#9b59b6" : "var(--text-muted)" }}>
                               {n.exame_especial != null ? arredondarNota(n.exame_especial) : "—"}
                             </td>
                             <td style={{ textAlign: "center", padding: "8px" }}>
                               <span style={{
                                 fontWeight: "700",
                                 color: n.nota_final != null 
-                                  ? (n.nota_final >= 10 ? "#22c55e" : "#e03d3d")
-                                  : "#b0b8cf"
+                                  ? (n.nota_final >= 10 ? "#22c55e" : "var(--accent)")
+                                  : "var(--text-muted)"
                               }}>
                                 {n.nota_final != null ? arredondarNota(n.nota_final) : "—"}
                               </span>
@@ -1193,10 +1193,10 @@ export default function EstudantesDashboard() {
                                     ? "rgba(34,197,94,0.2)" 
                                     : "rgba(224,61,61,0.2)",
                                 color: n.aprovado === null 
-                                  ? "#b0b8cf" 
+                                  ? "var(--text-muted)" 
                                   : n.aprovado 
                                     ? "#22c55e" 
-                                    : "#e03d3d"
+                                    : "var(--accent)"
                               }}>
                                 {n.dispensada ? "Dispensado" : n.aprovado === null ? "Em Curso" : n.aprovado ? "Aprovado" : "Reprovado"}
                               </span>
@@ -1252,7 +1252,7 @@ export default function EstudantesDashboard() {
           zIndex: 1000,
         }} onClick={() => setShowOrientadorModal(false)}>
           <div style={{
-            background: "#1e2230",
+            background: "var(--bg-card)",
             borderRadius: "16px",
             padding: "24px",
             width: "450px",
@@ -1260,15 +1260,15 @@ export default function EstudantesDashboard() {
             maxHeight: "90vh",
             overflow: "auto",
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: "0 0 4px 0", color: "#e8eaf0" }}>Atribuir Orientador</h3>
-            <div style={{ color: "#d0d7e8", fontSize: "13px", marginBottom: "16px" }}>
+            <h3 style={{ margin: "0 0 4px 0", color: "var(--text-primary)" }}>Atribuir Orientador</h3>
+            <div style={{ color: "var(--text-secondary)", fontSize: "13px", marginBottom: "16px" }}>
               {estudanteSelecionado.nome} ({estudanteSelecionado.curso.nome})
             </div>
 
             <div style={{ marginBottom: "16px" }}>
               <label style={{
                 fontSize: "11px",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 textTransform: "uppercase",
                 marginBottom: "4px",
                 display: "block"
@@ -1280,9 +1280,9 @@ export default function EstudantesDashboard() {
                   width: "100%",
                   padding: "10px 12px",
                   background: "#0a0c12",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid var(--border-color-strong)",
                   borderRadius: "8px",
-                  color: "#e8eaf0",
+                  color: "var(--text-primary)",
                   fontSize: "13px"
                 }}
               >
@@ -1301,9 +1301,9 @@ export default function EstudantesDashboard() {
                 style={{
                   padding: "10px 20px",
                   background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid var(--border-color-strong)",
                   borderRadius: "8px",
-                  color: "#d0d7e8",
+                  color: "var(--text-secondary)",
                   cursor: "pointer",
                 }}
               >
@@ -1314,7 +1314,7 @@ export default function EstudantesDashboard() {
                 disabled={!orientadorSelecionadoId || atribuindoOrientador}
                 style={{
                   padding: "10px 24px",
-                  background: !orientadorSelecionadoId || atribuindoOrientador ? "#b0b8cf" : "#2dd4bf",
+                  background: !orientadorSelecionadoId || atribuindoOrientador ? "var(--text-muted)" : "#2dd4bf",
                   border: "none",
                   borderRadius: "8px",
                   color: "white",

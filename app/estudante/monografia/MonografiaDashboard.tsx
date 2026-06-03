@@ -68,16 +68,16 @@ function BadgeEstado({ estado }: { estado: string }) {
   const config: Record<string, { bg: string; color: string }> = {
     Proposto: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     Aprovado: { bg: "rgba(34,197,94,0.12)", color: "#22c55e" },
-    Reprovado: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
-    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" },
+    Reprovado: { bg: "var(--accent-bg)", color: "var(--accent)" },
+    Cancelado: { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" },
     Submetida: { bg: "rgba(45,212,191,0.12)", color: "#2dd4bf" },
     EmRevisao: { bg: "rgba(240,165,0,0.12)", color: "#f0a500" },
     ParaDefender: { bg: "rgba(155,89,182,0.12)", color: "#9b59b6" },
     Defendida: { bg: "rgba(34,197,94,0.12)", color: "#22c55e" },
-    Rejeitada: { bg: "rgba(224,61,61,0.12)", color: "#e03d3d" },
+    Rejeitada: { bg: "var(--accent-bg)", color: "var(--accent)" },
   }
 
-  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "#b0b8cf" }
+  const style = config[estado] ?? { bg: "rgba(85,94,120,0.2)", color: "var(--text-muted)" }
 
   return (
     <span style={{
@@ -115,8 +115,8 @@ export default function MonografiaDashboard() {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const cardStyle: React.CSSProperties = {
-    background: "#1e2230",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "var(--bg-card)",
+    border: "1px solid var(--border-color)",
     borderRadius: "14px",
     padding: "20px",
     marginBottom: "20px",
@@ -245,7 +245,7 @@ export default function MonografiaDashboard() {
   if (loading) {
     return (
       <DashboardLayout navItems={navItems} title="Monografia" subtitle="Submissão e acompanhamento">
-        <div style={{ textAlign: "center", color: "#b0b8cf", padding: "60px" }}>
+        <div style={{ textAlign: "center", color: "var(--text-muted)", padding: "60px" }}>
           A carregar...
         </div>
       </DashboardLayout>
@@ -255,7 +255,7 @@ export default function MonografiaDashboard() {
   if (!dados) {
     return (
       <DashboardLayout navItems={navItems} title="Monografia" subtitle="Submissão e acompanhamento">
-        <div style={{ textAlign: "center", color: "#e03d3d", padding: "60px" }}>
+        <div style={{ textAlign: "center", color: "var(--accent)", padding: "60px" }}>
           Erro ao carregar dados
         </div>
       </DashboardLayout>
@@ -268,14 +268,14 @@ export default function MonografiaDashboard() {
     return (
       <DashboardLayout navItems={navItems} title="Monografia" subtitle="Submissão e acompanhamento">
         <div style={{
-          background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)", border: "1px solid var(--border-color)",
           borderRadius: "14px", padding: "40px", textAlign: "center"
         }}>
           <div style={{ fontSize: "40px", marginBottom: "16px" }}>🔒</div>
-          <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
+          <div style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "8px" }}>
             Monografia disponível no {anoMonografia}º ano
           </div>
-          <div style={{ fontSize: "13px", color: "#b0b8cf" }}>
+          <div style={{ fontSize: "13px", color: "var(--text-muted)" }}>
             A submissão de monografia só está disponível para estudantes do {anoMonografia}º ano.
           </div>
         </div>
@@ -292,17 +292,17 @@ export default function MonografiaDashboard() {
       padding: "20px"
     }} onClick={() => setShowBlockingModal(false)}>
       <div style={{
-        background: "#1e2230", border: "1px solid rgba(224,61,61,0.3)",
+        background: "var(--bg-card)", border: "1px solid rgba(224,61,61,0.3)",
         borderRadius: "16px", padding: "28px", maxWidth: "520px", width: "100%",
         boxShadow: "0 20px 60px rgba(0,0,0,0.5)"
       }} onClick={e => e.stopPropagation()}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
           <div style={{ fontSize: "32px" }}>🚫</div>
           <div>
-            <div style={{ fontSize: "16px", fontWeight: "700", color: "#e8eaf0" }}>
+            <div style={{ fontSize: "16px", fontWeight: "700", color: "var(--text-primary)" }}>
               Não é possível submeter a monografia
             </div>
-            <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
               Resolva os problemas abaixo antes de submeter.
             </div>
           </div>
@@ -317,7 +317,7 @@ export default function MonografiaDashboard() {
               display: "flex", alignItems: "flex-start", gap: "10px"
             }}>
               <span style={{ fontSize: "16px", flexShrink: 0, marginTop: "1px" }}>⚠️</span>
-              <div style={{ fontSize: "13px", color: "#e8eaf0", lineHeight: "1.5" }}>
+              <div style={{ fontSize: "13px", color: "var(--text-primary)", lineHeight: "1.5" }}>
                 {reason}
               </div>
             </div>
@@ -327,7 +327,7 @@ export default function MonografiaDashboard() {
           onClick={() => setShowBlockingModal(false)}
           style={{
             width: "100%", padding: "12px",
-            background: "#e03d3d", color: "white",
+            background: "var(--accent)", color: "white",
             border: "none", borderRadius: "8px",
             fontSize: "14px", fontWeight: "600", cursor: "pointer"
           }}
@@ -349,7 +349,7 @@ export default function MonografiaDashboard() {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
           <span style={{ fontSize: "20px" }}>🚫</span>
-          <div style={{ fontSize: "14px", fontWeight: "600", color: "#e03d3d" }}>
+          <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--accent)" }}>
             Requisitos em falta para submissão
           </div>
         </div>
@@ -359,8 +359,8 @@ export default function MonografiaDashboard() {
               padding: "10px 14px",
               background: "rgba(13,15,20,0.5)",
               borderRadius: "8px",
-              borderLeft: "3px solid #e03d3d",
-              fontSize: "12px", color: "#d0d7e8", lineHeight: "1.5"
+              borderLeft: "3px solid var(--accent)",
+              fontSize: "12px", color: "var(--text-secondary)", lineHeight: "1.5"
             }}>
               {reason}
             </div>
@@ -370,7 +370,7 @@ export default function MonografiaDashboard() {
           onClick={() => setShowBlockingModal(true)}
           style={{
             padding: "8px 16px",
-            background: "#e03d3d", color: "white",
+            background: "var(--accent)", color: "white",
             border: "none", borderRadius: "8px",
             fontSize: "12px", fontWeight: "600", cursor: "pointer"
           }}
@@ -397,13 +397,13 @@ export default function MonografiaDashboard() {
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#f0a500", marginBottom: "4px" }}>
               Propina pendente
             </div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
               Precisa de estar com a propina em dia para submeter a monografia.
             </div>
           </div>
           <a href="/estudante/pagamentos" style={{
             marginLeft: "auto", padding: "8px 16px",
-            background: "#f0a500", color: "#0d0f14",
+            background: "#f0a500", color: "var(--bg-primary)",
             borderRadius: "8px", fontSize: "13px", fontWeight: "600",
             textDecoration: "none"
           }}>
@@ -430,28 +430,28 @@ export default function MonografiaDashboard() {
           {/* Info do orientador */}
           {dados.orientacao && (
             <div style={{
-              background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--bg-card)", border: "1px solid var(--border-color)",
               borderRadius: "14px", padding: "16px 20px", marginBottom: "16px",
               display: "flex", alignItems: "center", gap: "12px"
             }}>
               <div style={{ fontSize: "24px" }}>👨‍🏫</div>
               <div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
-                <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Orientador</div>
+                <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>{dados.orientacao.orientador.nome_completo}</div>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>{dados.orientacao.orientador.especialidade}</div>
               </div>
             </div>
           )}
 
           {/* Info co-autores */}
           {(m.nome_co_orientador || m.nome_co_autor) && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginBottom: "16px" }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "16px 20px", marginBottom: "16px" }}>
               {m.nome_co_orientador && (
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: m.nome_co_autor ? "12px" : 0 }}>
                   <div style={{ fontSize: "24px" }}>👥</div>
                   <div>
-                    <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Co-orientador</div>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{m.nome_co_orientador}</div>
+                    <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Co-orientador</div>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>{m.nome_co_orientador}</div>
                   </div>
                 </div>
               )}
@@ -459,8 +459,8 @@ export default function MonografiaDashboard() {
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <div style={{ fontSize: "24px" }}>✍️</div>
                   <div>
-                    <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Co-autor</div>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{m.nome_co_autor}</div>
+                    <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Co-autor</div>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>{m.nome_co_autor}</div>
                   </div>
                 </div>
               )}
@@ -468,37 +468,37 @@ export default function MonografiaDashboard() {
           )}
 
           {/* Card principal */}
-          <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "24px", marginBottom: "16px" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "24px", marginBottom: "16px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
-                <div style={{ fontSize: "18px", fontWeight: "700", color: "#e8eaf0" }}>{m.titulo}</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
+                <div style={{ fontSize: "18px", fontWeight: "700", color: "var(--text-primary)" }}>{m.titulo}</div>
               </div>
               <BadgeEstado estado={m.estado} />
             </div>
             <div style={{ marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo</div>
-              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.resumo}</div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo</div>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.6" }}>{m.resumo}</div>
             </div>
             {m.descricao && (
               <div style={{ marginBottom: "16px" }}>
-                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição</div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.descricao}</div>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.6" }}>{m.descricao}</div>
               </div>
             )}
             {m.nome_arquivo && (
               <div style={{ background: "rgba(13,15,20,0.5)", borderRadius: "8px", padding: "12px 16px", display: "flex", alignItems: "center", gap: "10px" }}>
                 <span style={{ fontSize: "20px" }}>📄</span>
                 <div>
-                  <div style={{ fontSize: "13px", color: "#e8eaf0", fontWeight: "500" }}>{m.nome_arquivo}</div>
-                  <div style={{ fontSize: "11px", color: "#b0b8cf" }}>PDF</div>
+                  <div style={{ fontSize: "13px", color: "var(--text-primary)", fontWeight: "500" }}>{m.nome_arquivo}</div>
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>PDF</div>
                 </div>
               </div>
             )}
             {m.nota_final !== null && (
               <div style={{ marginTop: "16px", padding: "16px", background: (m.nota_final ?? 0) >= 10 ? "rgba(34,197,94,0.08)" : "rgba(224,61,61,0.08)", borderRadius: "10px", textAlign: "center" }}>
-                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Nota Final</div>
-                <div style={{ fontSize: "32px", fontWeight: "700", color: (m.nota_final ?? 0) >= 10 ? "#22c55e" : "#e03d3d" }}>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Nota Final</div>
+                <div style={{ fontSize: "32px", fontWeight: "700", color: (m.nota_final ?? 0) >= 10 ? "#22c55e" : "var(--accent)" }}>
                   {m.nota_final != null ? arredondarNota(m.nota_final) : "-"}
                 </div>
               </div>
@@ -507,7 +507,7 @@ export default function MonografiaDashboard() {
               <div style={{ marginTop: "12px", padding: "12px 16px", background: "rgba(155,89,182,0.08)", borderRadius: "8px", display: "flex", alignItems: "center", gap: "10px" }}>
                 <span style={{ fontSize: "18px" }}>📅</span>
                 <div>
-                  <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Data de Defesa</div>
+                  <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>Data de Defesa</div>
                   <div style={{ fontSize: "14px", fontWeight: "600", color: "#9b59b6" }}>{new Date(m.data_defesa).toLocaleDateString("pt-AO")}{m.hora_defesa ? ` às ${m.hora_defesa}h` : ""}{m.sala_defesa ? ` · Sala ${m.sala_defesa}` : ""}</div>
                 </div>
               </div>
@@ -515,25 +515,25 @@ export default function MonografiaDashboard() {
           </div>
 
           {m.feedback && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Orientador</div>
-              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.feedback}</div>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Orientador</div>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.6" }}>{m.feedback}</div>
             </div>
           )}
           {m.feedback_gestor && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
-              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Gestor</div>
-              <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.6" }}>{m.feedback_gestor}</div>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Feedback do Gestor</div>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.6" }}>{m.feedback_gestor}</div>
             </div>
           )}
           {m.correcoes.length > 0 && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px" }}>
-              <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Histórico de Correções</div>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px" }}>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Histórico de Correções</div>
               {m.correcoes.map((c, i) => (
                 <div key={i} style={{ padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", marginBottom: i < m.correcoes.length - 1 ? "8px" : 0 }}>
-                  <div style={{ fontSize: "13px", fontWeight: "600", color: "#e8eaf0", marginBottom: "4px" }}>{c.orientador.nome_completo}</div>
-                  {c.data_correcao && <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>{new Date(c.data_correcao).toLocaleDateString("pt-AO")}</div>}
-                  {c.observacoes && <div style={{ fontSize: "12px", color: "#d0d7e8" }}>{c.observacoes}</div>}
+                  <div style={{ fontSize: "13px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "4px" }}>{c.orientador.nome_completo}</div>
+                  {c.data_correcao && <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>{new Date(c.data_correcao).toLocaleDateString("pt-AO")}</div>}
+                  {c.observacoes && <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>{c.observacoes}</div>}
                 </div>
               ))}
             </div>
@@ -541,11 +541,11 @@ export default function MonografiaDashboard() {
 
           {/* Histórico de monografias */}
           {dados.monografias.length >= 1 && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginTop: "16px" }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "16px 20px", marginTop: "16px" }}>
               <div onClick={() => setMostrarHistorico(!mostrarHistorico)}
                 style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Histórico de monografias ({dados.monografias.length})</div>
-                <div style={{ fontSize: "18px", color: "#b0b8cf" }}>{mostrarHistorico ? "▲" : "▼"}</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Histórico de monografias ({dados.monografias.length})</div>
+                <div style={{ fontSize: "18px", color: "var(--text-muted)" }}>{mostrarHistorico ? "▲" : "▼"}</div>
               </div>
               {mostrarHistorico && (
                 <div style={{ marginTop: "12px" }}>
@@ -553,14 +553,14 @@ export default function MonografiaDashboard() {
                     <div key={mon.id} style={{
                       padding: "12px", background: index === 0 ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.5)",
                       borderRadius: "8px", marginBottom: index < dados.monografias.length - 1 ? "8px" : 0,
-                      borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid #b0b8cf"
+                      borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid var(--text-muted)"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
-                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#e8eaf0" }}>{mon.titulo}</div>
+                        <div style={{ fontSize: "12px", fontWeight: "600", color: "var(--text-primary)" }}>{mon.titulo}</div>
                         <BadgeEstado estado={mon.estado} />
                       </div>
-                      <div style={{ fontSize: "11px", color: "#b0b8cf" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
-                      {mon.feedback && <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}><strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{mon.feedback}</div>}
+                      <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
+                      {mon.feedback && <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}><strong style={{ color: "var(--text-muted)" }}>Feedback: </strong>{mon.feedback}</div>}
                     </div>
                   ))}
                 </div>
@@ -578,12 +578,12 @@ export default function MonografiaDashboard() {
         <DashboardLayout navItems={navItems} title="Monografia" subtitle="Submissão e acompanhamento">
           {/* Info do orientador */}
           {dados.orientacao && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "16px 20px", marginBottom: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
               <div style={{ fontSize: "24px" }}>👨‍🏫</div>
               <div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
-                <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Orientador</div>
+                <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>{dados.orientacao.orientador.nome_completo}</div>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>{dados.orientacao.orientador.especialidade}</div>
               </div>
             </div>
           )}
@@ -592,20 +592,20 @@ export default function MonografiaDashboard() {
           <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.25)", borderRadius: "14px", padding: "20px", marginBottom: "16px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
               <span style={{ fontSize: "20px" }}>❌</span>
-              <div style={{ fontSize: "14px", fontWeight: "600", color: "#e03d3d" }}>Monografia Rejeitada</div>
+              <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--accent)" }}>Monografia Rejeitada</div>
             </div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "6px" }}><strong>Título:</strong> {m.titulo}</div>
-            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "6px" }}><strong>Título:</strong> {m.titulo}</div>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>Submetida em {new Date(m.data_submissao).toLocaleDateString("pt-AO")}</div>
             {m.feedback && (
-              <div style={{ marginTop: "12px", padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", borderLeft: "3px solid #e03d3d" }}>
-                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Feedback do orientador:</div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{m.feedback}</div>
+              <div style={{ marginTop: "12px", padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", borderLeft: "3px solid var(--accent)" }}>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Feedback do orientador:</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.5" }}>{m.feedback}</div>
               </div>
             )}
             {m.feedback_gestor && (
               <div style={{ marginTop: "8px", padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px", borderLeft: "3px solid #f0a500" }}>
-                <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Feedback do gestor:</div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{m.feedback_gestor}</div>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Feedback do gestor:</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.5" }}>{m.feedback_gestor}</div>
               </div>
             )}
           </div>
@@ -614,73 +614,73 @@ export default function MonografiaDashboard() {
           <BlockingSection />
 
           {/* Formulário de resubmissão */}
-          <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "24px" }}>
-            <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "6px" }}>Submeter Nova Monografia</div>
-            <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>Corrija os problemas apontados e submeta uma nova versão.</div>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "24px" }}>
+            <div style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "6px" }}>Submeter Nova Monografia</div>
+            <div style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "20px" }}>Corrija os problemas apontados e submeta uma nova versão.</div>
 
             {sucessoMon ? (
               <div style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: "10px", padding: "20px", textAlign: "center" }}>
                 <div style={{ fontSize: "40px", marginBottom: "12px" }}>🎉</div>
                 <div style={{ fontSize: "16px", fontWeight: "600", color: "#22c55e", marginBottom: "8px" }}>Monografia resubmetida com sucesso!</div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>A sua monografia foi submetida e está a aguardar revisão.</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>A sua monografia foi submetida e está a aguardar revisão.</div>
               </div>
             ) : (
               <>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Título *</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Título *</label>
                   <input type="text" value={titulo} onChange={e => { setTitulo(e.target.value); setErroMon("") }}
                     placeholder="Título da monografia"
-                    style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
+                    style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo * (mín. 50 caracteres)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Resumo * (mín. 50 caracteres)</label>
                   <textarea value={resumo} onChange={e => { setResumo(e.target.value); setErroMon("") }}
                     placeholder="Resumo da sua monografia..." rows={4}
-                    style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
+                    style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição (opcional)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Descrição (opcional)</label>
                   <textarea value={descricao} onChange={e => setDescricao(e.target.value)}
                     placeholder="Descrição adicional..." rows={3}
-                    style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
+                    style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-orientador externo (opcional)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-orientador externo (opcional)</label>
                   <input type="text" value={nomeCoOrientador} onChange={e => setNomeCoOrientador(e.target.value)}
                     placeholder="Nome do co-orientador externo"
-                    style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
+                    style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-autor (opcional)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Co-autor (opcional)</label>
                   <input type="text" value={nomeCoAutor} onChange={e => setNomeCoAutor(e.target.value)}
                     placeholder="Nome do co-autor"
-                    style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
+                    style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "14px", outline: "none", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "20px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ficheiro * (PDF ou Word, máx. 10MB)</label>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ficheiro * (PDF ou Word, máx. 10MB)</label>
                   <div onClick={() => fileInputRef.current?.click()}
-                    style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "24px", textAlign: "center", cursor: "pointer", background: arquivo ? "rgba(34,197,94,0.05)" : "transparent" }}>
+                    style={{ border: "2px dashed var(--border-color-strong)", borderRadius: "10px", padding: "24px", textAlign: "center", cursor: "pointer", background: arquivo ? "rgba(34,197,94,0.05)" : "transparent" }}>
                     <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" onChange={e => setArquivo(e.target.files?.[0] || null)} style={{ display: "none" }} />
                     {arquivo ? (
                       <div>
                         <div style={{ fontSize: "24px", marginBottom: "8px" }}>📄</div>
                         <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivo.name}</div>
-                        <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
+                        <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
                       </div>
                     ) : (
                       <div>
                         <div style={{ fontSize: "24px", marginBottom: "8px" }}>📁</div>
-                        <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar o ficheiro PDF ou Word</div>
+                        <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Clique para selecionar o ficheiro PDF ou Word</div>
                       </div>
                     )}
                   </div>
                 </div>
                 {erroMon && (
-                  <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "#e03d3d" }}>{erroMon}</div>
+                  <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "var(--accent)" }}>{erroMon}</div>
                 )}
                 <button onClick={submeterMonografia} disabled={submetendoMon}
-                  style={{ width: "100%", padding: "12px", background: submetendoMon ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}>
+                  style={{ width: "100%", padding: "12px", background: submetendoMon ? "var(--text-muted)" : "var(--accent)", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}>
                   {submetendoMon ? "A submeter..." : "Submeter Nova Monografia"}
                 </button>
               </>
@@ -689,11 +689,11 @@ export default function MonografiaDashboard() {
 
           {/* Histórico */}
           {dados.monografias.length >= 1 && (
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "16px 20px", marginTop: "16px" }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "16px 20px", marginTop: "16px" }}>
               <div onClick={() => setMostrarHistorico(!mostrarHistorico)}
                 style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Histórico de monografias ({dados.monografias.length})</div>
-                <div style={{ fontSize: "18px", color: "#b0b8cf" }}>{mostrarHistorico ? "▲" : "▼"}</div>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Histórico de monografias ({dados.monografias.length})</div>
+                <div style={{ fontSize: "18px", color: "var(--text-muted)" }}>{mostrarHistorico ? "▲" : "▼"}</div>
               </div>
               {mostrarHistorico && (
                 <div style={{ marginTop: "12px" }}>
@@ -701,14 +701,14 @@ export default function MonografiaDashboard() {
                     <div key={mon.id} style={{
                       padding: "12px", background: "rgba(13,15,20,0.5)", borderRadius: "8px",
                       marginBottom: index < dados.monografias.length - 1 ? "8px" : 0,
-                      borderLeft: "3px solid #b0b8cf"
+                      borderLeft: "3px solid var(--text-muted)"
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
-                        <div style={{ fontSize: "12px", fontWeight: "600", color: "#e8eaf0" }}>{mon.titulo}</div>
+                        <div style={{ fontSize: "12px", fontWeight: "600", color: "var(--text-primary)" }}>{mon.titulo}</div>
                         <BadgeEstado estado={mon.estado} />
                       </div>
-                      <div style={{ fontSize: "11px", color: "#b0b8cf" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
-                      {mon.feedback && <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}><strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{mon.feedback}</div>}
+                      <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>Submetida em {new Date(mon.data_submissao).toLocaleDateString("pt-AO")}</div>
+                      {mon.feedback && <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}><strong style={{ color: "var(--text-muted)" }}>Feedback: </strong>{mon.feedback}</div>}
                     </div>
                   ))}
                 </div>
@@ -735,17 +735,17 @@ export default function MonografiaDashboard() {
           {/* Info do orientador */}
           {dados.orientacao && (
             <div style={{
-              background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+              background: "var(--bg-card)", border: "1px solid var(--border-color)",
               borderRadius: "14px", padding: "16px 20px", marginBottom: "16px",
               display: "flex", alignItems: "center", gap: "12px"
             }}>
               <div style={{ fontSize: "24px" }}>👨‍🏫</div>
               <div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
-                <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Orientador</div>
+                <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>
                   {dados.orientacao.orientador.nome_completo}
                 </div>
-                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>
                   {dados.orientacao.orientador.especialidade}
                 </div>
               </div>
@@ -759,8 +759,8 @@ export default function MonografiaDashboard() {
               style={{
                 padding: "8px 20px", borderRadius: "6px",
                 fontSize: "13px", fontWeight: "600", cursor: "pointer", color: "white",
-                background: activeView === "premonografia" ? "#2dd4bf" : "#1e2230",
-                border: activeView === "premonografia" ? "none" : "1px solid rgba(255,255,255,0.07)",
+                background: activeView === "premonografia" ? "#2dd4bf" : "var(--bg-card)",
+                border: activeView === "premonografia" ? "none" : "1px solid var(--border-color)",
               }}
             >
               📋 Pré-projecto ({dados.premonografias?.length || 0})
@@ -770,8 +770,8 @@ export default function MonografiaDashboard() {
               style={{
                 padding: "8px 20px", borderRadius: "6px",
                 fontSize: "13px", fontWeight: "600", cursor: "pointer", color: "white",
-                background: activeView === "monografia" ? "#e03d3d" : "#1e2230",
-                border: activeView === "monografia" ? "none" : "1px solid rgba(255,255,255,0.07)",
+                background: activeView === "monografia" ? "var(--accent)" : "var(--bg-card)",
+                border: activeView === "monografia" ? "none" : "1px solid var(--border-color)",
               }}
             >
               📄 Monografia
@@ -790,10 +790,10 @@ export default function MonografiaDashboard() {
                   <span style={{ fontSize: "20px" }}>✅</span>
                   <div style={{ fontSize: "14px", fontWeight: "600", color: "#22c55e" }}>Pré-projecto Aprovado</div>
                 </div>
-                <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "6px" }}>
+                <div style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "6px" }}>
                   <strong>Tema:</strong> {preAprovado.tema}
                 </div>
-                <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
+                <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>
                   Submetido em {new Date(preAprovado.data_proposta).toLocaleDateString("pt-AO")}
                 </div>
                 {preAprovado.feedback && (
@@ -802,8 +802,8 @@ export default function MonografiaDashboard() {
                     background: "rgba(13,15,20,0.5)", borderRadius: "8px",
                     borderLeft: "3px solid #22c55e"
                   }}>
-                    <div style={{ fontSize: "12px", color: "#b0b8cf", marginBottom: "4px" }}>Feedback do orientador:</div>
-                    <div style={{ fontSize: "13px", color: "#d0d7e8", lineHeight: "1.5" }}>{preAprovado.feedback}</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "4px" }}>Feedback do orientador:</div>
+                    <div style={{ fontSize: "13px", color: "var(--text-secondary)", lineHeight: "1.5" }}>{preAprovado.feedback}</div>
                   </div>
                 )}
               </div>
@@ -811,7 +811,7 @@ export default function MonografiaDashboard() {
               {/* ── CTA principal — aparece logo abaixo do card aprovado ── */}
               <div style={{
                 marginBottom: "16px", padding: "18px 20px",
-                background: "linear-gradient(135deg, rgba(224,61,61,0.12) 0%, rgba(224,61,61,0.06) 100%)",
+                background: "linear-gradient(135deg, var(--accent-bg) 0%, rgba(224,61,61,0.06) 100%)",
                 border: "1px solid rgba(224,61,61,0.3)",
                 borderRadius: "14px", display: "flex", alignItems: "center",
                 justifyContent: "space-between", gap: "12px", flexWrap: "wrap"
@@ -819,10 +819,10 @@ export default function MonografiaDashboard() {
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   <span style={{ fontSize: "28px" }}>🎓</span>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: "700", color: "#e8eaf0", marginBottom: "3px" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "700", color: "var(--text-primary)", marginBottom: "3px" }}>
                       Pronto para a Monografia!
                     </div>
-                    <div style={{ fontSize: "12px", color: "#d0d7e8" }}>
+                    <div style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
                       O pré-projecto está aprovado. Submeta agora a monografia final.
                     </div>
                   </div>
@@ -831,7 +831,7 @@ export default function MonografiaDashboard() {
                   onClick={() => setActiveView("monografia")}
                   style={{
                     flexShrink: 0, padding: "11px 24px",
-                    background: "#e03d3d", color: "white",
+                    background: "var(--accent)", color: "white",
                     border: "none", borderRadius: "8px",
                     fontSize: "13px", fontWeight: "700", cursor: "pointer",
                     boxShadow: "0 4px 14px rgba(224,61,61,0.35)"
@@ -843,36 +843,36 @@ export default function MonografiaDashboard() {
 
               {/* Formulário completamente bloqueado */}
               <div style={{
-                background: "#1e2230", border: "1px solid rgba(255,255,255,0.05)",
+                background: "var(--bg-card)", border: "1px solid rgba(255,255,255,0.05)",
                 borderRadius: "14px", padding: "24px", opacity: 0.45,
                 pointerEvents: "none", userSelect: "none"
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
                   <span style={{ fontSize: "20px" }}>🔒</span>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>Submissão de Pré-projecto Bloqueada</div>
-                    <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>Submissão de Pré-projecto Bloqueada</div>
+                    <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
                       O pré-projecto foi aprovado. Já não é possível submeter novos.
                     </div>
                   </div>
                 </div>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Tema do Pré-projecto *
                   </label>
                   <textarea
                     disabled rows={3}
                     style={{
                       width: "100%", padding: "10px 14px",
-                      background: "#0d0f14", border: "1px solid rgba(255,255,255,0.05)",
-                      borderRadius: "8px", color: "#b0b8cf", fontSize: "13px",
+                      background: "var(--bg-primary)", border: "1px solid rgba(255,255,255,0.05)",
+                      borderRadius: "8px", color: "var(--text-muted)", fontSize: "13px",
                       outline: "none", resize: "none", boxSizing: "border-box", cursor: "not-allowed"
                     }}
                   />
                 </div>
                 <button disabled style={{
                   width: "100%", padding: "12px",
-                  background: "#1a1d26", color: "#b0b8cf",
+                  background: "#1a1d26", color: "var(--text-muted)",
                   border: "1px solid rgba(255,255,255,0.05)",
                   borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: "not-allowed"
                 }}>
@@ -897,112 +897,112 @@ export default function MonografiaDashboard() {
                   <div style={{ fontSize: "16px", fontWeight: "600", color: "#22c55e", marginBottom: "8px" }}>
                     Monografia submetida com sucesso!
                   </div>
-                  <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+                  <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
                     A sua monografia foi submetida e está a aguardar revisão do orientador.
                   </div>
                 </div>
               ) : (
                 <div style={{
-                  background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--bg-card)", border: "1px solid var(--border-color)",
                   borderRadius: "14px", padding: "24px"
                 }}>
-                  <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "20px" }}>
+                  <div style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "20px" }}>
                     Submeter Monografia
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Título *
                     </label>
                     <input
                       type="text" value={titulo}
                       onChange={e => { setTitulo(e.target.value); setErroMon("") }}
                       placeholder="Título da sua monografia"
-                      style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
                     />
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Resumo * (mín. 50 caracteres)
                     </label>
                     <textarea
                       value={resumo}
                       onChange={e => { setResumo(e.target.value); setErroMon("") }}
                       placeholder="Resumo da sua monografia..." rows={4}
-                      style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }}
                     />
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{resumo.length}/50 caracteres</div>
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Descrição (opcional)
                     </label>
                     <textarea
                       value={descricao} onChange={e => setDescricao(e.target.value)}
                       placeholder="Descrição adicional..." rows={3}
-                      style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }}
                     />
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Co-orientador externo (opcional)
                     </label>
                     <input
                       type="text" value={nomeCoOrientador}
                       onChange={e => setNomeCoOrientador(e.target.value)}
                       placeholder="Nome do co-orientador externo"
-                      style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
                     />
                   </div>
 
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Co-autor (opcional)
                     </label>
                     <input
                       type="text" value={nomeCoAutor}
                       onChange={e => setNomeCoAutor(e.target.value)}
                       placeholder="Nome do co-autor"
-                      style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
+                      style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "14px", outline: "none", boxSizing: "border-box" }}
                     />
                   </div>
 
                   <div style={{ marginBottom: "20px" }}>
-                    <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                    <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                       Ficheiro da Monografia * (PDF ou Word, máx. 10MB)
                     </label>
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "24px", textAlign: "center", cursor: "pointer", background: arquivo ? "rgba(34,197,94,0.05)" : "transparent" }}
+                      style={{ border: "2px dashed var(--border-color-strong)", borderRadius: "10px", padding: "24px", textAlign: "center", cursor: "pointer", background: arquivo ? "rgba(34,197,94,0.05)" : "transparent" }}
                     >
                       <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" onChange={e => setArquivo(e.target.files?.[0] || null)} style={{ display: "none" }} />
                       {arquivo ? (
                         <div>
                           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📄</div>
                           <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivo.name}</div>
-                          <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
+                          <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{(arquivo.size / 1024 / 1024).toFixed(2)} MB</div>
                         </div>
                       ) : (
                         <div>
                           <div style={{ fontSize: "24px", marginBottom: "8px" }}>📁</div>
-                          <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar o ficheiro PDF ou Word</div>
+                          <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Clique para selecionar o ficheiro PDF ou Word</div>
                         </div>
                       )}
                     </div>
                   </div>
 
                   {erroMon && (
-                    <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "#e03d3d" }}>
+                    <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "var(--accent)" }}>
                       {erroMon}
                     </div>
                   )}
 
                   <button
                     onClick={submeterMonografia} disabled={submetendoMon}
-                    style={{ width: "100%", padding: "12px", background: submetendoMon ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}
+                    style={{ width: "100%", padding: "12px", background: submetendoMon ? "var(--text-muted)" : "var(--accent)", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoMon ? "not-allowed" : "pointer" }}
                   >
                     {submetendoMon ? "A submeter..." : "Submeter Monografia"}
                   </button>
@@ -1024,15 +1024,15 @@ export default function MonografiaDashboard() {
         {/* Info do orientador */}
         {dados.orientacao && (
           <div style={{
-            background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)", border: "1px solid var(--border-color)",
             borderRadius: "14px", padding: "16px 20px", marginBottom: "16px",
             display: "flex", alignItems: "center", gap: "12px"
           }}>
             <div style={{ fontSize: "24px" }}>👨‍🏫</div>
             <div>
-              <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
-              <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-              <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Orientador</div>
+              <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>{dados.orientacao.orientador.nome_completo}</div>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>{dados.orientacao.orientador.especialidade}</div>
             </div>
           </div>
         )}
@@ -1040,17 +1040,17 @@ export default function MonografiaDashboard() {
         {/* Card só para PROPOSTO */}
         {p.estado === "Proposto" && (
           <div style={{
-            background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)", border: "1px solid var(--border-color)",
             borderRadius: "14px", padding: "24px", marginBottom: "16px"
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-              <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>Pré-projecto</div>
+              <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>Pré-projecto</div>
               <BadgeEstado estado={p.estado} />
             </div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8", marginBottom: "8px" }}>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)", marginBottom: "8px" }}>
               <strong>Tema:</strong> {p.tema}
             </div>
-            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>
               Submetido em {new Date(p.data_proposta).toLocaleDateString("pt-AO")}
             </div>
             <div style={{ marginTop: "16px", padding: "12px", background: "rgba(240,165,0,0.08)", borderRadius: "8px" }}>
@@ -1064,13 +1064,13 @@ export default function MonografiaDashboard() {
         {/* Formulário de nova submissão quando REPROVADO */}
         {p.estado === "Reprovado" && (
           <div style={{
-            background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)", border: "1px solid var(--border-color)",
             borderRadius: "14px", padding: "24px"
           }}>
-            <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
+            <div style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "8px" }}>
               Submeter Pré-projecto
             </div>
-            <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>
+            <div style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "20px" }}>
               Pode submeter um novo tema para apreciação do orientador.
             </div>
 
@@ -1081,47 +1081,47 @@ export default function MonografiaDashboard() {
               }}>
                 <div style={{ fontSize: "32px", marginBottom: "10px" }}>✅</div>
                 <div style={{ fontSize: "14px", fontWeight: "600", color: "#22c55e" }}>Novo pré-projecto submetido!</div>
-                <div style={{ fontSize: "12px", color: "#d0d7e8", marginTop: "6px" }}>Aguarda aprovação do orientador.</div>
+                <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "6px" }}>Aguarda aprovação do orientador.</div>
               </div>
             ) : (
               <>
                 <div style={{ marginBottom: "16px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Tema do Pré-projecto *
                   </label>
                   <textarea value={tema} onChange={e => { setTema(e.target.value); setErroPre("") }}
                     placeholder="Descreva o tema do seu novo pré-projecto..." rows={3}
-                    style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
-                  <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
+                    style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
                 </div>
 
                 <div style={{ marginBottom: "20px" }}>
-                  <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                  <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Ficheiro * (PDF ou Word, máx. 10MB)
                   </label>
-                  <div onClick={() => fileInputPreRef.current?.click()} style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "20px", textAlign: "center", cursor: "pointer", background: arquivoPre ? "rgba(34,197,94,0.05)" : "transparent" }}>
+                  <div onClick={() => fileInputPreRef.current?.click()} style={{ border: "2px dashed var(--border-color-strong)", borderRadius: "10px", padding: "20px", textAlign: "center", cursor: "pointer", background: arquivoPre ? "rgba(34,197,94,0.05)" : "transparent" }}>
                     <input ref={fileInputPreRef} type="file" accept=".pdf,.doc,.docx" onChange={e => setArquivoPre(e.target.files?.[0] || null)} style={{ display: "none" }} />
                     {arquivoPre ? (
                       <div>
                         <div style={{ fontSize: "20px", marginBottom: "6px" }}>📄</div>
                         <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivoPre.name}</div>
-                        <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
+                        <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
                       </div>
                     ) : (
                       <div>
                         <div style={{ fontSize: "20px", marginBottom: "6px" }}>📁</div>
-                        <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar ficheiro</div>
+                        <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Clique para selecionar ficheiro</div>
                       </div>
                     )}
                   </div>
                 </div>
 
                 {erroPre && (
-                  <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "#e03d3d" }}>{erroPre}</div>
+                  <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "var(--accent)" }}>{erroPre}</div>
                 )}
 
                 <button onClick={submeterPremonografia} disabled={submetendoPre}
-                  style={{ width: "100%", padding: "12px", background: submetendoPre ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
+                  style={{ width: "100%", padding: "12px", background: submetendoPre ? "var(--text-muted)" : "var(--accent)", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
                   {submetendoPre ? "A submeter..." : "Submeter Novo Pré-projecto"}
                 </button>
               </>
@@ -1132,15 +1132,15 @@ export default function MonografiaDashboard() {
         {/* Dropdown histórico — só quando há mais de 1 */}
         {dados.premonografias.length > 1 && (
           <div style={{
-            background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+            background: "var(--bg-card)", border: "1px solid var(--border-color)",
             borderRadius: "14px", padding: "16px 20px", marginTop: "16px"
           }}>
             <div onClick={() => setMostrarHistorico(!mostrarHistorico)}
               style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
-              <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+              <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
                 Ver histórico de pré-projectos ({dados.premonografias.length})
               </div>
-              <div style={{ fontSize: "18px", color: "#b0b8cf" }}>{mostrarHistorico ? "▲" : "▼"}</div>
+              <div style={{ fontSize: "18px", color: "var(--text-muted)" }}>{mostrarHistorico ? "▲" : "▼"}</div>
             </div>
             {mostrarHistorico && (
               <div style={{ marginTop: "12px" }}>
@@ -1150,18 +1150,18 @@ export default function MonografiaDashboard() {
                     background: index === 0 ? "rgba(34,197,94,0.05)" : "rgba(13,15,20,0.5)",
                     borderRadius: "8px",
                     marginBottom: index < dados.premonografias.length - 1 ? "8px" : 0,
-                    borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid #b0b8cf"
+                    borderLeft: index === 0 ? "3px solid #22c55e" : "3px solid var(--text-muted)"
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
-                      <div style={{ fontSize: "12px", fontWeight: "600", color: "#e8eaf0" }}>{pre.tema}</div>
+                      <div style={{ fontSize: "12px", fontWeight: "600", color: "var(--text-primary)" }}>{pre.tema}</div>
                       <BadgeEstado estado={pre.estado} />
                     </div>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf" }}>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>
                       Submetido em {new Date(pre.data_proposta).toLocaleDateString("pt-AO")}
                     </div>
                     {pre.feedback && (
-                      <div style={{ fontSize: "11px", color: "#d0d7e8", marginTop: "4px" }}>
-                        <strong style={{ color: "#b0b8cf" }}>Feedback: </strong>{pre.feedback}
+                      <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "4px" }}>
+                        <strong style={{ color: "var(--text-muted)" }}>Feedback: </strong>{pre.feedback}
                       </div>
                     )}
                   </div>
@@ -1190,13 +1190,13 @@ export default function MonografiaDashboard() {
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#f0a500", marginBottom: "4px" }}>
               Orientação — Próximo Passo
             </div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>
               Após submeter o pré-projecto, o gestor irá aprová-lo. Depois vá à página <strong>Orientador</strong> para solicitar um orientador.
             </div>
           </div>
           <a href="/estudante/orientador" style={{
             marginLeft: "auto", padding: "8px 16px",
-            background: "#f0a500", color: "#0d0f14",
+            background: "#f0a500", color: "var(--bg-primary)",
             borderRadius: "8px", fontSize: "13px", fontWeight: "600",
             textDecoration: "none", whiteSpace: "nowrap"
           }}>
@@ -1208,25 +1208,25 @@ export default function MonografiaDashboard() {
       {/* Info do orientador (se já tiver) */}
       {dados.orientacao && (
         <div style={{
-          background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)",
+          background: "var(--bg-card)", border: "1px solid var(--border-color)",
           borderRadius: "14px", padding: "16px 20px", marginBottom: "16px",
           display: "flex", alignItems: "center", gap: "12px"
         }}>
           <div style={{ fontSize: "24px" }}>👨‍🏫</div>
           <div>
-            <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Orientador</div>
-            <div style={{ fontSize: "14px", fontWeight: "600", color: "#e8eaf0" }}>{dados.orientacao.orientador.nome_completo}</div>
-            <div style={{ fontSize: "12px", color: "#b0b8cf" }}>{dados.orientacao.orientador.especialidade}</div>
+            <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Orientador</div>
+            <div style={{ fontSize: "14px", fontWeight: "600", color: "var(--text-primary)" }}>{dados.orientacao.orientador.nome_completo}</div>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>{dados.orientacao.orientador.especialidade}</div>
           </div>
         </div>
       )}
 
       {/* Formulário de submissão do pré-projecto */}
       <div style={cardStyle}>
-        <div style={{ fontSize: "16px", fontWeight: "600", color: "#e8eaf0", marginBottom: "8px" }}>
+        <div style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)", marginBottom: "8px" }}>
           Submeter Pré-projecto
         </div>
-        <div style={{ fontSize: "13px", color: "#b0b8cf", marginBottom: "20px" }}>
+        <div style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "20px" }}>
           Primeiro passo para a monografia. Submeta o seu pré-projecto para aprovação do gestor.
         </div>
 
@@ -1237,47 +1237,47 @@ export default function MonografiaDashboard() {
           }}>
             <div style={{ fontSize: "32px", marginBottom: "10px" }}>✅</div>
             <div style={{ fontSize: "14px", fontWeight: "600", color: "#22c55e" }}>Pré-projecto submetido com sucesso!</div>
-            <div style={{ fontSize: "12px", color: "#d0d7e8", marginTop: "6px" }}>Aguarda aprovação do gestor.</div>
+            <div style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "6px" }}>Aguarda aprovação do gestor.</div>
           </div>
         ) : (
           <>
             <div style={{ marginBottom: "16px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 Tema do Pré-projecto *
               </label>
               <textarea value={tema} onChange={e => { setTema(e.target.value); setErroPre("") }}
                 placeholder="Descreva o tema do seu pré-projecto..." rows={3}
-                style={{ width: "100%", padding: "10px 14px", background: "#0d0f14", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px", color: "#e8eaf0", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
-              <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
+                style={{ width: "100%", padding: "10px 14px", background: "var(--bg-primary)", border: "1px solid var(--border-color-strong)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "13px", outline: "none", resize: "vertical", boxSizing: "border-box" }} />
+              <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{tema.length}/10 caracteres mínimos</div>
             </div>
 
             <div style={{ marginBottom: "20px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#b0b8cf", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 Ficheiro * (PDF ou Word, máx. 10MB)
               </label>
-              <div onClick={() => fileInputPreRef.current?.click()} style={{ border: "2px dashed rgba(255,255,255,0.1)", borderRadius: "10px", padding: "20px", textAlign: "center", cursor: "pointer", background: arquivoPre ? "rgba(34,197,94,0.05)" : "transparent" }}>
+              <div onClick={() => fileInputPreRef.current?.click()} style={{ border: "2px dashed var(--border-color-strong)", borderRadius: "10px", padding: "20px", textAlign: "center", cursor: "pointer", background: arquivoPre ? "rgba(34,197,94,0.05)" : "transparent" }}>
                 <input ref={fileInputPreRef} type="file" accept=".pdf,.doc,.docx" onChange={e => setArquivoPre(e.target.files?.[0] || null)} style={{ display: "none" }} />
                 {arquivoPre ? (
                   <div>
                     <div style={{ fontSize: "20px", marginBottom: "6px" }}>📄</div>
                     <div style={{ fontSize: "13px", color: "#22c55e", fontWeight: "500" }}>{arquivoPre.name}</div>
-                    <div style={{ fontSize: "11px", color: "#b0b8cf", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
+                    <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "4px" }}>{(arquivoPre.size / 1024 / 1024).toFixed(2)} MB</div>
                   </div>
                 ) : (
                   <div>
                     <div style={{ fontSize: "20px", marginBottom: "6px" }}>📁</div>
-                    <div style={{ fontSize: "13px", color: "#d0d7e8" }}>Clique para selecionar ficheiro</div>
+                    <div style={{ fontSize: "13px", color: "var(--text-secondary)" }}>Clique para selecionar ficheiro</div>
                   </div>
                 )}
               </div>
             </div>
 
             {erroPre && (
-              <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "#e03d3d" }}>{erroPre}</div>
+              <div style={{ background: "rgba(224,61,61,0.08)", border: "1px solid rgba(224,61,61,0.2)", borderRadius: "8px", padding: "12px", marginBottom: "16px", fontSize: "13px", color: "var(--accent)" }}>{erroPre}</div>
             )}
 
             <button onClick={submeterPremonografia} disabled={submetendoPre}
-              style={{ width: "100%", padding: "12px", background: submetendoPre ? "#b0b8cf" : "#e03d3d", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
+              style={{ width: "100%", padding: "12px", background: submetendoPre ? "var(--text-muted)" : "var(--accent)", color: "white", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: submetendoPre ? "not-allowed" : "pointer" }}>
               {submetendoPre ? "A submeter..." : "Submeter Pré-projecto"}
             </button>
           </>

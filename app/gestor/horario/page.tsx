@@ -265,15 +265,15 @@ export default function HorarioPage() {
   }, [aulas])
 
   const estiloSelect: React.CSSProperties = {
-    background: "#13161e", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "8px",
-    padding: "8px 12px", color: "#e8eaf0", fontSize: "13px", minWidth: "120px"
+    background: "var(--bg-input)", border: "1px solid var(--border-color-strong)", borderRadius: "8px",
+    padding: "8px 12px", color: "var(--text-primary)", fontSize: "13px", minWidth: "120px"
   }
 
   if (loading) {
     return (
       <DashboardLayout navItems={gestorNavItems} title="Horário de Aulas" subtitle="Gerir horário semanal por curso">
-        <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "40px", textAlign: "center" }}>
-          <div style={{ color: "#b0b8cf" }}>A carregar...</div>
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "40px", textAlign: "center" }}>
+          <div style={{ color: "var(--text-muted)" }}>A carregar...</div>
         </div>
       </DashboardLayout>
     )
@@ -282,42 +282,42 @@ export default function HorarioPage() {
   return (
     <DashboardLayout navItems={gestorNavItems} title="Horário de Aulas" subtitle="Gerir horário semanal por curso">
       {/* Selecionar Turma — com Turno incluído (como no plano-provas) */}
-      <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Selecionar Turma</div>
+      <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Selecionar Turma</div>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Curso</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Curso</div>
             <select value={cursoId} onChange={e => { setCursoId(e.target.value); setAno("1") }} style={estiloSelect}>
               <option value="">Selecionar...</option>
               {cursos.map(c => <option key={c.id_curso} value={c.id_curso}>{c.nome_curso}</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Ano</div>
             <select value={ano} onChange={e => setAno(e.target.value)} style={estiloSelect}>
               {anosDisponiveis.map(a => <option key={a} value={a}>{a}º</option>)}
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Semestre</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Semestre</div>
             <select value={semestre} onChange={e => setSemestre(e.target.value)} style={estiloSelect}>
               <option value="S1">S1</option>
               <option value="S2">S2</option>
             </select>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Ano Lectivo</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Ano Lectivo</div>
             <span style={{ ...estiloSelect, minWidth: "100px", display: "inline-flex", alignItems: "center", opacity: 0.8 }}>{anoLectivo || "—"}</span>
           </div>
           <div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Turno</div>
             <select value={filtroTurno} onChange={e => { setFiltroTurno(e.target.value); setPosicao("1") }} style={estiloSelect}>
               {turnosDoCurso.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
         </div>
         {cursoId && (
-          <div style={{ marginTop: "10px", color: "#d0d7e8", fontSize: "12px" }}>
+          <div style={{ marginTop: "10px", color: "var(--text-secondary)", fontSize: "12px" }}>
             ⏱️ Aula: <strong style={{ color: "#2dd4bf" }}>{duracao} min</strong> · Intervalo: <strong style={{ color: "#2dd4bf" }}>{intervalo} min</strong>
             · Turno: <strong style={{ color: "#2dd4bf" }}>{filtroTurno}</strong>
           </div>
@@ -327,30 +327,30 @@ export default function HorarioPage() {
       {cursoId && (
         <>
           {/* Formulário — Turno disabled, herdado do filtro (como no plano-provas) */}
-          <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#e8eaf0" }}>Adicionar Aula</div>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Adicionar Aula</div>
             <form onSubmit={adicionarAula} style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "flex-end" }}>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Disciplina</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Disciplina</div>
                 <select value={disciplinaId} onChange={e => setDisciplinaId(e.target.value)} required style={{ ...estiloSelect, minWidth: "220px" }}>
                   <option value="">Selecionar...</option>
                   {disciplinas.map(d => <option key={d.id_disciplina} value={d.id_disciplina}>{d.nome_disciplina} ({d.codigo_disciplina})</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Dia</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Dia</div>
                 <select value={diaSemana} onChange={e => setDiaSemana(e.target.value)} style={estiloSelect}>
                   {diasSemana.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Turno</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Turno</div>
                 <select value={filtroTurno} disabled style={{ ...estiloSelect, opacity: 0.7, cursor: "not-allowed" }}>
                   {turnosCurso.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Posição ({maxPosicoes} max)</div>
                 <select value={posicao} onChange={e => setPosicao(e.target.value)} style={estiloSelect}>
                   {Array.from({ length: Math.max(maxPosicoes, 1) }, (_, i) => (
                     <option key={i + 1} value={i + 1}>{i + 1}ª aula</option>
@@ -358,12 +358,12 @@ export default function HorarioPage() {
                 </select>
               </div>
               <div>
-                <div style={{ fontSize: "11px", color: "#b0b8cf", marginBottom: "4px" }}>Sala</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginBottom: "4px" }}>Sala</div>
                 <input type="text" placeholder="Ex: Sala 101" value={sala} onChange={e => setSala(e.target.value)} style={{ ...estiloSelect, minWidth: "100px" }} />
               </div>
               <button type="submit" disabled={salvando || !disciplinaId} style={{
-                padding: "8px 16px", background: disciplinaId ? "#2dd4bf" : "#b0b8cf",
-                color: disciplinaId ? "#13161e" : "#d0d7e8", border: "none", borderRadius: "8px",
+                padding: "8px 16px", background: disciplinaId ? "#2dd4bf" : "var(--text-muted)",
+                color: disciplinaId ? "var(--bg-input)" : "var(--text-secondary)", border: "none", borderRadius: "8px",
                 fontSize: "13px", fontWeight: "600", cursor: disciplinaId ? "pointer" : "not-allowed"
               }}>{salvando ? "A adicionar..." : "+ Adicionar"}</button>
             </form>
@@ -373,15 +373,15 @@ export default function HorarioPage() {
               </div>
             )}
             {disciplinas.length === 0 && (
-              <div style={{ color: "#b0b8cf", fontSize: "12px", marginTop: "10px" }}>
+              <div style={{ color: "var(--text-muted)", fontSize: "12px", marginTop: "10px" }}>
                 Nenhuma disciplina no currículo. Adicione no <a href="/gestor/curriculo" style={{ color: "#2dd4bf" }}>Currículo</a> primeiro.
               </div>
             )}
           </div>
 
           {/* Grade Semanal — Timetable com coluna de tempo */}
-          <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "#e8eaf0" }}>
+          <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+            <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "var(--text-primary)" }}>
               Horário Semanal — {cursos.find(c => c.id_curso === parseInt(cursoId))?.nome_curso} ({ano}º ano, {semestre}) — {filtroTurno}
             </div>
 
@@ -392,7 +392,7 @@ export default function HorarioPage() {
                 style={{
                   padding: "10px 18px",
                   background: "#2dd4bf",
-                  color: "#13161e",
+                  color: "var(--bg-input)",
                   border: "none",
                   borderRadius: "8px",
                   fontSize: "13px",
@@ -408,7 +408,7 @@ export default function HorarioPage() {
             </div>
 
             <div style={{ overflowX: "auto" }}>
-              <div style={{ display: "grid", gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`, gap: "1px", background: "#13161e", borderRadius: "10px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: `120px repeat(${diasSemana.length}, 1fr)`, gap: "1px", background: "var(--bg-input)", borderRadius: "10px" }}>
                 {/* Header row */}
                 <div style={{ padding: "12px", fontWeight: "600", color: "#2dd4bf", borderBottom: "1px solid rgba(45,212,191,0.2)", textAlign: "center" }}></div>
                 {diasSemana.map(dia => (
@@ -425,8 +425,8 @@ export default function HorarioPage() {
                       <div style={{
                         padding: "12px",
                         fontWeight: "700",
-                        color: "#e8eaf0",
-                        borderRight: "1px solid rgba(255,255,255,0.1)",
+                        color: "var(--text-primary)",
+                        borderRight: "1px solid var(--border-color-strong)",
                         borderBottom: "1px solid rgba(255,255,255,0.05)",
                         fontSize: "12px",
                         display: "flex",
@@ -446,17 +446,17 @@ export default function HorarioPage() {
                             justifyContent: "center"
                           }}>
                             {aula ? (
-                              <div style={{ background: "#1e2230", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
-                                <div style={{ color: "#e8eaf0", fontWeight: "500", fontSize: "11px" }}>{aula.disciplina.nome_disciplina}</div>
-                                {aula.sala && <div style={{ color: "#d0d7e8", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
+                              <div style={{ background: "var(--bg-card)", borderRadius: "6px", padding: "8px", width: "100%", textAlign: "center" }}>
+                                <div style={{ color: "var(--text-primary)", fontWeight: "500", fontSize: "11px" }}>{aula.disciplina.nome_disciplina}</div>
+                                {aula.sala && <div style={{ color: "var(--text-secondary)", marginTop: "4px", fontSize: "10px" }}>📍 {aula.sala}</div>}
                                 <button onClick={() => removerAula(aula.id_aula)} style={{
                                   marginTop: "4px", padding: "2px 6px", background: "transparent",
                                   border: "1px solid rgba(224,61,61,0.3)", borderRadius: "4px",
-                                  color: "#e03d3d", fontSize: "10px", cursor: "pointer"
+                                  color: "var(--accent)", fontSize: "10px", cursor: "pointer"
                                 }}>Remover</button>
                               </div>
                             ) : (
-                              <div style={{ color: "#b0b8cf", fontSize: "10px" }}>—</div>
+                              <div style={{ color: "var(--text-muted)", fontSize: "10px" }}>—</div>
                             )}
                           </div>
                         )
@@ -470,26 +470,26 @@ export default function HorarioPage() {
 
           {/* Tabela Professores-Disciplinas (visível no ecrã e no print) */}
           {professores.length > 0 && ( // always true now since we include all curriculum disciplines
-            <div style={{ background: "#1e2230", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
-              <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "#e8eaf0" }}>
-                <span style={{ background: "#2dd4bf", color: "#13161e", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700", marginRight: "10px", verticalAlign: "middle" }}>DOCENTES</span>
+            <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-color)", borderRadius: "14px", padding: "20px", marginBottom: "20px" }}>
+              <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "16px", color: "var(--text-primary)" }}>
+                <span style={{ background: "#2dd4bf", color: "var(--bg-input)", padding: "3px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "700", marginRight: "10px", verticalAlign: "middle" }}>DOCENTES</span>
                 Professores e Disciplinas
               </div>
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
                   <thead>
-                    <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Professor</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
-                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#d0d7e8", fontWeight: "600", fontSize: "12px" }}>Código</th>
+                    <tr style={{ borderBottom: "1px solid var(--border-color-strong)" }}>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Professor</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Disciplina</th>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "var(--text-secondary)", fontWeight: "600", fontSize: "12px" }}>Código</th>
                     </tr>
                   </thead>
                   <tbody>
                     {professores.map((p, idx) => (
                       <tr key={idx} style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                        <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>{p.nome_professor}</td>
-                        <td style={{ padding: "10px 12px", color: "#e8eaf0" }}>{p.nome_disciplina}</td>
-                        <td style={{ padding: "10px 12px", color: "#b0b8cf" }}>{p.codigo_disciplina}</td>
+                        <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>{p.nome_professor}</td>
+                        <td style={{ padding: "10px 12px", color: "var(--text-primary)" }}>{p.nome_disciplina}</td>
+                        <td style={{ padding: "10px 12px", color: "var(--text-muted)" }}>{p.codigo_disciplina}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -513,7 +513,7 @@ export default function HorarioPage() {
               .print-section { margin-bottom: 16px; page-break-inside: avoid; }
               .print-table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
               .print-table th, .print-table td { border: 1px solid #333; padding: 4px 6px; text-align: center; font-size: 10px; height: 28px; }
-              .print-table th { background: #e8eaf0; font-weight: 700; font-size: 11px; height: 32px; }
+              .print-table th { background: var(--text-primary); font-weight: 700; font-size: 11px; height: 32px; }
               .print-table td.hora { font-weight: 600; white-space: nowrap; text-align: right; background: #f5f6fa; width: 100px; font-size: 9px; }
               .print-header { text-align: center; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
               .print-sub { text-align: center; font-size: 11px; color: #555; margin-bottom: 12px; }
@@ -523,7 +523,7 @@ export default function HorarioPage() {
               .print-linha-assinatura { border-top: 2px solid #333; padding-top: 8px; font-size: 13px; font-weight: 600; min-width: 250px; }
               .print-prof-table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px; }
               .print-prof-table th, .print-prof-table td { border: 1px solid #999; padding: 5px 8px; text-align: left; font-size: 10px; }
-              .print-prof-table th { background: #e8eaf0; font-weight: 700; font-size: 11px; }
+              .print-prof-table th { background: var(--text-primary); font-weight: 700; font-size: 11px; }
               .print-prof-title { font-size: 12px; font-weight: 600; margin-top: 24px; margin-bottom: 6px; }
             }
           `}</style>

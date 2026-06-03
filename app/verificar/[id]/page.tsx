@@ -78,7 +78,7 @@ export default function VerificarDocumento() {
       case "declaracao": return "#4ade80"
       case "cert-disc": return "#6366f1"
       case "cert": return "#f59e0b"
-      default: return "#d0d7e8"
+      default: return "var(--text-secondary)"
     }
   }
 
@@ -88,7 +88,7 @@ export default function VerificarDocumento() {
       case "Finalizado": return { label: "Finalizado", color: "#3b82f6" }
       case "Desistente": return { label: "Desistente", color: "#f87171" }
       case "Suspendido": return { label: "Suspendido", color: "#fbbf24" }
-      default: return { label: estado || "—", color: "#b0b8cf" }
+      default: return { label: estado || "—", color: "var(--text-muted)" }
     }
   }
 
@@ -97,7 +97,7 @@ export default function VerificarDocumento() {
       case "Aprovado": return "#4ade80"
       case "Reprovado": return "#f87171"
       case "Dispensada": return "#fbbf24"
-      default: return "#b0b8cf"
+      default: return "var(--text-muted)"
     }
   }
 
@@ -106,7 +106,7 @@ export default function VerificarDocumento() {
     return (
       <main style={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #0d0f14 0%, #141820 50%, #0d0f14 100%)",
+        background: "linear-gradient(135deg, var(--bg-primary) 0%, #141820 50%, var(--bg-primary) 100%)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -127,20 +127,20 @@ export default function VerificarDocumento() {
             overflow: "hidden"
           }}>
             {/* Canto superior esquerdo */}
-            <div style={{ position: "absolute", top: 0, left: 0, width: 24, height: 24, borderTop: "3px solid #e03d3d", borderLeft: "3px solid #e03d3d", borderTopLeftRadius: 4 }} />
+            <div style={{ position: "absolute", top: 0, left: 0, width: 24, height: 24, borderTop: "3px solid var(--accent)", borderLeft: "3px solid var(--accent)", borderTopLeftRadius: 4 }} />
             {/* Canto superior direito */}
-            <div style={{ position: "absolute", top: 0, right: 0, width: 24, height: 24, borderTop: "3px solid #e03d3d", borderRight: "3px solid #e03d3d", borderTopRightRadius: 4 }} />
+            <div style={{ position: "absolute", top: 0, right: 0, width: 24, height: 24, borderTop: "3px solid var(--accent)", borderRight: "3px solid var(--accent)", borderTopRightRadius: 4 }} />
             {/* Canto inferior esquerdo */}
-            <div style={{ position: "absolute", bottom: 0, left: 0, width: 24, height: 24, borderBottom: "3px solid #e03d3d", borderLeft: "3px solid #e03d3d", borderBottomLeftRadius: 4 }} />
+            <div style={{ position: "absolute", bottom: 0, left: 0, width: 24, height: 24, borderBottom: "3px solid var(--accent)", borderLeft: "3px solid var(--accent)", borderBottomLeftRadius: 4 }} />
             {/* Canto inferior direito */}
-            <div style={{ position: "absolute", bottom: 0, right: 0, width: 24, height: 24, borderBottom: "3px solid #e03d3d", borderRight: "3px solid #e03d3d", borderBottomRightRadius: 4 }} />
+            <div style={{ position: "absolute", bottom: 0, right: 0, width: 24, height: 24, borderBottom: "3px solid var(--accent)", borderRight: "3px solid var(--accent)", borderBottomRightRadius: 4 }} />
             {/* Scanning line */}
             <div style={{
               position: "absolute",
               left: 0,
               right: 0,
               height: 2,
-              background: "linear-gradient(90deg, transparent, #e03d3d, transparent)",
+              background: "linear-gradient(90deg, transparent, var(--accent), transparent)",
               animation: "scan 1.5s ease-in-out infinite",
               top: 0
             }} />
@@ -152,12 +152,12 @@ export default function VerificarDocumento() {
             justifyContent: "center",
             marginBottom: 12
           }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e03d3d", animation: "dotPulse 1.4s ease-in-out infinite" }} />
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e03d3d", animation: "dotPulse 1.4s ease-in-out infinite 0.2s" }} />
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e03d3d", animation: "dotPulse 1.4s ease-in-out infinite 0.4s" }} />
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", animation: "dotPulse 1.4s ease-in-out infinite" }} />
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", animation: "dotPulse 1.4s ease-in-out infinite 0.2s" }} />
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", animation: "dotPulse 1.4s ease-in-out infinite 0.4s" }} />
           </div>
           <style>{`@keyframes dotPulse { 0%, 80%, 100% { opacity: 0.3; } 40% { opacity: 1; } }`}</style>
-          <p style={{ color: "#d0d7e8", fontSize: "14px", margin: 0 }}>A verificar documento...</p>
+          <p style={{ color: "var(--text-secondary)", fontSize: "14px", margin: 0 }}>A verificar documento...</p>
         </div>
       </main>
     )
@@ -168,7 +168,7 @@ export default function VerificarDocumento() {
   return (
     <main style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #0d0f14 0%, #141820 50%, #0d0f14 100%)",
+      background: "linear-gradient(135deg, var(--bg-primary) 0%, #141820 50%, var(--bg-primary) 100%)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -187,7 +187,7 @@ export default function VerificarDocumento() {
         <div style={{ textAlign: "center", marginBottom: "28px" }}>
           <div style={{
             width: "52px", height: "52px",
-            background: "#e03d3d",
+            background: "var(--accent)",
             borderRadius: "14px",
             display: "inline-flex",
             alignItems: "center",
@@ -199,12 +199,12 @@ export default function VerificarDocumento() {
             boxShadow: "0 4px 20px rgba(224,61,61,0.3)"
           }}>A</div>
           <h1 style={{
-            color: "#e8eaf0",
+            color: "var(--text-primary)",
             fontSize: "18px",
             fontWeight: "700",
             margin: "0 0 4px"
           }}>Instituto Superior Politécnico Atlântida</h1>
-          <p style={{ color: "#b0b8cf", fontSize: "13px", margin: 0 }}>Verificação de Documentos</p>
+          <p style={{ color: "var(--text-muted)", fontSize: "13px", margin: 0 }}>Verificação de Documentos</p>
         </div>
 
         {/* ── Error ── */}
@@ -226,13 +226,13 @@ export default function VerificarDocumento() {
               justifyContent: "center",
               marginBottom: "16px"
             }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e03d3d" strokeWidth="2.5" strokeLinecap="round">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round">
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </div>
             <h2 style={{
-              color: "#e03d3d",
+              color: "var(--accent)",
               fontSize: "18px",
               fontWeight: "600",
               margin: "0 0 8px"
@@ -275,7 +275,7 @@ export default function VerificarDocumento() {
                 fontWeight: "600",
                 margin: "0 0 6px"
               }}>Documento Válido</h2>
-              <p style={{ color: "#d0d7e8", fontSize: "13px", margin: "0 0 12px" }}>
+              <p style={{ color: "var(--text-secondary)", fontSize: "13px", margin: "0 0 12px" }}>
                 Este documento foi emitido pelo Instituto Superior Politécnico Atlântida
               </p>
               <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
@@ -316,8 +316,8 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Nº Documento</span>
-                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Nº Documento</span>
+                <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>
                   {documento.numero_documento}
                 </span>
               </div>
@@ -328,8 +328,8 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Nome</span>
-                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
+                <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Nome</span>
+                <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
                   {documento.estudante.nome_completo}
                 </span>
               </div>
@@ -340,8 +340,8 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Matrícula</span>
-                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Matrícula</span>
+                <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>
                   {documento.estudante.numero_estudante || "—"}
                 </span>
               </div>
@@ -352,8 +352,8 @@ export default function VerificarDocumento() {
                 padding: "12px 0",
                 borderBottom: "1px solid rgba(255,255,255,0.05)"
               }}>
-                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Curso</span>
-                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
+                <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Curso</span>
+                <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
                   {documento.estudante.curso.nome_curso}
                 </span>
               </div>
@@ -369,8 +369,8 @@ export default function VerificarDocumento() {
                       padding: "12px 0",
                       borderBottom: "1px solid rgba(255,255,255,0.05)"
                     }}>
-                      <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Ano Lectivo</span>
-                      <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                      <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Ano Lectivo</span>
+                      <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>
                         {documento.ano_lectivo}
                       </span>
                     </div>
@@ -381,8 +381,8 @@ export default function VerificarDocumento() {
                       padding: "12px 0",
                       borderBottom: "1px solid rgba(255,255,255,0.05)"
                     }}>
-                      <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Ano Curricular</span>
-                      <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                      <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Ano Curricular</span>
+                      <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>
                         {documento.estudante.ano_current}º Ano
                       </span>
                     </div>
@@ -397,7 +397,7 @@ export default function VerificarDocumento() {
                   borderBottom: "1px solid rgba(255,255,255,0.05)"
                 }}>
                   <span style={{
-                    color: "#d0d7e8",
+                    color: "var(--text-secondary)",
                     fontSize: "12px",
                     fontWeight: "600",
                     display: "block",
@@ -416,11 +416,11 @@ export default function VerificarDocumento() {
                       background: "rgba(255,255,255,0.04)",
                       borderBottom: "1px solid rgba(255,255,255,0.06)"
                     }}>
-                      <div style={{ flex: 3, padding: "8px 10px", fontSize: "10px", fontWeight: "600", color: "#b0b8cf", textTransform: "uppercase", letterSpacing: "0.5px" }}>Disciplina</div>
-                      <div style={{ flex: 1, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "#b0b8cf", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Sem.</div>
-                      <div style={{ flex: 1, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "#b0b8cf", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ano</div>
-                      <div style={{ flex: 1, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "#b0b8cf", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Nota</div>
-                      <div style={{ flex: 1.2, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "#b0b8cf", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Situação</div>
+                      <div style={{ flex: 3, padding: "8px 10px", fontSize: "10px", fontWeight: "600", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.5px" }}>Disciplina</div>
+                      <div style={{ flex: 1, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "var(--text-muted)", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Sem.</div>
+                      <div style={{ flex: 1, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "var(--text-muted)", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Ano</div>
+                      <div style={{ flex: 1, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "var(--text-muted)", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Nota</div>
+                      <div style={{ flex: 1.2, padding: "8px 6px", fontSize: "10px", fontWeight: "600", color: "var(--text-muted)", textAlign: "center", textTransform: "uppercase", letterSpacing: "0.5px" }}>Situação</div>
                     </div>
 
                     {/* Rows */}
@@ -430,10 +430,10 @@ export default function VerificarDocumento() {
                         borderBottom: index < documento.disciplinas!.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
                         background: index % 2 === 0 ? "transparent" : "rgba(255,255,255,0.02)"
                       }}>
-                        <div style={{ flex: 3, padding: "8px 10px", fontSize: "11px", color: "#e8eaf0" }}>{disc.nome_disciplina}</div>
-                        <div style={{ flex: 1, padding: "8px 6px", fontSize: "11px", color: "#b0b8cf", textAlign: "center" }}>{disc.semestre === "1º Semestre" ? "1º" : "2º"}</div>
-                        <div style={{ flex: 1, padding: "8px 6px", fontSize: "11px", color: "#b0b8cf", textAlign: "center" }}>{disc.ano_curricular}º</div>
-                        <div style={{ flex: 1, padding: "8px 6px", fontSize: "11px", color: "#e8eaf0", textAlign: "center", fontWeight: "500" }}>{disc.nota_final}</div>
+                        <div style={{ flex: 3, padding: "8px 10px", fontSize: "11px", color: "var(--text-primary)" }}>{disc.nome_disciplina}</div>
+                        <div style={{ flex: 1, padding: "8px 6px", fontSize: "11px", color: "var(--text-muted)", textAlign: "center" }}>{disc.semestre === "1º Semestre" ? "1º" : "2º"}</div>
+                        <div style={{ flex: 1, padding: "8px 6px", fontSize: "11px", color: "var(--text-muted)", textAlign: "center" }}>{disc.ano_curricular}º</div>
+                        <div style={{ flex: 1, padding: "8px 6px", fontSize: "11px", color: "var(--text-primary)", textAlign: "center", fontWeight: "500" }}>{disc.nota_final}</div>
                         <div style={{
                           flex: 1.2,
                           padding: "8px 6px",
@@ -455,7 +455,7 @@ export default function VerificarDocumento() {
                   borderBottom: "1px solid rgba(255,255,255,0.05)",
                   textAlign: "center"
                 }}>
-                  <span style={{ color: "#d0d7e8", fontSize: "12px", display: "block", marginBottom: "8px" }}>
+                  <span style={{ color: "var(--text-secondary)", fontSize: "12px", display: "block", marginBottom: "8px" }}>
                     Nota Final
                   </span>
                   <div style={{
@@ -476,7 +476,7 @@ export default function VerificarDocumento() {
                   </div>
                   {documento.nota_extenso && (
                     <p style={{
-                      color: "#b0b8cf",
+                      color: "var(--text-muted)",
                       fontSize: "13px",
                       fontStyle: "italic",
                       margin: "12px 0 0"
@@ -494,8 +494,8 @@ export default function VerificarDocumento() {
                   padding: "12px 0",
                   borderBottom: "1px solid rgba(255,255,255,0.05)"
                 }}>
-                  <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Descrição</span>
-                  <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
+                  <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Descrição</span>
+                  <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500", textAlign: "right" }}>
                     {documento.descricao}
                   </span>
                 </div>
@@ -506,8 +506,8 @@ export default function VerificarDocumento() {
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 padding: "12px 0"
               }}>
-                <span style={{ color: "#d0d7e8", fontSize: "12px" }}>Emissão</span>
-                <span style={{ color: "#e8eaf0", fontSize: "13px", fontWeight: "500" }}>
+                <span style={{ color: "var(--text-secondary)", fontSize: "12px" }}>Emissão</span>
+                <span style={{ color: "var(--text-primary)", fontSize: "13px", fontWeight: "500" }}>
                   {new Date(documento.data_emissao).toLocaleDateString("pt-PT")}
                 </span>
               </div>
@@ -526,7 +526,7 @@ export default function VerificarDocumento() {
                 </svg>
                 <span style={{ color: "#4ade80", fontSize: "11px", opacity: 0.8 }}>Documento verificado digitalmente</span>
               </div>
-              <p style={{ color: "#b0b8cf", fontSize: "11px", margin: 0 }}>
+              <p style={{ color: "var(--text-muted)", fontSize: "11px", margin: 0 }}>
                 Verificado em {new Date().toLocaleString("pt-PT")}
               </p>
             </div>
@@ -536,7 +536,7 @@ export default function VerificarDocumento() {
         {/* ── Footer ── */}
         <p style={{
           textAlign: "center",
-          color: "#b0b8cf",
+          color: "var(--text-muted)",
           fontSize: "12px",
           marginTop: "24px"
         }}>
