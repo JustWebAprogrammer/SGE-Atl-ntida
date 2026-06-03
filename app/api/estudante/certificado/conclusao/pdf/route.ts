@@ -9,7 +9,7 @@ import { readFileSync } from "fs"
 import { join } from "path"
 import { mergeLayoutConfig, replacePlaceholders } from "@/lib/layout-defaults"
 import { getAnoLectivo, getSystemDate } from "@/lib/sistema"
-import { arredondarNota } from "@/lib/notas"
+import { arredondarNota, numberToExtenso } from "@/lib/notas"
 
 // GET /api/estudante/certificado/conclusao/pdf - Return JSON data for client-side PDF generation
 export async function GET(request: NextRequest) {
@@ -114,7 +114,7 @@ export async function GET(request: NextRequest) {
 
       return {
         year,
-       average: arredondarNota(average).toFixed(2)
+        average: (arredondarNota(average) ?? 0).toFixed(2)
       }
     })
 
@@ -300,17 +300,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     )
   }
-}
-
-// Helper function to convert number to Portuguese extenso (simplified)
-function numberToExtenso(num: number): string {
-  const inteiro = Math.floor(num)
-  if (inteiro === 14) return "catorze"
-  if (inteiro === 15) return "quinze"
-  if (inteiro === 16) return "dezasseis"
-  if (inteiro === 17) return "dezassete"
-  if (inteiro === 18) return "dezoito"
-  if (inteiro === 19) return "dezanove"
-  if (inteiro === 20) return "vinte"
-  return num.toFixed(2).replace(".", ",")
 }

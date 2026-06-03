@@ -11,10 +11,10 @@ interface CertificadoConclusaoPDFProps {
   courseDuration: number
   anoLectivo: string
   systemDate?: Date
-  gradesByYear: { year: number; average: string }[]
-  monografiaGrade: string
-  finalGrade: string
-  finalGradeExtenso: string
+  gradesByYear?: { year: number; average: string }[]
+  monografiaGrade?: string
+  finalGrade?: string
+  finalGradeExtenso?: string
   presidentSignature: string
   presidentName: string
   directorSignature?: string
@@ -26,15 +26,6 @@ interface CertificadoConclusaoPDFProps {
 
 export default function CertificadoConclusaoPDF({
   layoutConfig,
-  studentName,
-  studentNumber,
-  courseName,
-  courseDuration,
-  anoLectivo,
-  gradesByYear,
-  monografiaGrade,
-  finalGrade,
-  finalGradeExtenso,
   presidentSignature,
   presidentName,
   directorSignature,
@@ -103,52 +94,6 @@ export default function CertificadoConclusaoPDF({
     },
     studentName: {
       fontWeight: "bold",
-    },
-    gradesTable: {
-      marginVertical: 15,
-      border: "1px solid #000",
-    },
-    tableHeader: {
-      flexDirection: "row",
-      borderBottom: "1px solid #000",
-      backgroundColor: "#f0f0f0",
-    },
-    tableHeaderCell: {
-      flex: 1,
-      padding: 8,
-      fontWeight: "bold",
-      textAlign: "center",
-    },
-    tableRow: {
-      flexDirection: "row",
-      borderBottom: "1px solid #ddd",
-    },
-    tableCell: {
-      flex: 1,
-      padding: 8,
-      textAlign: "center",
-    },
-    yearAverage: {
-      textAlign: "right",
-      marginTop: 8,
-      fontStyle: "italic",
-    },
-    finalGradeBox: {
-      marginTop: 20,
-      padding: 15,
-      backgroundColor: "#e8f5e9",
-      borderRadius: 5,
-      alignItems: "center",
-    },
-    finalGradeLabel: {
-      fontSize: 11,
-      color: "#2e7d32",
-      marginBottom: 5,
-    },
-    finalGradeValue: {
-      fontSize: 24,
-      fontWeight: "bold",
-      color: "#1b5e20",
     },
     footer: {
       marginTop: 30,
@@ -224,39 +169,6 @@ export default function CertificadoConclusaoPDF({
           <Text style={styles.bodyText}>
             {config.texto_corpo}
           </Text>
-        </View>
-
-        {/* Year Averages Table */}
-        <View style={styles.gradesTable}>
-          <View style={styles.tableHeader}>
-            <Text style={[styles.tableHeaderCell, { flex: 2, textAlign: "left" }]}>Ano Curricular</Text>
-            <Text style={styles.tableHeaderCell}>Média do Ano</Text>
-          </View>
-
-          {gradesByYear.map((yearData, index) => (
-            <View key={index} style={styles.tableRow}>
-              <Text style={[styles.tableCell, { flex: 2, textAlign: "left" }]}>
-                {yearData.year}º Ano
-              </Text>
-              <Text style={styles.tableCell}>{yearData.average}</Text>
-            </View>
-          ))}
-
-          {/* Monografia row */}
-          <View style={styles.tableRow}>
-            <Text style={[styles.tableCell, { flex: 2, textAlign: "left" }]}>
-              Monografia
-            </Text>
-            <Text style={styles.tableCell}>{monografiaGrade}</Text>
-          </View>
-
-          {/* Final Grade row */}
-          <View style={[styles.tableRow, { backgroundColor: "#e8f5e9" }]}>
-            <Text style={[styles.tableCell, { flex: 2, textAlign: "left", fontWeight: "bold" }]}>
-              Média Final
-            </Text>
-            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>{finalGrade}</Text>
-          </View>
         </View>
 
         {/* Footer */}

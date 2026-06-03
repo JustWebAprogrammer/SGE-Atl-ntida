@@ -146,3 +146,31 @@ export function validarNotaSeca(nota: number | null): boolean {
   if (nota == null) return true
   return nota >= 0 && nota <= 12
 }
+
+// Converte número inteiro 0-20 para o valor por extenso em português (capitalizado)
+export function numberToExtenso(num: number): string {
+  switch (num) {
+    case 0: return "Zero"
+    case 1: return "Um"
+    case 2: return "Dois"
+    case 3: return "Três"
+    case 4: return "Quatro"
+    case 5: return "Cinco"
+    case 6: return "Seis"
+    case 7: return "Sete"
+    case 8: return "Oito"
+    case 9: return "Nove"
+    case 10: return "Dez"
+    case 11: return "Onze"
+    case 12: return "Doze"
+    case 13: return "Treze"
+    case 14: return "Catorze"
+    case 15: return "Quinze"
+    case 16: return "Dezasseis"
+    case 17: return "Dezassete"
+    case 18: return "Dezoito"
+    case 19: return "Dezanove"
+    case 20: return "Vinte"
+    default: return num.toFixed(2).replace(".", ",")
+  }
+}

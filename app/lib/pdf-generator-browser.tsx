@@ -30,8 +30,6 @@ export async function gerarPDFCertificadoConclusao(data: {
   courseName: string
   courseDuration: number
   anoLectivo: string
-  gradesByYear: { year: number; average: string }[]
-  monografiaGrade: string
   finalGrade: string
   finalGradeExtenso: string
   presidentSignature: string

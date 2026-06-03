@@ -551,8 +551,6 @@ export default function EstudanteDetalhe({ id }: { id: string }) {
                                   courseName: data.courseName,
                                   courseDuration: data.courseDuration,
                                   anoLectivo: data.anoLectivo,
-                                  gradesByYear: data.gradesByYear,
-                                  monografiaGrade: data.monografiaGrade,
                                   finalGrade: data.finalGrade,
                                   finalGradeExtenso: data.finalGradeExtenso,
                                   presidentSignature: data.presidentSignature,

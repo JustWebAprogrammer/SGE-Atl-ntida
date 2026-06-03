@@ -10,8 +10,6 @@ interface Props {
   courseDuration: number
   anoLectivo: string
   systemDate?: Date
-  gradesByYear: { year: number; average: string }[]
-  monografiaGrade: string
   finalGrade: string
   finalGradeExtenso: string
   presidentSignature: string
@@ -36,11 +34,6 @@ const styles = StyleSheet.create({
   documentNumber: { position: "absolute", top: 40, right: 40, fontSize: 10, color: "#666" },
   body: { marginBottom: 20 },
   bodyText: { lineHeight: 1.6, marginBottom: 10, textAlign: "justify" },
-  gradesTable: { marginVertical: 15, border: "1px solid #000" },
-  tableHeader: { flexDirection: "row", borderBottom: "1px solid #000", backgroundColor: "#f0f0f0" },
-  tableHeaderCell: { flex: 1, padding: 8, fontWeight: "bold", textAlign: "center" },
-  tableRow: { flexDirection: "row", borderBottom: "1px solid #ddd" },
-  tableCell: { flex: 1, padding: 8, textAlign: "center" },
   footer: { marginTop: 30 },
   signatureSection: { flexDirection: "row", justifyContent: "center", marginTop: 40 },
   signatureBlock: { width: "45%", textAlign: "center" },
@@ -51,7 +44,7 @@ const styles = StyleSheet.create({
 
 export default function RecepcionistaCertificadoConclusaoPDF({
   studentName, studentNumber, courseName, courseDuration, anoLectivo,
-  gradesByYear, monografiaGrade, finalGrade, finalGradeExtenso,
+  finalGrade, finalGradeExtenso,
   presidentSignature, presidentName, documentNumber,
   logoUrl = "", systemDate,
 }: Props) {
@@ -59,6 +52,16 @@ export default function RecepcionistaCertificadoConclusaoPDF({
     ...getLayoutDefaults("CertificadoConclusao"),
     tem_qr_code: false,
   }
+
+  const textoCorpo = config.texto_corpo
+    .replace(/{NOME_COMPLETO}/g, studentName)
+    .replace(/{NUMERO_ESTUDANTE}/g, studentNumber)
+    .replace(/{NOME_CURSO}/g, courseName)
+    .replace(/{DURACAO_ANOS}/g, String(courseDuration))
+    .replace(/{ANO_LECTIVO}/g, anoLectivo)
+    .replace(/{NOTA_FINAL}/g, finalGrade)
+    .replace(/{NOTA_POR_EXTENSO}/g, finalGradeExtenso)
+    .replace(/{NOME_UNIVERSIDADE}/g, config.nome_universidade)
 
   return (
     <Document>
@@ -78,39 +81,7 @@ export default function RecepcionistaCertificadoConclusaoPDF({
         <Text style={styles.title}>{config.titulo}</Text>
 
         <View style={styles.body}>
-          <Text style={styles.bodyText}>
-            {config.texto_corpo
-              .replace(/{NOME_COMPLETO}/g, studentName)
-              .replace(/{NUMERO_ESTUDANTE}/g, studentNumber)
-              .replace(/{NOME_CURSO}/g, courseName)
-              .replace(/{DURACAO_ANOS}/g, String(courseDuration))
-              .replace(/{ANO_LECTIVO}/g, anoLectivo)
-              .replace(/{NOTA_FINAL}/g, finalGrade)
-              .replace(/{NOTA_POR_EXTENSO}/g, finalGradeExtenso)
-              .replace(/{NOME_UNIVERSIDADE}/g, config.nome_universidade)
-            }
-          </Text>
-        </View>
-
-        <View style={styles.gradesTable}>
-          <View style={styles.tableHeader}>
-            <Text style={[styles.tableHeaderCell, { flex: 2, textAlign: "left" }]}>Ano Curricular</Text>
-            <Text style={styles.tableHeaderCell}>Média do Ano</Text>
-          </View>
-          {gradesByYear.map((yd, i) => (
-            <View key={i} style={styles.tableRow}>
-              <Text style={[styles.tableCell, { flex: 2, textAlign: "left" }]}>{yd.year}º Ano</Text>
-              <Text style={styles.tableCell}>{yd.average}</Text>
-            </View>
-          ))}
-          <View style={styles.tableRow}>
-            <Text style={[styles.tableCell, { flex: 2, textAlign: "left" }]}>Monografia</Text>
-            <Text style={styles.tableCell}>{monografiaGrade}</Text>
-          </View>
-          <View style={[styles.tableRow, { backgroundColor: "#e8f5e9" }]}>
-            <Text style={[styles.tableCell, { flex: 2, textAlign: "left", fontWeight: "bold" }]}>Média Final</Text>
-            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>{finalGrade}</Text>
-          </View>
+          <Text style={styles.bodyText}>{textoCorpo}</Text>
         </View>
 
         <View style={styles.footer}>

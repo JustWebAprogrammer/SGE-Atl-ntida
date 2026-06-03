@@ -6,6 +6,7 @@ import { authOptions } from "@/lib/auth"
 import { readFileSync } from "fs"
 import { join } from "path"
 import { getAnoLectivo, getSystemDate } from "@/lib/sistema"
+import { arredondarNota, numberToExtenso } from "@/lib/notas"
 import { renderCertificadoConclusao, renderCertificadoDisciplinas, renderRecepcionistaDeclaracao } from "@/app/lib/render-pdf-helper"
 
 // GET /api/recepcionista/certificados/[id]/pdf - View existing certificate PDF
@@ -99,7 +100,8 @@ export async function GET(
 
       const yearAverages = gradesByYear.map(y => Number(y.average))
       const allGrades = [...yearAverages, monografiaGrade]
-      const finalGrade = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
+      const finalGradeRaw = allGrades.reduce((sum, g) => sum + g, 0) / allGrades.length
+      const finalGrade = arredondarNota(finalGradeRaw)
 
       pdfBuffer = await renderCertificadoConclusao({
         studentName: student.nome_completo,
@@ -107,10 +109,8 @@ export async function GET(
         courseName: student.curso.nome_curso,
         courseDuration: student.curso.duracao_anos || 3,
         anoLectivo,
-        gradesByYear,
-        monografiaGrade: monografiaGrade.toFixed(2),
-        finalGrade: finalGrade.toFixed(2),
-        finalGradeExtenso: finalGrade.toFixed(2).replace(".", ","),
+        finalGrade: finalGrade?.toFixed(2) || "0.00",
+        finalGradeExtenso: numberToExtenso(finalGrade || 0),
         presidentSignature: signatureBase64,
         presidentName: presidentSignature?.nome_presidente || "",
         documentNumber: `CERT-${anoLectivo}-${student.numero_estudante}-001`,
