@@ -41,12 +41,12 @@
 /* ── LIGHT MODE ── */
 html.light {
   --bg-primary: #f0f2f5;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f8f9fa;
-  --bg-input: #ebedf0;
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
+  --bg-secondary: #cecece;
+  --bg-card: #c0b8b8;
+  --bg-card-hover: #919192;
+  --bg-input: #8e8e8f;
+  --text-primary: #07090e;
+  --text-secondary: #101316;
   --text-muted: #6b7280;
   --text-faint: #9ca3af;
   --border-color: rgba(0, 0, 0, 0.08);
