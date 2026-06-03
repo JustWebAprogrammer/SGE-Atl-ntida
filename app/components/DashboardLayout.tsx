@@ -3,6 +3,7 @@
 import { signOut, useSession } from "next-auth/react"
 import { useRouter, usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
+import ThemeToggle from "./ThemeToggle"
 
 // Componente Dropdown Menu para renderizar itens com children
 function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname: string, router: any }) {
@@ -27,7 +28,7 @@ function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname:
                   borderRadius: "8px",
                   border: "none",
                   background: "transparent",
-                  color: "#d0d7e8",
+                  color: "var(--text-secondary)",
                   fontSize: "13.5px",
                   fontWeight: "400",
                   textAlign: "left",
@@ -60,8 +61,8 @@ function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname:
                           padding: "8px 12px",
                           borderRadius: "6px",
                           border: "none",
-                          background: active ? "rgba(224,61,61,0.12)" : "transparent",
-                          color: active ? "#e03d3d" : "#d0d7e8",
+                          background: active ? "var(--accent-bg)" : "transparent",
+                          color: active ? "var(--accent)" : "var(--text-secondary)",
                           fontSize: "13px",
                           fontWeight: active ? "500" : "400",
                           textAlign: "left",
@@ -92,8 +93,8 @@ function DropdownMenu({ items, pathname, router }: { items: NavItem[], pathname:
               padding: "9px 12px",
               borderRadius: "8px",
               border: "none",
-              background: active ? "rgba(224,61,61,0.12)" : "transparent",
-              color: active ? "#e03d3d" : "#d0d7e8",
+              background: active ? "var(--accent-bg)" : "transparent",
+              color: active ? "var(--accent)" : "var(--text-secondary)",
               fontSize: "13.5px",
               fontWeight: active ? "500" : "400",
               textAlign: "left",
@@ -259,7 +260,7 @@ export default function DashboardLayout({
   }
 
   // Se sessão expirou, mostrar tela de erro (executa após todos os hooks)
-  if (sessionExpired) {
+    if (sessionExpired) {
     return (
       <div style={{
         display: 'flex',
@@ -267,8 +268,8 @@ export default function DashboardLayout({
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        background: '#13161e',
-        color: 'white',
+        background: 'var(--bg-secondary)',
+        color: 'var(--text-primary)',
       }}>
         <div style={{
           textAlign: 'center',
@@ -276,15 +277,15 @@ export default function DashboardLayout({
           maxWidth: '400px',
         }}>
           <div style={{ fontSize: '48px', marginBottom: '20px' }}>⚠️</div>
-          <h2 style={{ margin: '0 0 16px 0', color: '#f0a500' }}>
+          <h2 style={{ margin: '0 0 16px 0', color: 'var(--warning)' }}>
             Sessão Expirada
           </h2>
-          <p style={{ color: '#d0d7e8', lineHeight: '1.6' }}>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>
             A sua sessão expirou ou houve um erro de conexão.
             <br />
             Por favor, faça login novamente.
           </p>
-          <p style={{ color: '#e03d3d', marginTop: '20px', fontSize: '14px' }}>
+          <p style={{ color: 'var(--accent)', marginTop: '20px', fontSize: '14px' }}>
             A redirecionar para o login...
           </p>
         </div>
@@ -400,13 +401,13 @@ export default function DashboardLayout({
   }
 
   return (
-    <div style={{
-      display: "flex",
-      minHeight: "100dvh",
-      background: "#0d0f14",
-      fontFamily: "system-ui, sans-serif",
-      color: "#e8eaf0"
-    }}>
+      <div style={{
+        display: "flex",
+        minHeight: "100dvh",
+        background: "var(--bg-primary)",
+        fontFamily: "system-ui, sans-serif",
+        color: "var(--text-primary)"
+      }}>
 
       {/* Responsive styles for mobile */}
       <style>{`
@@ -421,9 +422,9 @@ export default function DashboardLayout({
           .notif-dropdown { right: -60px !important; width: 300px !important; }
           .perfil-modal { width: 95% !important; }
         }
-        .sidebar-mobile-overlay { display: none; }
-        .sidebar-mobile-content { display: none; }
-        .topbar-hamburger { display: none; }
+          .sidebar-mobile-overlay { display: none; }
+          .sidebar-mobile-content { display: none; }
+          .topbar-hamburger { display: none; }
         /* tables scroll horizontally on small screens */
         @media (max-width: 768px) {
           .responsive-table { overflow-x: auto; display: block; max-width: 100%; }
@@ -452,8 +453,8 @@ export default function DashboardLayout({
       {/* DESKTOP SIDEBAR (hidden on mobile) */}
       <aside className="sidebar-desktop" style={{
         width: "240px",
-        background: "#13161e",
-        borderRight: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-secondary)",
+        borderRight: "1px solid var(--border-color)",
         display: "flex",
         flexDirection: "column",
         position: "fixed",
@@ -467,12 +468,12 @@ export default function DashboardLayout({
         {/* Brand */}
         <div style={{
           padding: "24px 20px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)"
+          borderBottom: "1px solid var(--border-color)"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{
               width: "32px", height: "32px",
-              background: "#e03d3d",
+              background: "var(--accent)",
               borderRadius: "8px",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontWeight: "800", fontSize: "15px", color: "white"
@@ -481,7 +482,7 @@ export default function DashboardLayout({
           </div>
           <div style={{
             fontSize: "11px",
-            color: "#b0b8cf",
+            color: "var(--text-muted)",
             marginTop: "4px",
             paddingLeft: "42px"
           }}>Portal Académico</div>
@@ -491,7 +492,7 @@ export default function DashboardLayout({
         <div 
           style={{
             padding: "14px 20px",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
+            borderBottom: "1px solid var(--border-color)",
             display: "flex",
             alignItems: "center",
             gap: "10px",
@@ -502,7 +503,7 @@ export default function DashboardLayout({
           <div style={{
             width: "36px", height: "36px",
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #e03d3d, #8b1a1a)",
+            background: "linear-gradient(135deg, var(--accent), #8b1a1a)",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontWeight: "700", fontSize: "13px", color: "white",
             flexShrink: 0
@@ -515,20 +516,20 @@ export default function DashboardLayout({
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
             }}>{displayName}</div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>
               {dadosPerfil.email || session?.user?.email}
             </div>
           </div>
         </div>
 
         {/* Nav */}
-        <nav style={{ flex: 1, padding: "12px 10px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "#2a2f3d #13161e" }}>
+        <nav style={{ flex: 1, padding: "12px 10px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) var(--bg-secondary)" }}>
           {/* Webkit scrollbar styling for Chrome/Edge/Safari */}
           <style>{`
             nav::-webkit-scrollbar { width: 6px; }
-            nav::-webkit-scrollbar-track { background: #13161e; border-radius: 3px; }
-            nav::-webkit-scrollbar-thumb { background: #2a2f3d; border-radius: 3px; }
-            nav::-webkit-scrollbar-thumb:hover { background: #3a3f4d; }
+            nav::-webkit-scrollbar-track { background: var(--bg-secondary); border-radius: 3px; }
+            nav::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+            nav::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
           `}</style>
           <DropdownMenu items={navItems} pathname={pathname} router={router} />
         </nav>
@@ -536,7 +537,7 @@ export default function DashboardLayout({
         {/* Logout */}
         <div style={{
           padding: "14px 10px",
-          borderTop: "1px solid rgba(255,255,255,0.07)"
+          borderTop: "1px solid var(--border-color)"
         }}>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
@@ -547,18 +548,18 @@ export default function DashboardLayout({
               borderRadius: "8px",
               border: "none",
               background: "transparent",
-              color: "#b0b8cf",
+              color: "var(--text-muted)",
               fontSize: "13px",
               textAlign: "left",
               cursor: "pointer",
               transition: "all 0.15s"
             }}
             onMouseEnter={e => {
-              (e.target as HTMLButtonElement).style.color = "#e03d3d"
-              ;(e.target as HTMLButtonElement).style.background = "rgba(224,61,61,0.12)"
+              (e.target as HTMLButtonElement).style.color = "var(--accent)"
+              ;(e.target as HTMLButtonElement).style.background = "var(--accent-bg)"
             }}
             onMouseLeave={e => {
-              (e.target as HTMLButtonElement).style.color = "#b0b8cf"
+              (e.target as HTMLButtonElement).style.color = "var(--text-muted)"
               ;(e.target as HTMLButtonElement).style.background = "transparent"
             }}
           >Terminar Sessão</button>
@@ -568,8 +569,8 @@ export default function DashboardLayout({
       {/* MOBILE SIDEBAR (slide-in, hidden on desktop) */}
       <aside className="sidebar-mobile-content" style={{
         width: "240px",
-        background: "#13161e",
-        borderRight: "1px solid rgba(255,255,255,0.07)",
+        background: "var(--bg-secondary)",
+        borderRight: "1px solid var(--border-color)",
         display: "flex",
         flexDirection: "column",
         position: "fixed",
@@ -585,12 +586,12 @@ export default function DashboardLayout({
         {/* Brand */}
         <div style={{
           padding: "24px 20px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)"
+          borderBottom: "1px solid var(--border-color)"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{
               width: "32px", height: "32px",
-              background: "#e03d3d",
+              background: "var(--accent)",
               borderRadius: "8px",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontWeight: "800", fontSize: "15px", color: "white"
@@ -599,7 +600,7 @@ export default function DashboardLayout({
           </div>
           <div style={{
             fontSize: "11px",
-            color: "#b0b8cf",
+            color: "var(--text-muted)",
             marginTop: "4px",
             paddingLeft: "42px"
           }}>Portal Académico</div>
@@ -609,7 +610,7 @@ export default function DashboardLayout({
         <div 
           style={{
             padding: "14px 20px",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
+            borderBottom: "1px solid var(--border-color)",
             display: "flex",
             alignItems: "center",
             gap: "10px",
@@ -620,7 +621,7 @@ export default function DashboardLayout({
           <div style={{
             width: "36px", height: "36px",
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #e03d3d, #8b1a1a)",
+            background: "linear-gradient(135deg, var(--accent), #8b1a1a)",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontWeight: "700", fontSize: "13px", color: "white",
             flexShrink: 0
@@ -633,20 +634,19 @@ export default function DashboardLayout({
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
             }}>{displayName}</div>
-            <div style={{ fontSize: "11px", color: "#b0b8cf" }}>
+            <div style={{ fontSize: "11px", color: "var(--text-muted)" }}>
               {dadosPerfil.email || session?.user?.email}
             </div>
           </div>
         </div>
 
         {/* Nav */}
-        <nav style={{ flex: 1, padding: "12px 10px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "#2a2f3d #13161e" }}>
-          {/* Webkit scrollbar styling for Chrome/Edge/Safari */}
+        <nav style={{ flex: 1, padding: "12px 10px", overflowY: "auto", scrollbarWidth: "thin", scrollbarColor: "var(--scrollbar-thumb) var(--bg-secondary)" }}>
           <style>{`
             nav::-webkit-scrollbar { width: 6px; }
-            nav::-webkit-scrollbar-track { background: #13161e; border-radius: 3px; }
-            nav::-webkit-scrollbar-thumb { background: #2a2f3d; border-radius: 3px; }
-            nav::-webkit-scrollbar-thumb:hover { background: #3a3f4d; }
+            nav::-webkit-scrollbar-track { background: var(--bg-secondary); border-radius: 3px; }
+            nav::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+            nav::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
           `}</style>
           <DropdownMenu items={navItems} pathname={pathname} router={router} />
         </nav>
@@ -654,7 +654,7 @@ export default function DashboardLayout({
         {/* Logout */}
         <div style={{
           padding: "14px 10px",
-          borderTop: "1px solid rgba(255,255,255,0.07)"
+          borderTop: "1px solid var(--border-color)"
         }}>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
@@ -665,18 +665,18 @@ export default function DashboardLayout({
               borderRadius: "8px",
               border: "none",
               background: "transparent",
-              color: "#b0b8cf",
+              color: "var(--text-muted)",
               fontSize: "13px",
               textAlign: "left",
               cursor: "pointer",
               transition: "all 0.15s"
             }}
             onMouseEnter={e => {
-              (e.target as HTMLButtonElement).style.color = "#e03d3d"
-              ;(e.target as HTMLButtonElement).style.background = "rgba(224,61,61,0.12)"
+              (e.target as HTMLButtonElement).style.color = "var(--accent)"
+              ;(e.target as HTMLButtonElement).style.background = "var(--accent-bg)"
             }}
             onMouseLeave={e => {
-              (e.target as HTMLButtonElement).style.color = "#b0b8cf"
+              (e.target as HTMLButtonElement).style.color = "var(--text-muted)"
               ;(e.target as HTMLButtonElement).style.background = "transparent"
             }}
           >Terminar Sessão</button>
@@ -684,13 +684,13 @@ export default function DashboardLayout({
       </aside>
 
       {/* MAIN */}
-      <main className="main-margin" style={{ marginLeft: "240px",marginTop: 0,paddingTop: 0, flex: 1, display: "flex", flexDirection: "column", background: "#0d0f14", minHeight: "100dvh" }}>
+      <main className="main-margin" style={{ marginLeft: "240px",marginTop: 0,paddingTop: 0, flex: 1, display: "flex", flexDirection: "column", background: "var(--bg-primary)", minHeight: "100dvh" }}>
 
         {/* Topbar */}
         <header className="topbar-padding" style={{
           padding: "18px 32px",
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
-          background: "#0d0f14",
+          borderBottom: "1px solid var(--border-color)",
+          background: "var(--bg-primary)",
           position: "sticky",
           top: 0,
           zIndex: 50,
@@ -710,7 +710,7 @@ export default function DashboardLayout({
                 justifyContent: "center",
                 background: "transparent",
                 border: "none",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 fontSize: "22px",
                 cursor: "pointer",
                 padding: "4px",
@@ -723,7 +723,7 @@ export default function DashboardLayout({
             <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: "18px", fontWeight: "700", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{title}</div>
             {subtitle && (
-              <div style={{ fontSize: "12px", color: "#b0b8cf", marginTop: "2px" }}>
+              <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "2px" }}>
                 {subtitle}
               </div>
             )}
@@ -744,7 +744,7 @@ export default function DashboardLayout({
                 padding: "8px",
                 borderRadius: "8px",
                 position: "relative",
-                color: "#d0d7e8",
+                color: "var(--text-secondary)",
                 fontSize: "20px",
                 display: "flex",
                 alignItems: "center"
@@ -756,7 +756,7 @@ export default function DashboardLayout({
                   position: "absolute",
                   top: "0px",
                   right: "0px",
-                  background: "#e03d3d",
+                  background: "var(--accent)",
                   color: "white",
                   fontSize: "10px",
                   fontWeight: "700",
@@ -766,7 +766,7 @@ export default function DashboardLayout({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  border: "2px solid #0d0f14"
+                  border: "2px solid var(--bg-primary)"
                 }}>
                   {notificacoesNaoLidas > 99 ? "99+" : notificacoesNaoLidas}
                 </span>
@@ -787,10 +787,10 @@ export default function DashboardLayout({
                   right: 0,
                   width: "380px",
                   maxHeight: "480px",
-                  background: "#1e2230",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border-color-strong)",
                   borderRadius: "12px",
-                  boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                  boxShadow: "var(--shadow-dropdown)",
                   zIndex: 100,
                   overflow: "hidden",
                   display: "flex",
@@ -802,16 +802,16 @@ export default function DashboardLayout({
                     justifyContent: "space-between",
                     alignItems: "center",
                     padding: "14px 16px",
-                    borderBottom: "1px solid rgba(255,255,255,0.07)"
+                    borderBottom: "1px solid var(--border-color)"
                   }}>
-                    <span style={{ fontWeight: "600", fontSize: "14px", color: "#e8eaf0" }}>Notificações</span>
+                    <span style={{ fontWeight: "600", fontSize: "14px", color: "var(--text-primary)" }}>Notificações</span>
                     {notificacoesNaoLidas > 0 && (
                       <button
                         onClick={marcarTodasLidas}
                         style={{
                           background: "transparent",
                           border: "none",
-                          color: "#e03d3d",
+                          color: "var(--accent)",
                           fontSize: "12px",
                           cursor: "pointer",
                           fontWeight: "500"
@@ -827,14 +827,14 @@ export default function DashboardLayout({
                     overflowY: "auto",
                     flex: 1,
                     scrollbarWidth: "thin",
-                    scrollbarColor: "#2a2f3d #1e2230"
+                    scrollbarColor: "var(--scrollbar-thumb) var(--bg-card)"
                   }}>
                     {loadingNotificacoes ? (
-                      <div style={{ padding: "40px", textAlign: "center", color: "#d0d7e8", fontSize: "13px" }}>
+                      <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", fontSize: "13px" }}>
                         A carregar...
                       </div>
                     ) : notificacoes.length === 0 ? (
-                      <div style={{ padding: "40px", textAlign: "center", color: "#b0b8cf", fontSize: "13px" }}>
+                      <div style={{ padding: "40px", textAlign: "center", color: "var(--text-muted)", fontSize: "13px" }}>
                         Nenhuma notificação
                       </div>
                     ) : (
@@ -850,9 +850,9 @@ export default function DashboardLayout({
                           }}
                           style={{
                             padding: "12px 16px",
-                            borderBottom: "1px solid rgba(255,255,255,0.04)",
+                            borderBottom: "1px solid var(--border-color)",
                             cursor: n.link_url ? "pointer" : "default",
-                            background: n.lida ? "transparent" : "rgba(224,61,61,0.06)",
+                            background: n.lida ? "transparent" : "var(--accent-bg-subtle)",
                             transition: "background 0.15s"
                           }}
                         >
@@ -866,12 +866,12 @@ export default function DashboardLayout({
                               <div style={{
                                 fontSize: "13px",
                                 fontWeight: n.lida ? "400" : "600",
-                                color: "#e8eaf0",
+                                color: "var(--text-primary)",
                                 marginBottom: "3px"
                               }}>{n.titulo}</div>
                               <div style={{
                                 fontSize: "12px",
-                                color: "#b0b8cf",
+                                color: "var(--text-muted)",
                                 lineHeight: "1.4",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -897,7 +897,7 @@ export default function DashboardLayout({
                                 width: "8px",
                                 height: "8px",
                                 borderRadius: "50%",
-                                background: "#e03d3d",
+                                background: "var(--accent)",
                                 flexShrink: 0,
                                 marginTop: "6px"
                               }} />
@@ -912,24 +912,27 @@ export default function DashboardLayout({
             )}
           </div>
 
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Simulador Indicator */}
           {simuladorAtivo && (
             <div style={{
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              background: "rgba(255,165,0,0.15)",
-              border: "1px solid rgba(255,165,0,0.3)",
+              background: "var(--warning-bg)",
+              border: "1px solid var(--warning-border)",
               borderRadius: "6px",
               padding: "6px 12px",
               fontSize: "12px",
-              color: "#ffa500",
+              color: "var(--warning)",
               fontWeight: "600"
             }}>
               <span>🕐</span>
               <span>SIMULADOR ACTIVO</span>
               {dataSimulada && (
-                <span style={{ color: "#ffa500", opacity: 0.8 }}>
+                <span style={{ color: "var(--warning)", opacity: 0.8 }}>
                   ({dataSimulada.toLocaleDateString('pt-PT')})
                 </span>
               )}
@@ -938,7 +941,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Content */}
-        <div className="content-padding" style={{ padding: "28px 32px", flex: 1, background: "#0d0f14" }}>
+        <div className="content-padding" style={{ padding: "28px 32px", flex: 1, background: "var(--bg-primary)" }}>
           {children}
         </div>
       </main>
@@ -951,14 +954,14 @@ export default function DashboardLayout({
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0,0,0,0.7)',
+          background: 'var(--overlay-modal)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 2000
         }} onClick={() => setShowPerfilModal(false)}>
           <div style={{
-            background: '#1e2230',
+            background: 'var(--bg-card)',
             borderRadius: '16px',
             padding: '24px',
             width: '450px',
@@ -966,20 +969,20 @@ export default function DashboardLayout({
             maxHeight: '85vh',
             overflowY: 'auto',
             margin: '16px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+            boxShadow: 'var(--shadow-modal)',
             scrollbarWidth: "thin",
-            scrollbarColor: "#2a2f3d #1e2230"
+            scrollbarColor: "var(--scrollbar-thumb) var(--bg-card)"
           }} onClick={(e) => e.stopPropagation()}>
-            <h3 style={{ margin: '0 0 20px 0', color: '#e8eaf0' }}>Meu Perfil</h3>
+            <h3 style={{ margin: '0 0 20px 0', color: 'var(--text-primary)' }}>Meu Perfil</h3>
             
             {loadingPerfil ? (
-              <div style={{ textAlign: 'center', padding: '40px', color: '#d0d7e8' }}>
+              <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
                 A carregar perfil...
               </div>
             ) : (
               <>
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome Completo</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome Completo</label>
                   <input
                     type="text"
                     value={dadosPerfil.nome}
@@ -987,17 +990,17 @@ export default function DashboardLayout({
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       boxSizing: 'border-box'
                     }}
                   />
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nome de Utilizador</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nome de Utilizador</label>
                   <input
                     type="text"
                     value={dadosPerfil.nome_usuario}
@@ -1005,17 +1008,17 @@ export default function DashboardLayout({
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       boxSizing: 'border-box'
                     }}
                   />
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Email</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Email</label>
                   <input
                     type="email"
                     value={dadosPerfil.email}
@@ -1023,25 +1026,25 @@ export default function DashboardLayout({
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       boxSizing: 'border-box'
                     }}
                   />
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Telemóvel</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Telemóvel</label>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
                     <div style={{
                       padding: '12px',
-                      background: '#2a2f3d',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--scrollbar-thumb)',
+                      border: '1px solid var(--border-color)',
                       borderRight: 'none',
                       borderRadius: '8px 0 0 8px',
-                      color: '#d0d7e8',
+                      color: 'var(--text-secondary)',
                       fontSize: '14px'
                     }}>+244 9</div>
                     <input
@@ -1055,11 +1058,11 @@ export default function DashboardLayout({
                       style={{
                         flex: 1,
                         padding: '12px',
-                        background: '#13161e',
-                        border: '1px solid rgba(255,255,255,0.07)',
+                        background: 'var(--bg-input)',
+                        border: '1px solid var(--border-color)',
                         borderLeft: 'none',
                         borderRadius: '0 8px 8px 0',
-                        color: 'white',
+                        color: 'var(--text-primary)',
                         fontSize: '14px',
                         boxSizing: 'border-box'
                       }}
@@ -1069,11 +1072,11 @@ export default function DashboardLayout({
 
 
                 {/* Alterar Password */}
-                <div style={{ marginBottom: '20px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                  <h4 style={{ color: '#e8eaf0', marginBottom: '12px', fontSize: '15px' }}>🔑 Alterar Password</h4>
+                <div style={{ marginBottom: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
+                  <h4 style={{ color: 'var(--text-primary)', marginBottom: '12px', fontSize: '15px' }}>🔑 Alterar Password</h4>
 
                   <div style={{ marginBottom: '12px' }}>
-                    <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Password Actual</label>
+                    <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Password Actual</label>
                     <input
                       type="password"
                       value={dadosPerfil.password_actual}
@@ -1081,17 +1084,17 @@ export default function DashboardLayout({
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       boxSizing: 'border-box'
                     }}
                   />
                 </div>
 
                 <div style={{ marginBottom: '12px' }}>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Nova Password</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Nova Password</label>
                   <input
                     type="password"
                     value={dadosPerfil.password_nova}
@@ -1099,17 +1102,17 @@ export default function DashboardLayout({
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       boxSizing: 'border-box'
                     }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '6px', color: '#d0d7e8', fontSize: '13px' }}>Confirmar Nova Password</label>
+                  <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-secondary)', fontSize: '13px' }}>Confirmar Nova Password</label>
                   <input
                     type="password"
                     value={dadosPerfil.password_confirmar}
@@ -1117,10 +1120,10 @@ export default function DashboardLayout({
                     style={{
                       width: '100%',
                       padding: '12px',
-                      background: '#13161e',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-input)',
+                      border: '1px solid var(--border-color)',
                       borderRadius: '8px',
-                      color: 'white',
+                      color: 'var(--text-primary)',
                       boxSizing: 'border-box'
                     }}
                     />
@@ -1134,9 +1137,9 @@ export default function DashboardLayout({
                     style={{
                       padding: '12px 20px',
                       background: 'transparent',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      border: '1px solid var(--border-color-strong)',
                       borderRadius: '8px',
-                      color: '#d0d7e8',
+                      color: 'var(--text-secondary)',
                       cursor: 'pointer'
                     }}
                   >
@@ -1146,7 +1149,7 @@ export default function DashboardLayout({
                     onClick={salvarPerfil}
                     style={{
                       padding: '12px 20px',
-                      background: '#e03d3d',
+                      background: 'var(--accent)',
                       border: 'none',
                       borderRadius: '8px',
                       color: 'white',

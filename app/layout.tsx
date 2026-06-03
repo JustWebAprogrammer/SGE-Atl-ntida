@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import NextAuthProvider from "./components/SessionProvider"
+import { ThemeProvider } from "@/lib/ThemeContext"
 
 export const metadata: Metadata = {
   title: "ISP Atlântida — Portal Académico",
@@ -12,9 +13,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt">
-      <body suppressHydrationWarning style={{ background: '#0d0f14', margin: 0, padding: 0 }}>
-        <NextAuthProvider>{children}</NextAuthProvider>
+    <html lang="pt" suppressHydrationWarning>
+      <body style={{ margin: 0, padding: 0 }}>
+        <ThemeProvider>
+          <NextAuthProvider>{children}</NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

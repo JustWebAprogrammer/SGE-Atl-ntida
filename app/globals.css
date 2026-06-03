@@ -1,8 +1,34 @@
 @import "tailwindcss";
 
+/* ── DARK MODE (default) ── */
 :root {
-  --background: #0d0f14;
-  --foreground: #e8eaf0;
+  --bg-primary: #0d0f14;
+  --bg-secondary: #13161e;
+  --bg-card: #1e2230;
+  --bg-card-hover: #252a3a;
+  --bg-input: #13161e;
+  --text-primary: #e8eaf0;
+  --text-secondary: #d0d7e8;
+  --text-muted: #b0b8cf;
+  --text-faint: #6b7280;
+  --border-color: rgba(255, 255, 255, 0.07);
+  --border-color-strong: rgba(255, 255, 255, 0.1);
+  --scrollbar-track: #13161e;
+  --scrollbar-thumb: #2a2f3d;
+  --scrollbar-thumb-hover: #3a3f4d;
+  --accent: #e03d3d;
+  --accent-bg: rgba(224, 61, 61, 0.12);
+  --accent-bg-subtle: rgba(224, 61, 61, 0.06);
+  --success: #4ade80;
+  --warning: #ffa500;
+  --warning-bg: rgba(255, 165, 0, 0.15);
+  --warning-border: rgba(255, 165, 0, 0.3);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --shadow-dropdown: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --overlay: rgba(0, 0, 0, 0.6);
+  --overlay-modal: rgba(0, 0, 0, 0.7);
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
@@ -12,23 +38,70 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ── LIGHT MODE ── */
+html.light {
+  --bg-primary: #f5f6f8;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f1f3;
+  --bg-input: #f0f1f3;
+  --text-primary: #1a1a2e;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-color-strong: rgba(0, 0, 0, 0.15);
+  --scrollbar-track: #e5e7eb;
+  --scrollbar-thumb: #c4c8d0;
+  --scrollbar-thumb-hover: #a0a5b0;
+  --accent: #dc2626;
+  --accent-bg: rgba(220, 38, 38, 0.1);
+  --accent-bg-subtle: rgba(220, 38, 38, 0.05);
+  --success: #16a34a;
+  --warning: #d97706;
+  --warning-bg: rgba(217, 119, 6, 0.1);
+  --warning-border: rgba(217, 119, 6, 0.25);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-dropdown: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --overlay: rgba(0, 0, 0, 0.3);
+  --overlay-modal: rgba(0, 0, 0, 0.4);
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+}
+
 main {
   margin: 0;
 }
 
 html, body {
-  background: #0d0f14 !important;
-  color: #e8eaf0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
   min-height: 100dvh;
   margin: 0;
   padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #__next {
   min-height: 100vh;
-  background: #0d0f14;
+  background: var(--bg-primary);
+}
+
+/* ── Scrollbar global ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* ── react-day-picker dark theme overrides ── */
@@ -39,7 +112,7 @@ html, body {
 }
 
 .rdp-dark .rdp-root {
-  color: #e8eaf0;
+  color: var(--text-primary);
 }
 
 .rdp-dark .rdp-caption {
@@ -53,7 +126,7 @@ html, body {
 .rdp-dark .rdp-caption_label {
   font-weight: 600;
   font-size: 14px;
-  color: #e8eaf0;
+  color: var(--text-primary);
 }
 
 .rdp-dark .rdp-nav {
@@ -68,16 +141,16 @@ html, body {
   width: 28px;
   height: 28px;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-color-strong);
   border-radius: 6px;
-  color: #e8eaf0;
+  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .rdp-dark .rdp-nav_button:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.2);
+  background: var(--border-color-strong);
+  border-color: var(--border-color-strong);
 }
 
 .rdp-dark .rdp-head_cell {
@@ -85,7 +158,7 @@ html, body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #9098b0;
+  color: var(--text-muted);
   padding: 8px 0;
 }
 
@@ -101,7 +174,7 @@ html, body {
   height: 32px;
   border-radius: 6px;
   font-size: 13px;
-  color: #e8eaf0;
+  color: var(--text-primary);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -109,7 +182,7 @@ html, body {
 }
 
 .rdp-dark .rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
-  background: rgba(255,255,255,0.1);
+  background: var(--border-color-strong);
 }
 
 .rdp-dark .rdp-day_selected {
@@ -119,18 +192,18 @@ html, body {
 }
 
 .rdp-dark .rdp-day_today:not(.rdp-day_selected) {
-  color: #4ade80;
+  color: var(--success);
   font-weight: 600;
 }
 
 .rdp-dark .rdp-day_disabled {
-  color: #555e78;
+  color: var(--text-faint);
   cursor: not-allowed;
   opacity: 0.5;
 }
 
 .rdp-dark .rdp-day_outside {
-  color: #555e78;
+  color: var(--text-faint);
   opacity: 0.5;
 }
 
@@ -148,7 +221,6 @@ html, body {
 }
 
 /* ── Portuguese locale for react-day-picker ── */
-/* Replace navigation arrows */
 .rdp-portuguese .rdp-nav_button_previous::after {
   content: "◀";
 }
@@ -157,22 +229,19 @@ html, body {
   content: "▶";
 }
 
-/* Portuguese month - show static label that works with any month */
 .rdp-portuguese .rdp-caption_label {
   position: relative;
 }
 
-/* Add Portuguese month name after the default label */
 .rdp-portuguese .rdp-caption_label::after {
   content: "";
   display: block;
   margin-top: -20px;
   font-weight: 600;
   font-size: 14px;
-  color: #e8eaf0;
+  color: var(--text-primary);
 }
 
-/* Month names in Portuguese */
 .rdp-portuguese .rdp-caption[data-month="0"] .rdp-caption_label::after { content: "Janeiro"; }
 .rdp-portuguese .rdp-caption[data-month="1"] .rdp-caption_label::after { content: "Fevereiro"; }
 .rdp-portuguese .rdp-caption[data-month="2"] .rdp-caption_label::after { content: "Março"; }
@@ -186,7 +255,6 @@ html, body {
 .rdp-portuguese .rdp-caption[data-month="10"] .rdp-caption_label::after { content: "Novembro"; }
 .rdp-portuguese .rdp-caption[data-month="11"] .rdp-caption_label::after { content: "Dezembro"; }
 
-/* Portuguese day names */
 .rdp-portuguese .rdp-head_cell:nth-child(1)::after { content: "Dom"; }
 .rdp-portuguese .rdp-head_cell:nth-child(2)::after { content: "Seg"; }
 .rdp-portuguese .rdp-head_cell:nth-child(3)::after { content: "Ter"; }
@@ -195,7 +263,6 @@ html, body {
 .rdp-portuguese .rdp-head_cell:nth-child(6)::after { content: "Sex"; }
 .rdp-portuguese .rdp-head_cell:nth-child(7)::after { content: "Sáb"; }
 
-/* Hide default day headers, show custom */
 .rdp-portuguese .rdp-head_cell {
   visibility: hidden;
 }
@@ -207,7 +274,7 @@ html, body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #9098b0;
+  color: var(--text-muted);
 }
 
 /* Legacy rdp class for backward compatibility */
@@ -218,7 +285,7 @@ html, body {
 }
 
 .rdp-root {
-  color: #e8eaf0;
+  color: var(--text-primary);
 }
 
 .rdp-caption {
@@ -232,7 +299,7 @@ html, body {
 .rdp-caption_label {
   font-weight: 600;
   font-size: 14px;
-  color: #e8eaf0;
+  color: var(--text-primary);
 }
 
 .rdp-nav {
@@ -247,16 +314,16 @@ html, body {
   width: 28px;
   height: 28px;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-color-strong);
   border-radius: 6px;
-  color: #e8eaf0;
+  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .rdp-nav_button:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.2);
+  background: var(--border-color-strong);
+  border-color: var(--border-color-strong);
 }
 
 .rdp-head_cell {
@@ -264,7 +331,7 @@ html, body {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #9098b0;
+  color: var(--text-muted);
   padding: 8px 0;
 }
 
@@ -280,7 +347,7 @@ html, body {
   height: 32px;
   border-radius: 6px;
   font-size: 13px;
-  color: #e8eaf0;
+  color: var(--text-primary);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -288,7 +355,7 @@ html, body {
 }
 
 .rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
-  background: rgba(255,255,255,0.1);
+  background: var(--border-color-strong);
 }
 
 .rdp-day_selected {
@@ -298,18 +365,18 @@ html, body {
 }
 
 .rdp-day_today:not(.rdp-day_selected) {
-  color: #4ade80;
+  color: var(--success);
   font-weight: 600;
 }
 
 .rdp-day_disabled {
-  color: #555e78;
+  color: var(--text-faint);
   cursor: not-allowed;
   opacity: 0.5;
 }
 
 .rdp-day_outside {
-  color: #555e78;
+  color: var(--text-faint);
   opacity: 0.5;
 }
 
